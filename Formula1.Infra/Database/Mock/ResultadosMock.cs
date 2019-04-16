@@ -41,6 +41,7 @@ namespace Formula1.Infra.Database.Mock
             var corrida1000 = corridas.Where(o => o.Id == 1000).FirstOrDefault();
             if (corrida1000 != null)
             {
+                corrida1000.Resultados.Add(new Resultado(1, corrida1000, PilotosMock.LEWIS_HAMILTON, EquipesMock.MERCEDES, 2, 1, 25));
                 corrida1000.Resultados.Add(new Resultado(1, corrida1000, PilotosMock.VALTTERI_BOTTAS, EquipesMock.MERCEDES, 1, 2, 18));
             }
 
