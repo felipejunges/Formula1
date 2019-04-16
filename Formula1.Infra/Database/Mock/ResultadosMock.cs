@@ -35,5 +35,16 @@ namespace Formula1.Infra.Database.Mock
 
             return corridas;
         }
+
+        public static ICollection<Corrida> PreencherResultados1000(ICollection<Corrida> corridas)
+        {
+            var corrida1000 = corridas.Where(o => o.Id == 1000).FirstOrDefault();
+            if (corrida1000 != null)
+            {
+                corrida1000.Resultados.Add(new Resultado(1, corrida1000, PilotosMock.VALTTERI_BOTTAS, EquipesMock.MERCEDES, 1, 2, 18));
+            }
+
+            return corridas;
+        }
     }
 }

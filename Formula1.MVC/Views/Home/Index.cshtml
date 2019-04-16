@@ -33,7 +33,9 @@
 
                 @foreach (var corrida in Model.Corridas)
                 {
-                    <td>oi</td>
+                    var resultado = corrida.Resultados.Where(o => o.Piloto == piloto).FirstOrDefault();
+
+                    <td>@resultado?.PosicaoChegada.ToString()</td>
                 }
             </tr>
         }

@@ -56,7 +56,7 @@ body {
 }
 
 .vertical-text {
-    transform: rotate(90deg);
-    transform-origin: left top 0;
-
+    /*transform: rotate(90deg);
+    transform-origin: left top 0;*/
+    writing-mode: vertical-rl;
 }
