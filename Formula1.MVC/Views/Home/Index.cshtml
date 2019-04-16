@@ -1,0 +1,41 @@
+﻿@model Formula1.MVC.Models.ResultadoCampeonatoModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+
+            @foreach (var corrida in Model.Corridas)
+            {
+                <th scope="col">
+                    <div class="vertical-text">
+                        @corrida.DataHoraBrasil.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var piloto in Model.Pilotos)
+        {
+            <tr>
+                <th scope="row">@piloto.NomeGuerra</th>
+
+                @foreach (var corrida in Model.Corridas)
+                {
+                    <td>oi</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
