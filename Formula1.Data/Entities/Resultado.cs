@@ -29,6 +29,8 @@
 
         public int Pontos { get; set; }
 
+        //public bool PontoExtra { get; set; }
+
         public bool DNF { get; set; }
         
         public MotivoDNF? MotivoDNF { get; set; }

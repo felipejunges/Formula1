@@ -10,12 +10,12 @@ namespace Formula1.Data.Entities
             this.Resultados = new HashSet<Resultado>();
         }
 
-        public Corrida(int id, int temporada, string nomeGrandePremio, string pais, DateTime dataHoraBrasil) : this()
+        public Corrida(int id, int temporada, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil) : this()
         {
             Id = id;
             Temporada = temporada;
             NomeGrandePremio = nomeGrandePremio;
-            Pais = pais;
+            Circuito = circuito;
             DataHoraBrasil = dataHoraBrasil;
         }
 
@@ -23,7 +23,7 @@ namespace Formula1.Data.Entities
 
         public string NomeGrandePremio { get; set; }
 
-        public string Pais { get; set; }
+        public string Circuito { get; set; }
 
         public DateTime DataHoraBrasil { get; set; }
 

@@ -7,9 +7,9 @@ namespace Formula1.MVC.Models
     {
         public List<Corrida> Corridas { get; set; }
 
-        public List<Piloto> Pilotos { get; set; }
+        public List<PilotoPontosModel> Pilotos { get; set; }
 
-        public ResultadoCampeonatoModel(List<Corrida> corridas, List<Piloto> pilotos)
+        public ResultadoCampeonatoModel(List<Corrida> corridas, List<PilotoPontosModel> pilotos)
         {
             Corridas = corridas;
             Pilotos = pilotos;

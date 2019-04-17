@@ -10,6 +10,7 @@ namespace Formula1.Infra.Database.Mock
             var corridas = CorridasMock.Corridas;
 
             ResultadosMock.PreencherResultados998(corridas);
+            ResultadosMock.PreencherResultados999(corridas);
             ResultadosMock.PreencherResultados1000(corridas);
 
             return corridas;

@@ -9,19 +9,21 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<table class="table">
+<table class="table table-classificacao">
     <thead>
         <tr>
             <th scope="col"></th>
 
             @foreach (var corrida in Model.Corridas)
             {
-                <th scope="col" class="align-top text-center">
-                    <div class="vertical-text">
-                        @corrida.DataHoraBrasil.ToString("dd/MM/yyyy HH:mm")
-                    </div>
+                <th scope="col" class="text-center align-middle th-titulo-corrida">
+                    <small class="titulo-corrida">
+                        @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+                    </small>
                 </th>
             }
+
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -29,14 +31,22 @@
         @foreach (var piloto in Model.Pilotos)
         {
             <tr>
-                <th scope="row">@piloto.NomeGuerra</th>
+                <td>
+                    <small>@piloto.Piloto.NomeGuerra</small>
+                </td>
 
                 @foreach (var corrida in Model.Corridas)
                 {
-                    var resultado = corrida.Resultados.Where(o => o.Piloto == piloto).FirstOrDefault();
+                    var resultado = corrida.Resultados.Where(o => o.Piloto == piloto.Piloto).FirstOrDefault();
 
-                    <td class="text-center">@resultado?.PosicaoChegada.ToString()</td>
+                    <td class="text-center">
+                        <small>@resultado?.PosicaoChegada.ToString()</small>
+                    </td>
                 }
+
+                <td>
+                    <small>@piloto.Pontos.ToString()</small>
+                </td>
             </tr>
         }
     </tbody>

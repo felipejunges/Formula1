@@ -17,15 +17,22 @@ namespace Formula1.MVC.Controllers
 
             var corridas = temporadaService.GetCorridas2019().ToList();
 
-            List<Piloto> pilotos = new List<Piloto>();
-            foreach (var corrida in corridas)
+            // TODO: essa regra deveria estar na service
+            List<PilotoPontosModel> pilotos = new List<PilotoPontosModel>();
+            foreach (var corrida in corridas)//.Sum(s => s.Resultados.GroupBy(g => g).Sum(ss => ss.Key.Pontos)))
             {
                 foreach (var resultado in corrida.Resultados)
                 {
-                    if (!pilotos.Contains(resultado.Piloto))
-                        pilotos.Add(resultado.Piloto);
+                    var pilotoPontos = pilotos.Where(o => o.Piloto == resultado.Piloto).FirstOrDefault();
+
+                    if (pilotoPontos == null)
+                        pilotos.Add(new PilotoPontosModel(resultado.Piloto, resultado.Pontos));
+                    else
+                        pilotoPontos.Pontos += resultado.Pontos;
                 }
             }
+
+            pilotos.Sort((o, i) => i.Pontos.CompareTo(o.Pontos));
 
             var campeonato = new ResultadoCampeonatoModel(corridas, pilotos);
 
