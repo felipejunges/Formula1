@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="Dapper.Contrib" Version="1.60.1" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.110" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Formula1.Data\Formula1.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\SQLite\" />
   </ItemGroup>
 
 </Project>

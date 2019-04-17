@@ -1,5 +1,4 @@
-﻿using Formula1.Data.Entities;
-using Formula1.Domain.Services;
+﻿using Formula1.Domain.Services;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,16 +9,20 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly TemporadaService TemporadaService;
+
+        public HomeController(TemporadaService temporadaService)
+        {
+            TemporadaService = temporadaService;
+        }
+
         public IActionResult Index()
         {
-            // TODO: injeção de dependência
-            var temporadaService = new TemporadaService();
-
-            var corridas = temporadaService.GetCorridas2019().ToList();
+            var corridas = TemporadaService.GetCorridas2019().ToList();
 
             // TODO: essa regra deveria estar na service
             List<PilotoPontosModel> pilotos = new List<PilotoPontosModel>();
-            foreach (var corrida in corridas)//.Sum(s => s.Resultados.GroupBy(g => g).Sum(ss => ss.Key.Pontos)))
+            foreach (var corrida in corridas)
             {
                 foreach (var resultado in corrida.Resultados)
                 {
