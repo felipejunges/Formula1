@@ -25,6 +25,8 @@ namespace Formula1.Infra.Database.SqlServer
             modelBuilder.ApplyConfiguration(new Data.Config.PilotoConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.ResultadoConfig());
 
+            modelBuilder.Seed();
+
             base.OnModelCreating(modelBuilder);
         }
     }

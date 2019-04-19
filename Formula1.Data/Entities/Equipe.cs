@@ -10,9 +10,13 @@ namespace Formula1.Data.Entities
             Resultados = new HashSet<Resultado>();
         }
 
-        public Equipe(int id, string nome)
+        public Equipe(int id, string nome) : this(nome)
         {
             Id = id;
+        }
+
+        public Equipe(string nome)
+        {
             Nome = nome;
         }
 

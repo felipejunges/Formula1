@@ -2,6 +2,7 @@
 {
     public class Entity
     {
+        // TODO: autoincremento
         public int Id { get; set; }
     }
 }

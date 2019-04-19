@@ -1,6 +1,6 @@
 ﻿using Formula1.Data.Entities;
 
-namespace Formula1.MVC.Models
+namespace Formula1.Data.Models
 {
     public class PilotoPontosModel
     {

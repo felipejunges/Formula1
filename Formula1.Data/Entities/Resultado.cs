@@ -5,8 +5,13 @@
         public Resultado() { }
 
         public Resultado(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, MotivoDNF? motivoDnf = null)
+            : this(corrida, piloto, equipe, posicaoLargada, posicaoChegada, pontos, motivoDnf)
         {
             Id = id;
+        }
+
+        public Resultado(Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, MotivoDNF? motivoDnf = null)
+        {
             Corrida = corrida;
             Piloto = piloto;
             Equipe = equipe;

@@ -1,7 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using System.Collections.Generic;
 
-namespace Formula1.MVC.Models
+namespace Formula1.Data.Models
 {
     public class ResultadoCampeonatoModel
     {

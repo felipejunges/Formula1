@@ -27,8 +27,6 @@ namespace Formula1.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddScoped(_ => new SqlConnection(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<IDbConnection>(_ => new SQLiteConnection(Configuration.GetConnectionString("SqliteConnection")));
             services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
             services.AddScoped<TemporadaService>();
