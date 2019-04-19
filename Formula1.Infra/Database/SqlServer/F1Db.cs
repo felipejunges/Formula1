@@ -19,6 +19,8 @@ namespace Formula1.Infra.Database.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new Data.Config.ContratoConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.CorridaConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.EquipeConfig());
@@ -26,8 +28,6 @@ namespace Formula1.Infra.Database.SqlServer
             modelBuilder.ApplyConfiguration(new Data.Config.ResultadoConfig());
 
             modelBuilder.Seed();
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

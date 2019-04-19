@@ -1,4 +1,5 @@
 ﻿using Formula1.Data.Entities;
+using Formula1.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -9,38 +10,38 @@ namespace Formula1.Infra.Database.SqlServer
         public static void Seed(this ModelBuilder modelBuilder)
         {
             // pilotos
-            Piloto LEWIS_HAMILTON = new Piloto("Lewis Hamilton", "Hamilton", "HAM", 44, "Inglaterra");
-            Piloto VALTTERI_BOTTAS = new Piloto("Valtteri Bottas", "Bottas", "BOT", 77, "Finlândia");
-            Piloto SEBASTIAN_VETTEL = new Piloto("Sebastian Vettel", "Vettel", "VET", 5, "Alemanha");
-            Piloto CHARLES_LECLERC = new Piloto("Charles Leclerc", "Leclerc", "LEC", 16, "Mônaco");
-            Piloto MAX_VERSTAPPEN = new Piloto("Max Verstappen", "Verstappen", "VER", 33, "Holanda (talvez)");
-            Piloto PIERRE_GASLY = new Piloto("Pierre Gasly", "Gasly", "GAS", 10, "França");
-            Piloto DANIEL_RICCARDO = new Piloto("Daniel Riccardo", "Riccardo", "RIC", 3, "Austrália");
-            Piloto NICO_HULKENBERG = new Piloto("Nico Hülkenberg", "Hülkenberg", "HUL", 27, "Alemanha");
-            Piloto KEVIN_MAGNUSSEN = new Piloto("Kevin Magnussen", "Magnussen", "MAG", 20, "Dinamarca");
-            Piloto ROMAIN_GROSJEAN = new Piloto("Romain Grosjean", "Grosjean", "GRO", 8, "França");
-            Piloto DANIIL_KVYAT = new Piloto("Daniil Kvyat", "Kvyat", "KVY", 26, "Rússia");
-            Piloto ALEXANDER_ALBON = new Piloto("Alexander Albon", "Albon", "ALB", 23, "?");
-            Piloto LANDO_NORRIS = new Piloto("Lando Norris", "Norris", "NOR", 4, "Inglaterra");
-            Piloto CARLOS_SAINZ_JR = new Piloto("Carlos Sainz Jr.", "Sainz", "SAI", 55, "Espanha");
-            Piloto KIMI_RAIKKONEN = new Piloto("Kimi Räikkönen", "Räikkönen", "RAI", 7, "Finlândia");
-            Piloto ANTONIO_GIOVANAZZI = new Piloto("Antonio Giovinazzi", "Giovinazzi", "GIO", 99, "Itália");
-            Piloto SERGIO_PEREZ = new Piloto("Sergio Perez", "Perez", "PER", 11, "México");
-            Piloto LANCE_STROLL = new Piloto("Lance Stroll", "Stroll", "STR", 18, "Canadá");
-            Piloto ROBERT_KUBICA = new Piloto("Robert Kubica", "Kubica", "KUB", 88, "Polônia");
-            Piloto GEORGE_RUSSEL = new Piloto("George Russell", "Russell", "RUS", 63, "Inglaterra");
+            Piloto LEWIS_HAMILTON = new Piloto(1, "Lewis Hamilton", "Hamilton", "HAM", 44, "Inglaterra");
+            Piloto VALTTERI_BOTTAS = new Piloto(2, "Valtteri Bottas", "Bottas", "BOT", 77, "Finlândia");
+            Piloto SEBASTIAN_VETTEL = new Piloto(3, "Sebastian Vettel", "Vettel", "VET", 5, "Alemanha");
+            Piloto CHARLES_LECLERC = new Piloto(4, "Charles Leclerc", "Leclerc", "LEC", 16, "Mônaco");
+            Piloto MAX_VERSTAPPEN = new Piloto(5, "Max Verstappen", "Verstappen", "VER", 33, "Holanda (talvez)");
+            Piloto PIERRE_GASLY = new Piloto(6, "Pierre Gasly", "Gasly", "GAS", 10, "França");
+            Piloto DANIEL_RICCARDO = new Piloto(7, "Daniel Riccardo", "Riccardo", "RIC", 3, "Austrália");
+            Piloto NICO_HULKENBERG = new Piloto(8, "Nico Hülkenberg", "Hülkenberg", "HUL", 27, "Alemanha");
+            Piloto KEVIN_MAGNUSSEN = new Piloto(9, "Kevin Magnussen", "Magnussen", "MAG", 20, "Dinamarca");
+            Piloto ROMAIN_GROSJEAN = new Piloto(10, "Romain Grosjean", "Grosjean", "GRO", 8, "França");
+            Piloto DANIIL_KVYAT = new Piloto(11, "Daniil Kvyat", "Kvyat", "KVY", 26, "Rússia");
+            Piloto ALEXANDER_ALBON = new Piloto(12, "Alexander Albon", "Albon", "ALB", 23, "?");
+            Piloto LANDO_NORRIS = new Piloto(13, "Lando Norris", "Norris", "NOR", 4, "Inglaterra");
+            Piloto CARLOS_SAINZ_JR = new Piloto(14, "Carlos Sainz Jr.", "Sainz", "SAI", 55, "Espanha");
+            Piloto KIMI_RAIKKONEN = new Piloto(15, "Kimi Räikkönen", "Räikkönen", "RAI", 7, "Finlândia");
+            Piloto ANTONIO_GIOVANAZZI = new Piloto(16, "Antonio Giovinazzi", "Giovinazzi", "GIO", 99, "Itália");
+            Piloto SERGIO_PEREZ = new Piloto(17, "Sergio Perez", "Perez", "PER", 11, "México");
+            Piloto LANCE_STROLL = new Piloto(18, "Lance Stroll", "Stroll", "STR", 18, "Canadá");
+            Piloto ROBERT_KUBICA = new Piloto(19, "Robert Kubica", "Kubica", "KUB", 88, "Polônia");
+            Piloto GEORGE_RUSSEL = new Piloto(20, "George Russell", "Russell", "RUS", 63, "Inglaterra");
 
             // equipes
-            Equipe MERCEDES = new Equipe("Mercedes");
-            Equipe FERRARI = new Equipe("Ferrari");
-            Equipe REDBULL = new Equipe("RedBull Racing");
-            Equipe TORO_ROSSO = new Equipe("Scuderia Toro Rosso");
-            Equipe RENAULT = new Equipe("Renault");
-            Equipe WILLIAMS = new Equipe("Williams");
-            Equipe MCLAREN = new Equipe("McLaren");
-            Equipe RACING_POINT = new Equipe("Racing Point");
-            Equipe HAAS = new Equipe("Haas");
-            Equipe ALFA_ROMEO = new Equipe("Alfa Romeo");
+            Equipe MERCEDES = new Equipe(1, "Mercedes");
+            Equipe FERRARI = new Equipe(2, "Ferrari");
+            Equipe REDBULL = new Equipe(3, "RedBull Racing");
+            Equipe TORO_ROSSO = new Equipe(4, "Scuderia Toro Rosso");
+            Equipe RENAULT = new Equipe(5, "Renault");
+            Equipe WILLIAMS = new Equipe(6, "Williams");
+            Equipe MCLAREN = new Equipe(7, "McLaren");
+            Equipe RACING_POINT = new Equipe(8, "Racing Point");
+            Equipe HAAS = new Equipe(9, "Haas");
+            Equipe ALFA_ROMEO = new Equipe(10, "Alfa Romeo");
 
             // corridas
             Corrida CORRIDA998 = new Corrida(998, 2019, "GP da Austrália", "Circuito de Albert Park", new DateTime(2019, 3, 17, 2, 10, 0));
@@ -133,74 +134,74 @@ namespace Formula1.Infra.Database.SqlServer
 
             // resultados (998)
             modelBuilder.Entity<Resultado>().HasData(
-                    new Resultado(CORRIDA998, VALTTERI_BOTTAS, MERCEDES, 2, 1, 26),
-                    new Resultado(CORRIDA998, LEWIS_HAMILTON, MERCEDES, 1, 2, 18),
-                    new Resultado(CORRIDA998, MAX_VERSTAPPEN, REDBULL, 4, 3, 15),
-                    new Resultado(CORRIDA998, SEBASTIAN_VETTEL, FERRARI, 3, 4, 12),
-                    new Resultado(CORRIDA998, CHARLES_LECLERC, FERRARI, 5, 5, 10),
-                    new Resultado(CORRIDA998, KEVIN_MAGNUSSEN, HAAS, 7, 6, 8),
-                    new Resultado(CORRIDA998, NICO_HULKENBERG, RENAULT, 11, 7, 6),
-                    new Resultado(CORRIDA998, KIMI_RAIKKONEN, ALFA_ROMEO, 9, 8, 4),
-                    new Resultado(CORRIDA998, LANCE_STROLL, RACING_POINT, 16, 9, 2),
-                    new Resultado(CORRIDA998, DANIIL_KVYAT, TORO_ROSSO, 15, 10, 1),
-                    new Resultado(CORRIDA998, PIERRE_GASLY, REDBULL, 17, 11, 0),
-                    new Resultado(CORRIDA998, LANDO_NORRIS, MCLAREN, 8, 12, 0),
-                    new Resultado(CORRIDA998, SERGIO_PEREZ, RACING_POINT, 10, 13, 0),
-                    new Resultado(CORRIDA998, ALEXANDER_ALBON, TORO_ROSSO, 13, 14, 0),
-                    new Resultado(CORRIDA998, ANTONIO_GIOVANAZZI, ALFA_ROMEO, 14, 15, 0),
-                    new Resultado(CORRIDA998, GEORGE_RUSSEL, WILLIAMS, 19, 16, 0),
-                    new Resultado(CORRIDA998, ROBERT_KUBICA, WILLIAMS, 20, 17, 0),
-                    new Resultado(CORRIDA998, ROMAIN_GROSJEAN, HAAS, 6, 18, 0, MotivoDNF.Pneu),
-                    new Resultado(CORRIDA998, DANIEL_RICCARDO, RENAULT, 12, 19, 0, MotivoDNF.Colisao),
-                    new Resultado(CORRIDA998, CARLOS_SAINZ_JR, MCLAREN, 18, 20, 0, MotivoDNF.Motor)
+                    new ResultadoInclusaoModel(1, CORRIDA998, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 2, posicaoChegada: 1, pontos: 26, pontoExtra: true),
+                    new ResultadoInclusaoModel(2, CORRIDA998, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 1, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusaoModel(3, CORRIDA998, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 4, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusaoModel(4, CORRIDA998, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 3, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusaoModel(5, CORRIDA998, CHARLES_LECLERC, FERRARI, posicaoLargada: 5, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusaoModel(6, CORRIDA998, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 7, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusaoModel(7, CORRIDA998, NICO_HULKENBERG, RENAULT, posicaoLargada: 11, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusaoModel(8, CORRIDA998, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 9, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusaoModel(9, CORRIDA998, LANCE_STROLL, RACING_POINT, posicaoLargada: 16, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusaoModel(10, CORRIDA998, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 15, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusaoModel(11, CORRIDA998, PIERRE_GASLY, REDBULL, posicaoLargada: 17, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusaoModel(12, CORRIDA998, LANDO_NORRIS, MCLAREN, posicaoLargada: 8, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusaoModel(13, CORRIDA998, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 10, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusaoModel(14, CORRIDA998, ALEXANDER_ALBON, TORO_ROSSO, posicaoLargada: 13, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusaoModel(15, CORRIDA998, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 14, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusaoModel(16, CORRIDA998, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 19, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusaoModel(17, CORRIDA998, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusaoModel(18, CORRIDA998, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 6, posicaoChegada: 18, pontos: 0, motivoDnf: MotivoDNF.Pneu),
+                    new ResultadoInclusaoModel(19, CORRIDA998, DANIEL_RICCARDO, RENAULT, posicaoLargada: 12, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Colisao),
+                    new ResultadoInclusaoModel(20, CORRIDA998, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 18, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Motor)
                 );
 
             // resultados (999)
             modelBuilder.Entity<Resultado>().HasData(
-                    new Resultado(CORRIDA999, LEWIS_HAMILTON, MERCEDES, 3, 1, 25),
-                    new Resultado(CORRIDA999, VALTTERI_BOTTAS, MERCEDES, 4, 2, 18),
-                    new Resultado(CORRIDA999, CHARLES_LECLERC, FERRARI, 1, 3, 16),
-                    new Resultado(CORRIDA999, MAX_VERSTAPPEN, REDBULL, 5, 4, 12),
-                    new Resultado(CORRIDA999, SEBASTIAN_VETTEL, FERRARI, 2, 5, 10),
-                    new Resultado(CORRIDA999, LANDO_NORRIS, MCLAREN, 9, 6, 8),
-                    new Resultado(CORRIDA999, KIMI_RAIKKONEN, ALFA_ROMEO, 8, 7, 6),
-                    new Resultado(CORRIDA999, PIERRE_GASLY, REDBULL, 13, 8, 4),
-                    new Resultado(CORRIDA999, ALEXANDER_ALBON, TORO_ROSSO, 12, 9, 2),
-                    new Resultado(CORRIDA999, SERGIO_PEREZ, RACING_POINT, 14, 10, 1),
-                    new Resultado(CORRIDA999, ANTONIO_GIOVANAZZI, ALFA_ROMEO, 16, 11, 0),
-                    new Resultado(CORRIDA999, DANIIL_KVYAT, TORO_ROSSO, 15, 12, 0),
-                    new Resultado(CORRIDA999, KEVIN_MAGNUSSEN, HAAS, 6, 13, 0),
-                    new Resultado(CORRIDA999, LANCE_STROLL, RACING_POINT, 18, 14, 0),
-                    new Resultado(CORRIDA999, GEORGE_RUSSEL, WILLIAMS, 19, 15, 0),
-                    new Resultado(CORRIDA999, ROBERT_KUBICA, WILLIAMS, 20, 16, 0),
-                    new Resultado(CORRIDA999, NICO_HULKENBERG, RENAULT, 17, 17, 6),
-                    new Resultado(CORRIDA999, DANIEL_RICCARDO, RENAULT, 10, 18, 0),
-                    new Resultado(CORRIDA999, CARLOS_SAINZ_JR, MCLAREN, 7, 19, 0),
-                    new Resultado(CORRIDA999, ROMAIN_GROSJEAN, HAAS, 11, 20, 0, MotivoDNF.Danos)
+                    new ResultadoInclusaoModel(21, CORRIDA999, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 3, posicaoChegada: 1, pontos: 25),
+                    new ResultadoInclusaoModel(22, CORRIDA999, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 4, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusaoModel(23, CORRIDA999, CHARLES_LECLERC, FERRARI, posicaoLargada: 1, posicaoChegada: 3, pontos: 16, pontoExtra: true),
+                    new ResultadoInclusaoModel(24, CORRIDA999, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 5, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusaoModel(25, CORRIDA999, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 2, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusaoModel(26, CORRIDA999, LANDO_NORRIS, MCLAREN, posicaoLargada: 9, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusaoModel(27, CORRIDA999, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 8, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusaoModel(28, CORRIDA999, PIERRE_GASLY, REDBULL, posicaoLargada: 13, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusaoModel(29, CORRIDA999, ALEXANDER_ALBON, TORO_ROSSO, posicaoLargada: 12, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusaoModel(30, CORRIDA999, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 14, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusaoModel(31, CORRIDA999, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 16, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusaoModel(32, CORRIDA999, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 15, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusaoModel(33, CORRIDA999, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 6, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusaoModel(34, CORRIDA999, LANCE_STROLL, RACING_POINT, posicaoLargada: 18, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusaoModel(35, CORRIDA999, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 19, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusaoModel(36, CORRIDA999, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusaoModel(37, CORRIDA999, NICO_HULKENBERG, RENAULT, posicaoLargada: 17, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusaoModel(38, CORRIDA999, DANIEL_RICCARDO, RENAULT, posicaoLargada: 10, posicaoChegada: 18, pontos: 0),
+                    new ResultadoInclusaoModel(39, CORRIDA999, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 7, posicaoChegada: 19, pontos: 0),
+                    new ResultadoInclusaoModel(40, CORRIDA999, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 11, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Danos)
                 );
 
             // resultados (1000)
             modelBuilder.Entity<Resultado>().HasData(
-                    new Resultado(CORRIDA1000, LEWIS_HAMILTON, MERCEDES, 2, 1, 25),
-                    new Resultado(CORRIDA1000, VALTTERI_BOTTAS, MERCEDES, 1, 2, 18),
-                    new Resultado(CORRIDA1000, SEBASTIAN_VETTEL, FERRARI, 3, 3, 15),
-                    new Resultado(CORRIDA1000, MAX_VERSTAPPEN, REDBULL, 5, 4, 12),
-                    new Resultado(CORRIDA1000, CHARLES_LECLERC, FERRARI, 4, 5, 10),
-                    new Resultado(CORRIDA1000, PIERRE_GASLY, REDBULL, 6, 6, 9),
-                    new Resultado(CORRIDA1000, DANIEL_RICCARDO, RENAULT, 7, 7, 6),
-                    new Resultado(CORRIDA1000, SERGIO_PEREZ, RACING_POINT, 12, 8, 4),
-                    new Resultado(CORRIDA1000, KIMI_RAIKKONEN, ALFA_ROMEO, 13, 9, 2),
-                    new Resultado(CORRIDA1000, ALEXANDER_ALBON, TORO_ROSSO, 0, 10, 1), // PL
-                    new Resultado(CORRIDA1000, ROMAIN_GROSJEAN, HAAS, 10, 11, 0),
-                    new Resultado(CORRIDA1000, LANCE_STROLL, RACING_POINT, 16, 12, 0),
-                    new Resultado(CORRIDA1000, KEVIN_MAGNUSSEN, HAAS, 9, 13, 0),
-                    new Resultado(CORRIDA1000, CARLOS_SAINZ_JR, MCLAREN, 14, 14, 0),
-                    new Resultado(CORRIDA1000, ANTONIO_GIOVANAZZI, ALFA_ROMEO, 0, 15, 0), // PL
-                    new Resultado(CORRIDA1000, GEORGE_RUSSEL, WILLIAMS, 17, 16, 0),
-                    new Resultado(CORRIDA1000, ROBERT_KUBICA, WILLIAMS, 18, 17, 0),
-                    new Resultado(CORRIDA1000, LANDO_NORRIS, MCLAREN, 15, 18, 8, MotivoDNF.Danos),
-                    new Resultado(CORRIDA1000, DANIIL_KVYAT, TORO_ROSSO, 11, 19, 0, MotivoDNF.Danos),
-                    new Resultado(CORRIDA1000, NICO_HULKENBERG, RENAULT, 8, 20, 0, MotivoDNF.Motor)
+                    new ResultadoInclusaoModel(41, CORRIDA1000, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 2, posicaoChegada: 1, pontos: 25),
+                    new ResultadoInclusaoModel(42, CORRIDA1000, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 1, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusaoModel(43, CORRIDA1000, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 3, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusaoModel(44, CORRIDA1000, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 5, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusaoModel(45, CORRIDA1000, CHARLES_LECLERC, FERRARI, posicaoLargada: 4, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusaoModel(46, CORRIDA1000, PIERRE_GASLY, REDBULL, posicaoLargada: 6, posicaoChegada: 6, pontos: 9, pontoExtra: true),
+                    new ResultadoInclusaoModel(47, CORRIDA1000, DANIEL_RICCARDO, RENAULT, posicaoLargada: 7, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusaoModel(48, CORRIDA1000, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 12, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusaoModel(49, CORRIDA1000, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 13, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusaoModel(50, CORRIDA1000, ALEXANDER_ALBON, TORO_ROSSO, posicaoLargada: 20, posicaoChegada: 10, pontos: 1), // PL (Pit lane, largou dos boxes - sem tempo)
+                    new ResultadoInclusaoModel(51, CORRIDA1000, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 10, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusaoModel(52, CORRIDA1000, LANCE_STROLL, RACING_POINT, posicaoLargada: 16, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusaoModel(53, CORRIDA1000, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 9, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusaoModel(54, CORRIDA1000, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 14, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusaoModel(55, CORRIDA1000, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 19, posicaoChegada: 15, pontos: 0), // PL (Pit lane, largou dos boxes - sem tempo)
+                    new ResultadoInclusaoModel(56, CORRIDA1000, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 17, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusaoModel(57, CORRIDA1000, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 18, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusaoModel(58, CORRIDA1000, LANDO_NORRIS, MCLAREN, posicaoLargada: 15, posicaoChegada: 18, pontos: 0, motivoDnf: MotivoDNF.Danos),
+                    new ResultadoInclusaoModel(59, CORRIDA1000, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 11, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Danos),
+                    new ResultadoInclusaoModel(60, CORRIDA1000, NICO_HULKENBERG, RENAULT, posicaoLargada: 8, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Motor)
                 );
         }
     }

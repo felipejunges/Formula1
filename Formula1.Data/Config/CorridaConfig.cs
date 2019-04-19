@@ -8,9 +8,7 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Corrida> builder)
         {
-            builder.HasMany(c => c.Resultados)
-                .WithOne(c => c.Corrida)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasIndex(i => i.Temporada);
         }
     }
 }

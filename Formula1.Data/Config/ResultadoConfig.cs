@@ -8,7 +8,17 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Resultado> builder)
         {
-            //
+            builder.HasOne(h => h.Corrida)
+                .WithMany(c => c.Resultados)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(h => h.Equipe)
+                .WithMany(c => c.Resultados)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(h => h.Piloto)
+                .WithMany(c => c.Resultados)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
