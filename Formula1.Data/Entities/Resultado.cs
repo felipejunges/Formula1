@@ -4,7 +4,8 @@
     {
         public Resultado() { }
 
-        public Resultado(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, MotivoDNF? motivoDnf = null)
+        public Resultado(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra = false, MotivoDNF? motivoDnf = null)
+            : this ()
         {
             Id = id;
             Corrida = corrida;
@@ -13,6 +14,7 @@
             PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;
             Pontos = pontos;
+            PontoExtra = pontoExtra;
             DNF = motivoDnf != null;
             MotivoDNF = motivoDnf;
         }
@@ -29,7 +31,7 @@
 
         public int Pontos { get; set; }
 
-        //public bool PontoExtra { get; set; }
+        public bool PontoExtra { get; set; }
 
         public bool DNF { get; set; }
         

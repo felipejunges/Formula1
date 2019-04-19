@@ -10,7 +10,8 @@ namespace Formula1.Data.Entities
             Resultados = new HashSet<Resultado>();
         }
 
-        public Piloto(int id, string nome, string nomeGuerra, string sigla, int numeroCarro, string paisOrigem) : this()
+        public Piloto(int id, string nome, string nomeGuerra, string sigla, int numeroCarro, string paisOrigem)
+            : this ()
         {
             Id = id;
             Nome = nome;

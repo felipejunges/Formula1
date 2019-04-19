@@ -11,6 +11,7 @@ namespace Formula1.Data.Entities
         }
 
         public Equipe(int id, string nome)
+            : this()
         {
             Id = id;
             Nome = nome;

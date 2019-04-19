@@ -1,12 +1,12 @@
 ﻿using Formula1.Domain.Services;
+using Formula1.Infra.Database.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data;
-using System.Data.SQLite;
 
 namespace Formula1.MVC
 {
@@ -27,8 +27,7 @@ namespace Formula1.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddScoped(_ => new SqlConnection(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IDbConnection>(_ => new SQLiteConnection(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
             services.AddScoped<TemporadaService>();
 
