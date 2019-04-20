@@ -14,11 +14,13 @@ namespace Formula1.MVC.Controllers
             TemporadaService = temporadaService;
         }
 
+        [ResponseCache(Duration = 60)]
         public IActionResult Index()
         {
             return RedirectToAction(nameof(PilotosPosicoes));
         }
 
+        [ResponseCache(Duration = 60)]
         public IActionResult PilotosPosicoes()
         {
             var campeonato = TemporadaService.GetTabelaCampeonatoPilotosPorPosicoes(2019);
@@ -26,6 +28,7 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
+        [ResponseCache(Duration = 60)]
         public IActionResult PilotosPontos()
         {
             var campeonato = TemporadaService.GetTabelaCampeonatoPilotosPorPontos(2019);
@@ -33,6 +36,7 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
+        [ResponseCache(Duration = 60)]
         public IActionResult EquipesPontos()
         {
             var campeonato = TemporadaService.GetTabelaCampeonatoEquipesPorPontos(2019);
