@@ -1,5 +1,4 @@
-﻿using Formula1.Data.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Formula1.Data.Models
 {

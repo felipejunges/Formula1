@@ -7,12 +7,12 @@ namespace Formula1.Data.Models
     {
         public List<Corrida> Corridas { get; set; }
 
-        public List<PilotoResultadosModel> PilotoResultados { get; set; }
+        public List<PilotoResultadosModel> PilotosResultados { get; set; }
 
         public TabelaCampeonatoModel(List<Corrida> corridas, List<PilotoResultadosModel> pilotoResultados)
         {
             Corridas = corridas;
-            PilotoResultados = pilotoResultados;
+            PilotosResultados = pilotoResultados;
         }
     }
 }
