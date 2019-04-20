@@ -1,6 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
 using Formula1.Infra.Database.SqlServer;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,27 +23,38 @@ namespace Formula1.Domain.Services
             return corridas;
         }
 
-        public ResultadoCampeonatoModel GetCampeonato(int temporada)
+        public List<PilotoResultadosModel> GetPilotosResultados(int temporada)
+        {
+            var resultados = Db.Resultados
+                .Include(o => o.Piloto)
+                .Include(o => o.Corrida)
+                .Where(o => o.Corrida.Temporada == temporada)
+                .ToList();
+            
+            var pilotosResultados = new List<PilotoResultadosModel>();
+
+            foreach (var resultado in resultados)
+            {
+                var pilotoResultado = pilotosResultados.Where(o => o.Piloto == resultado.Piloto.NomeGuerra).FirstOrDefault();
+
+                if (pilotoResultado == null)
+                    pilotosResultados.Add(new PilotoResultadosModel(resultado.Piloto.NomeGuerra, resultado.Corrida.Id, resultado.PosicaoChegada, resultado.Pontos));
+                else
+                    pilotoResultado.AddResultado(resultado.Corrida.Id, resultado.PosicaoChegada, resultado.Pontos);
+            }
+
+            pilotosResultados.Sort((o, i) => i.Pontos.CompareTo(o.Pontos));
+
+            return pilotosResultados;
+        }
+
+        public TabelaCampeonatoModel GetCampeonato(int temporada)
         {
             var corridas = GetCorridas(temporada);
 
-            List<PilotoPontosModel> pilotos = new List<PilotoPontosModel>();
-            foreach (var corrida in corridas)
-            {
-                foreach (var resultado in corrida.Resultados)
-                {
-                    var pilotoPontos = pilotos.Where(o => o.Piloto == resultado.Piloto).FirstOrDefault();
+            var pilotosResultados = GetPilotosResultados(temporada);
 
-                    if (pilotoPontos == null)
-                        pilotos.Add(new PilotoPontosModel(resultado.Piloto, resultado.Pontos));
-                    else
-                        pilotoPontos.Pontos += resultado.Pontos;
-                }
-            }
-
-            pilotos.Sort((o, i) => i.Pontos.CompareTo(o.Pontos));
-
-            return new ResultadoCampeonatoModel(corridas, pilotos);
+            return new TabelaCampeonatoModel(corridas, pilotosResultados);
         }
     }
 }

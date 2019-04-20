@@ -1,12 +1,12 @@
-﻿@model Formula1.Data.Models.ResultadoCampeonatoModel
+﻿@model Formula1.Data.Models.TabelaCampeonatoModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Formula1";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Formula 1</h1>
+    <p>Temporada 2019</p>
 </div>
 
 <table class="table table-classificacao">
@@ -28,24 +28,29 @@
     </thead>
     <tbody>
 
-        @foreach (var piloto in Model.Pilotos)
+        @foreach (var pilotoResultado in Model.PilotoResultados)
         {
             <tr>
                 <td>
-                    <small>@piloto.Piloto.NomeGuerra</small>
+                    <small>@pilotoResultado.Piloto</small>
                 </td>
 
                 @foreach (var corrida in Model.Corridas)
                 {
-                    var resultado = corrida.Resultados.Where(o => o.Piloto == piloto.Piloto).FirstOrDefault();
-
                     <td class="text-center">
-                        <small>@resultado?.PosicaoChegada.ToString()</small>
+
+                        @if (pilotoResultado.Resultados.ContainsKey(corrida.Id))
+                        {
+                            var resultado = pilotoResultado.Resultados[corrida.Id];
+                            
+                            <small>@resultado.ToString()</small>
+                        }
+
                     </td>
                 }
 
-                <td>
-                    <small>@piloto.Pontos.ToString()</small>
+                <td class="text-center">
+                    <small>@pilotoResultado.Pontos.ToString()</small>
                 </td>
             </tr>
         }
