@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Formula1.Data.Models
 {
-    public class TabelaCampeonatoModel
+    public class TabelaCampeonatoPilotosPosicoesModel
     {
         public List<Corrida> Corridas { get; set; }
 
-        public List<PilotoResultadosModel> PilotosResultados { get; set; }
+        public List<PilotoResultadosPosicaoModel> PilotosResultados { get; set; }
 
-        public TabelaCampeonatoModel(List<Corrida> corridas, List<PilotoResultadosModel> pilotoResultados)
+        public TabelaCampeonatoPilotosPosicoesModel(List<Corrida> corridas, List<PilotoResultadosPosicaoModel> pilotoResultados)
         {
             Corridas = corridas;
             PilotosResultados = pilotoResultados;

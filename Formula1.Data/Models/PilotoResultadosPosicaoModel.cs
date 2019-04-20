@@ -2,18 +2,18 @@
 
 namespace Formula1.Data.Models
 {
-    public class PilotoResultadosModel
+    public class PilotoResultadosPosicaoModel
     {
         public string Piloto { get; set; }
 
-        public int Pontos { get; set; }
+        public int TotalPontos { get; set; }
 
         public Dictionary<int, int> Resultados { get; set; }
 
-        public PilotoResultadosModel(string piloto, int corridaId, int posicaoChegada, int pontos)
+        public PilotoResultadosPosicaoModel(string piloto, int corridaId, int posicaoChegada, int pontos)
         {
             Piloto = piloto;
-            Pontos = pontos;
+            TotalPontos = pontos;
 
             Resultados = new Dictionary<int, int>
             {
@@ -23,7 +23,7 @@ namespace Formula1.Data.Models
 
         public void AddResultado(int corridaId, int posicaoChegada, int pontos)
         {
-            Pontos += pontos;
+            TotalPontos += pontos;
             Resultados.Add(corridaId, posicaoChegada);
         }
     }

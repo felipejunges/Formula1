@@ -16,14 +16,28 @@ namespace Formula1.MVC.Controllers
 
         public IActionResult Index()
         {
-            var campeonato = TemporadaService.GetCampeonato(2019);
+            return RedirectToAction(nameof(PilotosPosicoes));
+        }
+
+        public IActionResult PilotosPosicoes()
+        {
+            var campeonato = TemporadaService.GetTabelaCampeonatoPilotosPorPosicoes(2019);
 
             return View(campeonato);
         }
 
-        public IActionResult Privacy()
+        public IActionResult PilotosPontos()
         {
-            return View();
+            var campeonato = TemporadaService.GetTabelaCampeonatoPilotosPorPontos(2019);
+
+            return View(campeonato);
+        }
+
+        public IActionResult EquipesPontos()
+        {
+            var campeonato = TemporadaService.GetTabelaCampeonatoEquipesPorPontos(2019);
+
+            return View(campeonato);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

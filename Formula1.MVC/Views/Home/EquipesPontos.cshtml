@@ -1,0 +1,59 @@
+﻿@model Formula1.Data.Models.TabelaCampeonatoEquipesPontosModel
+
+@{
+    ViewData["Title"] = "Temporada 2019 - Pontos por equipe";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Formula 1</h1>
+    <h3 class="display-6">Temporada 2019</h3>
+    <p>Pontos por equipe</p>
+</div>
+
+<table class="table table-striped table-classificacao">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+
+            @foreach (var corrida in Model.Corridas)
+            {
+                <th scope="col" class="text-center align-middle th-titulo-corrida">
+                    <small class="titulo-corrida">
+                        @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+                    </small>
+                </th>
+            }
+
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var equipeResultado in Model.EquipesResultados)
+        {
+            <tr>
+                <td>
+                    <small>@equipeResultado.Equipe</small>
+                </td>
+
+                @foreach (var corrida in Model.Corridas)
+                {
+                    <td class="text-center">
+
+                        @if (equipeResultado.Resultados.ContainsKey(corrida.Id))
+                        {
+                            var resultado = equipeResultado.Resultados[corrida.Id];
+
+                            <small>@resultado.ToString()</small>
+                        }
+
+                    </td>
+                }
+
+                <td class="text-center">
+                    <small>@equipeResultado.TotalPontos.ToString()</small>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
