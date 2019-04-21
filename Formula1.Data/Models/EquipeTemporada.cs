@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Formula1.Data.Models
 {
-    public class PilotoTemporada
+    public class EquipeTemporada
     {
         public int Id { get; set; }
 
-        public string NomeGuerra { get; set; }
+        public string Nome { get; set; }
 
         public int PontosTemporada
         {

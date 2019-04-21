@@ -1,4 +1,4 @@
-﻿@model Formula1.Data.Models.TabelaCampeonatoPilotosPosicoesModel
+﻿@model Formula1.Data.Models.TabelaCampeonatoPilotosModel
 
 @{
     ViewData["Title"] = "Temporada 2019 - Posições por piloto";
@@ -29,31 +29,34 @@
     </thead>
     <tbody>
 
-        @foreach (var pilotoResultado in Model.PilotosResultados)
+        @foreach (var piloto in Model.Pilotos)
         {
             <tr>
                 <td>
-                    <small>@pilotoResultado.Piloto</small>
+                    <small>@piloto.NomeGuerra</small>
                 </td>
 
                 @foreach (var corrida in Model.Corridas)
                 {
                     <td class="text-center">
 
-                        @if (pilotoResultado.Resultados.ContainsKey(corrida.Id))
-                        {
-                            var resultado = pilotoResultado.Resultados[corrida.Id];
+                        @{
+                            var resultado = piloto.Resultados.Where(o => o.CorridaId == corrida.Id).FirstOrDefault();
 
-                            <small>@resultado.ToString()</small>
+                            if (resultado != null)
+                            {
+                                <small>@resultado.PosicaoChegada.ToString() @(resultado.PontoExtra ? "*" : "")</small>
+                            }
                         }
 
                     </td>
                 }
 
                 <td class="text-center">
-                    <small>@pilotoResultado.TotalPontos.ToString()</small>
+                    <small>@piloto.PontosTemporada.ToString()</small>
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
