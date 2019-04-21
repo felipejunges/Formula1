@@ -29,6 +29,8 @@ namespace Formula1.MVC
 
             services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
+            services.AddScoped<CorridasService>();
+            services.AddScoped<PilotosService>();
             services.AddScoped<TemporadaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

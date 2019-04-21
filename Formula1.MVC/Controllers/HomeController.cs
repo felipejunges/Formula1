@@ -44,6 +44,11 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
+        public IActionResult GraficoPilotosPontos()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -5,11 +5,11 @@ namespace Formula1.Data.Models
 {
     public class TabelaCampeonatoPilotosPosicoesModel
     {
-        public List<Corrida> Corridas { get; set; }
+        public List<CorridaTemporada> Corridas { get; set; }
 
         public List<PilotoResultadosPosicaoModel> PilotosResultados { get; set; }
 
-        public TabelaCampeonatoPilotosPosicoesModel(List<Corrida> corridas, List<PilotoResultadosPosicaoModel> pilotoResultados)
+        public TabelaCampeonatoPilotosPosicoesModel(List<CorridaTemporada> corridas, List<PilotoResultadosPosicaoModel> pilotoResultados)
         {
             Corridas = corridas;
             PilotosResultados = pilotoResultados;

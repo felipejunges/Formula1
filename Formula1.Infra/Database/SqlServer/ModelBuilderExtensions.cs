@@ -132,6 +132,30 @@ namespace Formula1.Infra.Database.SqlServer
                     CORRIDA1018
                 );
 
+            // contratos
+            modelBuilder.Entity<Contrato>().HasData(
+                    new ContratoInclusaoModel(1, LEWIS_HAMILTON, MERCEDES, 2019),
+                    new ContratoInclusaoModel(2, VALTTERI_BOTTAS, MERCEDES, 2019),
+                    new ContratoInclusaoModel(3, SEBASTIAN_VETTEL, FERRARI, 2019),
+                    new ContratoInclusaoModel(4, CHARLES_LECLERC, FERRARI, 2019),
+                    new ContratoInclusaoModel(5, MAX_VERSTAPPEN, REDBULL, 2019),
+                    new ContratoInclusaoModel(6, PIERRE_GASLY, REDBULL, 2019),
+                    new ContratoInclusaoModel(7, NICO_HULKENBERG, RENAULT, 2019),
+                    new ContratoInclusaoModel(8, DANIEL_RICCARDO, RENAULT, 2019),
+                    new ContratoInclusaoModel(9, SERGIO_PEREZ, RACING_POINT, 2019),
+                    new ContratoInclusaoModel(10, LANCE_STROLL, RACING_POINT, 2019),
+                    new ContratoInclusaoModel(11, KIMI_RAIKKONEN, ALFA_ROMEO, 2019),
+                    new ContratoInclusaoModel(12, ANTONIO_GIOVANAZZI, ALFA_ROMEO, 2019),
+                    new ContratoInclusaoModel(13, DANIIL_KVYAT, TORO_ROSSO, 2019),
+                    new ContratoInclusaoModel(14, ALEXANDER_ALBON, TORO_ROSSO, 2019),
+                    new ContratoInclusaoModel(15, LANDO_NORRIS, MCLAREN, 2019),
+                    new ContratoInclusaoModel(16, CARLOS_SAINZ_JR, MCLAREN, 2019),
+                    new ContratoInclusaoModel(17, KEVIN_MAGNUSSEN, HAAS, 2019),
+                    new ContratoInclusaoModel(18, ROMAIN_GROSJEAN, HAAS, 2019),
+                    new ContratoInclusaoModel(19, GEORGE_RUSSEL, WILLIAMS, 2019),
+                    new ContratoInclusaoModel(20, ROBERT_KUBICA, WILLIAMS, 2019)
+                );
+
             // resultados (998)
             modelBuilder.Entity<Resultado>().HasData(
                     new ResultadoInclusaoModel(1, CORRIDA998, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 2, posicaoChegada: 1, pontos: 26, pontoExtra: true),
