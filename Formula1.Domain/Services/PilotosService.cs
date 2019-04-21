@@ -22,8 +22,7 @@ namespace Formula1.Domain.Services
                            select new PilotoTemporada()
                            {
                                Id = p.Id,
-                               NomeGuerra = p.NomeGuerra,
-                               PontosTemporada = 0
+                               NomeGuerra = p.NomeGuerra
                            }).ToList();
 
             return pilotos;

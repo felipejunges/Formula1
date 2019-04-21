@@ -1,47 +1,47 @@
 ﻿using Formula1.Data.Models;
-using Formula1.Infra.Database.SqlServer;
+using System.Linq;
 
 namespace Formula1.Domain.Services
 {
     public class TemporadaService
     {
-        //private readonly F1Db Db;
         private readonly CorridasService CorridasService;
+        private readonly EquipesService EquipesService;
         private readonly PilotosService PilotosService;
+        private readonly ResultadosService ResultadosService;
 
-        //public TemporadaService(F1Db db, CorridasService corridasService)
-        public TemporadaService(CorridasService corridasService)
+        public TemporadaService(CorridasService corridasService, EquipesService equipesService, PilotosService pilotosService, ResultadosService resultadosService)
         {
-            //Db = db;
             CorridasService = corridasService;
+            EquipesService = equipesService;
+            PilotosService = pilotosService;
+            ResultadosService = resultadosService;
         }
 
-        public TabelaCampeonatoPilotosPosicoesModel GetTabelaCampeonatoPilotosPorPosicoes(int temporada)
+        public TabelaCampeonatoPilotosModel GetTabelaCampeonatoPilotos(int temporada)
         {
             var corridas = CorridasService.GetCorridasTabela(temporada);
             var pilotos = PilotosService.GetPilotosTabela(temporada);
+            var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
 
-            var pilotosResultados = CorridasService.GetPilotosResultadosPorPosicoes(temporada);
+            pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
 
-            return new TabelaCampeonatoPilotosPosicoesModel(corridas, pilotosResultados);
+            pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
+
+            return new TabelaCampeonatoPilotosModel(corridas, pilotos);
         }
 
-        public TabelaCampeonatoPilotosPontosModel GetTabelaCampeonatoPilotosPorPontos(int temporada)
+        public TabelaCampeonatoEquipesModel GetTabelaCampeonatoEquipes(int temporada)
         {
-            var corridas = CorridasService.GetCorridas(temporada);
+            var corridas = CorridasService.GetCorridasTabela(temporada);
+            var equipes = EquipesService.GetEquipesTabela(temporada);
+            var resultados = ResultadosService.GetResultadosEquipeTemporada(temporada);
 
-            var pilotosResultados = CorridasService.GetPilotosResultadosPorPontos(temporada);
+            equipes.ForEach(f => f.Resultados = resultados.Where(o => o.EquipeId == f.Id).ToList());
 
-            return new TabelaCampeonatoPilotosPontosModel(corridas, pilotosResultados);
-        }
+            equipes.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
 
-        public TabelaCampeonatoEquipesPontosModel GetTabelaCampeonatoEquipesPorPontos(int temporada)
-        {
-            var corridas = CorridasService.GetCorridas(temporada);
-
-            var equipesResultados = CorridasService.GetEquipesResultadosPorPontos(temporada);
-
-            return new TabelaCampeonatoEquipesPontosModel(corridas, equipesResultados);
+            return new TabelaCampeonatoEquipesModel(corridas, equipes);
         }
     }
 }
