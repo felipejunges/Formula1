@@ -45,7 +45,7 @@
 
                             if (resultado != null)
                             {
-                                <small>@resultado.Pontos.ToString() @(resultado.PontoExtra ? "*" : "")</small>
+                                <small>@resultado.Pontos.ToString() @(resultado.PontoExtra ? "*" : "") @(resultado.DNF ? "_" : "")</small>
                             }
                         }
 

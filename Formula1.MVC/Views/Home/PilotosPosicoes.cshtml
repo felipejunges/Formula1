@@ -45,7 +45,7 @@
 
                             if (resultado != null)
                             {
-                                <small>@resultado.PosicaoChegada.ToString() @(resultado.PontoExtra ? "*" : "")</small>
+                                <small>@resultado.PosicaoChegada.ToString() @(resultado.PontoExtra ? "*" : "") @(resultado.DNF ? "_" : "")</small>
                             }
                         }
 

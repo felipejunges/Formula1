@@ -13,5 +13,7 @@
         public bool PontoExtra { get; set; }
 
         public int PosicaoChegada { get; set; }
+
+        public bool DNF { get; set; }
     }
 }
