@@ -1,4 +1,5 @@
 ﻿using Formula1.Data.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Formula1.Domain.Services
@@ -42,6 +43,28 @@ namespace Formula1.Domain.Services
             equipes.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
 
             return new TabelaCampeonatoEquipesModel(corridas, equipes);
+        }
+
+        public List<PilotoPontosGrafico> GetGraficoCampeonatoPilotos(int temporada)
+        {
+            var campeonato = GetTabelaCampeonatoPilotos(temporada);
+
+            var pilotosGrafico = new List<PilotoPontosGrafico>();
+
+            foreach (var piloto in campeonato.Pilotos)
+            {
+                var pontos = new int?[campeonato.Corridas.Count];
+                for (int i = 0; i < piloto.Resultados.Count; i++)
+                    pontos[i] = i == 0 ? piloto.Resultados[i].Pontos : pontos[i - 1] + piloto.Resultados[i].Pontos;
+
+                pilotosGrafico.Add(new PilotoPontosGrafico()
+                {
+                    Piloto = piloto.NomeGuerra,
+                    Pontos = pontos
+                });
+            }
+
+            return pilotosGrafico;
         }
     }
 }

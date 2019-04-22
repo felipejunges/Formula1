@@ -46,7 +46,9 @@ namespace Formula1.MVC.Controllers
 
         public IActionResult GraficoPilotosPontos()
         {
-            return View();
+            var pilotosGrafico = TemporadaService.GetGraficoCampeonatoPilotos(2019);
+
+            return View(pilotosGrafico);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
