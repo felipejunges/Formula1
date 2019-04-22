@@ -28,6 +28,8 @@ namespace Formula1.MVC
             });
 
             services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
+            // TODO: testar essa configuração
+            //services.AddDbContext<F1Db>(options => options.UseInMemoryDatabase(""));
 
             services.AddScoped<CorridasService>();
             services.AddScoped<EquipesService>();
