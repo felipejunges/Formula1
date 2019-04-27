@@ -5,7 +5,10 @@ namespace Formula1.Infra.Database.SqlServer
 {
     public class F1Db : DbContext
     {
-        public F1Db(DbContextOptions<F1Db> options) : base(options) { }
+        public F1Db(DbContextOptions<F1Db> options) : base(options)
+        {
+            
+        }
 
         public DbSet<Contrato> Contratos { get; set; }
 

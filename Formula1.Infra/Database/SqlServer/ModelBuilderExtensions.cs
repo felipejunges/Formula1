@@ -5,6 +5,7 @@ using System;
 
 namespace Formula1.Infra.Database.SqlServer
 {
+    [Obsolete("Não funciona com MemoryDb, então decidir se isso ficou sai.", false)]
     public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)

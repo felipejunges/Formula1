@@ -27,9 +27,8 @@ namespace Formula1.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
-            // TODO: testar essa configuração
-            //services.AddDbContext<F1Db>(options => options.UseInMemoryDatabase(""));
+            //services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
+            services.AddDbContext<F1Db>(options => options.UseInMemoryDatabase("F1"));
 
             services.AddScoped<CorridasService>();
             services.AddScoped<EquipesService>();

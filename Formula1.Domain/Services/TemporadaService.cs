@@ -1,4 +1,5 @@
 ﻿using Formula1.Data.Models;
+using Formula1.Infra.Database.SqlServer;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,13 +7,18 @@ namespace Formula1.Domain.Services
 {
     public class TemporadaService
     {
+        private readonly F1Db Db;
+
         private readonly CorridasService CorridasService;
         private readonly EquipesService EquipesService;
         private readonly PilotosService PilotosService;
         private readonly ResultadosService ResultadosService;
 
-        public TemporadaService(CorridasService corridasService, EquipesService equipesService, PilotosService pilotosService, ResultadosService resultadosService)
+        public TemporadaService(F1Db db, CorridasService corridasService, EquipesService equipesService, PilotosService pilotosService, ResultadosService resultadosService)
         {
+            Db = db;
+            Db.Database.EnsureCreated();
+
             CorridasService = corridasService;
             EquipesService = equipesService;
             PilotosService = pilotosService;
