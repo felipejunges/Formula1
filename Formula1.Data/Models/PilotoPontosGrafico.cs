@@ -4,6 +4,8 @@
     {
         public string Piloto { get; set; }
 
+        public string CorRgb { get; set; }
+
         public int?[] Pontos { get; set; }
     }
 }

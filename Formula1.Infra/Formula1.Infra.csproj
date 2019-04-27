@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Formula1.Data\Formula1.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\SQLite\" />
-  </ItemGroup>
-
 </Project>

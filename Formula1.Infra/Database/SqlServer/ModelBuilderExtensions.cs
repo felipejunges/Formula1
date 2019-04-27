@@ -5,7 +5,6 @@ using System;
 
 namespace Formula1.Infra.Database.SqlServer
 {
-    [Obsolete("Não funciona com MemoryDb, então decidir se isso ficou sai.", false)]
     public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
@@ -33,16 +32,16 @@ namespace Formula1.Infra.Database.SqlServer
             Piloto GEORGE_RUSSEL = new Piloto(20, "George Russell", "Russell", "RUS", 63, "Inglaterra");
 
             // equipes
-            Equipe MERCEDES = new Equipe(1, "Mercedes");
-            Equipe FERRARI = new Equipe(2, "Ferrari");
-            Equipe REDBULL = new Equipe(3, "RedBull Racing");
-            Equipe TORO_ROSSO = new Equipe(4, "Scuderia Toro Rosso");
-            Equipe RENAULT = new Equipe(5, "Renault");
-            Equipe WILLIAMS = new Equipe(6, "Williams");
-            Equipe MCLAREN = new Equipe(7, "McLaren");
-            Equipe RACING_POINT = new Equipe(8, "Racing Point");
-            Equipe HAAS = new Equipe(9, "Haas");
-            Equipe ALFA_ROMEO = new Equipe(10, "Alfa Romeo");
+            Equipe MERCEDES = new Equipe(1, "Mercedes", "#00D2BE");
+            Equipe FERRARI = new Equipe(2, "Ferrari", "#DC0000");
+            Equipe REDBULL = new Equipe(3, "RedBull Racing", "#1E41FF");
+            Equipe TORO_ROSSO = new Equipe(4, "Scuderia Toro Rosso", "#469BFF");
+            Equipe RENAULT = new Equipe(5, "Renault", "#FFF500");
+            Equipe WILLIAMS = new Equipe(6, "Williams", "#EEEEEE");
+            Equipe MCLAREN = new Equipe(7, "McLaren", "#FF8700");
+            Equipe RACING_POINT = new Equipe(8, "Racing Point", "#F596C8");
+            Equipe HAAS = new Equipe(9, "Haas", "#F0D787");
+            Equipe ALFA_ROMEO = new Equipe(10, "Alfa Romeo", "#9B0000");
 
             // corridas
             Corrida CORRIDA998 = new Corrida(998, 2019, "GP da Austrália", "Circuito de Albert Park", new DateTime(2019, 3, 17, 2, 10, 0));

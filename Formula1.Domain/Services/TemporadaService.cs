@@ -51,7 +51,7 @@ namespace Formula1.Domain.Services
             return new TabelaCampeonatoEquipesModel(corridas, equipes);
         }
 
-        public List<PilotoPontosGrafico> GetGraficoCampeonatoPilotos(int temporada)
+        public GraficoCampeonatoPilotos GetGraficoCampeonatoPilotos(int temporada)
         {
             var campeonato = GetTabelaCampeonatoPilotos(temporada);
 
@@ -66,11 +66,14 @@ namespace Formula1.Domain.Services
                 pilotosGrafico.Add(new PilotoPontosGrafico()
                 {
                     Piloto = piloto.NomeGuerra,
+                    CorRgb = piloto.CorRgb,
                     Pontos = pontos
                 });
             }
 
-            return pilotosGrafico;
+            var graficoCampeonato = new GraficoCampeonatoPilotos(campeonato.Corridas, pilotosGrafico);
+
+            return graficoCampeonato;
         }
     }
 }

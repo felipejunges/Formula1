@@ -7,6 +7,8 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private const int TEMPORADA = 2019;
+
         private readonly TemporadaService TemporadaService;
 
         public HomeController(TemporadaService temporadaService)
@@ -23,7 +25,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPosicoes()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(2019);
+            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(TEMPORADA);
 
             return View(campeonato);
         }
@@ -31,7 +33,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPontos()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(2019);
+            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(TEMPORADA);
 
             return View(campeonato);
         }
@@ -39,14 +41,14 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult EquipesPontos()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoEquipes(2019);
+            var campeonato = TemporadaService.GetTabelaCampeonatoEquipes(TEMPORADA);
 
             return View(campeonato);
         }
 
         public IActionResult GraficoPilotosPontos()
         {
-            var pilotosGrafico = TemporadaService.GetGraficoCampeonatoPilotos(2019);
+            var pilotosGrafico = TemporadaService.GetGraficoCampeonatoPilotos(TEMPORADA);
 
             return View(pilotosGrafico);
         }

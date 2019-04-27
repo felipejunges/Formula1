@@ -10,14 +10,17 @@ namespace Formula1.Data.Entities
             Resultados = new HashSet<Resultado>();
         }
 
-        public Equipe(int id, string nome)
+        public Equipe(int id, string nome, string corRgb)
             : this()
         {
             Id = id;
             Nome = nome;
+            CorRgb = corRgb;
         }
 
         public string Nome { get; set; }
+
+        public string CorRgb { get; set; }
 
         // TODO: criar estrutura Equipe x Campeonato pra armazenar o motor
 

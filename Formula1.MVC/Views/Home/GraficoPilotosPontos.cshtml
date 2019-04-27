@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Formula1.Data.Models.PilotoPontosGrafico>
+﻿@model Formula1.Data.Models.GraficoCampeonatoPilotos
 
 @{
-    ViewData["Title"] = "GraficoPilotosPontos";
+    ViewData["Title"] = "Temporada 2019 - Gráfico de pontos por piloto";
 }
 
 <div class="text-center">
@@ -22,16 +22,16 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['aqui','vão','as','datas','das','corridas'],
+                labels: [@Html.Raw(string.Join(",", Model.Corridas.Select(o => $"'{o.NomeGrandePremio}'")))],
                 datasets: [
-                    @foreach(var item in Model)
+                    @foreach(var piloto in Model.Pilotos)
                     {
                         <text>
                         {
-                            label: 'Realização',
-                            data: [@(string.Join(",", item.Pontos.Select(o => o.ToString().Replace(',', '.'))))],
+                            label: '@piloto.Piloto',
+                            data: [@(string.Join(",", piloto.Pontos.Select(o => o != null ? o.ToString().Replace(',', '.') : "null")))],
                             borderColor: [
-                                'rgba(0,220,220,1)'
+                                '@piloto.CorRgb'
                             ],
                             fill: false,
                             borderWidth: 2
@@ -49,7 +49,7 @@
                         tension: 0,
                     },
                     point: {
-                        radius: 0
+                        radius: 2
                     }
                 },
                 scales: {
