@@ -30,9 +30,8 @@
                         {
                             label: '@piloto.Piloto',
                             data: [@(string.Join(",", piloto.Pontos.Select(o => o != null ? o.ToString().Replace(',', '.') : "null")))],
-                            borderColor: [
-                                '@piloto.CorRgb'
-                            ],
+                            borderColor: ['@piloto.CorRgb'],
+                            backgroundColor: ['@piloto.CorRgb'],
                             fill: false,
                             borderWidth: 2
                         },
