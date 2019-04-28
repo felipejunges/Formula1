@@ -34,6 +34,7 @@ namespace Formula1.Domain.Services
             pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
 
             pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
+            //pilotos.Sort((o, i) => i.Resultados[3].Pontos.CompareTo(o.Resultados[3].Pontos));
 
             return new TabelaCampeonatoPilotosModel(corridas, pilotos);
         }
