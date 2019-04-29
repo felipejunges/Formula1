@@ -34,7 +34,10 @@ namespace Formula1.MVC
             services.AddScoped<EquipesService>();
             services.AddScoped<PilotosService>();
             services.AddScoped<ResultadosService>();
-            services.AddScoped<TemporadaService>();
+            services.AddScoped<TabelaPilotosService>();
+            services.AddScoped<TabelaEquipesService>();
+            services.AddScoped<GraficoCampeonatoPilotosService>();
+            services.AddScoped<GraficoCampeonatoEquipesService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

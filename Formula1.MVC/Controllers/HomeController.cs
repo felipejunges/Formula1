@@ -1,4 +1,5 @@
 ﻿using Formula1.Domain.Services;
+using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,11 +10,19 @@ namespace Formula1.MVC.Controllers
     {
         private const int TEMPORADA = 2019;
 
-        private readonly TemporadaService TemporadaService;
+        private readonly TabelaPilotosService TabelaPilotosService;
+        private readonly TabelaEquipesService TabelaEquipesService;
+        private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
+        private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
 
-        public HomeController(TemporadaService temporadaService)
+        public HomeController(F1Db db, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
-            TemporadaService = temporadaService;
+            db.Database.EnsureCreated();
+
+            TabelaPilotosService = tabelaPilotosService;
+            TabelaEquipesService = tabelaEquipesService;
+            GraficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
+            GraficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
         }
 
         [ResponseCache(Duration = 60)]
@@ -25,7 +34,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPosicoes()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(TEMPORADA);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA);
 
             return View(campeonato);
         }
@@ -33,7 +42,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPontos()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoPilotos(TEMPORADA);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA);
 
             return View(campeonato);
         }
@@ -41,7 +50,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult EquipesPontos()
         {
-            var campeonato = TemporadaService.GetTabelaCampeonatoEquipes(TEMPORADA);
+            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(TEMPORADA);
 
             return View(campeonato);
         }
@@ -49,7 +58,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult GraficoPilotosPontos()
         {
-            var pilotosGrafico = TemporadaService.GetGraficoCampeonatoPilotos(TEMPORADA);
+            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(TEMPORADA);
 
             return View(pilotosGrafico);
         }
@@ -57,7 +66,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult GraficoEquipesPontos()
         {
-            var equipesGrafico = TemporadaService.GetGraficoCampeonatoEquipes(TEMPORADA);
+            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(TEMPORADA);
 
             return View(equipesGrafico);
         }
