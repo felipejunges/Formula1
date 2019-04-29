@@ -9,6 +9,8 @@ namespace Formula1.Data.Models
 
         public string Nome { get; set; }
 
+        public string CorRgb { get; set; }
+
         public int PontosTemporada
         {
             get

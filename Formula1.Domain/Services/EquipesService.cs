@@ -19,11 +19,12 @@ namespace Formula1.Domain.Services
             var equipes = (from c in Db.Contratos
                            join e in Db.Equipes on c.Equipe equals e
                            where c.Temporada == temporada
-                           group e by new { e.Id, e.Nome } into g
+                           group e by new { e.Id, e.Nome, e.CorRgb } into g
                            select new EquipeTemporada()
                            {
                                Id = g.Key.Id,
-                               Nome = g.Key.Nome
+                               Nome = g.Key.Nome,
+                               CorRgb = g.Key.CorRgb
                            }).ToList();
 
             return equipes;

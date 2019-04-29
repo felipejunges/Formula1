@@ -46,11 +46,20 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
+        [ResponseCache(Duration = 60)]
         public IActionResult GraficoPilotosPontos()
         {
             var pilotosGrafico = TemporadaService.GetGraficoCampeonatoPilotos(TEMPORADA);
 
             return View(pilotosGrafico);
+        }
+
+        [ResponseCache(Duration = 60)]
+        public IActionResult GraficoEquipesPontos()
+        {
+            var equipesGrafico = TemporadaService.GetGraficoCampeonatoEquipes(TEMPORADA);
+
+            return View(equipesGrafico);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
