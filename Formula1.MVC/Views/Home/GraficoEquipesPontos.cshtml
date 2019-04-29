@@ -31,7 +31,6 @@
                             label: '@equipe.Equipe',
                             data: [@(string.Join(",", equipe.Pontos.Select(o => o != null ? o.ToString().Replace(',', '.') : "null")))],
                             borderColor: ['@equipe.CorRgb'],
-                            backgroundColor: ['@equipe.CorRgb'],
                             fill: false,
                             borderWidth: 2
                         },
@@ -40,6 +39,7 @@
                 ]
             },
             options: {
+                responsive: true,
                 legend: {
                     display: false
                 },
@@ -48,14 +48,19 @@
                         tension: 0,
                     },
                     point: {
-                        radius: 2
+                        radius: 3
                     }
                 },
                 scales: {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
-                        }
+                        },
+                        display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Pontos'
+						}
                     }]
                 },
 
