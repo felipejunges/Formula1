@@ -251,6 +251,30 @@ namespace Formula1.Infra.Database.SqlServer
                     new ResultadoInclusao(79, CORRIDA1001, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 6, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Outros),
                     new ResultadoInclusao(80, CORRIDA1001, DANIEL_RICCARDO, RENAULT, posicaoLargada: 12, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Outros)
                 );
+
+            // resultados (1002 - GP ESPANHA - 12/05/2019)
+            modelBuilder.Entity<Resultado>().HasData(
+                    new ResultadoInclusao(81, CORRIDA1002, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 2, posicaoChegada: 1, pontos: 26, pontoExtra: true),
+                    new ResultadoInclusao(82, CORRIDA1002, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 1, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusao(83, CORRIDA1002, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 4, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusao(84, CORRIDA1002, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 3, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusao(85, CORRIDA1002, CHARLES_LECLERC, FERRARI, posicaoLargada: 5, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusao(86, CORRIDA1002, PIERRE_GASLY, REDBULL, posicaoLargada: 6, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusao(87, CORRIDA1002, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 8, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusao(88, CORRIDA1002, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 13, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusao(89, CORRIDA1002, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 9, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusao(90, CORRIDA1002, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 7, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusao(91, CORRIDA1002, ALEXANDER_ALBON, TORO_ROSSO, posicaoLargada: 12, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusao(92, CORRIDA1002, DANIEL_RICCARDO, RENAULT, posicaoLargada: 10, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusao(93, CORRIDA1002, NICO_HULKENBERG, RENAULT, posicaoLargada: 16, posicaoChegada: 13, pontos: 0), // PL
+                    new ResultadoInclusao(94, CORRIDA1002, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 14, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusao(95, CORRIDA1002, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 15, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(96, CORRIDA1002, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 18, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusao(97, CORRIDA1002, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 19, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusao(98, CORRIDA1002, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 18, pontos: 0),
+                    new ResultadoInclusao(99, CORRIDA1002, LANCE_STROLL, RACING_POINT, posicaoLargada: 17, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Colisao),
+                    new ResultadoInclusao(100, CORRIDA1002, LANDO_NORRIS, MCLAREN, posicaoLargada: 11, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Colisao)
+                );
         }
     }
 }
