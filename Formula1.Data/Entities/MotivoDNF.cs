@@ -6,6 +6,8 @@
         Colisao = 2,
         Motor = 3,
         Danos = 4,
+        Transmissao = 5,
+        Freios = 6,
         Outros = 99
     }
 }
