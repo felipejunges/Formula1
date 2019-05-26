@@ -37,6 +37,14 @@ namespace Formula1.Test
         }
 
         [Fact]
+        public void TodasAsCorridasTemVinteResultados()
+        {
+            var corridas = ServiceFixture.Db.Corridas.Where(o => o.Resultados.Count != 0 && o.Resultados.Count != 20).ToList();
+
+            Assert.Empty(corridas);
+        }
+        
+        [Fact]
         public void TodasAsPosicoesBatemComOsPontos()
         {
             var resultados = ServiceFixture.Db.Resultados.ToList();
