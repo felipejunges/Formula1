@@ -8,6 +8,7 @@
         Danos = 4,
         Transmissao = 5,
         Freios = 6,
+        Quebra = 7,
         Outros = 99
     }
 }
