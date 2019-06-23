@@ -16,7 +16,7 @@ namespace Formula1.Domain.Services
             ResultadosService = resultadosService;
         }
 
-        public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada)
+        public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada, int? order)
         {
             var corridas = CorridasService.GetCorridasTabela(temporada);
             var pilotos = PilotosService.GetPilotosTabela(temporada);
@@ -24,8 +24,10 @@ namespace Formula1.Domain.Services
 
             pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
 
-            pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
-            //pilotos.Sort((o, i) => i.Resultados[3].Pontos.CompareTo(o.Resultados[3].Pontos));
+            if (order == null)
+                pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
+            else
+                pilotos.Sort((o, i) => o.Resultados[order.Value - 1].PosicaoChegada.CompareTo(i.Resultados[order.Value - 1].PosicaoChegada));
 
             return new TabelaCampeonatoPilotos(corridas, pilotos);
         }

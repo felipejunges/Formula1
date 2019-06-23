@@ -14,7 +14,7 @@ namespace Formula1.Domain.Services
 
         public GraficoCampeonatoEquipes GetGraficoCampeonatoEquipes(int temporada)
         {
-            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(temporada);
+            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(temporada, null);
 
             var equipesGrafico = new List<EquipePontosGrafico>();
 

@@ -2,6 +2,7 @@
 using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 
 namespace Formula1.MVC.Controllers
@@ -34,7 +35,9 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPosicoes()
         {
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA);
+            int? order = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
+
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, order);
 
             return View(campeonato);
         }
@@ -42,7 +45,9 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPontos()
         {
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA);
+            int? order = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
+
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, order);
 
             return View(campeonato);
         }
@@ -50,7 +55,9 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult EquipesPontos()
         {
-            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(TEMPORADA);
+            int? order = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
+
+            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(TEMPORADA, order);
 
             return View(campeonato);
         }
