@@ -1,13 +1,14 @@
 ﻿@model Formula1.Data.Models.GraficoCampeonatoEquipes
 
 @{
-    ViewData["Title"] = "Temporada 2019 - Gráfico de pontos por equipe";
+    ViewData["Title"] = "Temporada 2019";
+    ViewData["SubTitle"] = "Gráfico de pontos por equipe";
 }
 
 <div class="text-center">
     <h1 class="display-4">Formula 1</h1>
-    <h3 class="display-6">Temporada 2019</h3>
-    <p>Gráfico de pontos por equipe</p>
+    <h3 class="display-6">@ViewData["Title"]</h3>
+    <p>@ViewData["SubTitle"]</p>
 
     <canvas id="grafico"></canvas>
 </div>

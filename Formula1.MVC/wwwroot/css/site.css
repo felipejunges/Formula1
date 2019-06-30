@@ -65,3 +65,7 @@ body {
     height: 125px;
     padding: 0px !important;
 }
+
+    .titulo-corrida a {
+        color: #212529;
+    }

@@ -1,13 +1,14 @@
 ﻿@model Formula1.Data.Models.TabelaCampeonatoPilotos
 
 @{
-    ViewData["Title"] = "Temporada 2019 - Pontos por piloto";
+    ViewData["Title"] = "Temporada 2019";
+    ViewData["SubTitle"] = "Pontos por piloto";
 }
 
 <div class="text-center">
     <h1 class="display-4">Formula 1</h1>
-    <h3 class="display-6">Temporada 2019</h3>
-    <p>Pontos por piloto</p>
+    <h3 class="display-6">@ViewData["Title"]</h3>
+    <p>@ViewData["SubTitle"]</p>
 </div>
 
 <table class="table table-striped table-classificacao">
@@ -20,7 +21,16 @@
             {
                 <th scope="col" class="text-center align-middle th-titulo-corrida">
                     <small class="titulo-corrida">
-                        @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+
+                        @{
+                            var link = Model.Pilotos.Where(w => w.Resultados.Any(a => a.CorridaId == corrida.Id)).Count() > 0
+                                ? "~/Home/PilotosPontos?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString()
+                                : "~/Home/PilotosPontos?o=";
+                        }
+
+                        <a href="@Url.Content(link)">
+                            @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+                        </a>
                     </small>
                 </th>
             }
@@ -50,7 +60,7 @@
 
                             if (resultado != null)
                             {
-                                <small>@resultado.Pontos.ToString() @(resultado.PontoExtra ? "*" : "") @(resultado.DNF ? "_" : "")</small>
+                                <small style="font-weight: @(resultado.PontoExtra ? "bold" : "normal")">@(resultado.DNF ? "-" : resultado.Pontos.ToString())</small>
                             }
                         }
 
