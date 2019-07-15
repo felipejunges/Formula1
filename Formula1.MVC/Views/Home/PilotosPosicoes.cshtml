@@ -22,15 +22,17 @@
                 <th scope="col" class="text-center align-middle th-titulo-corrida">
                     <small class="titulo-corrida">
 
-                        @{
-                            var link = Model.Pilotos.Where(w => w.Resultados.Any(a => a.CorridaId == corrida.Id)).Count() > 0
-                                ? "~/Home/PilotosPosicoes?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString()
-                                : "~/Home/PilotosPosicoes?o=";
+                        @if (Model.Pilotos.Where(w => w.Resultados.Any(a => a.CorridaId == corrida.Id)).Count() > 0)
+                        {
+                            <a href="@Url.Content("~/Home/PilotosPosicoes?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString())">
+                                @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+                            </a>
+                        }
+                        else
+                        {
+                            @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
                         }
 
-                        <a href="@Url.Content(link)">
-                            @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
-                        </a>
                     </small>
                 </th>
             }
@@ -58,7 +60,6 @@
                 @foreach (var corrida in Model.Corridas)
                 {
                     <td class="text-center">
-
                         @{
                             var resultado = piloto.Resultados.Where(o => o.CorridaId == corrida.Id).FirstOrDefault();
 
@@ -67,7 +68,6 @@
                                 <small style="font-weight: @(resultado.PontoExtra ? "bold" : "normal")">@(resultado.DNF ? "-" : resultado.PosicaoChegada.ToString())</small>
                             }
                         }
-
                     </td>
                 }
 
