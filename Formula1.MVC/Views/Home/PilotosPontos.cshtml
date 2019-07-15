@@ -24,8 +24,8 @@
 
                         @{
                             var link = Model.Pilotos.Where(w => w.Resultados.Any(a => a.CorridaId == corrida.Id)).Count() > 0
-                                ? "~/Home/PilotosPontos?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString()
-                                : "~/Home/PilotosPontos?o=";
+                            ? "~/Home/PilotosPontos?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString()
+                            : "~/Home/PilotosPontos?o=";
                         }
 
                         <a href="@Url.Content(link)">
@@ -35,7 +35,11 @@
                 </th>
             }
 
-            <th scope="col"></th>
+            <th scope="col" class="text-center align-middle th-titulo-corrida">
+                <small class="titulo-corrida">
+                    <a href="@Url.Content("~/Home/PilotosPontos")">Pontos</a>
+                </small>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -60,7 +64,7 @@
 
                             if (resultado != null)
                             {
-                                <small style="font-weight: @(resultado.PontoExtra ? "bold" : "normal")">@(resultado.DNF ? "-" : resultado.Pontos.ToString())</small>
+                                <small style="font-weight: @(resultado.PontoExtra ? " bold" : "normal" )">@(resultado.DNF ? "-" : resultado.Pontos.ToString())</small>
                             }
                         }
 
