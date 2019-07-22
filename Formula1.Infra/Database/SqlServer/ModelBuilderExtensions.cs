@@ -388,8 +388,8 @@ namespace Formula1.Infra.Database.SqlServer
                     new ResultadoInclusao(192, CORRIDA1007, ALEXANDER_ALBON, TORO_ROSSO, posicaoLargada: 9, posicaoChegada: 12, pontos: 0),
                     new ResultadoInclusao(193, CORRIDA1007, LANCE_STROLL, RACING_POINT, posicaoLargada: 18, posicaoChegada: 13, pontos: 0),
                     new ResultadoInclusao(194, CORRIDA1007, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 19, posicaoChegada: 14, pontos: 0),
-                    new ResultadoInclusao(196, CORRIDA1007, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 16, pontos: 0),
-                    new ResultadoInclusao(195, CORRIDA1007, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 6, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(195, CORRIDA1007, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(196, CORRIDA1007, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 6, posicaoChegada: 16, pontos: 0), // punição 10 segs.
                     new ResultadoInclusao(197, CORRIDA1007, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 15, posicaoChegada: 17, pontos: 0),
                     new ResultadoInclusao(198, CORRIDA1007, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 11, posicaoChegada: 18, pontos: 0, motivoDnf: MotivoDNF.Outros), // rodada mma brita
                     new ResultadoInclusao(199, CORRIDA1007, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 14, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Colisao),
