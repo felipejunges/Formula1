@@ -9,6 +9,7 @@
         Transmissao = 5,
         Freios = 6,
         Quebra = 7,
+        Abandono = 8,
         Outros = 99
     }
 }

@@ -43,7 +43,7 @@ namespace Formula1.Test
 
             Assert.Empty(corridas);
         }
-        
+
         [Fact]
         public void TodasAsPosicoesBatemComOsPontos()
         {
@@ -64,6 +64,16 @@ namespace Formula1.Test
                 );
 
             Assert.True(resultadosComPontosErrados.Count() == 0);
+        }
+
+        [Fact]
+        public void ResultadoIdConfereComOIndex()
+        {
+            var resultados = ServiceFixture.Db.Resultados.ToList();
+
+            var resultadosErrados = resultados.Where(o => o.Id != resultados.IndexOf(o) + 1).ToList();
+
+            Assert.Empty(resultadosErrados);
         }
     }
 }
