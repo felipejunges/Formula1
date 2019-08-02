@@ -1,13 +1,18 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
-RUN cd /srv && \
-    mkdir Felipe && \
-    cd Felipe && \
-    git clone https://github.com/felipejunges/Formula1.git
-
 EXPOSE 5000
 
-#RUN cd /srv/Felipe/Formula1/Formula1.MVC && \
-#	dotnet run
-	
-CMD ["bash"]
+RUN mkdir /srv/Felipe
+
+WORKDIR /srv/Felipe
+
+RUN git clone https://github.com/felipejunges/Formula1.git
+
+WORKDIR /srv/Felipe/Formula1/Formula1.MVC
+
+ENTRYPOINT ["dotnet", "run"]
+
+RUN dotnet build
+
+# $ docker build . -t teste_felipe
+# $ docker run -it -p 5000:5000 teste_felipe
