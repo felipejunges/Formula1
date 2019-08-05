@@ -12,7 +12,5 @@ WORKDIR /srv/Felipe/Formula1/Formula1.MVC
 
 ENTRYPOINT ["dotnet", "run"]
 
-RUN dotnet build
-
 # $ docker build . -t teste_felipe
 # $ docker run -it -p 5000:5000 teste_felipe
