@@ -139,7 +139,7 @@ namespace Formula1.Infra.Database.SqlServer
                     new ContratoInclusao(3, SEBASTIAN_VETTEL, FERRARI, 2019),
                     new ContratoInclusao(4, CHARLES_LECLERC, FERRARI, 2019),
                     new ContratoInclusao(5, MAX_VERSTAPPEN, REDBULL, 2019),
-                    new ContratoInclusao(6, PIERRE_GASLY, REDBULL, 2019),
+                    new ContratoInclusao(6, PIERRE_GASLY, TORO_ROSSO, 2019), // REDBULL -> TORO_ROSSO
                     new ContratoInclusao(7, NICO_HULKENBERG, RENAULT, 2019),
                     new ContratoInclusao(8, DANIEL_RICCARDO, RENAULT, 2019),
                     new ContratoInclusao(9, SERGIO_PEREZ, RACING_POINT, 2019),
@@ -147,7 +147,7 @@ namespace Formula1.Infra.Database.SqlServer
                     new ContratoInclusao(11, KIMI_RAIKKONEN, ALFA_ROMEO, 2019),
                     new ContratoInclusao(12, ANTONIO_GIOVANAZZI, ALFA_ROMEO, 2019),
                     new ContratoInclusao(13, DANIIL_KVYAT, TORO_ROSSO, 2019),
-                    new ContratoInclusao(14, ALEXANDER_ALBON, TORO_ROSSO, 2019),
+                    new ContratoInclusao(14, ALEXANDER_ALBON, REDBULL, 2019), // TORO_ROSSO -> REDBULL
                     new ContratoInclusao(15, LANDO_NORRIS, MCLAREN, 2019),
                     new ContratoInclusao(16, CARLOS_SAINZ_JR, MCLAREN, 2019),
                     new ContratoInclusao(17, KEVIN_MAGNUSSEN, HAAS, 2019),
