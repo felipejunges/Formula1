@@ -525,8 +525,8 @@ namespace Formula1.Infra.Database.SqlServer
                     new ResultadoInclusao(305, CORRIDA1013, ALEXANDER_ALBON, REDBULL, posicaoLargada: 20, posicaoChegada: 5, pontos: 10), // largada do box
                     new ResultadoInclusao(306, CORRIDA1013, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 6, posicaoChegada: 6, pontos: 8),
                     new ResultadoInclusao(307, CORRIDA1013, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 12, posicaoChegada: 7, pontos: 6),
-                    new ResultadoInclusao(308, CORRIDA1013, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 14, posicaoChegada: 8, pontos: 4),
-                    new ResultadoInclusao(309, CORRIDA1013, LANDO_NORRIS, MCLAREN, posicaoLargada: 8, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusao(308, CORRIDA1013, LANDO_NORRIS, MCLAREN, posicaoLargada: 8, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusao(309, CORRIDA1013, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 14, posicaoChegada: 9, pontos: 2),
                     new ResultadoInclusao(310, CORRIDA1013, NICO_HULKENBERG, RENAULT, posicaoLargada: 7, posicaoChegada: 10, pontos: 1),
                     new ResultadoInclusao(311, CORRIDA1013, LANCE_STROLL, RACING_POINT, posicaoLargada: 15, posicaoChegada: 11, pontos: 0),
                     new ResultadoInclusao(312, CORRIDA1013, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 19, posicaoChegada: 12, pontos: 0),
