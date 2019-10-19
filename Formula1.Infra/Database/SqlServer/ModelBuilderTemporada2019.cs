@@ -5,8 +5,11 @@ using System;
 
 namespace Formula1.Infra.Database.SqlServer
 {
-    public static class ModelBuilderExtensions
+    public static class ModelBuilderTemporada2019
     {
+        public static int PONTOS_MAXIMOS_CORRIDA_PILOTO = 26;
+        public static int PONTOS_MAXIMOS_CORRIDA_EQUIPE = 44;
+
         public static void Seed(this ModelBuilder modelBuilder)
         {
             // pilotos

@@ -20,5 +20,7 @@ namespace Formula1.Data.Models
         }
 
         public List<ResultadoTemporada> Resultados { get; set; }
+
+        public bool DisputaCampeonato { get; set; }
     }
 }

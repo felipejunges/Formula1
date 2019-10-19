@@ -10,5 +10,7 @@ namespace Formula1.Data.Models
         public string NomeGrandePremio { get; set; }
 
         public List<ResultadoTemporada> Resultados { get; set; }
+
+        public bool TemResultados => Resultados.Count > 0;
     }
 }

@@ -22,7 +22,7 @@
                 <th scope="col" class="text-center align-middle th-titulo-corrida">
                     <small class="titulo-corrida">
 
-                        @if (Model.Equipes.Where(w => w.Resultados.Any(a => a.CorridaId == corrida.Id)).Count() > 0)
+                        @if (corrida.TemResultados)
                         {
                             <a href="@Url.Content("~/Home/EquipesPontos?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString())">
                                 @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
@@ -72,7 +72,7 @@
                 }
 
                 <td class="text-center">
-                    <small>@equipe.PontosTemporada.ToString()</small>
+                    <small style="font-weight: @(equipe.DisputaCampeonato ? " bold" : "normal" )">@equipe.PontosTemporada.ToString()</small>
                 </td>
             </tr>
         }

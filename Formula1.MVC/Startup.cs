@@ -44,7 +44,6 @@ namespace Formula1.MVC
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // TODO: retirado de env.IsDevelopment()
             app.UseDeveloperExceptionPage();
 
             if (env.IsDevelopment())
