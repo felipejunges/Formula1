@@ -10,61 +10,61 @@ namespace Formula1.Infra.Database.SqlServer
         public static void Seed(this ModelBuilder modelBuilder)
         {
             // pilotos
-            Piloto LEWIS_HAMILTON = new Piloto(1, "Lewis Hamilton", "Hamilton", "HAM", 44, "Inglaterra");
-            Piloto VALTTERI_BOTTAS = new Piloto(2, "Valtteri Bottas", "Bottas", "BOT", 77, "Finlândia");
-            Piloto SEBASTIAN_VETTEL = new Piloto(3, "Sebastian Vettel", "Vettel", "VET", 5, "Alemanha");
-            Piloto CHARLES_LECLERC = new Piloto(4, "Charles Leclerc", "Leclerc", "LEC", 16, "Mônaco");
-            Piloto MAX_VERSTAPPEN = new Piloto(5, "Max Verstappen", "Verstappen", "VER", 33, "Holanda (talvez)");
-            Piloto PIERRE_GASLY = new Piloto(6, "Pierre Gasly", "Gasly", "GAS", 10, "França");
-            Piloto DANIEL_RICCARDO = new Piloto(7, "Daniel Riccardo", "Riccardo", "RIC", 3, "Austrália");
-            Piloto NICO_HULKENBERG = new Piloto(8, "Nico Hülkenberg", "Hülkenberg", "HUL", 27, "Alemanha");
-            Piloto KEVIN_MAGNUSSEN = new Piloto(9, "Kevin Magnussen", "Magnussen", "MAG", 20, "Dinamarca");
-            Piloto ROMAIN_GROSJEAN = new Piloto(10, "Romain Grosjean", "Grosjean", "GRO", 8, "França");
-            Piloto DANIIL_KVYAT = new Piloto(11, "Daniil Kvyat", "Kvyat", "KVY", 26, "Rússia");
-            Piloto ALEXANDER_ALBON = new Piloto(12, "Alexander Albon", "Albon", "ALB", 23, "?");
-            Piloto LANDO_NORRIS = new Piloto(13, "Lando Norris", "Norris", "NOR", 4, "Inglaterra");
-            Piloto CARLOS_SAINZ_JR = new Piloto(14, "Carlos Sainz Jr.", "Sainz", "SAI", 55, "Espanha");
-            Piloto KIMI_RAIKKONEN = new Piloto(15, "Kimi Räikkönen", "Räikkönen", "RAI", 7, "Finlândia");
-            Piloto ANTONIO_GIOVANAZZI = new Piloto(16, "Antonio Giovinazzi", "Giovinazzi", "GIO", 99, "Itália");
-            Piloto SERGIO_PEREZ = new Piloto(17, "Sergio Perez", "Perez", "PER", 11, "México");
-            Piloto LANCE_STROLL = new Piloto(18, "Lance Stroll", "Stroll", "STR", 18, "Canadá");
-            Piloto ROBERT_KUBICA = new Piloto(19, "Robert Kubica", "Kubica", "KUB", 88, "Polônia");
-            Piloto GEORGE_RUSSEL = new Piloto(20, "George Russell", "Russell", "RUS", 63, "Inglaterra");
+            var LEWIS_HAMILTON = new Piloto(1, "Lewis Hamilton", "Hamilton", "HAM", 44, "Inglaterra");
+            var VALTTERI_BOTTAS = new Piloto(2, "Valtteri Bottas", "Bottas", "BOT", 77, "Finlândia");
+            var SEBASTIAN_VETTEL = new Piloto(3, "Sebastian Vettel", "Vettel", "VET", 5, "Alemanha");
+            var CHARLES_LECLERC = new Piloto(4, "Charles Leclerc", "Leclerc", "LEC", 16, "Mônaco");
+            var MAX_VERSTAPPEN = new Piloto(5, "Max Verstappen", "Verstappen", "VER", 33, "Holanda (talvez)");
+            var PIERRE_GASLY = new Piloto(6, "Pierre Gasly", "Gasly", "GAS", 10, "França");
+            var DANIEL_RICCARDO = new Piloto(7, "Daniel Riccardo", "Riccardo", "RIC", 3, "Austrália");
+            var NICO_HULKENBERG = new Piloto(8, "Nico Hülkenberg", "Hülkenberg", "HUL", 27, "Alemanha");
+            var KEVIN_MAGNUSSEN = new Piloto(9, "Kevin Magnussen", "Magnussen", "MAG", 20, "Dinamarca");
+            var ROMAIN_GROSJEAN = new Piloto(10, "Romain Grosjean", "Grosjean", "GRO", 8, "França");
+            var DANIIL_KVYAT = new Piloto(11, "Daniil Kvyat", "Kvyat", "KVY", 26, "Rússia");
+            var ALEXANDER_ALBON = new Piloto(12, "Alexander Albon", "Albon", "ALB", 23, "?");
+            var LANDO_NORRIS = new Piloto(13, "Lando Norris", "Norris", "NOR", 4, "Inglaterra");
+            var CARLOS_SAINZ_JR = new Piloto(14, "Carlos Sainz Jr.", "Sainz", "SAI", 55, "Espanha");
+            var KIMI_RAIKKONEN = new Piloto(15, "Kimi Räikkönen", "Räikkönen", "RAI", 7, "Finlândia");
+            var ANTONIO_GIOVANAZZI = new Piloto(16, "Antonio Giovinazzi", "Giovinazzi", "GIO", 99, "Itália");
+            var SERGIO_PEREZ = new Piloto(17, "Sergio Perez", "Perez", "PER", 11, "México");
+            var LANCE_STROLL = new Piloto(18, "Lance Stroll", "Stroll", "STR", 18, "Canadá");
+            var ROBERT_KUBICA = new Piloto(19, "Robert Kubica", "Kubica", "KUB", 88, "Polônia");
+            var GEORGE_RUSSEL = new Piloto(20, "George Russell", "Russell", "RUS", 63, "Inglaterra");
 
             // equipes
-            Equipe MERCEDES = new Equipe(1, "Mercedes", "#00D2BE");
-            Equipe FERRARI = new Equipe(2, "Ferrari", "#DC0000");
-            Equipe REDBULL = new Equipe(3, "RedBull Racing", "#1E41FF");
-            Equipe TORO_ROSSO = new Equipe(4, "Scuderia Toro Rosso", "#469BFF");
-            Equipe RENAULT = new Equipe(5, "Renault", "#FFF500");
-            Equipe WILLIAMS = new Equipe(6, "Williams", "#EEEEEE");
-            Equipe MCLAREN = new Equipe(7, "McLaren", "#FF8700");
-            Equipe RACING_POINT = new Equipe(8, "Racing Point", "#F596C8");
-            Equipe HAAS = new Equipe(9, "Haas", "#F0D787");
-            Equipe ALFA_ROMEO = new Equipe(10, "Alfa Romeo", "#9B0000");
+            var MERCEDES = new Equipe(1, "Mercedes", "#00D2BE");
+            var FERRARI = new Equipe(2, "Ferrari", "#DC0000");
+            var REDBULL = new Equipe(3, "RedBull Racing", "#1E41FF");
+            var TORO_ROSSO = new Equipe(4, "Scuderia Toro Rosso", "#469BFF");
+            var RENAULT = new Equipe(5, "Renault", "#FFF500");
+            var WILLIAMS = new Equipe(6, "Williams", "#EEEEEE");
+            var MCLAREN = new Equipe(7, "McLaren", "#FF8700");
+            var RACING_POINT = new Equipe(8, "Racing Point", "#F596C8");
+            var HAAS = new Equipe(9, "Haas", "#F0D787");
+            var ALFA_ROMEO = new Equipe(10, "Alfa Romeo", "#9B0000");
 
             // corridas
-            Corrida CORRIDA998 = new Corrida(998, 2019, "GP da Austrália", "Circuito de Albert Park", new DateTime(2019, 3, 17, 2, 10, 0));
-            Corrida CORRIDA999 = new Corrida(999, 2019, "GP do Bahrein", "Circuito Internacional do Bahrein", new DateTime(2019, 3, 31, 12, 10, 0));
-            Corrida CORRIDA1000 = new Corrida(1000, 2019, "GP da China", "Circuito Internacional de Xangai", new DateTime(2019, 4, 14, 03, 10, 0));
-            Corrida CORRIDA1001 = new Corrida(1001, 2019, "GP do Azerbaijão", "Curcuito Urbano de Baku", new DateTime(2019, 4, 28, 9, 10, 0));
-            Corrida CORRIDA1002 = new Corrida(1002, 2019, "GP da Espanha", "Circuito da Catalunha", new DateTime(2019, 5, 12, 10, 10, 0));
-            Corrida CORRIDA1003 = new Corrida(1003, 2019, "GP de Mônaco", "Circuito de Mônaco", new DateTime(2019, 5, 26, 10, 10, 0));
-            Corrida CORRIDA1004 = new Corrida(1004, 2019, "GP do Canadá", "Circuito Gilles Villeneuve", new DateTime(2019, 6, 9, 15, 10, 0));
-            Corrida CORRIDA1005 = new Corrida(1005, 2019, "GP da França", "Circuito Paul Ricard", new DateTime(2019, 6, 23, 10, 10, 0));
-            Corrida CORRIDA1006 = new Corrida(1006, 2019, "GP da Áustria", "Red Bull Ring", new DateTime(2019, 6, 30, 10, 10, 0));
-            Corrida CORRIDA1007 = new Corrida(1007, 2019, "GP da Grã-Bretanha", "Silverstone", new DateTime(2019, 7, 14, 10, 10, 0));
-            Corrida CORRIDA1008 = new Corrida(1008, 2019, "GP da Alemanha", "Hockenheimring", new DateTime(2019, 7, 28, 10, 10, 0));
-            Corrida CORRIDA1009 = new Corrida(1009, 2019, "GP da Hungria", "Hungaroring", new DateTime(2019, 8, 4, 10, 10, 0));
-            Corrida CORRIDA1010 = new Corrida(1010, 2019, "GP da Bélgica", "Spa-Francorchamps", new DateTime(2019, 9, 1, 10, 10, 0));
-            Corrida CORRIDA1011 = new Corrida(1011, 2019, "GP da Itália", "Circuito de Monza", new DateTime(2019, 9, 8, 10, 10, 0));
-            Corrida CORRIDA1012 = new Corrida(1012, 2019, "GP de Singapura", "Circuito Urbano de Marina Bay", new DateTime(2019, 9, 22, 9, 10, 0));
-            Corrida CORRIDA1013 = new Corrida(1013, 2019, "GP da Rússia", "Autódromo de Sóchi", new DateTime(2019, 9, 29, 8, 10, 0));
-            Corrida CORRIDA1014 = new Corrida(1014, 2019, "GP do Japão", "Circuito de Suzuka", new DateTime(2019, 10, 13, 2, 10, 0));
-            Corrida CORRIDA1015 = new Corrida(1015, 2019, "GP do México", "Autódromo Hermanos Rodríguez", new DateTime(2019, 10, 27, 16, 10, 0));
-            Corrida CORRIDA1016 = new Corrida(1016, 2019, "GP dos Estados Unidos", "Circuito das Américas", new DateTime(2019, 11, 3, 16, 10, 0));
-            Corrida CORRIDA1017 = new Corrida(1017, 2019, "GP do Brasil", "Autódromo José Carlos Pace", new DateTime(2019, 11, 17, 14, 10, 0));
-            Corrida CORRIDA1018 = new Corrida(1018, 2019, "GP do Abu Dhabi", "Circuito de Yas Marina", new DateTime(2019, 12, 1, 10, 10, 0));
+            var CORRIDA998 = new Corrida(998, 2019, "GP da Austrália", "Circuito de Albert Park", new DateTime(2019, 3, 17, 2, 10, 0));
+            var CORRIDA999 = new Corrida(999, 2019, "GP do Bahrein", "Circuito Internacional do Bahrein", new DateTime(2019, 3, 31, 12, 10, 0));
+            var CORRIDA1000 = new Corrida(1000, 2019, "GP da China", "Circuito Internacional de Xangai", new DateTime(2019, 4, 14, 03, 10, 0));
+            var CORRIDA1001 = new Corrida(1001, 2019, "GP do Azerbaijão", "Curcuito Urbano de Baku", new DateTime(2019, 4, 28, 9, 10, 0));
+            var CORRIDA1002 = new Corrida(1002, 2019, "GP da Espanha", "Circuito da Catalunha", new DateTime(2019, 5, 12, 10, 10, 0));
+            var CORRIDA1003 = new Corrida(1003, 2019, "GP de Mônaco", "Circuito de Mônaco", new DateTime(2019, 5, 26, 10, 10, 0));
+            var CORRIDA1004 = new Corrida(1004, 2019, "GP do Canadá", "Circuito Gilles Villeneuve", new DateTime(2019, 6, 9, 15, 10, 0));
+            var CORRIDA1005 = new Corrida(1005, 2019, "GP da França", "Circuito Paul Ricard", new DateTime(2019, 6, 23, 10, 10, 0));
+            var CORRIDA1006 = new Corrida(1006, 2019, "GP da Áustria", "Red Bull Ring", new DateTime(2019, 6, 30, 10, 10, 0));
+            var CORRIDA1007 = new Corrida(1007, 2019, "GP da Grã-Bretanha", "Silverstone", new DateTime(2019, 7, 14, 10, 10, 0));
+            var CORRIDA1008 = new Corrida(1008, 2019, "GP da Alemanha", "Hockenheimring", new DateTime(2019, 7, 28, 10, 10, 0));
+            var CORRIDA1009 = new Corrida(1009, 2019, "GP da Hungria", "Hungaroring", new DateTime(2019, 8, 4, 10, 10, 0));
+            var CORRIDA1010 = new Corrida(1010, 2019, "GP da Bélgica", "Spa-Francorchamps", new DateTime(2019, 9, 1, 10, 10, 0));
+            var CORRIDA1011 = new Corrida(1011, 2019, "GP da Itália", "Circuito de Monza", new DateTime(2019, 9, 8, 10, 10, 0));
+            var CORRIDA1012 = new Corrida(1012, 2019, "GP de Singapura", "Circuito Urbano de Marina Bay", new DateTime(2019, 9, 22, 9, 10, 0));
+            var CORRIDA1013 = new Corrida(1013, 2019, "GP da Rússia", "Autódromo de Sóchi", new DateTime(2019, 9, 29, 8, 10, 0));
+            var CORRIDA1014 = new Corrida(1014, 2019, "GP do Japão", "Circuito de Suzuka", new DateTime(2019, 10, 13, 2, 10, 0));
+            var CORRIDA1015 = new Corrida(1015, 2019, "GP do México", "Autódromo Hermanos Rodríguez", new DateTime(2019, 10, 27, 16, 10, 0));
+            var CORRIDA1016 = new Corrida(1016, 2019, "GP dos Estados Unidos", "Circuito das Américas", new DateTime(2019, 11, 3, 16, 10, 0));
+            var CORRIDA1017 = new Corrida(1017, 2019, "GP do Brasil", "Autódromo José Carlos Pace", new DateTime(2019, 11, 17, 14, 10, 0));
+            var CORRIDA1018 = new Corrida(1018, 2019, "GP do Abu Dhabi", "Circuito de Yas Marina", new DateTime(2019, 12, 1, 10, 10, 0));
 
             //
             // -------------------- adiciona dados

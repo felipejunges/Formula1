@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Formula1.Data.Models
 {
@@ -7,5 +8,7 @@ namespace Formula1.Data.Models
         public int Id { get; set; }
         public DateTime DataHoraBrasil { get; set; }
         public string NomeGrandePremio { get; set; }
+
+        public List<ResultadoTemporada> Resultados { get; set; }
     }
 }

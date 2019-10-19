@@ -23,6 +23,9 @@ namespace Formula1.Domain.Services
             var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
 
             pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
+            corridas.ForEach(f => f.Resultados = resultados.Where(o => o.CorridaId == f.Id).ToList());
+
+            //int corridasFaltantes = corridas.Where(o => o.Resultados.Count() == 0).Count();
 
             if (order == null)
                 pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
