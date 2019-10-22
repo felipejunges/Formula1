@@ -1,8 +1,10 @@
-﻿using Formula1.Domain.Services;
+﻿using Formula1.Data.Models;
+using Formula1.Domain.Services;
 using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Formula1.MVC.Controllers
@@ -50,6 +52,14 @@ namespace Formula1.MVC.Controllers
             var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, order);
 
             return View(campeonato);
+        }
+
+        [Route("Api/Piloto")]
+        public List<PilotoTemporada> PilotosPontosApi()
+        {
+            var pilotos = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, null).Pilotos;
+
+            return pilotos;
         }
 
         [ResponseCache(Duration = 60)]
