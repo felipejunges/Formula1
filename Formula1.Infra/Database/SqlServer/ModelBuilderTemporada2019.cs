@@ -550,21 +550,21 @@ namespace Formula1.Infra.Database.SqlServer
                     new ResultadoInclusao(323, CORRIDA1014, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 4, posicaoChegada: 3, pontos: 16, pontoExtra: true),
                     new ResultadoInclusao(324, CORRIDA1014, ALEXANDER_ALBON, REDBULL, posicaoLargada: 6, posicaoChegada: 4, pontos: 12),
                     new ResultadoInclusao(325, CORRIDA1014, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 7, posicaoChegada: 5, pontos: 10),
-                    new ResultadoInclusao(326, CORRIDA1014, DANIEL_RICCARDO, RENAULT, posicaoLargada: 16, posicaoChegada: 6, pontos: 8),
-                    new ResultadoInclusao(327, CORRIDA1014, CHARLES_LECLERC, FERRARI, posicaoLargada: 2, posicaoChegada: 7, pontos: 6),
-                    new ResultadoInclusao(328, CORRIDA1014, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 9, posicaoChegada: 8, pontos: 4),
-                    new ResultadoInclusao(329, CORRIDA1014, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 17, posicaoChegada: 9, pontos: 2),
-                    new ResultadoInclusao(330, CORRIDA1014, NICO_HULKENBERG, RENAULT, posicaoLargada: 15, posicaoChegada: 10, pontos: 1),
-                    new ResultadoInclusao(331, CORRIDA1014, LANCE_STROLL, RACING_POINT, posicaoLargada: 12, posicaoChegada: 11, pontos: 0),
-                    new ResultadoInclusao(332, CORRIDA1014, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 14, posicaoChegada: 12, pontos: 0),
-                    new ResultadoInclusao(333, CORRIDA1014, LANDO_NORRIS, MCLAREN, posicaoLargada: 8, posicaoChegada: 13, pontos: 0),
-                    new ResultadoInclusao(334, CORRIDA1014, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 13, posicaoChegada: 14, pontos: 0),
-                    new ResultadoInclusao(335, CORRIDA1014, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 10, posicaoChegada: 15, pontos: 0),
-                    new ResultadoInclusao(336, CORRIDA1014, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 11, posicaoChegada: 16, pontos: 0),
-                    new ResultadoInclusao(337, CORRIDA1014, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 19, posicaoChegada: 17, pontos: 0),
-                    new ResultadoInclusao(338, CORRIDA1014, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 18, posicaoChegada: 18, pontos: 0),
-                    new ResultadoInclusao(339, CORRIDA1014, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 19, pontos: 0),
-                    new ResultadoInclusao(340, CORRIDA1014, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 5, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Colisao)
+                    new ResultadoInclusao(326, CORRIDA1014, CHARLES_LECLERC, FERRARI, posicaoLargada: 2, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusao(327, CORRIDA1014, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 9, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusao(328, CORRIDA1014, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 17, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusao(329, CORRIDA1014, LANCE_STROLL, RACING_POINT, posicaoLargada: 12, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusao(330, CORRIDA1014, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 14, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusao(331, CORRIDA1014, LANDO_NORRIS, MCLAREN, posicaoLargada: 8, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusao(332, CORRIDA1014, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 13, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusao(333, CORRIDA1014, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 10, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusao(334, CORRIDA1014, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 11, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusao(335, CORRIDA1014, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 19, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(336, CORRIDA1014, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 18, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusao(337, CORRIDA1014, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusao(338, CORRIDA1014, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 5, posicaoChegada: 18, pontos: 0, motivoDnf: MotivoDNF.Colisao),
+                    new ResultadoInclusao(339, CORRIDA1014, DANIEL_RICCARDO, RENAULT, posicaoLargada: 16, posicaoChegada: 19, pontos: 0), // desclassificado depois
+                    new ResultadoInclusao(340, CORRIDA1014, NICO_HULKENBERG, RENAULT, posicaoLargada: 15, posicaoChegada: 20, pontos: 0) // desclassificado depois
                 );
 
             // resultados (1015 - GP DO MÉXICO - 27/10/2019)
