@@ -42,6 +42,8 @@
                     <a href="@Url.Content("~/Home/EquipesPontos")">Pontos</a>
                 </small>
             </th>
+
+            <th scope="col" class="text-center align-middle th-titulo-corrida"></th>
         </tr>
     </thead>
     <tbody>
@@ -72,7 +74,10 @@
                 }
 
                 <td class="text-center">
-                    <small style="font-weight: @(equipe.DisputaCampeonato ? " bold" : "normal" )">@equipe.PontosTemporada.ToString()</small>
+                    <small>@equipe.PontosTemporada.ToString()</small>
+                </td>
+                <td class="text-center max-pontos">
+                    <small>@equipe.PosicaoMaxima.ToString()</small>
                 </td>
             </tr>
         }

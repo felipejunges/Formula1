@@ -23,15 +23,16 @@ namespace Formula1.Domain.Services
             var corridas = CorridasService.GetCorridasTabela(temporada);
             var pilotos = PilotosService.GetPilotosTabela(temporada);
             var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
-            
+
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
-
-            MarcarPilotosDisputamCampeonato(corridas, pilotos);
-
+            
             if (order == null)
                 pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
             else
                 pilotos.Sort((o, i) => o.Resultados[order.Value - 1].PosicaoChegada.CompareTo(i.Resultados[order.Value - 1].PosicaoChegada));
+
+            var pontosRestantes = CalcularPontosRestantes(corridas);
+            MarcarPilotosPosicaoMaxima(pilotos, pontosRestantes);
 
             return new TabelaCampeonatoPilotos(corridas, pilotos);
         }
@@ -42,13 +43,19 @@ namespace Formula1.Domain.Services
             corridas.ForEach(f => f.Resultados = resultados.Where(o => o.CorridaId == f.Id).ToList());
         }
 
-        private void MarcarPilotosDisputamCampeonato(List<CorridaTemporada> corridas, List<PilotoTemporada> pilotos)
+        private void MarcarPilotosPosicaoMaxima(List<PilotoTemporada> pilotos, int pontosRestantes)
+        {
+            pilotos.ForEach(f =>
+                    f.PosicaoMaxima = pilotos.IndexOf(pilotos.Where(w => w.PontosTemporada <= f.PontosTemporada + pontosRestantes).OrderByDescending(o => o.PontosTemporada).FirstOrDefault()) + 1
+                );
+        }
+
+        private int CalcularPontosRestantes(List<CorridaTemporada> corridas)
         {
             int corridasRestantes = corridas.Where(o => o.Resultados.Count() == 0).Count();
             int pontosRestantes = corridasRestantes * ModelBuilderTemporada2019.PONTOS_MAXIMOS_CORRIDA_PILOTO;
 
-            int pontosLider = pilotos.Select(o => o.PontosTemporada).OrderByDescending(o => o).First();
-            pilotos.ForEach(f => f.DisputaCampeonato = f.PontosTemporada + pontosRestantes >= pontosLider);
+            return pontosRestantes;
         }
     }
 }
