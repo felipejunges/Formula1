@@ -614,6 +614,30 @@ namespace Formula1.Infra.Database.SqlServer
                     new ResultadoInclusao(379, CORRIDA1016, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 19, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Abandono),
                     new ResultadoInclusao(380, CORRIDA1016, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 2, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Quebra)
                 );
+
+            // resultados (1017 - GP DO BRASIL - 17/11/2019)
+            modelBuilder.Entity<Resultado>().HasData(
+                    new ResultadoInclusao(381, CORRIDA1017, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 1, posicaoChegada: 1, pontos: 25),
+                    new ResultadoInclusao(382, CORRIDA1017, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 6, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusao(383, CORRIDA1017, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 3, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusao(384, CORRIDA1017, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 20, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusao(385, CORRIDA1017, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 8, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusao(386, CORRIDA1017, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 12, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusao(387, CORRIDA1017, DANIEL_RICCARDO, RENAULT, posicaoLargada: 11, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusao(388, CORRIDA1017, LANDO_NORRIS, MCLAREN, posicaoLargada: 10, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusao(389, CORRIDA1017, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 15, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusao(390, CORRIDA1017, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 16, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusao(391, CORRIDA1017, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 9, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusao(392, CORRIDA1017, NICO_HULKENBERG, RENAULT, posicaoLargada: 13, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusao(393, CORRIDA1017, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 18, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusao(394, CORRIDA1017, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 7, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusao(395, CORRIDA1017, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 19, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(396, CORRIDA1017, ALEXANDER_ALBON, REDBULL, posicaoLargada: 5, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusao(397, CORRIDA1017, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 2, posicaoChegada: 17, pontos: 0, motivoDnf: MotivoDNF.Colisao),
+                    new ResultadoInclusao(398, CORRIDA1017, LANCE_STROLL, RACING_POINT, posicaoLargada: 17, posicaoChegada: 18, pontos: 0, motivoDnf: MotivoDNF.Quebra),
+                    new ResultadoInclusao(399, CORRIDA1017, CHARLES_LECLERC, FERRARI, posicaoLargada: 14, posicaoChegada: 19, pontos: 0, motivoDnf: MotivoDNF.Colisao),
+                    new ResultadoInclusao(400, CORRIDA1017, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 4, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Quebra, pontoExtra: true)
+                );
         }
     }
 }
