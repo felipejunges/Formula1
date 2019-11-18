@@ -619,11 +619,11 @@ namespace Formula1.Infra.Database.SqlServer
             modelBuilder.Entity<Resultado>().HasData(
                     new ResultadoInclusao(381, CORRIDA1017, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 1, posicaoChegada: 1, pontos: 25),
                     new ResultadoInclusao(382, CORRIDA1017, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 6, posicaoChegada: 2, pontos: 18),
-                    new ResultadoInclusao(383, CORRIDA1017, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 3, posicaoChegada: 3, pontos: 15),
-                    new ResultadoInclusao(384, CORRIDA1017, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 20, posicaoChegada: 4, pontos: 12),
-                    new ResultadoInclusao(385, CORRIDA1017, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 8, posicaoChegada: 5, pontos: 10),
-                    new ResultadoInclusao(386, CORRIDA1017, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 12, posicaoChegada: 6, pontos: 8),
-                    new ResultadoInclusao(387, CORRIDA1017, DANIEL_RICCARDO, RENAULT, posicaoLargada: 11, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusao(383, CORRIDA1017, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 20, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusao(384, CORRIDA1017, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 8, posicaoChegada: 4, pontos: 12),
+                    new ResultadoInclusao(385, CORRIDA1017, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 12, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusao(386, CORRIDA1017, DANIEL_RICCARDO, RENAULT, posicaoLargada: 11, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusao(387, CORRIDA1017, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 3, posicaoChegada: 7, pontos: 6), // chegou em 3o, punido 5s, caiu pra 7
                     new ResultadoInclusao(388, CORRIDA1017, LANDO_NORRIS, MCLAREN, posicaoLargada: 10, posicaoChegada: 8, pontos: 4),
                     new ResultadoInclusao(389, CORRIDA1017, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 15, posicaoChegada: 9, pontos: 2),
                     new ResultadoInclusao(390, CORRIDA1017, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 16, posicaoChegada: 10, pontos: 1),
