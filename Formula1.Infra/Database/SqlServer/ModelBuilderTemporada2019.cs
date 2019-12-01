@@ -641,26 +641,26 @@ namespace Formula1.Infra.Database.SqlServer
 
             // resultados (1018 - GP DE ABU DHABI - 01/12/2019)
             modelBuilder.Entity<Resultado>().HasData(
-                    new ResultadoInclusao(387, CORRIDA1018, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 1, posicaoChegada: 0, pontos: 0, pontoExtra: true),
-                    new ResultadoInclusao(381, CORRIDA1018, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 3, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(399, CORRIDA1018, CHARLES_LECLERC, FERRARI, posicaoLargada: 4, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(400, CORRIDA1018, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 2, posicaoChegada: 0, pontos: 0), // TODO: largou de 20 (classificou em 2, largou em 20 (punição))
-                    new ResultadoInclusao(397, CORRIDA1018, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 5, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(394, CORRIDA1018, ALEXANDER_ALBON, REDBULL, posicaoLargada: 6, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(411, CORRIDA1018, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 11, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(388, CORRIDA1018, LANDO_NORRIS, MCLAREN, posicaoLargada: 7, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(414, CORRIDA1018, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 14, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(395, CORRIDA1018, NICO_HULKENBERG, RENAULT, posicaoLargada: 10, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(383, CORRIDA1018, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 9, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(386, CORRIDA1018, DANIEL_RICCARDO, RENAULT, posicaoLargada: 8, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(418, CORRIDA1018, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 18, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(415, CORRIDA1018, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 15, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(416, CORRIDA1018, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 16, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(417, CORRIDA1018, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 17, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(419, CORRIDA1018, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 19, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(412, CORRIDA1018, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 12, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(420, CORRIDA1018, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 20, posicaoChegada: 0, pontos: 0),
-                    new ResultadoInclusao(413, CORRIDA1018, LANCE_STROLL, RACING_POINT, posicaoLargada: 13, posicaoChegada: 0, pontos: 0, motivoDnf: MotivoDNF.Abandono)
+                    new ResultadoInclusao(401, CORRIDA1018, LEWIS_HAMILTON, MERCEDES, posicaoLargada: 1, posicaoChegada: 1, pontos: 26, pontoExtra: true),
+                    new ResultadoInclusao(402, CORRIDA1018, MAX_VERSTAPPEN, REDBULL, posicaoLargada: 2, posicaoChegada: 2, pontos: 18),
+                    new ResultadoInclusao(403, CORRIDA1018, CHARLES_LECLERC, FERRARI, posicaoLargada: 3, posicaoChegada: 3, pontos: 15),
+                    new ResultadoInclusao(404, CORRIDA1018, VALTTERI_BOTTAS, MERCEDES, posicaoLargada: 20, posicaoChegada: 4, pontos: 12), // classificou em 2, largou em 20 (punição)
+                    new ResultadoInclusao(405, CORRIDA1018, SEBASTIAN_VETTEL, FERRARI, posicaoLargada: 4, posicaoChegada: 5, pontos: 10),
+                    new ResultadoInclusao(406, CORRIDA1018, ALEXANDER_ALBON, REDBULL, posicaoLargada: 5, posicaoChegada: 6, pontos: 8),
+                    new ResultadoInclusao(407, CORRIDA1018, SERGIO_PEREZ, RACING_POINT, posicaoLargada: 10, posicaoChegada: 7, pontos: 6),
+                    new ResultadoInclusao(408, CORRIDA1018, LANDO_NORRIS, MCLAREN, posicaoLargada: 6, posicaoChegada: 8, pontos: 4),
+                    new ResultadoInclusao(409, CORRIDA1018, DANIIL_KVYAT, TORO_ROSSO, posicaoLargada: 13, posicaoChegada: 9, pontos: 2),
+                    new ResultadoInclusao(410, CORRIDA1018, CARLOS_SAINZ_JR, MCLAREN, posicaoLargada: 8, posicaoChegada: 10, pontos: 1),
+                    new ResultadoInclusao(411, CORRIDA1018, DANIEL_RICCARDO, RENAULT, posicaoLargada: 7, posicaoChegada: 11, pontos: 0),
+                    new ResultadoInclusao(412, CORRIDA1018, NICO_HULKENBERG, RENAULT, posicaoLargada: 9, posicaoChegada: 12, pontos: 0),
+                    new ResultadoInclusao(413, CORRIDA1018, KIMI_RAIKKONEN, ALFA_ROMEO, posicaoLargada: 17, posicaoChegada: 13, pontos: 0),
+                    new ResultadoInclusao(414, CORRIDA1018, KEVIN_MAGNUSSEN, HAAS, posicaoLargada: 14, posicaoChegada: 14, pontos: 0),
+                    new ResultadoInclusao(415, CORRIDA1018, ROMAIN_GROSJEAN, HAAS, posicaoLargada: 15, posicaoChegada: 15, pontos: 0),
+                    new ResultadoInclusao(416, CORRIDA1018, ANTONIO_GIOVANAZZI, ALFA_ROMEO, posicaoLargada: 16, posicaoChegada: 16, pontos: 0),
+                    new ResultadoInclusao(417, CORRIDA1018, GEORGE_RUSSEL, WILLIAMS, posicaoLargada: 18, posicaoChegada: 17, pontos: 0),
+                    new ResultadoInclusao(418, CORRIDA1018, PIERRE_GASLY, TORO_ROSSO, posicaoLargada: 11, posicaoChegada: 18, pontos: 0),
+                    new ResultadoInclusao(419, CORRIDA1018, ROBERT_KUBICA, WILLIAMS, posicaoLargada: 19, posicaoChegada: 19, pontos: 0),
+                    new ResultadoInclusao(420, CORRIDA1018, LANCE_STROLL, RACING_POINT, posicaoLargada: 12, posicaoChegada: 20, pontos: 0, motivoDnf: MotivoDNF.Abandono)
                 );
         }
     }
