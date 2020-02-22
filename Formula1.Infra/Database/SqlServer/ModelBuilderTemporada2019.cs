@@ -10,7 +10,7 @@ namespace Formula1.Infra.Database.SqlServer
         public static int PONTOS_MAXIMOS_CORRIDA_PILOTO = 26;
         public static int PONTOS_MAXIMOS_CORRIDA_EQUIPE = 44;
 
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void Seed2019(this ModelBuilder modelBuilder)
         {
             // pilotos
             var LEWIS_HAMILTON = new Piloto(1, "Lewis Hamilton", "Hamilton", "HAM", 44, "Inglaterra");
