@@ -26,9 +26,6 @@ namespace Formula1.Infra.Database.SqlServer
             modelBuilder.ApplyConfiguration(new Data.Config.EquipeConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.PilotoConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.ResultadoConfig());
-
-            modelBuilder.Seed2019();
-            modelBuilder.Seed2020();
         }
     }
 }
