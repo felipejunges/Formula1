@@ -11,7 +11,7 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private const int TEMPORADA = 2019;
+        private const int TEMPORADA = 2020;
 
         private readonly TabelaPilotosService TabelaPilotosService;
         private readonly TabelaEquipesService TabelaEquipesService;

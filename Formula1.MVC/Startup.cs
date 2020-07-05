@@ -21,9 +21,7 @@ namespace Formula1.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<F1Db>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
-            //services.AddDbContext<F1Db>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
-            services.AddDbContext<F1Db>(options => options.UseInMemoryDatabase("F1"));
+            services.AddDbContext<F1Db>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
             services.AddScoped<CorridasService>();
             services.AddScoped<EquipesService>();

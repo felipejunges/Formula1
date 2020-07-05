@@ -7,6 +7,8 @@ namespace Formula1.Domain.Services
 {
     public class TabelaPilotosService
     {
+        private static int PONTOS_MAXIMOS_CORRIDA_PILOTO = 26;
+
         private readonly CorridasService CorridasService;
         private readonly PilotosService PilotosService;
         private readonly ResultadosService ResultadosService;
@@ -53,7 +55,7 @@ namespace Formula1.Domain.Services
         private int CalcularPontosRestantes(List<CorridaTemporada> corridas)
         {
             int corridasRestantes = corridas.Where(o => o.Resultados.Count() == 0).Count();
-            int pontosRestantes = corridasRestantes * ModelBuilderTemporada2019.PONTOS_MAXIMOS_CORRIDA_PILOTO;
+            int pontosRestantes = corridasRestantes * PONTOS_MAXIMOS_CORRIDA_PILOTO;
 
             return pontosRestantes;
         }
