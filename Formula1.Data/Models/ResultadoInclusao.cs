@@ -24,20 +24,19 @@ namespace Formula1.Data.Models
 
         public ResultadoInclusao()
         {
-
         }
 
-        public ResultadoInclusao(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra = false, bool dnf = false)
+        public ResultadoInclusao(Resultado resultado)
         {
-            Id = id;
-            CorridaId = corrida.Id;
-            PilotoId = piloto.Id;
-            EquipeId = equipe.Id;
-            PosicaoLargada = posicaoLargada;
-            PosicaoChegada = posicaoChegada;
-            Pontos = pontos;
-            PontoExtra = pontoExtra;
-            DNF = dnf;
+            Id = resultado.Id;
+            CorridaId = resultado.CorridaId;
+            PilotoId = resultado.PilotoId;
+            EquipeId = resultado.EquipeId;
+            PosicaoLargada = resultado.PosicaoLargada;
+            PosicaoChegada = resultado.PosicaoChegada;
+            Pontos = resultado.Pontos;
+            PontoExtra = resultado.PontoExtra;
+            DNF = resultado.DNF;
         }
     }
 }

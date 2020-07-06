@@ -1,5 +1,6 @@
 ﻿using Formula1.Data.Models;
 using Formula1.Infra.Database.SqlServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public List<PilotoTemporada> GetPilotosTabela(int temporada)
+        public List<PilotoTemporada> ObterPilotosTabela(int temporada)
         {
             var pilotos = (from c in Db.Contratos
                            join p in Db.Pilotos on c.Piloto equals p

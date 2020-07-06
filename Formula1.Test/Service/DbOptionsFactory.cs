@@ -12,10 +12,8 @@ namespace Formula1.Test.Service
                                     .AddJsonFile("appsettings.json")
                                     .Build();
 
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
             DbContextOptions = new DbContextOptionsBuilder<F1Db>()
-                    .UseSqlServer(connectionString)
+                    .UseSqlite(Configuration.GetConnectionString("SqliteConnection"))
                     .Options;
 
             DbMemoryContextOptions = new DbContextOptionsBuilder<F1Db>()

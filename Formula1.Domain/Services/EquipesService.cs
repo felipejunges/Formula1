@@ -14,7 +14,7 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public List<EquipeTemporada> GetEquipesTabela(int temporada)
+        public List<EquipeTemporada> ObterEquipesTabela(int temporada)
         {
             var equipes = (from c in Db.Contratos
                            join e in Db.Equipes on c.Equipe equals e
