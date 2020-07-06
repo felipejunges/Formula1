@@ -22,9 +22,12 @@ namespace Formula1.Data.Models
 
         public bool DNF { get; set; }
 
-        public MotivoDNF? MotivoDNF { get; set; }
+        public ResultadoInclusao()
+        {
 
-        public ResultadoInclusao(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra = false, MotivoDNF? motivoDnf = null)
+        }
+
+        public ResultadoInclusao(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra = false, bool dnf = false)
         {
             Id = id;
             CorridaId = corrida.Id;
@@ -34,8 +37,7 @@ namespace Formula1.Data.Models
             PosicaoChegada = posicaoChegada;
             Pontos = pontos;
             PontoExtra = pontoExtra;
-            DNF = motivoDnf != null;
-            MotivoDNF = motivoDnf;
+            DNF = dnf;
         }
     }
 }

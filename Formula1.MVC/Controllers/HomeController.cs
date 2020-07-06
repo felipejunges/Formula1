@@ -20,8 +20,6 @@ namespace Formula1.MVC.Controllers
 
         public HomeController(F1Db db, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
-            db.Database.EnsureCreated();
-
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;
             GraficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
