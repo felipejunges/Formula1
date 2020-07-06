@@ -23,6 +23,24 @@ namespace Formula1.Data.Models
 
         public int PosicaoMaxima { get; set; }
 
+        public long GerarCriterioDesempate(int pilotosPorProva, int quantidadeCorridas)
+        {
+            long total = 0;
+
+            var quantidadesResultados = Resultados.GroupBy(o => o.PosicaoChegada).Select(o => new { Posicao = o.Key, Quantidade = o.Count() });
+
+            foreach(var quantidadeResultado in quantidadesResultados)
+            {
+                int posicaoInvertida = pilotosPorProva - quantidadeResultado.Posicao;
+
+                long soma = posicaoInvertida * quantidadeCorridas;
+
+                return quantidadeResultado.Quantidade + soma;
+            }
+
+            return total;
+        }
+
         public PilotoTemporada()
         {
             Resultados = new List<ResultadoTemporada>();
