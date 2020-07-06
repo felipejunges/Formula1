@@ -16,6 +16,13 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
+        public Resultado ObterPeloId(int id)
+        {
+            var resultado = Db.Resultados.Find(id);
+
+            return resultado;
+        }
+
         public List<ResultadoTemporada> GetResultadosPilotosTemporada(int temporada)
         {
             var resultados = Db.Resultados
@@ -89,6 +96,23 @@ namespace Formula1.Domain.Services
             };
 
             Db.Resultados.Add(resultado);
+            Db.SaveChanges();
+        }
+
+        public void Alterar(ResultadoInclusao resultadoInclusao)
+        {
+            var resultado = ObterPeloId(resultadoInclusao.Id);
+
+            resultado.CorridaId = resultadoInclusao.CorridaId;
+            resultado.PilotoId = resultadoInclusao.PilotoId;
+            resultado.EquipeId = resultadoInclusao.EquipeId;
+            resultado.PosicaoLargada = resultadoInclusao.PosicaoLargada;
+            resultado.PosicaoChegada = resultadoInclusao.PosicaoChegada;
+            resultado.Pontos = resultadoInclusao.Pontos;
+            resultado.PontoExtra = resultadoInclusao.PontoExtra;
+            resultado.DNF = resultadoInclusao.DNF;
+
+            Db.Resultados.Update(resultado);
             Db.SaveChanges();
         }
     }

@@ -9,8 +9,7 @@ namespace Formula1.Test.Service
 
         public ServiceFixture()
         {
-            Db = new F1Db(DbOptionsFactory.DbMemoryContextOptions);
-            Db.Database.EnsureCreated();
+            Db = new F1Db(DbOptionsFactory.DbContextOptions);
         }
 
         public void Dispose()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Formula1.Data.Models.ResultadoLista>
+﻿@model Formula1.Data.Models.ResultadoCorridaEdicao
 
 @{
     ViewData["Title"] = "Index";
@@ -6,37 +6,37 @@
 
 <h1>Index</h1>
 
-@await Html.PartialAsync("Add", new Formula1.Data.Models.ResultadoInclusao() { CorridaId = Convert.ToInt32(ViewData["CorridaId"]) })
+@await Html.PartialAsync("Add", Model.Dados)
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Piloto)
+                @Html.DisplayNameFor(model => model.Resultados[0].Piloto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Equipe)
+                @Html.DisplayNameFor(model => model.Resultados[0].Equipe)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PosicaoLargada)
+                @Html.DisplayNameFor(model => model.Resultados[0].PosicaoLargada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PosicaoChegada)
+                @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pontos)
+                @Html.DisplayNameFor(model => model.Resultados[0].Pontos)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PontoExtra)
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Resultados[0].PontoExtra)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DNF)
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Resultados[0].DNF)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Resultados)
         {
             <tr>
                 <td>
@@ -54,15 +54,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Pontos)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.PontoExtra)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.DNF)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <td class="text-right">
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados.CorridaId">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

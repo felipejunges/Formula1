@@ -23,7 +23,7 @@ namespace Formula1.Domain.Services
         public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada, int? order)
         {
             var corridas = CorridasService.GetCorridasTabela(temporada);
-            var pilotos = PilotosService.GetPilotosTabela(temporada);
+            var pilotos = PilotosService.ObterPilotosTabela(temporada);
             var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
 
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
