@@ -1,5 +1,7 @@
-﻿using Formula1.Data.Models;
+﻿using Formula1.Data.Entities;
+using Formula1.Data.Models;
 using Formula1.Infra.Database.SqlServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,6 +51,45 @@ namespace Formula1.Domain.Services
                 }).ToList();
 
             return resultados;
+        }
+
+        public List<ResultadoLista> ObterListaResultados(int corridaId)
+        {
+            var resultados = Db.Resultados
+                .Where(o => o.Corrida.Id == corridaId)
+                .OrderBy(o => o.PosicaoChegada)
+                .Select(o => new ResultadoLista()
+                {
+                    Id = o.Id,
+                    Piloto = o.Piloto.Nome,
+                    Equipe = o.Equipe.Nome,
+                    PosicaoLargada = o.PosicaoLargada,
+                    PosicaoChegada = o.PosicaoChegada,
+                    Pontos = o.Pontos,
+                    PontoExtra = o.PontoExtra,
+                    DNF = o.DNF
+                }).ToList();
+
+            return resultados;
+        }
+
+        public void Incluir(ResultadoInclusao resultadoInclusao)
+        {
+            var resultado = new Resultado()
+            {
+                Id = 0,
+                CorridaId = resultadoInclusao.CorridaId,
+                PilotoId = resultadoInclusao.PilotoId,
+                EquipeId = resultadoInclusao.EquipeId,
+                PosicaoLargada = resultadoInclusao.PosicaoLargada,
+                PosicaoChegada = resultadoInclusao.PosicaoChegada,
+                Pontos = resultadoInclusao.Pontos,
+                PontoExtra = resultadoInclusao.PontoExtra,
+                DNF = resultadoInclusao.DNF
+            };
+
+            Db.Resultados.Add(resultado);
+            Db.SaveChanges();
         }
     }
 }
