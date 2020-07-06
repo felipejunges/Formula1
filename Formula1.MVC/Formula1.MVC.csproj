@@ -20,4 +20,11 @@
     <ProjectReference Include="..\Formula1.Domain\Formula1.Domain.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Update="Db\Formula1.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
