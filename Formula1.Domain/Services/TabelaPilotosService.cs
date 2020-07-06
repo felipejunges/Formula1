@@ -26,10 +26,15 @@ namespace Formula1.Domain.Services
             var pilotos = PilotosService.ObterPilotosTabela(temporada);
             var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
 
+            int quantidadePilotos = pilotos.Count();
+            int quantidadeCorridas = corridas.Count();
+
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
-            
+
             if (order == null)
-                pilotos.Sort((o, i) => i.PontosTemporada.CompareTo(o.PontosTemporada));
+                pilotos.Sort((o, i) => o.PontosTemporada != i.PontosTemporada
+                                            ? i.PontosTemporada.CompareTo(o.PontosTemporada)
+                                            : i.GerarCriterioDesempate(quantidadePilotos, quantidadeCorridas).CompareTo(o.GerarCriterioDesempate(quantidadePilotos, quantidadeCorridas)));
             else
                 pilotos.Sort((o, i) => o.Resultados[order.Value - 1].PosicaoChegada.CompareTo(i.Resultados[order.Value - 1].PosicaoChegada));
 

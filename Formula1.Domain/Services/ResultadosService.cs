@@ -53,7 +53,7 @@ namespace Formula1.Domain.Services
                     CorridaId = o.Key.CorridaId,
                     Pontos = o.Sum(s => s.Pontos),
                     PontoExtra = o.Max(m => m.PontoExtra ? 1 : 0) > 0,
-                    PosicaoChegada = 0,
+                    PosicaoChegada = o.Min(m => m.PosicaoChegada),
                     DNF = false
                 }).ToList();
 
