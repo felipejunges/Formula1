@@ -39,6 +39,8 @@ namespace Formula1.MVC.Controllers
 
             var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, order);
 
+            ViewData["Temporada"] = TEMPORADA;
+
             return View(campeonato);
         }
 
@@ -49,6 +51,8 @@ namespace Formula1.MVC.Controllers
 
             var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, order);
 
+            ViewData["Temporada"] = TEMPORADA;
+
             return View(campeonato);
         }
 
@@ -56,6 +60,8 @@ namespace Formula1.MVC.Controllers
         public List<PilotoTemporada> PilotosPontosApi()
         {
             var pilotos = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, null).Pilotos;
+
+            ViewData["Temporada"] = TEMPORADA;
 
             return pilotos;
         }
@@ -67,6 +73,8 @@ namespace Formula1.MVC.Controllers
 
             var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(TEMPORADA, order);
 
+            ViewData["Temporada"] = TEMPORADA;
+
             return View(campeonato);
         }
 
@@ -75,6 +83,8 @@ namespace Formula1.MVC.Controllers
         {
             var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(TEMPORADA);
 
+            ViewData["Temporada"] = TEMPORADA;
+
             return View(pilotosGrafico);
         }
 
@@ -82,6 +92,8 @@ namespace Formula1.MVC.Controllers
         public IActionResult GraficoEquipesPontos()
         {
             var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(TEMPORADA);
+
+            ViewData["Temporada"] = TEMPORADA;
 
             return View(equipesGrafico);
         }
