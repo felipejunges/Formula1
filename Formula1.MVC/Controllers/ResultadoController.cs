@@ -1,4 +1,5 @@
-﻿using Formula1.Data.Models;
+﻿using Formula1.Data.Entities;
+using Formula1.Data.Models;
 using Formula1.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,12 +10,14 @@ namespace Formula1.MVC.Controllers
     {
         private const int TEMPORADA = 2020;
 
+        private readonly CorridasService CorridasService;
         private readonly PilotosService PilotosService;
         private readonly EquipesService EquipesService;
         private readonly ResultadosService ResultadosService;
 
-        public ResultadoController(PilotosService pilotosService, EquipesService equipesService, ResultadosService resultadosService)
+        public ResultadoController(CorridasService corridasService, PilotosService pilotosService, EquipesService equipesService, ResultadosService resultadosService)
         {
+            this.CorridasService = corridasService;
             this.PilotosService = pilotosService;
             this.EquipesService = equipesService;
             this.ResultadosService = resultadosService;
@@ -27,8 +30,12 @@ namespace Formula1.MVC.Controllers
 
             var edicao = new ResultadoCorridaEdicao(dados, resultados);
 
+            //
+            var corrida = this.CorridasService.ObterPeloId(corridaId);
+
             ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosTabela(TEMPORADA), "Id", "NomeGuerra", null);
             ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesTabela(TEMPORADA), "Id", "Nome", null);
+            ViewData["NomeGP"] = $"{corrida.NomeGrandePremio} - {corrida.Temporada}";
 
             return View(edicao);
         }
@@ -60,9 +67,18 @@ namespace Formula1.MVC.Controllers
                     this.ResultadosService.Incluir(resultadoInclusao);
                 else
                     this.ResultadosService.Alterar(resultadoInclusao);
+
+                return RedirectToAction("Index", new { corridaId = resultadoInclusao.CorridaId });
             }
 
-            return RedirectToAction("Index", new { corridaId = resultadoInclusao.CorridaId });
+            //
+            var resultados = this.ResultadosService.ObterListaResultados(resultadoInclusao.CorridaId);
+            var edicao = new ResultadoCorridaEdicao(resultadoInclusao, resultados);
+
+            ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosTabela(TEMPORADA), "Id", "NomeGuerra", null);
+            ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesTabela(TEMPORADA), "Id", "Nome", null);
+
+            return View(nameof(Index), edicao);
         }
 
         public IActionResult Delete(int corridaId, int id)

@@ -1,10 +1,13 @@
 ﻿@model Formula1.Data.Models.ResultadoCorridaEdicao
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Resultados";
+    ViewData["SubTitle"] = ViewData["NomeGP"];
 }
 
-<h1>Index</h1>
+<h3>@ViewData["Title"]</h3>
+<h4>@ViewData["SubTitle"]</h4>
+<hr />
 
 @await Html.PartialAsync("Add", Model.Dados)
 
@@ -61,8 +64,8 @@
                     @Html.DisplayFor(modelItem => item.DNF)
                 </td>
                 <td class="text-right">
-                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados.CorridaId">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados.CorridaId">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
                 </td>
             </tr>
         }
