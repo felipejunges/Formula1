@@ -1,5 +1,6 @@
 ﻿using Formula1.Data.Models;
 using Formula1.Infra.Database.SqlServer;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,7 @@ namespace Formula1.Domain.Services
             ResultadosService = resultadosService;
         }
 
-        public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada, int? order)
+        public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada, int? corridaOrder)
         {
             var corridas = CorridasService.GetCorridasTabela(temporada);
             var pilotos = PilotosService.ObterPilotosTabela(temporada);
@@ -31,12 +32,16 @@ namespace Formula1.Domain.Services
 
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
 
-            if (order == null)
+            if (corridaOrder == null)
                 pilotos.Sort((o, i) => o.PontosTemporada != i.PontosTemporada
                                             ? i.PontosTemporada.CompareTo(o.PontosTemporada)
                                             : i.GerarCriterioDesempate(quantidadePilotos, quantidadeCorridas).CompareTo(o.GerarCriterioDesempate(quantidadePilotos, quantidadeCorridas)));
             else
-                pilotos.Sort((o, i) => o.Resultados[order.Value - 1].PosicaoChegada.CompareTo(i.Resultados[order.Value - 1].PosicaoChegada));
+                pilotos.Sort((o, i) =>
+                        o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 999 : o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).PosicaoChegada
+                    .CompareTo(
+                        i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 999 : i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).PosicaoChegada
+                    ));
 
             var pontosRestantes = CalcularPontosRestantes(corridas);
             MarcarPilotosPosicaoMaxima(pilotos, pontosRestantes);
@@ -66,3 +71,4 @@ namespace Formula1.Domain.Services
         }
     }
 }
+ 

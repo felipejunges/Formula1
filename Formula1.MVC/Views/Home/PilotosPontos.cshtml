@@ -24,7 +24,7 @@
 
                         @if (corrida.TemResultados)
                         {
-                            <a href="@Url.Content("~/Home/PilotosPontos?o=" + (Model.Corridas.IndexOf(corrida) + 1).ToString())">
+                            <a href="@Url.Content("~/Home/PilotosPontos?o=" + corrida.Id)">
                                 @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
                             </a>
                         }

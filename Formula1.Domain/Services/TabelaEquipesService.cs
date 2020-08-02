@@ -20,7 +20,7 @@ namespace Formula1.Domain.Services
             ResultadosService = resultadosService;
         }
 
-        public TabelaCampeonatoEquipes GetTabelaCampeonatoEquipes(int temporada, int? order)
+        public TabelaCampeonatoEquipes GetTabelaCampeonatoEquipes(int temporada, int? corridaOrder)
         {
             var corridas = CorridasService.GetCorridasTabela(temporada);
             var equipes = EquipesService.ObterEquipesTabela(temporada);
@@ -31,12 +31,18 @@ namespace Formula1.Domain.Services
 
             PreencherResultadosEquipesCorridas(corridas, equipes, resultados);
 
-            if (order == null)
+            if (corridaOrder == null)
                 equipes.Sort((o, i) => o.PontosTemporada != i.PontosTemporada
                                                 ? i.PontosTemporada.CompareTo(o.PontosTemporada)
                                                 : i.GerarCriterioDesempate(quantidadeEquipes, quantidadeCorridas).CompareTo(o.GerarCriterioDesempate(quantidadeEquipes, quantidadeCorridas)));
             else
-                equipes.Sort((o, i) => i.Resultados[order.Value - 1].Pontos.CompareTo(o.Resultados[order.Value - 1].Pontos));
+                equipes.Sort((o, i) =>
+                        i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
+                    .CompareTo(
+                        o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
+                    ));
+
+            //equipes.Sort((o, i) => i.Resultados[order.Value - 1].Pontos.CompareTo(o.Resultados[order.Value - 1].Pontos));
 
             int pontosRestantes = CalcularPontosRestantes(corridas);
             MarcarEquipesPosicaoMaxima(equipes, pontosRestantes);
