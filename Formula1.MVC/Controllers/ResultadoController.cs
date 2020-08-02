@@ -64,5 +64,17 @@ namespace Formula1.MVC.Controllers
 
             return RedirectToAction("Index", new { corridaId = resultadoInclusao.CorridaId });
         }
+
+        public IActionResult Delete(int corridaId, int id)
+        {
+            var resultado = this.ResultadosService.ObterPeloId(id);
+
+            if (resultado == null)
+                return NotFound();
+
+            this.ResultadosService.Excluir(resultado);
+
+            return RedirectToAction("Index", new { corridaId });
+        }
     }
 }

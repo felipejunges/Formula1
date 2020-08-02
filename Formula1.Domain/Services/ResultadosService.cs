@@ -115,5 +115,11 @@ namespace Formula1.Domain.Services
             Db.Resultados.Update(resultado);
             Db.SaveChanges();
         }
+
+        public void Excluir(Resultado resultado)
+        {
+            Db.Resultados.Remove(resultado);
+            Db.SaveChanges();
+        }
     }
 }
