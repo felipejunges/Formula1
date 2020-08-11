@@ -1,6 +1,6 @@
-﻿using Formula1.Data.Models;
+﻿using Formula1.Data.Entities;
+using Formula1.Data.Models;
 using Formula1.Infra.Database.SqlServer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,17 +15,25 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public List<PilotoTemporada> ObterPilotosTabela(int temporada)
+        public List<Piloto> ObterPilotosContrato(int temporada)
         {
-            var pilotos = (from c in Db.Contratos
-                           join p in Db.Pilotos on c.Piloto equals p
-                           join e in Db.Equipes on c.Equipe equals e
-                           where c.Temporada == temporada
-                           select new PilotoTemporada()
+            var pilotos = this.Db.Contratos.Where(o => o.Temporada == temporada).Select(o => o.Piloto).ToList();
+
+            return pilotos;
+        }
+
+        public List<PilotoTemporadaResultado> ObterPilotosTabela(int temporada)
+        {
+            var pilotos = (from pt in Db.PilotosTemporada
+                           join p in Db.Pilotos on pt.Piloto equals p
+                           where pt.Temporada == temporada
+                           select new PilotoTemporadaResultado()
                            {
                                Id = p.Id,
                                NomeGuerra = p.NomeGuerra,
-                               CorRgb = e.CorRgb
+                               CorRgb = "000000",
+                               Pontos = pt.Pontos,
+                               Posicao = pt.Posicao
                            }).ToList();
 
             return pilotos;

@@ -41,7 +41,7 @@
     <tbody>
         @foreach (var item in Model.Resultados)
         {
-            <tr>
+            <tr style="@(item.Grifar ? "color: red;" : string.Empty)">
                 <td>
                     @Html.DisplayFor(modelItem => item.Piloto)
                 </td>

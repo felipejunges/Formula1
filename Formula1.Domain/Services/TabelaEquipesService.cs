@@ -1,5 +1,4 @@
 ﻿using Formula1.Data.Models;
-using Formula1.Infra.Database.SqlServer;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace Formula1.Domain.Services
 {
     public class TabelaEquipesService
     {
-        private static int PONTOS_MAXIMOS_CORRIDA_EQUIPE = 44;
+        private static readonly int PONTOS_MAXIMOS_CORRIDA_EQUIPE = 44;
 
         private readonly CorridasService CorridasService;
         private readonly EquipesService EquipesService;
@@ -32,9 +31,7 @@ namespace Formula1.Domain.Services
             PreencherResultadosEquipesCorridas(corridas, equipes, resultados);
 
             if (corridaOrder == null)
-                equipes.Sort((o, i) => o.PontosTemporada != i.PontosTemporada
-                                                ? i.PontosTemporada.CompareTo(o.PontosTemporada)
-                                                : i.GerarCriterioDesempate(quantidadeEquipes, quantidadeCorridas).CompareTo(o.GerarCriterioDesempate(quantidadeEquipes, quantidadeCorridas)));
+                equipes.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
             else
                 equipes.Sort((o, i) =>
                         i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
@@ -42,24 +39,22 @@ namespace Formula1.Domain.Services
                         o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
                     ));
 
-            //equipes.Sort((o, i) => i.Resultados[order.Value - 1].Pontos.CompareTo(o.Resultados[order.Value - 1].Pontos));
-
             int pontosRestantes = CalcularPontosRestantes(corridas);
             MarcarEquipesPosicaoMaxima(equipes, pontosRestantes);
 
             return new TabelaCampeonatoEquipes(corridas, equipes);
         }
 
-        private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporada> equipes, List<ResultadoTemporada> resultados)
+        private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)
         {
             equipes.ForEach(f => f.Resultados = resultados.Where(o => o.EquipeId == f.Id).ToList());
             corridas.ForEach(f => f.Resultados = resultados.Where(o => o.CorridaId == f.Id).ToList());
         }
 
-        private void MarcarEquipesPosicaoMaxima(List<EquipeTemporada> equipes, int pontosRestantes)
+        private void MarcarEquipesPosicaoMaxima(List<EquipeTemporadaResultado> equipes, int pontosRestantes)
         {
             equipes.ForEach(f =>
-                    f.PosicaoMaxima = equipes.IndexOf(equipes.Where(w => w.PontosTemporada <= f.PontosTemporada + pontosRestantes).OrderByDescending(o => o.PontosTemporada).FirstOrDefault()) + 1
+                    f.PosicaoMaxima = equipes.IndexOf(equipes.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
                 );
         }
 

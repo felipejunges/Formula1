@@ -1,5 +1,4 @@
-﻿using Formula1.Data.Entities;
-using Formula1.Data.Models;
+﻿using Formula1.Data.Models;
 using Formula1.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,8 +7,6 @@ namespace Formula1.MVC.Controllers
 {
     public class ResultadoController : Controller
     {
-        private const int TEMPORADA = 2020;
-
         private readonly CorridasService CorridasService;
         private readonly PilotosService PilotosService;
         private readonly EquipesService EquipesService;
@@ -31,15 +28,11 @@ namespace Formula1.MVC.Controllers
             var edicao = new ResultadoCorridaEdicao(dados, resultados);
 
             //
-            var corrida = this.CorridasService.ObterPeloId(corridaId);
-
-            ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosTabela(TEMPORADA), "Id", "NomeGuerra", null);
-            ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesTabela(TEMPORADA), "Id", "Nome", null);
-            ViewData["NomeGP"] = $"{corrida.NomeGrandePremio} - {corrida.Temporada}";
+            SetarDadosViewData(corridaId);
 
             return View(edicao);
         }
-
+        
         public IActionResult Edit(int corridaId, int id)
         {
             var resultado = this.ResultadosService.ObterPeloId(id);
@@ -52,8 +45,8 @@ namespace Formula1.MVC.Controllers
 
             var edicao = new ResultadoCorridaEdicao(dados, resultados);
 
-            ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosTabela(TEMPORADA), "Id", "NomeGuerra", null);
-            ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesTabela(TEMPORADA), "Id", "Nome", null);
+            //
+            SetarDadosViewData(corridaId);
 
             return View(nameof(Index), edicao);
         }
@@ -75,8 +68,7 @@ namespace Formula1.MVC.Controllers
             var resultados = this.ResultadosService.ObterListaResultados(resultadoInclusao.CorridaId);
             var edicao = new ResultadoCorridaEdicao(resultadoInclusao, resultados);
 
-            ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosTabela(TEMPORADA), "Id", "NomeGuerra", null);
-            ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesTabela(TEMPORADA), "Id", "Nome", null);
+            SetarDadosViewData(resultadoInclusao.CorridaId);
 
             return View(nameof(Index), edicao);
         }
@@ -91,6 +83,15 @@ namespace Formula1.MVC.Controllers
             this.ResultadosService.Excluir(resultado);
 
             return RedirectToAction("Index", new { corridaId });
+        }
+
+        private void SetarDadosViewData(int corridaId)
+        {
+            var corrida = this.CorridasService.ObterPeloId(corridaId);
+
+            ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosContrato(corrida.Temporada), "Id", "NomeGuerra", null);
+            ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesContrato(corrida.Temporada), "Id", "Nome", null);
+            ViewData["NomeGP"] = $"{corrida.NomeGrandePremio} - {corrida.Temporada}";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Formula1.Data.Models;
+﻿using Formula1.Data.Entities;
+using Formula1.Data.Models;
 using Formula1.Domain.Services;
 using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
@@ -15,13 +16,17 @@ namespace Formula1.MVC.Controllers
 
         private readonly TabelaPilotosService TabelaPilotosService;
         private readonly TabelaEquipesService TabelaEquipesService;
+        private readonly PilotoTemporadaService PilotoTemporadaService;
+        private readonly EquipeTemporadaService EquipeTemporadaService;
         private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
         private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
 
-        public HomeController(F1Db db, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
+        public HomeController(F1Db db, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;
+            PilotoTemporadaService = pilotoTemporadaService;
+            EquipeTemporadaService = equipeTemporadaService;
             GraficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
             GraficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
         }
@@ -54,16 +59,6 @@ namespace Formula1.MVC.Controllers
             ViewData["Temporada"] = TEMPORADA;
 
             return View(campeonato);
-        }
-
-        [Route("Api/Piloto")]
-        public List<PilotoTemporada> PilotosPontosApi()
-        {
-            var pilotos = TabelaPilotosService.GetTabelaCampeonatoPilotos(TEMPORADA, null).Pilotos;
-
-            ViewData["Temporada"] = TEMPORADA;
-
-            return pilotos;
         }
 
         [ResponseCache(Duration = 60)]
@@ -102,6 +97,14 @@ namespace Formula1.MVC.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Calcular(int id)
+        {
+            this.PilotoTemporadaService.CalcularPilotosTemporada(id);
+            this.EquipeTemporadaService.CalcularEquipesTemporada(id);
+
+            return Ok();
         }
     }
 }

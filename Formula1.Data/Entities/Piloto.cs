@@ -6,12 +6,11 @@ namespace Formula1.Data.Entities
     {
         public Piloto()
         {
-            Contratos = new HashSet<Contrato>();
             Resultados = new HashSet<Resultado>();
+            Temporadas = new HashSet<PilotoTemporada>();
         }
 
-        public Piloto(int id, string nome, string nomeGuerra, string sigla, int numeroCarro, string paisOrigem)
-            : this ()
+        public Piloto(int id, string nome, string nomeGuerra, string sigla, int numeroCarro, string paisOrigem) : this()
         {
             Id = id;
             Nome = nome;
@@ -32,7 +31,7 @@ namespace Formula1.Data.Entities
         public string PaisOrigem { get; set; }
 
         public virtual ICollection<Contrato> Contratos { get; set; }
-
         public virtual ICollection<Resultado> Resultados { get; set; }
+        public virtual ICollection<PilotoTemporada> Temporadas { get; set; }
     }
 }
