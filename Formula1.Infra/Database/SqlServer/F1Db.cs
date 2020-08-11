@@ -13,7 +13,11 @@ namespace Formula1.Infra.Database.SqlServer
 
         public DbSet<Equipe> Equipes { get; set; }
 
+        public DbSet<EquipeTemporada> EquipesTemporada { get; set; }
+
         public DbSet<Piloto> Pilotos { get; set; }
+
+        public DbSet<PilotoTemporada> PilotosTemporada { get; set; }
 
         public DbSet<Resultado> Resultados { get; set; }
 

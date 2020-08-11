@@ -23,14 +23,16 @@ namespace Formula1.MVC
         {
             services.AddDbContext<F1Db>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
-            services.AddScoped<CorridasService>();
-            services.AddScoped<EquipesService>();
-            services.AddScoped<PilotosService>();
-            services.AddScoped<ResultadosService>();
-            services.AddScoped<TabelaPilotosService>();
-            services.AddScoped<TabelaEquipesService>();
-            services.AddScoped<GraficoCampeonatoPilotosService>();
-            services.AddScoped<GraficoCampeonatoEquipesService>();
+            services.AddScoped<CorridasService>()
+                    .AddScoped<EquipesService>()
+                    .AddScoped<EquipeTemporadaService>()
+                    .AddScoped<PilotosService>()
+                    .AddScoped<PilotoTemporadaService>()
+                    .AddScoped<ResultadosService>()
+                    .AddScoped<TabelaPilotosService>()
+                    .AddScoped<TabelaEquipesService>()
+                    .AddScoped<GraficoCampeonatoPilotosService>()
+                    .AddScoped<GraficoCampeonatoEquipesService>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);

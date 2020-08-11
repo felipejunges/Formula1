@@ -22,5 +22,7 @@ namespace Formula1.Data.Models
         public bool PontoExtra { get; set; }
 
         public bool DNF { get; set; }
+
+        public bool Grifar { get; set; }
     }
 }

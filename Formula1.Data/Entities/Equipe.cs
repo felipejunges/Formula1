@@ -6,8 +6,8 @@ namespace Formula1.Data.Entities
     {
         public Equipe()
         {
-            Contratos = new HashSet<Contrato>();
             Resultados = new HashSet<Resultado>();
+            Temporadas = new HashSet<EquipeTemporada>();
         }
 
         public Equipe(int id, string nome, string corRgb)
@@ -22,10 +22,8 @@ namespace Formula1.Data.Entities
 
         public string CorRgb { get; set; }
 
-        // TODO: criar estrutura Equipe x Campeonato pra armazenar o motor
-
         public virtual ICollection<Contrato> Contratos { get; set; }
-
         public virtual ICollection<Resultado> Resultados { get; set; }
+        public virtual ICollection<EquipeTemporada> Temporadas { get; set; }
     }
 }

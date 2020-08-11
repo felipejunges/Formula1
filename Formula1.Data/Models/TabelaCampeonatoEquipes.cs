@@ -6,9 +6,9 @@ namespace Formula1.Data.Models
     {
         public List<CorridaTemporada> Corridas { get; private set; }
 
-        public List<EquipeTemporada> Equipes { get; private set; }
+        public List<EquipeTemporadaResultado> Equipes { get; private set; }
 
-        public TabelaCampeonatoEquipes(List<CorridaTemporada> corridas, List<EquipeTemporada> equipes)
+        public TabelaCampeonatoEquipes(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes)
         {
             Corridas = corridas;
             Equipes = equipes;
