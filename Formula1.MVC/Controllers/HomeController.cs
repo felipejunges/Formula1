@@ -99,12 +99,15 @@ namespace Formula1.MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Calcular(int id)
+        public IActionResult Calcular(int? id)
         {
-            this.PilotoTemporadaService.CalcularPilotosTemporada(id);
-            this.EquipeTemporadaService.CalcularEquipesTemporada(id);
+            if (id == null)
+                return BadRequest("Temporada não informada.");
 
-            return Ok();
+            this.PilotoTemporadaService.CalcularPilotosTemporada(id.Value);
+            this.EquipeTemporadaService.CalcularEquipesTemporada(id.Value);
+
+            return Ok($"Gerado cálculo da temporada {id}.");
         }
     }
 }
