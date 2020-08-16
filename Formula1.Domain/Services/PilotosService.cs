@@ -31,7 +31,7 @@ namespace Formula1.Domain.Services
                            {
                                Id = p.Id,
                                NomeGuerra = p.NomeGuerra,
-                               CorRgb = "000000",
+                               CorRgb = p.Contratos.Where(o => o.Temporada == temporada).OrderByDescending(o => o.Id).FirstOrDefault().Equipe.CorRgb,
                                Pontos = pt.Pontos,
                                Posicao = pt.Posicao
                            }).ToList();
