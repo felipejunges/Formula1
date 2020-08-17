@@ -10,23 +10,28 @@ namespace Formula1.Domain.Services
     {
         private readonly F1Db Db;
         private readonly ResultadosService _resultadosService;
+        private readonly PunicaoService _punicaoService;
 
-        public PilotoTemporadaService(F1Db db, ResultadosService resultadosService)
+        public PilotoTemporadaService(F1Db db, ResultadosService resultadosService, PunicaoService punicaoService)
         {
             Db = db;
             _resultadosService = resultadosService;
+            _punicaoService = punicaoService;
         }
 
         public void CalcularPilotosTemporada(int temporada)
         {
             var resultados = _resultadosService.GetResultadosPilotosTemporada(temporada);
+            var punicoes = _punicaoService.ObterPunicoesTemporada(temporada);
 
             var pilotosIds = resultados.GroupBy(o => o.PilotoId).Select(o => o.Key).ToList();
             var pilotosTemporada = new List<PilotoTemporadaInclusao>();
 
             foreach (var pilotoId in pilotosIds)
             {
-                var pontos = resultados.Where(o => o.PilotoId == pilotoId).Sum(o => o.Pontos);
+                var pontos = 0;
+                pontos += resultados.Where(o => o.PilotoId == pilotoId).Sum(o => o.Pontos);
+                pontos -= punicoes.Where(o => o.PilotoId == pilotoId).Sum(o => o.Pontos);
 
                 pilotosTemporada.Add(new PilotoTemporadaInclusao(pilotoId, temporada, pontos, 0));
             }
