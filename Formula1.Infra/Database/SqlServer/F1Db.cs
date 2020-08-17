@@ -19,6 +19,8 @@ namespace Formula1.Infra.Database.SqlServer
 
         public DbSet<PilotoTemporada> PilotosTemporada { get; set; }
 
+        public DbSet<Punicao> Punicoes { get; set; }
+
         public DbSet<Resultado> Resultados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +31,7 @@ namespace Formula1.Infra.Database.SqlServer
             modelBuilder.ApplyConfiguration(new Data.Config.CorridaConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.EquipeConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.PilotoConfig());
+            modelBuilder.ApplyConfiguration(new Data.Config.PunicaoConfig());
             modelBuilder.ApplyConfiguration(new Data.Config.ResultadoConfig());
         }
     }
