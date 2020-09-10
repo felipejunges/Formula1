@@ -1,5 +1,6 @@
 ﻿using Formula1.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Formula1.Domain.Services
 {
@@ -21,8 +22,17 @@ namespace Formula1.Domain.Services
             foreach (var equipe in campeonato.Equipes)
             {
                 var pontos = new int?[campeonato.Corridas.Count];
-                for (int i = 0; i < equipe.Resultados.Count; i++)
-                    pontos[i] = i == 0 ? equipe.Resultados[i].Pontos : pontos[i - 1] + equipe.Resultados[i].Pontos;
+
+                int soma = 0;
+                foreach (var corrida in campeonato.Corridas)
+                {
+                    var resultado = equipe.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
+                    if (resultado != null)
+                    {
+                        soma += resultado.Pontos;
+                        pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
+                    }
+                }
 
                 equipesGrafico.Add(new EquipePontosGrafico()
                 {
