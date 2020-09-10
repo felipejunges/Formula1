@@ -26,9 +26,6 @@ namespace Formula1.Domain.Services
             var pilotos = PilotosService.ObterPilotosTabela(temporada);
             var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
 
-            int quantidadePilotos = pilotos.Count();
-            int quantidadeCorridas = corridas.Count();
-
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
 
             if (corridaOrder == null)

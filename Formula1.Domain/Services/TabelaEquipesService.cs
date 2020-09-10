@@ -25,9 +25,6 @@ namespace Formula1.Domain.Services
             var equipes = EquipesService.ObterEquipesTabela(temporada);
             var resultados = ResultadosService.GetResultadosEquipeTemporada(temporada);
 
-            int quantidadeEquipes = equipes.Count();
-            int quantidadeCorridas = corridas.Count();
-
             PreencherResultadosEquipesCorridas(corridas, equipes, resultados);
 
             if (corridaOrder == null)
