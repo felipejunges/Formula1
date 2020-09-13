@@ -26,12 +26,14 @@ namespace Formula1.Domain.Services
                 int soma = 0;
                 foreach (var corrida in campeonato.Corridas)
                 {
+                    if (corrida.Resultados.Count == 0)
+                        break;
+
                     var resultado = piloto.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
                     if (resultado != null)
-                    {
                         soma += resultado.Pontos;
-                        pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
-                    }
+
+                    pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
                 }
 
                 pilotosGrafico.Add(new PilotoPontosGrafico()
