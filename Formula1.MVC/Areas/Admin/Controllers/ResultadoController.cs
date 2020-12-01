@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Formula1.MVC.Controllers
+namespace Formula1.MVC.Areas.Admin.Controllers
 {
     [Authorize]
+    [Area("Admin")]
     public class ResultadoController : Controller
     {
         private readonly CorridasService CorridasService;

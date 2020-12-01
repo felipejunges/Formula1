@@ -9,7 +9,7 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private const int TEMPORADA = 2020;
+        private const int TEMPORADA = 2020; // TODO: transformar em uma config vinda do banco
 
         private readonly TabelaPilotosService TabelaPilotosService;
         private readonly TabelaEquipesService TabelaEquipesService;

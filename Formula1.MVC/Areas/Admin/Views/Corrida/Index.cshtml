@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Formula1.Data.Models.CorridaLista>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Corridas";
+    ViewData["SubTitle"] = "Achar algo pra escrever aqui!";
+}
+
+<h3>@ViewData["Title"]</h3>
+<h4>@ViewData["SubTitle"]</h4>
+<hr />
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHoraBrasil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeGrandePremio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Circuito)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataHoraBrasil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeGrandePremio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Circuito)
+                </td>
+                <td class="text-right">
+                    <a asp-area="Admin" asp-controller="Resultado" asp-route-corridaId="@item.Id">Resultados</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

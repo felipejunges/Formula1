@@ -33,5 +33,18 @@ namespace Formula1.Domain.Services
 
             return corridas;
         }
+
+        public List<CorridaLista> GetCorridasLista(int temporada)
+        {
+            var corridas = Db.Corridas.Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaLista()
+            {
+                Id = o.Id,
+                DataHoraBrasil = o.DataHoraBrasil,
+                NomeGrandePremio = o.NomeGrandePremio,
+                Circuito = o.Circuito
+            }).ToList();
+
+            return corridas;
+        }
     }
 }

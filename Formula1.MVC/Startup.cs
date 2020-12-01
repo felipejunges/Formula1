@@ -82,9 +82,15 @@ namespace Formula1.MVC
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                endpoints.MapAreaControllerRoute(
+                    areaName: "Admin",
                     name: "Resultado",
-                    pattern: "{controller}/{corridaId}/{action=Index}/{id?}");
+                    pattern: "Admin/{controller}/{corridaId}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    areaName: "Admin",
+                    name: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
