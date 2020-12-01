@@ -1,9 +1,9 @@
 ﻿using Formula1.Data.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Formula1.Data.Models
+namespace Formula1.Data.Models.Admin
 {
-    public class ResultadoInclusao
+    public class ResultadoDados
     {
         public int Id { get; set; }
 
@@ -28,11 +28,11 @@ namespace Formula1.Data.Models
 
         public bool DNF { get; set; }
 
-        public ResultadoInclusao()
+        public ResultadoDados()
         {
         }
 
-        public ResultadoInclusao(Resultado resultado)
+        public ResultadoDados(Resultado resultado)
         {
             Id = resultado.Id;
             CorridaId = resultado.CorridaId;

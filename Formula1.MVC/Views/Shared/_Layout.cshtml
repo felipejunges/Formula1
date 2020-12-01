@@ -7,9 +7,11 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" href="~/img/line-chart-icon.png" />
@@ -70,12 +72,20 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/bootstrap-datetime-picker/js/bootstrap-datetimepicker.js"></script>
+        <script src="~/lib/jquery-mask/jquery.mask.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        setaCamposMascaras();
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Formula1.Data.Models
+namespace Formula1.Data.Models.Admin
 {
     public class CorridaLista
     {
@@ -12,6 +12,7 @@ namespace Formula1.Data.Models
 
         public string Circuito { get; set; }
 
+        [Display(Name = "Data/hora Brasil")]
         [DisplayFormat(DataFormatString = "{0:dd/MMM/yyyy HH:mm}")]
         public DateTime DataHoraBrasil { get; set; }
     }

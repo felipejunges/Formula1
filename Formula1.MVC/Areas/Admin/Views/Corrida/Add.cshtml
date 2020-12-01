@@ -1,0 +1,46 @@
+﻿@model Formula1.Data.Models.Admin.CorridaDados
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Save">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Temporada" />
+
+            <div class="form-group row">
+                <label asp-for="NomeGrandePremio" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="NomeGrandePremio" class="form-control" />
+                    <span asp-validation-for="NomeGrandePremio" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Circuito" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="Circuito" class="form-control" />
+                    <span asp-validation-for="Circuito" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="DataHoraBrasil" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="DataHoraBrasil" class="form-control campo-data-hora" />
+                    <span asp-validation-for="DataHoraBrasil" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="@(Model.Id == 0 ? "Incluir" : "Editar")" class="btn btn-primary" /> ou <a asp-action="Index">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

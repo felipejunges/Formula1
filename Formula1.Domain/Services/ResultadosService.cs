@@ -1,7 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
+using Formula1.Data.Models.Admin;
 using Formula1.Infra.Database.SqlServer;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -115,39 +115,46 @@ namespace Formula1.Domain.Services
             var itensPosicaoChegada = resultados.Where(o => posicoesChegadaRepetidos.Contains(o.PosicaoChegada)).ToList();
 
             itensPosicaoChegada.ForEach(o => o.Grifar = true);
+
+            //
+            var equipesMais2Resultados = resultados.GroupBy(o => o.Equipe).Where(o => o.Count() > 2).Select(o => o.Key).ToList();
+
+            var equipesGrifar = resultados.Where(o => equipesMais2Resultados.Contains(o.Equipe)).ToList();
+
+            equipesGrifar.ForEach(o => o.Grifar = true);
         }
 
-        public void Incluir(ResultadoInclusao resultadoInclusao)
+        public void Incluir(ResultadoDados resultadoDados)
         {
             var resultado = new Resultado()
             {
                 Id = 0,
-                CorridaId = resultadoInclusao.CorridaId,
-                PilotoId = resultadoInclusao.PilotoId,
-                EquipeId = resultadoInclusao.EquipeId,
-                PosicaoLargada = resultadoInclusao.PosicaoLargada,
-                PosicaoChegada = resultadoInclusao.PosicaoChegada,
-                Pontos = resultadoInclusao.Pontos,
-                PontoExtra = resultadoInclusao.PontoExtra,
-                DNF = resultadoInclusao.DNF
+                CorridaId = resultadoDados.CorridaId,
+                PilotoId = resultadoDados.PilotoId,
+                EquipeId = resultadoDados.EquipeId,
+                PosicaoLargada = resultadoDados.PosicaoLargada,
+                PosicaoChegada = resultadoDados.PosicaoChegada,
+                Pontos = resultadoDados.Pontos,
+                PontoExtra = resultadoDados.PontoExtra,
+                DNF = resultadoDados.DNF
             };
 
             Db.Resultados.Add(resultado);
             Db.SaveChanges();
         }
 
-        public void Alterar(ResultadoInclusao resultadoInclusao)
+        public void Alterar(ResultadoDados resultadoDados)
         {
-            var resultado = ObterPeloId(resultadoInclusao.Id);
+            var resultado = ObterPeloId(resultadoDados.Id);
 
-            resultado.CorridaId = resultadoInclusao.CorridaId;
-            resultado.PilotoId = resultadoInclusao.PilotoId;
-            resultado.EquipeId = resultadoInclusao.EquipeId;
-            resultado.PosicaoLargada = resultadoInclusao.PosicaoLargada;
-            resultado.PosicaoChegada = resultadoInclusao.PosicaoChegada;
-            resultado.Pontos = resultadoInclusao.Pontos;
-            resultado.PontoExtra = resultadoInclusao.PontoExtra;
-            resultado.DNF = resultadoInclusao.DNF;
+            resultado.CorridaId = resultadoDados.CorridaId;
+            resultado.PilotoId = resultadoDados.PilotoId;
+            resultado.EquipeId = resultadoDados.EquipeId;
+            resultado.PosicaoLargada = resultadoDados.PosicaoLargada;
+            resultado.PosicaoChegada = resultadoDados.PosicaoChegada;
+            resultado.Pontos = resultadoDados.Pontos;
+            resultado.PontoExtra = resultadoDados.PontoExtra;
+            resultado.DNF = resultadoDados.DNF;
 
             Db.Resultados.Update(resultado);
             Db.SaveChanges();

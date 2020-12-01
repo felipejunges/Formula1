@@ -1,6 +1,8 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
+using Formula1.Data.Models.Admin;
 using Formula1.Infra.Database.SqlServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,6 +47,40 @@ namespace Formula1.Domain.Services
             }).ToList();
 
             return corridas;
+        }
+
+        public void Incluir(CorridaDados corridaDados)
+        {
+            var corrida = new Corrida()
+            {
+                Id = 0,
+                Temporada = corridaDados.Temporada,
+                NomeGrandePremio = corridaDados.NomeGrandePremio,
+                Circuito = corridaDados.Circuito,
+                DataHoraBrasil = corridaDados.DataHoraBrasil.Value
+            };
+
+            Db.Corridas.Add(corrida);
+            Db.SaveChanges();
+        }
+
+        public void Alterar(CorridaDados corridaDados)
+        {
+            var corrida = ObterPeloId(corridaDados.Id);
+
+            corrida.Temporada = corridaDados.Temporada;
+            corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;
+            corrida.Circuito = corridaDados.Circuito;
+            corrida.DataHoraBrasil = corridaDados.DataHoraBrasil.Value;
+
+            Db.Corridas.Update(corrida);
+            Db.SaveChanges();
+        }
+
+        public void Excluir(Corrida corrida)
+        {
+            Db.Corridas.Remove(corrida);
+            Db.SaveChanges();
         }
     }
 }

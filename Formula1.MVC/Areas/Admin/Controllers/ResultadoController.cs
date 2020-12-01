@@ -1,4 +1,4 @@
-﻿using Formula1.Data.Models;
+﻿using Formula1.Data.Models.Admin;
 using Formula1.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +25,10 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index(int corridaId)
         {
-            var dados = new ResultadoInclusao() { Id = 0, CorridaId = corridaId };
+            var dados = new ResultadoDados() { Id = 0, CorridaId = corridaId };
             var resultados = this.ResultadosService.ObterListaResultados(corridaId);
 
-            var edicao = new ResultadoCorridaEdicao(dados, resultados);
+            var edicao = new ResultadoListaDados(dados, resultados);
 
             //
             SetarDadosViewData(corridaId);
@@ -43,10 +43,10 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (resultado == null)
                 return NotFound();
 
-            var dados = new ResultadoInclusao(resultado);
+            var dados = new ResultadoDados(resultado);
             var resultados = this.ResultadosService.ObterListaResultados(corridaId);
 
-            var edicao = new ResultadoCorridaEdicao(dados, resultados);
+            var edicao = new ResultadoListaDados(dados, resultados);
 
             //
             SetarDadosViewData(corridaId);
@@ -55,23 +55,23 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(ResultadoInclusao resultadoInclusao)
+        public IActionResult Save(ResultadoDados resultadoDados)
         {
             if (ModelState.IsValid)
             {
-                if (resultadoInclusao.Id == 0)
-                    this.ResultadosService.Incluir(resultadoInclusao);
+                if (resultadoDados.Id == 0)
+                    this.ResultadosService.Incluir(resultadoDados);
                 else
-                    this.ResultadosService.Alterar(resultadoInclusao);
+                    this.ResultadosService.Alterar(resultadoDados);
 
-                return RedirectToAction("Index", new { corridaId = resultadoInclusao.CorridaId });
+                return RedirectToAction("Index", new { corridaId = resultadoDados.CorridaId });
             }
 
             //
-            var resultados = this.ResultadosService.ObterListaResultados(resultadoInclusao.CorridaId);
-            var edicao = new ResultadoCorridaEdicao(resultadoInclusao, resultados);
+            var resultados = this.ResultadosService.ObterListaResultados(resultadoDados.CorridaId);
+            var edicao = new ResultadoListaDados(resultadoDados, resultados);
 
-            SetarDadosViewData(resultadoInclusao.CorridaId);
+            SetarDadosViewData(resultadoDados.CorridaId);
 
             return View(nameof(Index), edicao);
         }
