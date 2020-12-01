@@ -1,5 +1,4 @@
 ﻿using Formula1.Data.Models;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 

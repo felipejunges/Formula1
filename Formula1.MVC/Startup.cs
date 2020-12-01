@@ -1,12 +1,16 @@
 ﻿using Formula1.Domain.Services;
 using Formula1.Infra.Database.SqlServer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 
 namespace Formula1.MVC
 {
@@ -33,7 +37,21 @@ namespace Formula1.MVC
                     .AddScoped<TabelaPilotosService>()
                     .AddScoped<TabelaEquipesService>()
                     .AddScoped<GraficoCampeonatoPilotosService>()
-                    .AddScoped<GraficoCampeonatoEquipesService>();
+                    .AddScoped<GraficoCampeonatoEquipesService>()
+                    .AddScoped<UsuarioService>();
+
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/Login";
+                    options.LogoutPath = "/Login/Logout";
+                });
+
+            services.AddDataProtection()
+                .SetApplicationName("Formula 1")
+                .PersistKeysToFileSystem(new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"\Etc\Keys"))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -58,6 +76,9 @@ namespace Formula1.MVC
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

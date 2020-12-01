@@ -1,10 +1,12 @@
 ﻿using Formula1.Data.Models;
 using Formula1.Domain.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Formula1.MVC.Controllers
 {
+    [Authorize]
     public class ResultadoController : Controller
     {
         private readonly CorridasService CorridasService;

@@ -1,11 +1,8 @@
-﻿using Formula1.Data.Entities;
-using Formula1.Data.Models;
-using Formula1.Domain.Services;
+﻿using Formula1.Domain.Services;
 using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Formula1.MVC.Controllers
