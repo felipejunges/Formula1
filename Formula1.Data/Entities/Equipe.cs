@@ -12,14 +12,6 @@ namespace Formula1.Data.Entities
             Temporadas = new HashSet<EquipeTemporada>();
         }
 
-        public Equipe(int id, string nome, string corRgb)
-            : this()
-        {
-            Id = id;
-            Nome = nome;
-            CorRgb = corRgb;
-        }
-
         public string Nome { get; set; }
 
         public string CorRgb { get; set; }

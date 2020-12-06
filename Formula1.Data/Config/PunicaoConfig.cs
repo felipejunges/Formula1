@@ -16,11 +16,13 @@ namespace Formula1.Data.Config
                 .WithMany(c => c.Punicoes)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(h => h.Corrida)
+                .WithMany(c => c.Punicoes)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(p => p.Descricao)
                 .HasMaxLength(100)
                 .IsRequired();
-
-            builder.HasIndex(i => i.Temporada);
         }
     }
 }
