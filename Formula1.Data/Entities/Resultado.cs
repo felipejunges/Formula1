@@ -2,20 +2,8 @@
 {
     public class Resultado : Entity
     {
-        public Resultado() { }
-
-        public Resultado(int id, Corrida corrida, Piloto piloto, Equipe equipe, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra = false, bool dnf = false)
-            : this()
+        public Resultado()
         {
-            Id = id;
-            Corrida = corrida;
-            Piloto = piloto;
-            Equipe = equipe;
-            PosicaoLargada = posicaoLargada;
-            PosicaoChegada = posicaoChegada;
-            Pontos = pontos;
-            PontoExtra = pontoExtra;
-            DNF = dnf;
         }
 
         public int CorridaId { get; set; }

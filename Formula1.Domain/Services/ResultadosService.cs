@@ -25,37 +25,53 @@ namespace Formula1.Domain.Services
 
         public List<ResultadoTemporada> GetResultadosPilotosTemporada(int temporada)
         {
-            var resultados = Db.Resultados
-                .Where(o => o.Corrida.Temporada == temporada)
-                .Select(o => new ResultadoTemporada()
-                {
-                    PilotoId = o.Piloto.Id,
-                    EquipeId = 0,
-                    CorridaId = o.Corrida.Id,
-                    Pontos = o.Pontos,
-                    PontoExtra = o.PontoExtra,
-                    PosicaoChegada = o.PosicaoChegada,
-                    DNF = o.DNF
-                }).ToList();
+            var resultados = (from r in Db.Resultados
+                              join c in Db.Corridas on r.CorridaId equals c.Id
+                              where
+                                  c.Temporada == temporada
+                              select new ResultadoTemporada()
+                              {
+                                  PilotoId = r.PilotoId,
+                                  EquipeId = 0,
+                                  CorridaId = r.CorridaId,
+                                  Pontos = r.Pontos,
+                                  PontoExtra = r.PontoExtra,
+                                  PosicaoChegada = r.PosicaoChegada,
+                                  DNF = r.DNF
+                              }).ToList();
+
+            var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
+
+            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.PilotoId == r.PilotoId).Sum(s => s.Pontos));
 
             return resultados;
         }
 
         public List<ResultadoTemporada> GetResultadosEquipeTemporada(int temporada)
         {
-            var resultados = Db.Resultados
-                .Where(o => o.Corrida.Temporada == temporada)
-                .GroupBy(o => new { EquipeId = o.Equipe.Id, CorridaId = o.Corrida.Id })
-                .Select(o => new ResultadoTemporada()
-                {
-                    PilotoId = 0,
-                    EquipeId = o.Key.EquipeId,
-                    CorridaId = o.Key.CorridaId,
-                    Pontos = o.Sum(s => s.Pontos),
-                    PontoExtra = o.Max(m => m.PontoExtra ? 1 : 0) > 0,
-                    PosicaoChegada = o.Min(m => m.PosicaoChegada),
-                    DNF = false
-                }).ToList();
+            var resultados = (from r in Db.Resultados
+                              join c in Db.Corridas on r.CorridaId equals c.Id
+                              where
+                                  c.Temporada == temporada
+                              group new { r } by new
+                              {
+                                  r.EquipeId,
+                                  r.CorridaId
+                              } into g
+                              select new ResultadoTemporada()
+                              {
+                                  PilotoId = 0,
+                                  EquipeId = g.Key.EquipeId,
+                                  CorridaId = g.Key.CorridaId,
+                                  Pontos = g.Sum(s => s.r.Pontos),
+                                  PontoExtra = g.Max(m => m.r.PontoExtra ? 1 : 0) > 0,
+                                  PosicaoChegada = g.Min(m => m.r.PosicaoChegada),
+                                  DNF = false
+                              }).ToList();
+
+            var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
+
+            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
 
             return resultados;
         }

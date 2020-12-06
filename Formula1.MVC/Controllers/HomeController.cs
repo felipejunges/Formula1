@@ -1,5 +1,4 @@
 ﻿using Formula1.Domain.Services;
-using Formula1.Infra.Database.SqlServer;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,7 +17,7 @@ namespace Formula1.MVC.Controllers
         private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
         private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
 
-        public HomeController(F1Db db, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
+        public HomeController(TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;

@@ -3,14 +3,16 @@ using System;
 using Formula1.Infra.Database.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Formula1.Infra.Migrations
 {
     [DbContext(typeof(F1Db))]
-    partial class F1DbModelSnapshot : ModelSnapshot
+    [Migration("20201206000833_Remove-Tabela-Punicao")]
+    partial class RemoveTabelaPunicao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,40 +162,6 @@ namespace Formula1.Infra.Migrations
                     b.ToTable("PilotosTemporada");
                 });
 
-            modelBuilder.Entity("Formula1.Data.Entities.Punicao", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CorridaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(100);
-
-                    b.Property<int?>("EquipeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("PilotoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Pontos")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CorridaId");
-
-                    b.HasIndex("EquipeId");
-
-                    b.HasIndex("PilotoId");
-
-                    b.ToTable("Punicoes");
-                });
-
             modelBuilder.Entity("Formula1.Data.Entities.Resultado", b =>
                 {
                     b.Property<int>("Id")
@@ -280,25 +248,6 @@ namespace Formula1.Infra.Migrations
                     b.HasOne("Formula1.Data.Entities.Piloto", "Piloto")
                         .WithMany("Temporadas")
                         .HasForeignKey("PilotoId");
-                });
-
-            modelBuilder.Entity("Formula1.Data.Entities.Punicao", b =>
-                {
-                    b.HasOne("Formula1.Data.Entities.Corrida", "Corrida")
-                        .WithMany("Punicoes")
-                        .HasForeignKey("CorridaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Formula1.Data.Entities.Equipe", "Equipe")
-                        .WithMany("Punicoes")
-                        .HasForeignKey("EquipeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Formula1.Data.Entities.Piloto", "Piloto")
-                        .WithMany("Punicoes")
-                        .HasForeignKey("PilotoId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Formula1.Data.Entities.Resultado", b =>

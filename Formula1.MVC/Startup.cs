@@ -32,7 +32,6 @@ namespace Formula1.MVC
                     .AddScoped<EquipeTemporadaService>()
                     .AddScoped<PilotosService>()
                     .AddScoped<PilotoTemporadaService>()
-                    .AddScoped<PunicaoService>()
                     .AddScoped<ResultadosService>()
                     .AddScoped<TabelaPilotosService>()
                     .AddScoped<TabelaEquipesService>()
