@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Formula1.Data.Models.Admin
+namespace Formula1.Data.Models.Admin.Resultados
 {
     public class ResultadoListaDados
     {

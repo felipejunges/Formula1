@@ -1,0 +1,63 @@
+﻿@model Formula1.Data.Models.Admin.Pilotos.PilotoListaDados
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Pilotos";
+    ViewData["SubTitle"] = "Sem temporada!";
+}
+
+<h3>@ViewData["Title"]</h3>
+<h4>@ViewData["SubTitle"]</h4>
+<hr />
+
+@await Html.PartialAsync("Add", Model.Dados)
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilotos[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilotos[0].NomeGuerra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilotos[0].Sigla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilotos[0].NumeroCarro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilotos[0].PaisOrigem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pilotos)
+        {
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeGuerra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroCarro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaisOrigem)
+                </td>
+                <td class="text-right">
+                    <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

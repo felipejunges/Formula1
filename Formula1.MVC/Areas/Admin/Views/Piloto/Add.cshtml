@@ -1,0 +1,61 @@
+﻿@model Formula1.Data.Models.Admin.Pilotos.PilotoDados
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Save">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group row">
+                <label asp-for="Nome" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="NomeGuerra" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="NomeGuerra" class="form-control" />
+                    <span asp-validation-for="NomeGuerra" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Sigla" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="Sigla" class="form-control" />
+                    <span asp-validation-for="Sigla" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="NumeroCarro" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="NumeroCarro" class="form-control" />
+                    <span asp-validation-for="NumeroCarro" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="PaisOrigem" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="PaisOrigem" class="form-control" />
+                    <span asp-validation-for="PaisOrigem" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="@(Model.Id == 0 ? "Incluir" : "Editar")" class="btn btn-primary" /> ou <a asp-action="Index">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

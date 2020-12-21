@@ -1,4 +1,4 @@
-﻿using Formula1.Data.Models.Admin;
+﻿using Formula1.Data.Models.Admin.Resultados;
 using Formula1.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

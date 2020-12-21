@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Formula1.Data.Models.Admin
+namespace Formula1.Data.Models.Admin.Resultados
 {
     public class ResultadoLista
     {

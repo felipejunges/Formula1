@@ -1,4 +1,4 @@
-﻿@model Formula1.Data.Models.Admin.ResultadoListaDados
+﻿@model Formula1.Data.Models.Admin.Resultados.ResultadoListaDados
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,7 +43,7 @@
     <tbody>
         @foreach (var item in Model.Resultados)
         {
-            <tr style="@(item.Grifar ? "color: red;" : string.Empty)">
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")" style="@(item.Grifar ? "color: red;" : string.Empty)">
                 <td>
                     @Html.DisplayFor(modelItem => item.Piloto)
                 </td>
@@ -67,7 +67,7 @@
                 </td>
                 <td class="text-right">
                     <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados.CorridaId">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
                 </td>
             </tr>
         }

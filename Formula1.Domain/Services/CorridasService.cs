@@ -1,8 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
-using Formula1.Data.Models.Admin;
+using Formula1.Data.Models.Admin.Corridas;
 using Formula1.Infra.Database.SqlServer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

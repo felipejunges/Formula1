@@ -1,7 +1,7 @@
-﻿using Formula1.Data.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Formula1.Data.Entities;
 
-namespace Formula1.Data.Models.Admin
+namespace Formula1.Data.Models.Admin.Resultados
 {
     public class ResultadoDados
     {
