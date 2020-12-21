@@ -5,8 +5,16 @@
         <form asp-action="Save">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Inclusao" />
             <input type="hidden" asp-for="Temporada" />
+
+            <div class="form-group row">
+                <label asp-for="Id" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label asp-for="NomeGrandePremio" class="col-md-3 text-md-right control-label"></label>

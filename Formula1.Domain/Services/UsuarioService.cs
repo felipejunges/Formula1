@@ -1,6 +1,6 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Domain.Extensions;
-using Formula1.Infra.Database.SqlServer;
+using Formula1.Infra.Database;
 using System.Linq;
 
 namespace Formula1.Domain.Services

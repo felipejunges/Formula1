@@ -24,8 +24,6 @@ namespace Formula1.MVC.Controllers
             return View();
         }
 
-        
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(LoginViewModel model, string returnUrl)

@@ -1,7 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Corridas;
-using Formula1.Infra.Database.SqlServer;
+using Formula1.Infra.Database;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,7 +52,7 @@ namespace Formula1.Domain.Services
         {
             var corrida = new Corrida()
             {
-                Id = 0,
+                Id = corridaDados.Id,
                 Temporada = corridaDados.Temporada,
                 NomeGrandePremio = corridaDados.NomeGrandePremio,
                 Circuito = corridaDados.Circuito,

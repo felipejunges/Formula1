@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Formula1.Infra.Migrations
 {
     [DbContext(typeof(F1Db))]
-    [Migration("20201206001018_Create-Table-Punicao")]
-    partial class CreateTablePunicao
+    [Migration("20201221170337_Corrida-Campo-Id-Livre")]
+    partial class CorridaCampoIdLivre
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,6 @@ namespace Formula1.Infra.Migrations
             modelBuilder.Entity("Formula1.Data.Entities.Corrida", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Circuito")
@@ -274,14 +273,16 @@ namespace Formula1.Infra.Migrations
                 {
                     b.HasOne("Formula1.Data.Entities.Equipe", "Equipe")
                         .WithMany("Temporadas")
-                        .HasForeignKey("EquipeId");
+                        .HasForeignKey("EquipeId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Formula1.Data.Entities.PilotoTemporada", b =>
                 {
                     b.HasOne("Formula1.Data.Entities.Piloto", "Piloto")
                         .WithMany("Temporadas")
-                        .HasForeignKey("PilotoId");
+                        .HasForeignKey("PilotoId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Formula1.Data.Entities.Punicao", b =>

@@ -8,6 +8,9 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Punicao> builder)
         {
+            builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+
             builder.HasOne(h => h.Equipe)
                 .WithMany(c => c.Punicoes)
                 .OnDelete(DeleteBehavior.Restrict);

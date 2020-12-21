@@ -1,7 +1,7 @@
 ﻿using Formula1.Data.Entities;
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Pilotos;
-using Formula1.Infra.Database.SqlServer;
+using Formula1.Infra.Database;
 using System.Collections.Generic;
 using System.Linq;
 

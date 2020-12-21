@@ -1,5 +1,5 @@
 ﻿using Formula1.Domain.Services;
-using Formula1.Infra.Database.SqlServer;
+using Formula1.Infra.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;

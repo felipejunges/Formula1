@@ -8,6 +8,9 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Resultado> builder)
         {
+            builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+
             builder.HasOne(h => h.Corrida)
                 .WithMany(c => c.Resultados)
                 .OnDelete(DeleteBehavior.Restrict);

@@ -8,7 +8,8 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Piloto> builder)
         {
-            
+            builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedOnAdd();
         }
     }
 }

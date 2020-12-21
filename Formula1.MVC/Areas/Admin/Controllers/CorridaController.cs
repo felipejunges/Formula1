@@ -20,7 +20,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var dados = new CorridaDados() { Id = 0, Temporada = TEMPORADA };
+            var dados = new CorridaDados() { Id = 0, Temporada = TEMPORADA, Inclusao = true };
             var corridasLista = _corridasService.GetCorridasLista(TEMPORADA);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
@@ -51,7 +51,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (corridaDados.Id == 0)
+                if (corridaDados.Inclusao)
                     _corridasService.Incluir(corridaDados);
                 else
                     _corridasService.Alterar(corridaDados);

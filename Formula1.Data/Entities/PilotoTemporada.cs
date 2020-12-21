@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Formula1.Data.Entities
+﻿namespace Formula1.Data.Entities
 {
     public class PilotoTemporada : Entity
     {

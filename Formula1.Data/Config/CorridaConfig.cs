@@ -8,6 +8,9 @@ namespace Formula1.Data.Config
     {
         public void Configure(EntityTypeBuilder<Corrida> builder)
         {
+            builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedNever();
+
             builder.HasIndex(i => i.Temporada);
         }
     }

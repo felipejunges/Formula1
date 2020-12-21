@@ -6,6 +6,9 @@ namespace Formula1.Data.Models.Admin.Corridas
 {
     public class CorridaDados
     {
+        public bool Inclusao { get; set; }
+
+        [Range(1, double.MaxValue)]
         public int Id { get; set; }
 
         public int Temporada { get; set; }
@@ -25,11 +28,12 @@ namespace Formula1.Data.Models.Admin.Corridas
 
         public CorridaDados()
         {
-
+            
         }
 
         public CorridaDados(Corrida corrida)
         {
+            Inclusao = false;
             Id = corrida.Id;
             Temporada = corrida.Temporada;
             NomeGrandePremio = corrida.NomeGrandePremio;
