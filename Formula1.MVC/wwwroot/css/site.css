@@ -154,3 +154,9 @@ html {
 }
 
 /* END LOGIN */
+
+.quadro-cor-equipe {
+    width: 80px;
+    height: 20px;
+    display: inline-flex;
+}

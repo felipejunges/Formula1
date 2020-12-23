@@ -1,0 +1,44 @@
+﻿@model Formula1.Data.Models.Admin.Equipes.EquipeListaDados
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Equipes";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@await Html.PartialAsync("Add", Model.Dados)
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipes[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipes[0].CorRgb)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Equipes)
+        {
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorRgb)
+                    <div class="quadro-cor-equipe" style="background-color: @(item.CorRgb)"></div>
+                </td>
+                <td class="text-right">
+                    <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

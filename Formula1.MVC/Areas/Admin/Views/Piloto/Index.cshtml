@@ -4,11 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ViewData["Title"] = "Pilotos";
-    ViewData["SubTitle"] = "Sem temporada!";
 }
 
 <h3>@ViewData["Title"]</h3>
-<h4>@ViewData["SubTitle"]</h4>
 <hr />
 
 @await Html.PartialAsync("Add", Model.Dados)
