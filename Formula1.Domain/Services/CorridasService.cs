@@ -18,9 +18,7 @@ namespace Formula1.Domain.Services
 
         public Corrida ObterPeloId(int id)
         {
-            var corrida = Db.Corridas.Find(id);
-
-            return corrida;
+            return Db.Corridas.Find(id);
         }
 
         public List<CorridaTemporada> GetCorridasTabela(int temporada)
@@ -52,7 +50,7 @@ namespace Formula1.Domain.Services
         {
             var corrida = new Corrida()
             {
-                Id = corridaDados.Id,
+                Id = corridaDados.Id.Value,
                 Temporada = corridaDados.Temporada,
                 NomeGrandePremio = corridaDados.NomeGrandePremio,
                 Circuito = corridaDados.Circuito,
@@ -65,7 +63,7 @@ namespace Formula1.Domain.Services
 
         public void Alterar(CorridaDados corridaDados)
         {
-            var corrida = ObterPeloId(corridaDados.Id);
+            var corrida = ObterPeloId(corridaDados.Id.Value);
 
             corrida.Temporada = corridaDados.Temporada;
             corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;

@@ -1,0 +1,43 @@
+﻿@model Formula1.Data.Models.Admin.Contratos.ContratoListaDados
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Contratos";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@await Html.PartialAsync("Add", Model.Dados)
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].Piloto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contratos[0].Equipe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contratos)
+        {
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Piloto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Equipe)
+                </td>
+                <td class="text-right">
+                    <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

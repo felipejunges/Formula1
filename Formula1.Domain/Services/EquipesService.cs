@@ -2,7 +2,6 @@
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Equipes;
 using Formula1.Infra.Database;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,9 +25,18 @@ namespace Formula1.Domain.Services
 
         public List<EquipeLista> ObterEquipesLista()
         {
-            var pilotos = Db.Equipes.OrderBy(o => o.Nome).Select(o => new EquipeLista(o)).ToList();
+            var equipes = Db.Equipes.OrderBy(o => o.Nome).Select(o => new EquipeLista(o)).ToList();
 
-            return pilotos;
+            return equipes;
+        }
+
+        public List<Equipe> ObterEquipesAtivas()
+        {
+            // TODO: filtrar equipes ativas
+
+            var equipes = Db.Equipes.OrderBy(o => o.Nome).ToList();
+
+            return equipes;
         }
 
         public List<Equipe> ObterEquipesContrato(int temporada)

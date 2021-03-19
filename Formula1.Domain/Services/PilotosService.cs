@@ -30,6 +30,15 @@ namespace Formula1.Domain.Services
             return pilotos;
         }
 
+        public List<Piloto> ObterPilotosAtivos()
+        {
+            // TODO: filtrar pilotos ativos
+
+            var pilotos = Db.Pilotos.OrderBy(o => o.NomeGuerra).ToList();
+
+            return pilotos;
+        }
+
         public List<Piloto> ObterPilotosContrato(int temporada)
         {
             var pilotos = Db.Contratos.Where(o => o.Temporada == temporada).Select(o => o.Piloto).ToList();

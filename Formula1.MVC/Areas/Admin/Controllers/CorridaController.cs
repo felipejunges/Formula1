@@ -9,7 +9,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class CorridaController : Controller
     {
-        private const int TEMPORADA = 2020; // TODO: transformar em uma config vinda do banco
+        private const int TEMPORADA = 2021; // TODO: transformar em uma config vinda do banco
 
         private readonly CorridasService _corridasService;
 

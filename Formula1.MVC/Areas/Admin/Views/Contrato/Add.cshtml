@@ -1,0 +1,44 @@
+﻿@model Formula1.Data.Models.Admin.Contratos.ContratoDados
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Save">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Temporada" />
+
+            <div class="form-group row">
+                <label asp-for="PilotoId" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <select asp-for="PilotoId" class="form-control" asp-items="@((SelectList)ViewData["PilotosLista"])">
+                        <option value="">Selecione</option>
+                    </select>
+
+                    <span asp-validation-for="PilotoId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="EquipeId" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <select asp-for="EquipeId" class="form-control" asp-items="@((SelectList)ViewData["EquipesLista"])">
+                        <option value="">Selecione</option>
+                    </select>
+
+                    <span asp-validation-for="EquipeId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="@(Model.Id == 0 ? "Incluir" : "Editar")" class="btn btn-primary" /> ou <a asp-action="Index">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

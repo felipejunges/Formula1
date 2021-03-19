@@ -27,7 +27,8 @@ namespace Formula1.MVC
         {
             services.AddDbContext<F1Db>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
 
-            services.AddScoped<CorridasService>()
+            services.AddScoped<ContratosService>()
+                    .AddScoped<CorridasService>()
                     .AddScoped<EquipesService>()
                     .AddScoped<EquipeTemporadaService>()
                     .AddScoped<PilotosService>()

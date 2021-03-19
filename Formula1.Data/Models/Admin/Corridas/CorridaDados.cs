@@ -8,8 +8,9 @@ namespace Formula1.Data.Models.Admin.Corridas
     {
         public bool Inclusao { get; set; }
 
+        [Required]
         [Range(1, double.MaxValue)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public int Temporada { get; set; }
 
