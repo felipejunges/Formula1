@@ -22,7 +22,7 @@ namespace Formula1.Domain.Services
 
         public List<ContratoLista> ObterContratosLista(int temporada)
         {
-            var contratos = Db.Contratos.Where(o => o.Temporada == temporada).OrderBy(o => o.Id).Select(o => new ContratoLista()
+            var contratos = Db.Contratos.Where(o => o.Temporada == temporada).OrderBy(o => o.Equipe.Nome).ThenBy(o => o.Piloto.Nome).Select(o => new ContratoLista()
             {
                 Id = o.Id,
                 Piloto = o.Piloto.Nome,
