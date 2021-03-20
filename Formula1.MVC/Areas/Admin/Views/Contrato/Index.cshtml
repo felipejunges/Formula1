@@ -4,9 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ViewData["Title"] = "Contratos";
+    ViewData["SubTitle"] = "Temporada " + ViewData["Temporada"];
 }
 
 <h3>@ViewData["Title"]</h3>
+<h5>@ViewData["SubTitle"]</h5>
 <hr />
 
 @await Html.PartialAsync("Add", Model.Dados)

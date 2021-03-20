@@ -21,8 +21,8 @@ namespace Formula1.Data.Models.Admin.Contratos
         {
             Id = contato.Id;
             Temporada = contato.Temporada;
-            PilotoId = contato.Piloto.Id;
-            EquipeId = contato.Equipe.Id;
+            PilotoId = contato.PilotoId;
+            EquipeId = contato.EquipeId;
         }
     }
 }

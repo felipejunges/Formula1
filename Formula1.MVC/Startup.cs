@@ -1,4 +1,5 @@
 ﻿using Formula1.Domain.Services;
+using Formula1.Domain.Settings;
 using Formula1.Infra.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,11 @@ namespace Formula1.MVC
                     .AddScoped<GraficoCampeonatoPilotosService>()
                     .AddScoped<GraficoCampeonatoEquipesService>()
                     .AddScoped<UsuarioService>();
+
+            var parametrosSettings = Configuration.GetSection("Parametros").Get<ParametrosSettings>();
+
+            services
+                .AddSingleton(parametrosSettings);
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

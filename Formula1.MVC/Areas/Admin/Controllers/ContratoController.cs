@@ -1,5 +1,6 @@
 using Formula1.Data.Models.Admin.Contratos;
 using Formula1.Domain.Services;
+using Formula1.Domain.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,14 +11,15 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class ContratoController : Controller
     {
-        private const int TEMPORADA = 2021; // TODO: transformar em uma config vinda do banco
+        private readonly ParametrosSettings _settings;
 
         private readonly ContratosService _contratosService;
         private readonly PilotosService _pilotosService;
         private readonly EquipesService _equipesService;
 
-        public ContratoController(ContratosService contratosService, PilotosService pilotosService, EquipesService equipesService)
+        public ContratoController(ParametrosSettings settings, ContratosService contratosService, PilotosService pilotosService, EquipesService equipesService)
         {
+            _settings = settings;
             _contratosService = contratosService;
             _pilotosService = pilotosService;
             _equipesService = equipesService;
@@ -25,8 +27,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var dados = new ContratoDados() { Id = 0, Temporada = TEMPORADA };
-            var contratosLista = _contratosService.ObterContratosLista(TEMPORADA);
+            var dados = new ContratoDados() { Id = 0, Temporada = _settings.TemporadaAtiva };
+            var contratosLista = _contratosService.ObterContratosLista(_settings.TemporadaAtiva);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
@@ -44,7 +46,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
                 return NotFound();
 
             var dados = new ContratoDados(contrato);
-            var contratosLista = _contratosService.ObterContratosLista(TEMPORADA);
+            var contratosLista = _contratosService.ObterContratosLista(_settings.TemporadaAtiva);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
@@ -70,7 +72,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             //
             SetarDadosViewData();
 
-            var contratosLista = _contratosService.ObterContratosLista(TEMPORADA);
+            var contratosLista = _contratosService.ObterContratosLista(_settings.TemporadaAtiva);
 
             var edicao = new ContratoListaDados(contratoDados, contratosLista);
 
@@ -91,7 +93,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         private void SetarDadosViewData()
         {
-            ViewData["Temporada"] = TEMPORADA;
+            ViewData["Temporada"] = _settings.TemporadaAtiva;
 
             ViewData["PilotosLista"] = new SelectList(_pilotosService.ObterPilotosAtivos(), "Id", "NomeGuerra", null);
             ViewData["EquipesLista"] = new SelectList(_equipesService.ObterEquipesAtivas(), "Id", "Nome", null);

@@ -1,5 +1,6 @@
 ﻿using Formula1.Data.Models.Admin.Corridas;
 using Formula1.Domain.Services;
+using Formula1.Domain.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,23 +10,24 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class CorridaController : Controller
     {
-        private const int TEMPORADA = 2021; // TODO: transformar em uma config vinda do banco
+        private readonly ParametrosSettings _settings;
 
         private readonly CorridasService _corridasService;
 
-        public CorridaController(CorridasService corridasService)
+        public CorridaController(ParametrosSettings settings, CorridasService corridasService)
         {
+            _settings = settings;
             _corridasService = corridasService;
         }
 
         public IActionResult Index()
         {
-            var dados = new CorridaDados() { Id = 0, Temporada = TEMPORADA, Inclusao = true };
-            var corridasLista = _corridasService.GetCorridasLista(TEMPORADA);
+            var dados = new CorridaDados() { Id = 0, Temporada = _settings.TemporadaAtiva, Inclusao = true };
+            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
 
-            ViewData["Temporada"] = TEMPORADA;
+            ViewData["Temporada"] = _settings.TemporadaAtiva;
 
             return View(edicao);
         }
@@ -38,7 +40,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
                 return NotFound();
 
             var dados = new CorridaDados(corrida);
-            var corridasLista = _corridasService.GetCorridasLista(TEMPORADA);
+            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
 
@@ -60,7 +62,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             }
 
             //
-            var corridasLista = _corridasService.GetCorridasLista(TEMPORADA);
+            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
 
             var edicao = new CorridaListaDados(corridaDados, corridasLista);
 
