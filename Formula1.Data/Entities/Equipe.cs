@@ -16,6 +16,8 @@ namespace Formula1.Data.Entities
 
         public string CorRgb { get; set; }
 
+        public bool Ativo { get; set; }
+
         public virtual ICollection<Contrato> Contratos { get; set; }
         public virtual ICollection<Punicao> Punicoes { get; set; }
         public virtual ICollection<Resultado> Resultados { get; set; }

@@ -20,6 +20,8 @@ namespace Formula1.Data.Models.Admin.Pilotos
         [Display(Name = "País origem")]
         public string PaisOrigem { get; set; }
 
+        public bool Ativo { get; set; }
+
         public PilotoLista()
         {
 
@@ -33,6 +35,7 @@ namespace Formula1.Data.Models.Admin.Pilotos
             Sigla = piloto.Sigla;
             NumeroCarro = piloto.NumeroCarro;
             PaisOrigem = piloto.PaisOrigem;
+            Ativo = piloto.Ativo;
         }
     }
 }

@@ -32,9 +32,7 @@ namespace Formula1.Domain.Services
 
         public List<Equipe> ObterEquipesAtivas()
         {
-            // TODO: filtrar equipes ativas
-
-            var equipes = Db.Equipes.OrderBy(o => o.Nome).ToList();
+            var equipes = Db.Equipes.Where(o => o.Ativo).OrderBy(o => o.Nome).ToList();
 
             return equipes;
         }
@@ -69,7 +67,8 @@ namespace Formula1.Domain.Services
             {
                 Id = 0,
                 Nome = equipeDados.Nome,
-                CorRgb = equipeDados.CorRgb
+                CorRgb = equipeDados.CorRgb,
+                Ativo = equipeDados.Ativo
             };
 
             Db.Equipes.Add(equipe);
@@ -82,6 +81,7 @@ namespace Formula1.Domain.Services
 
             equipe.Nome = equipeDados.Nome;
             equipe.CorRgb = equipeDados.CorRgb;
+            equipe.Ativo = equipeDados.Ativo;
 
             Db.Equipes.Update(equipe);
             Db.SaveChanges();

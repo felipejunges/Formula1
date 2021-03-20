@@ -32,9 +32,7 @@ namespace Formula1.Domain.Services
 
         public List<Piloto> ObterPilotosAtivos()
         {
-            // TODO: filtrar pilotos ativos
-
-            var pilotos = Db.Pilotos.OrderBy(o => o.NomeGuerra).ToList();
+            var pilotos = Db.Pilotos.Where(o => o.Ativo).OrderBy(o => o.NomeGuerra).ToList();
 
             return pilotos;
         }
@@ -72,7 +70,8 @@ namespace Formula1.Domain.Services
                 NomeGuerra = pilotoDados.NomeGuerra,
                 Sigla = pilotoDados.Sigla,
                 NumeroCarro = pilotoDados.NumeroCarro.Value,
-                PaisOrigem = pilotoDados.PaisOrigem
+                PaisOrigem = pilotoDados.PaisOrigem,
+                Ativo = pilotoDados.Ativo
             };
 
             Db.Pilotos.Add(piloto);
@@ -88,6 +87,7 @@ namespace Formula1.Domain.Services
             piloto.Sigla = pilotoDados.Sigla;
             piloto.NumeroCarro = pilotoDados.NumeroCarro.Value;
             piloto.PaisOrigem = pilotoDados.PaisOrigem;
+            piloto.Ativo = pilotoDados.Ativo;
 
             Db.Pilotos.Update(piloto);
             Db.SaveChanges();

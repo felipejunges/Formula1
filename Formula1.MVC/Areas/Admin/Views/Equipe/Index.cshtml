@@ -20,6 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Equipes[0].CorRgb)
             </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Equipes[0].Ativo)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -33,6 +36,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CorRgb)
                     <div class="quadro-cor-equipe" style="background-color: @(item.CorRgb)"></div>
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Ativo)
                 </td>
                 <td class="text-right">
                     <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

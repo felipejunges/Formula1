@@ -12,6 +12,8 @@ namespace Formula1.Data.Models.Admin.Equipes
         [Display(Name = "Cor RGB")]
         public string CorRgb { get; set; }
 
+        public bool Ativo { get; set; }
+
         public EquipeLista()
         {
 
@@ -22,6 +24,7 @@ namespace Formula1.Data.Models.Admin.Equipes
             Id = equipe.Id;
             Nome = equipe.Nome;
             CorRgb = equipe.CorRgb;
+            Ativo = equipe.Ativo;
         }
     }
 }

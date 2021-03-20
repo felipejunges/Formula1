@@ -11,7 +11,7 @@ namespace Formula1.Data.Entities
             Resultados = new HashSet<Resultado>();
             Temporadas = new HashSet<PilotoTemporada>();
         }
-        
+
         public string Nome { get; set; }
 
         public string NomeGuerra { get; set; }
@@ -21,6 +21,8 @@ namespace Formula1.Data.Entities
         public int NumeroCarro { get; set; }
 
         public string PaisOrigem { get; set; }
+
+        public bool Ativo { get; set; }
 
         public virtual ICollection<Contrato> Contratos { get; set; }
         public virtual ICollection<Punicao> Punicoes { get; set; }
