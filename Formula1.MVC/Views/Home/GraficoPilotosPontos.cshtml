@@ -55,6 +55,8 @@
                 scales: {
                     yAxes: [{
                         ticks: {
+                            max: @Model.MaxValue,
+                            stepSize: @Model.Step,
                             beginAtZero: true
                         },
                         display: true,
@@ -73,12 +75,7 @@
                             scaleID: "x-axis-0",
                             value: 1,
                             borderColor: "red",
-                            borderDash: [2, 2],
-                            //label: {
-                            //    content: "TODAY",
-                            //    enabled: true,
-                            //    position: "top"
-                            //}
+                            borderDash: [2, 2]
                         }
                     ]
                 }

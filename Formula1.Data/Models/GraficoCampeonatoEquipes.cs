@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Formula1.Data.Models
 {
@@ -7,6 +9,23 @@ namespace Formula1.Data.Models
         public List<CorridaTemporada> Corridas { get; private set; }
 
         public List<EquipePontosGrafico> Equipes { get; private set; }
+
+        public int Step { get => 10; }
+
+        public int MaxValue
+        {
+            get
+            {
+                int maxPontos = Equipes.Max(p => p.Pontos.Max() ?? 0);
+
+                if (maxPontos == 0)
+                    return maxPontos;
+
+                var divisor = (int)Math.Ceiling((decimal)maxPontos / Step);
+
+                return divisor * Step;
+            }
+        }
 
         public GraficoCampeonatoEquipes(List<CorridaTemporada> corridas, List<EquipePontosGrafico> equipes)
         {
