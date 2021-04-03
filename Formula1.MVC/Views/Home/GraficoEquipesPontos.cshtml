@@ -15,8 +15,7 @@
 
 @section scripts {
 
-    <script src="~/lib/chartjs/Chart.bundle.min.js"></script>
-    <script src="~/lib/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script>
+    <script src="~/lib/chartjs/chart.min.js"></script>
 
     <script type="text/javascript">
         var ctx = document.getElementById('grafico').getContext('2d');
@@ -41,8 +40,10 @@
             },
             options: {
                 responsive: true,
-                legend: {
-                    display: false
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 },
                 elements: {
                     line: {
@@ -53,7 +54,7 @@
                     }
                 },
                 scales: {
-                    yAxes: [{
+                    y: {
                         ticks: {
                             max: @Model.MaxValue,
                             stepSize: @Model.Step,
@@ -64,25 +65,7 @@
 							display: true,
 							labelString: 'Pontos'
 						}
-                    }]
-                },
-
-                annotation: {
-                    annotations: [
-                        {
-                            type: "line",
-                            mode: "vertical",
-                            scaleID: "x-axis-0",
-                            value: 1,
-                            borderColor: "red",
-                            borderDash: [2, 2],
-                            //label: {
-                            //    content: "TODAY",
-                            //    enabled: true,
-                            //    position: "top"
-                            //}
-                        }
-                    ]
+                    }
                 }
             }
         });
