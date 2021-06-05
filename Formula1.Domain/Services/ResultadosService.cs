@@ -81,6 +81,7 @@ namespace Formula1.Domain.Services
             var resultados = Db.Resultados
                 .Where(o => o.Corrida.Id == corridaId)
                 .OrderBy(o => o.PosicaoChegada)
+                .ThenBy(o => o.PosicaoLargada)
                 .Select(o => new ResultadoLista()
                 {
                     Id = o.Id,
@@ -117,6 +118,9 @@ namespace Formula1.Domain.Services
                 ).ToList();
 
             itensPontosInvalidos.ForEach(o => o.Grifar = true);
+
+            //
+            resultados.Where(r => r.PosicaoLargada == 0 || r.PosicaoChegada ==0).ToList().ForEach(r => r.Grifar = true);
 
             //
             var posicoesLargadaRepetidos = resultados.GroupBy(o => o.PosicaoLargada).Where(o => o.Count() > 1).Select(o => o.Key).ToList();
