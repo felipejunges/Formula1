@@ -82,18 +82,19 @@ namespace Formula1.Domain.Services
                 .Where(o => o.Corrida.Id == corridaId)
                 .OrderBy(o => o.PosicaoChegada)
                 .ThenBy(o => o.PosicaoLargada)
-                .Select(o => new ResultadoLista()
-                {
-                    Id = o.Id,
-                    Piloto = o.Piloto.Nome,
-                    Equipe = o.Equipe.Nome,
-                    PosicaoLargada = o.PosicaoLargada,
-                    PosicaoChegada = o.PosicaoChegada,
-                    Pontos = o.Pontos,
-                    PontoExtra = o.PontoExtra,
-                    DNF = o.DNF,
-                    Grifar = false
-                }).ToList();
+                .Select(o => new ResultadoLista(
+                    o.Id,
+                    o.Piloto.Nome,
+                    o.Equipe.Nome,
+                    o.Corrida.CorridaClassificacao,
+                    o.PosicaoLargada,
+                    o.PosicaoChegada,
+                    o.Pontos,
+                    o.PontoExtra,
+                    o.DNF,
+                    false
+                 ))
+                .ToList();
 
             GrifarItensListaInvalidos(resultados);
 
@@ -103,24 +104,10 @@ namespace Formula1.Domain.Services
         private void GrifarItensListaInvalidos(List<ResultadoLista> resultados)
         {
             //
-            var itensPontosInvalidos = resultados.Where(o =>
-                    (o.PosicaoChegada == 1 && o.Pontos != 25 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 2 && o.Pontos != 18 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 3 && o.Pontos != 15 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 4 && o.Pontos != 12 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 5 && o.Pontos != 10 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 6 && o.Pontos != 8 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 7 && o.Pontos != 6 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 8 && o.Pontos != 4 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 9 && o.Pontos != 2 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada == 10 && o.Pontos != 1 + (o.PontoExtra ? 1 : 0))
-                    || (o.PosicaoChegada > 10 && o.Pontos > 0)
-                ).ToList();
-
-            itensPontosInvalidos.ForEach(o => o.Grifar = true);
+            resultados.Where(o => o.Pontos != o.PontosCalculados).ToList().ForEach(o => o.Grifar = true);
 
             //
-            resultados.Where(r => r.PosicaoLargada == 0 || r.PosicaoChegada ==0).ToList().ForEach(r => r.Grifar = true);
+            resultados.Where(r => r.PosicaoLargada == 0 || r.PosicaoChegada == 0).ToList().ForEach(r => r.Grifar = true);
 
             //
             var posicoesLargadaRepetidos = resultados.GroupBy(o => o.PosicaoLargada).Where(o => o.Count() > 1).Select(o => o.Key).ToList();

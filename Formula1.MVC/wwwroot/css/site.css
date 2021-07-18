@@ -75,6 +75,17 @@ html {
     color: #999;
 }
 
+.result-ponto-extra {
+    font-weight: bold;
+}
+
+.result-normal {
+}
+
+.result-dnf {
+    font-style: italic;
+}
+
 
 /* BEGIN LOGIN */
 
