@@ -54,7 +54,8 @@ namespace Formula1.Domain.Services
                 Temporada = corridaDados.Temporada,
                 NomeGrandePremio = corridaDados.NomeGrandePremio,
                 Circuito = corridaDados.Circuito,
-                DataHoraBrasil = corridaDados.DataHoraBrasil.Value
+                DataHoraBrasil = corridaDados.DataHoraBrasil.Value,
+                CorridaClassificacao = corridaDados.CorridaClassificacao
             };
 
             Db.Corridas.Add(corrida);
@@ -69,6 +70,7 @@ namespace Formula1.Domain.Services
             corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;
             corrida.Circuito = corridaDados.Circuito;
             corrida.DataHoraBrasil = corridaDados.DataHoraBrasil.Value;
+            corrida.CorridaClassificacao = corridaDados.CorridaClassificacao;
 
             Db.Corridas.Update(corrida);
             Db.SaveChanges();

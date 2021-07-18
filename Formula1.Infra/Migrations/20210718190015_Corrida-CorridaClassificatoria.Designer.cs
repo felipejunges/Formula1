@@ -3,14 +3,16 @@ using System;
 using Formula1.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Formula1.Infra.Migrations
 {
     [DbContext(typeof(F1Db))]
-    partial class F1DbModelSnapshot : ModelSnapshot
+    [Migration("20210718190015_Corrida-CorridaClassificatoria")]
+    partial class CorridaCorridaClassificatoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

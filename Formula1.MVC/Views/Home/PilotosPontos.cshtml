@@ -67,7 +67,7 @@
 
                             if (resultado != null)
                             {
-                                <small style="font-weight: @(resultado.PontoExtra ? " bold" : "normal" )">@(resultado.DNF ? "-" : resultado.Pontos.ToString())</small>
+                                <small class="@(resultado.DNF ? "result-dnf" : "") @(resultado.PontoExtra ? "result-ponto-extra" : "")">@resultado.Pontos.ToString()</small>
                             }
                         }
                     </td>

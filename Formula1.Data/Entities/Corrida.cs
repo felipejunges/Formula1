@@ -19,6 +19,8 @@ namespace Formula1.Data.Entities
 
         public DateTime DataHoraBrasil { get; set; }
 
+        public bool CorridaClassificacao { get; set; }
+
         public virtual ICollection<Punicao> Punicoes { get; set; }
 
         public virtual ICollection<Resultado> Resultados { get; set; }
