@@ -7,6 +7,9 @@ namespace Formula1.Data.Models.Admin.Corridas
     {
         public int Id { get; set; }
 
+        [Display(Name = "Corrida")]
+        public int NumeroCorrida { get; set; }
+
         [Display(Name = "Grande prêmio")]
         public string NomeGrandePremio { get; set; }
 

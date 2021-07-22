@@ -22,7 +22,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var dados = new CorridaDados() { Id = 0, Temporada = _settings.TemporadaAtiva, Inclusao = true };
+            var dados = new CorridaDados() { Id = 0, Temporada = _settings.TemporadaAtiva };
             var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
@@ -45,6 +45,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             var edicao = new CorridaListaDados(dados, corridasLista);
 
             //
+            ViewData["Temporada"] = _settings.TemporadaAtiva;
+
             return View(nameof(Index), edicao);
         }
 
@@ -53,7 +55,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (corridaDados.Inclusao)
+                if (corridaDados.Id == 0)
                     _corridasService.Incluir(corridaDados);
                 else
                     _corridasService.Alterar(corridaDados);
@@ -65,6 +67,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
 
             var edicao = new CorridaListaDados(corridaDados, corridasLista);
+
+            ViewData["Temporada"] = _settings.TemporadaAtiva;
 
             return View(nameof(Index), edicao);
         }

@@ -38,6 +38,7 @@ namespace Formula1.Domain.Services
             var corridas = Db.Corridas.Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaLista()
             {
                 Id = o.Id,
+                NumeroCorrida = o.NumeroCorrida,
                 DataHoraBrasil = o.DataHoraBrasil,
                 NomeGrandePremio = o.NomeGrandePremio,
                 Circuito = o.Circuito
@@ -50,7 +51,8 @@ namespace Formula1.Domain.Services
         {
             var corrida = new Corrida()
             {
-                Id = corridaDados.Id.Value,
+                Id = 0,
+                NumeroCorrida = corridaDados.NumeroCorrida.Value,
                 Temporada = corridaDados.Temporada,
                 NomeGrandePremio = corridaDados.NomeGrandePremio,
                 Circuito = corridaDados.Circuito,
@@ -64,8 +66,9 @@ namespace Formula1.Domain.Services
 
         public void Alterar(CorridaDados corridaDados)
         {
-            var corrida = ObterPeloId(corridaDados.Id.Value);
+            var corrida = ObterPeloId(corridaDados.Id);
 
+            corrida.NumeroCorrida = corridaDados.NumeroCorrida.Value;
             corrida.Temporada = corridaDados.Temporada;
             corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;
             corrida.Circuito = corridaDados.Circuito;
