@@ -13,6 +13,8 @@ namespace Formula1.Data.Entities
 
         public int Temporada { get; set; }
 
+        public int NumeroCorrida { get; set; }
+
         public string NomeGrandePremio { get; set; }
 
         public string Circuito { get; set; }

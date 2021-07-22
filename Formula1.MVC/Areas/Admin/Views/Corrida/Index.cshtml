@@ -17,7 +17,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Corridas[0].Id)
+                @Html.DisplayNameFor(model => model.Corridas[0].NumeroCorrida)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Corridas[0].DataHoraBrasil)
@@ -36,7 +36,7 @@
         {
         <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.NumeroCorrida)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataHoraBrasil)
