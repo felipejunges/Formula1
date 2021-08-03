@@ -37,7 +37,8 @@ namespace Formula1.Domain.Services
                                   Pontos = r.Pontos,
                                   PontoExtra = r.PontoExtra,
                                   PosicaoChegada = r.PosicaoChegada,
-                                  DNF = r.DNF
+                                  DNF = r.DNF,
+                                  DSQ = r.DSQ
                               }).ToList();
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
@@ -66,7 +67,8 @@ namespace Formula1.Domain.Services
                                   Pontos = g.Sum(s => s.r.Pontos),
                                   PontoExtra = g.Max(m => m.r.PontoExtra ? 1 : 0) > 0,
                                   PosicaoChegada = g.Min(m => m.r.PosicaoChegada),
-                                  DNF = false
+                                  DNF = false,
+                                  DSQ = false
                               }).ToList();
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
@@ -92,6 +94,7 @@ namespace Formula1.Domain.Services
                     o.Pontos,
                     o.PontoExtra,
                     o.DNF,
+                    o.DSQ,
                     false
                  ))
                 .ToList();
@@ -143,7 +146,8 @@ namespace Formula1.Domain.Services
                 PosicaoChegada = resultadoDados.PosicaoChegada,
                 Pontos = resultadoDados.Pontos,
                 PontoExtra = resultadoDados.PontoExtra,
-                DNF = resultadoDados.DNF
+                DNF = resultadoDados.DNF,
+                DSQ = resultadoDados.DSQ
             };
 
             Db.Resultados.Add(resultado);
@@ -162,6 +166,7 @@ namespace Formula1.Domain.Services
             resultado.Pontos = resultadoDados.Pontos;
             resultado.PontoExtra = resultadoDados.PontoExtra;
             resultado.DNF = resultadoDados.DNF;
+            resultado.DSQ = resultadoDados.DSQ;
 
             Db.Resultados.Update(resultado);
             Db.SaveChanges();

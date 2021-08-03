@@ -28,6 +28,8 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool DNF { get; set; }
 
+        public bool DSQ { get; set; }
+
         public ResultadoDados()
         {
         }
@@ -43,6 +45,7 @@ namespace Formula1.Data.Models.Admin.Resultados
             Pontos = resultado.Pontos;
             PontoExtra = resultado.PontoExtra;
             DNF = resultado.DNF;
+            DSQ = resultado.DSQ;
         }
     }
 }

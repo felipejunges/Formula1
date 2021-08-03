@@ -27,5 +27,7 @@
         public bool PontoExtra { get; set; }
 
         public bool DNF { get; set; }
+
+        public bool DSQ { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool DNF { get; set; }
 
+        public bool DSQ { get; set; }
+
         public bool Grifar { get; set; }
 
         public int PontosCalculados
@@ -61,7 +63,7 @@ namespace Formula1.Data.Models.Admin.Resultados
         {
         }
 
-        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra, bool dnf, bool grifar)
+        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, int posicaoLargada, int posicaoChegada, int pontos, bool pontoExtra, bool dnf, bool dsq, bool grifar)
         {
             Id = id;
             Piloto = piloto;
@@ -72,6 +74,7 @@ namespace Formula1.Data.Models.Admin.Resultados
             Pontos = pontos;
             PontoExtra = pontoExtra;
             DNF = dnf;
+            DSQ = dsq;
             Grifar = grifar;
         }
     }
