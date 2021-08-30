@@ -89,6 +89,7 @@ namespace Formula1.Domain.Services
                     o.Piloto.Nome,
                     o.Equipe.Nome,
                     o.Corrida.CorridaClassificacao,
+                    o.Corrida.MetadePontos,
                     o.PosicaoLargada,
                     o.PosicaoChegada,
                     o.Pontos,

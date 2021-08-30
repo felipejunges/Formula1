@@ -21,9 +21,9 @@ namespace Formula1.Domain.Services
 
             foreach (var equipe in campeonato.Equipes)
             {
-                var pontos = new int?[campeonato.Corridas.Count];
+                var pontos = new decimal?[campeonato.Corridas.Count];
 
-                int soma = 0;
+                decimal soma = 0;
                 foreach (var corrida in campeonato.Corridas)
                 {
                     if (corrida.Resultados.Count == 0)

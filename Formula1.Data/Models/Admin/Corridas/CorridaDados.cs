@@ -30,6 +30,8 @@ namespace Formula1.Data.Models.Admin.Corridas
         [Display(Name = "Com corrida classificação")]
         public bool CorridaClassificacao { get; set; }
 
+        public bool MetadePontos { get; set; }
+
         public CorridaDados()
         {
         }
@@ -43,6 +45,7 @@ namespace Formula1.Data.Models.Admin.Corridas
             Circuito = corrida.Circuito;
             DataHoraBrasil = corrida.DataHoraBrasil;
             CorridaClassificacao = corrida.CorridaClassificacao;
+            MetadePontos = corrida.MetadePontos;
         }
     }
 }

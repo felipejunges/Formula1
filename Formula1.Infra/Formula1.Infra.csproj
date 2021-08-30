@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201206000117_Punicao-Vinculo-Corrida.cs" />
-    <Compile Remove="Migrations\20201206000117_Punicao-Vinculo-Corrida.Designer.cs" />
+    <Compile Remove="Migrations\20210718190015_Corrida-CorridaClassificatoria.cs" />
+    <Compile Remove="Migrations\20210718190015_Corrida-CorridaClassificatoria.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

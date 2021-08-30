@@ -12,11 +12,11 @@ namespace Formula1.Data.Models
 
         public int Step { get => 10; }
 
-        public int MaxValue
+        public decimal MaxValue
         {
             get
             {
-                int maxPontos = Pilotos.Max(p => p.Pontos.Max() ?? 0);
+                decimal maxPontos = Pilotos.Max(p => p.Pontos.Max() ?? 0);
 
                 if (maxPontos == 0)
                     return maxPontos;

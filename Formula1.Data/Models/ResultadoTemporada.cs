@@ -8,7 +8,7 @@
 
         public int CorridaId { get; set; }
 
-        public int Pontos { get; set; }
+        public decimal Pontos { get; set; }
 
         public bool PontoExtra { get; set; }
 
