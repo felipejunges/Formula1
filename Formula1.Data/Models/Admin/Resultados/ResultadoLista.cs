@@ -20,7 +20,7 @@ namespace Formula1.Data.Models.Admin.Resultados
         [Display(Name = "Pos. chegada")]
         public int PosicaoChegada { get; set; }
 
-        public decimal Pontos { get; set; }
+        public double Pontos { get; set; }
 
         [Display(Name = "Ponto extra")]
         public bool PontoExtra { get; set; }
@@ -31,22 +31,22 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool Grifar { get; set; }
 
-        public decimal PontosCalculados
+        public double PontosCalculados
         {
             get
             {
-                decimal pontosPosicao =
-                    PosicaoChegada == 1 ? 25M
-                    : PosicaoChegada == 2 ? 18M
-                    : PosicaoChegada == 3 ? 15M
-                    : PosicaoChegada == 4 ? 12M
-                    : PosicaoChegada == 5 ? 10M
-                    : PosicaoChegada == 6 ? 8M
-                    : PosicaoChegada == 7 ? 6M
-                    : PosicaoChegada == 8 ? 4M
-                    : PosicaoChegada == 9 ? 2M
-                    : PosicaoChegada == 10 ? 1M
-                    : 0M;
+                double pontosPosicao =
+                    PosicaoChegada == 1 ? 25D
+                    : PosicaoChegada == 2 ? 18D
+                    : PosicaoChegada == 3 ? 15D
+                    : PosicaoChegada == 4 ? 12D
+                    : PosicaoChegada == 5 ? 10D
+                    : PosicaoChegada == 6 ? 8D
+                    : PosicaoChegada == 7 ? 6D
+                    : PosicaoChegada == 8 ? 4D
+                    : PosicaoChegada == 9 ? 2D
+                    : PosicaoChegada == 10 ? 1D
+                    : 0D;
 
                 if (CorridaMetadePontos) pontosPosicao /= 2;
 
@@ -67,7 +67,7 @@ namespace Formula1.Data.Models.Admin.Resultados
         {
         }
 
-        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, decimal pontos, bool pontoExtra, bool dnf, bool dsq, bool grifar)
+        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontos, bool pontoExtra, bool dnf, bool dsq, bool grifar)
         {
             Id = id;
             Piloto = piloto;

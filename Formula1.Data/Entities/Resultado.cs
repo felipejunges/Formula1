@@ -22,7 +22,7 @@
 
         public int PosicaoChegada { get; set; }
 
-        public decimal Pontos { get; set; }
+        public double Pontos { get; set; }
 
         public bool PontoExtra { get; set; }
 

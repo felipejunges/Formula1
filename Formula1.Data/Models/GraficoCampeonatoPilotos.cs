@@ -12,16 +12,16 @@ namespace Formula1.Data.Models
 
         public int Step { get => 10; }
 
-        public decimal MaxValue
+        public double MaxValue
         {
             get
             {
-                decimal maxPontos = Pilotos.Max(p => p.Pontos.Max() ?? 0);
+                double maxPontos = Pilotos.Max(p => p.Pontos.Max() ?? 0);
 
                 if (maxPontos == 0)
                     return maxPontos;
 
-                var divisor = (int)Math.Ceiling((decimal)maxPontos / Step);
+                var divisor = (int)Math.Ceiling((double)maxPontos / Step);
 
                 return divisor * Step;
             }

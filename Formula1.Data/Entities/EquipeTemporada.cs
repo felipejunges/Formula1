@@ -10,7 +10,7 @@
 
         public int Temporada { get; set; }
 
-        public decimal Pontos { get; set; }
+        public double Pontos { get; set; }
 
         public int Posicao { get; set; }
     }
