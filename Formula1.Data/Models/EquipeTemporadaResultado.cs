@@ -10,7 +10,7 @@ namespace Formula1.Data.Models
 
         public string CorRgb { get; set; }
 
-        public int Pontos { get; set; }
+        public double Pontos { get; set; }
 
         public int Posicao { get; set; }
 

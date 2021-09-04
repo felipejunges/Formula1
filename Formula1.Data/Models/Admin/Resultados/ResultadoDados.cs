@@ -21,7 +21,8 @@ namespace Formula1.Data.Models.Admin.Resultados
         [Display(Name = "Pos. chegada")]
         public int PosicaoChegada { get; set; }
 
-        public int Pontos { get; set; }
+        [Required]
+        public double? Pontos { get; set; }
 
         [Display(Name = "Ponto extra")]
         public bool PontoExtra { get; set; }

@@ -23,6 +23,8 @@ namespace Formula1.Data.Entities
 
         public bool CorridaClassificacao { get; set; }
 
+        public bool MetadePontos { get; set; }
+
         public virtual ICollection<Punicao> Punicoes { get; set; }
 
         public virtual ICollection<Resultado> Resultados { get; set; }

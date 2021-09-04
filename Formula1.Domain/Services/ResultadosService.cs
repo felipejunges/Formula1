@@ -54,7 +54,7 @@ namespace Formula1.Domain.Services
                               join c in Db.Corridas on r.CorridaId equals c.Id
                               where
                                   c.Temporada == temporada
-                              group new { r } by new
+                              group r by new
                               {
                                   r.EquipeId,
                                   r.CorridaId
@@ -64,9 +64,9 @@ namespace Formula1.Domain.Services
                                   PilotoId = 0,
                                   EquipeId = g.Key.EquipeId,
                                   CorridaId = g.Key.CorridaId,
-                                  Pontos = g.Sum(s => s.r.Pontos),
-                                  PontoExtra = g.Max(m => m.r.PontoExtra ? 1 : 0) > 0,
-                                  PosicaoChegada = g.Min(m => m.r.PosicaoChegada),
+                                  Pontos = g.Sum(s => s.Pontos),
+                                  PontoExtra = g.Max(m => m.PontoExtra ? 1 : 0) > 0,
+                                  PosicaoChegada = g.Min(m => m.PosicaoChegada),
                                   DNF = false,
                                   DSQ = false
                               }).ToList();
@@ -89,6 +89,7 @@ namespace Formula1.Domain.Services
                     o.Piloto.Nome,
                     o.Equipe.Nome,
                     o.Corrida.CorridaClassificacao,
+                    o.Corrida.MetadePontos,
                     o.PosicaoLargada,
                     o.PosicaoChegada,
                     o.Pontos,
@@ -144,7 +145,7 @@ namespace Formula1.Domain.Services
                 EquipeId = resultadoDados.EquipeId,
                 PosicaoLargada = resultadoDados.PosicaoLargada,
                 PosicaoChegada = resultadoDados.PosicaoChegada,
-                Pontos = resultadoDados.Pontos,
+                Pontos = resultadoDados.Pontos.Value,
                 PontoExtra = resultadoDados.PontoExtra,
                 DNF = resultadoDados.DNF,
                 DSQ = resultadoDados.DSQ
@@ -163,7 +164,7 @@ namespace Formula1.Domain.Services
             resultado.EquipeId = resultadoDados.EquipeId;
             resultado.PosicaoLargada = resultadoDados.PosicaoLargada;
             resultado.PosicaoChegada = resultadoDados.PosicaoChegada;
-            resultado.Pontos = resultadoDados.Pontos;
+            resultado.Pontos = resultadoDados.Pontos.Value;
             resultado.PontoExtra = resultadoDados.PontoExtra;
             resultado.DNF = resultadoDados.DNF;
             resultado.DSQ = resultadoDados.DSQ;

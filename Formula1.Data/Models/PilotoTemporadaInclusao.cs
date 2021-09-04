@@ -6,11 +6,11 @@
 
         public int Temporada { get; set; }
 
-        public int Pontos { get; set; }
+        public double Pontos { get; set; }
 
         public int Posicao { get; set; }
 
-        public PilotoTemporadaInclusao(int pilotoId, int temporada, int pontos, int posicao)
+        public PilotoTemporadaInclusao(int pilotoId, int temporada, double pontos, int posicao)
         {
             PilotoId = pilotoId;
             Temporada = temporada;

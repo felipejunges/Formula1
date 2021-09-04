@@ -6,6 +6,6 @@
 
         public string CorRgb { get; set; }
 
-        public int?[] Pontos { get; set; }
+        public double?[] Pontos { get; set; }
     }
 }

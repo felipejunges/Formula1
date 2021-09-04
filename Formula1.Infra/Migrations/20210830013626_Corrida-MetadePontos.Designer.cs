@@ -3,14 +3,16 @@ using System;
 using Formula1.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Formula1.Infra.Migrations
 {
     [DbContext(typeof(F1Db))]
-    partial class F1DbModelSnapshot : ModelSnapshot
+    [Migration("20210830013626_Corrida-MetadePontos")]
+    partial class CorridaMetadePontos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,8 +107,8 @@ namespace Formula1.Infra.Migrations
                     b.Property<int?>("EquipeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Pontos")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Pontos")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Posicao")
                         .HasColumnType("INTEGER");
@@ -159,8 +161,8 @@ namespace Formula1.Infra.Migrations
                     b.Property<int?>("PilotoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Pontos")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Pontos")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Posicao")
                         .HasColumnType("INTEGER");
@@ -233,8 +235,8 @@ namespace Formula1.Infra.Migrations
                     b.Property<bool>("PontoExtra")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Pontos")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Pontos")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("PosicaoChegada")
                         .HasColumnType("INTEGER");
