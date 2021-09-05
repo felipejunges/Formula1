@@ -2,6 +2,7 @@
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Corridas;
 using Formula1.Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,11 @@ namespace Formula1.Domain.Services
 {
     public class CorridasService
     {
+        private const int MAXIMO_PONTOS_PILOTO_PADRAO = 26;
+        private const int MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO = 29;
+        private const int MAXIMO_PONTOS_EQUIPE_PADRAO = 44;
+        private const int MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO = 49;
+
         private readonly F1Db Db;
 
         public CorridasService(F1Db db)
@@ -45,6 +51,20 @@ namespace Formula1.Domain.Services
             }).ToList();
 
             return corridas;
+        }
+
+        public int GetPontosEmDisputaPilotos(int temporada)
+        {
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && o.Resultados.Count() == 0); // TODO: flag "finalizada"
+
+            return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO : MAXIMO_PONTOS_PILOTO_PADRAO);
+        }
+
+        public int GetPontosEmDisputaEquipes(int temporada)
+        {
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && o.Resultados.Count() == 0); // TODO: flag "finalizada"
+
+            return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO : MAXIMO_PONTOS_EQUIPE_PADRAO);
         }
 
         public void Incluir(CorridaDados corridaDados)

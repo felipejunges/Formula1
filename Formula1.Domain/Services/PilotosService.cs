@@ -55,7 +55,8 @@ namespace Formula1.Domain.Services
                                NomeGuerra = p.NomeGuerra,
                                CorRgb = p.Contratos.Where(o => o.Temporada == temporada).OrderByDescending(o => o.Id).FirstOrDefault().Equipe.CorRgb,
                                Pontos = pt.Pontos,
-                               Posicao = pt.Posicao
+                               Posicao = pt.Posicao,
+                               PosicaoMaxima = pt.PosicaoMaxima
                            }).ToList();
 
             return pilotos;

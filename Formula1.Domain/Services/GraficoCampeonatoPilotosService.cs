@@ -26,7 +26,7 @@ namespace Formula1.Domain.Services
                 double soma = 0;
                 foreach (var corrida in campeonato.Corridas)
                 {
-                    if (corrida.Resultados.Count == 0)
+                    if (corrida.Resultados.Count == 0) // TODO: flag "finalizada"
                         break;
 
                     var resultado = piloto.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);

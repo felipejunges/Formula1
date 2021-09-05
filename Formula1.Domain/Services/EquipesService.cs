@@ -55,7 +55,8 @@ namespace Formula1.Domain.Services
                                Nome = e.Nome,
                                CorRgb = e.CorRgb,
                                Pontos = et.Pontos,
-                               Posicao = et.Posicao
+                               Posicao = et.Posicao,
+                               PosicaoMaxima = et.PosicaoMaxima
                            }).ToList();
 
             return equipes;

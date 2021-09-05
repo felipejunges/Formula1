@@ -13,5 +13,7 @@
         public double Pontos { get; set; }
 
         public int Posicao { get; set; }
+
+        public int PosicaoMaxima { get; set; }
     }
 }
