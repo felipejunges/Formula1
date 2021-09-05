@@ -10,12 +10,15 @@
 
         public int Posicao { get; set; }
 
-        public EquipeTemporadaInclusao(int equipeId, int temporada, double pontos, int posicao)
+        public int PosicaoMaxima { get; set; }
+
+        public EquipeTemporadaInclusao(int equipeId, int temporada, double pontos, int posicao, int posicaoMaxima)
         {
             EquipeId = equipeId;
             Temporada = temporada;
             Pontos = pontos;
             Posicao = posicao;
+            PosicaoMaxima = posicaoMaxima;
         }
     }
 }

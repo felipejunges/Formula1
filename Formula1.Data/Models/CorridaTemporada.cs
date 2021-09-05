@@ -11,7 +11,7 @@ namespace Formula1.Data.Models
 
         public List<ResultadoTemporada> Resultados { get; set; }
 
-        public bool TemResultados => Resultados.Count > 0;
+        public bool TemResultados => Resultados.Count > 0; // TODO: flag "finalizada"
 
         public CorridaTemporada()
         {

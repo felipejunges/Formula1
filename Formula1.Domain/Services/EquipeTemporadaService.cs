@@ -10,11 +10,13 @@ namespace Formula1.Domain.Services
     {
         private readonly F1Db Db;
         private readonly ResultadosService _resultadosService;
+        private readonly CorridasService _corridasService;
 
-        public EquipeTemporadaService(F1Db db, ResultadosService resultadosService)
+        public EquipeTemporadaService(F1Db db, ResultadosService resultadosService, CorridasService corridasService)
         {
             Db = db;
             _resultadosService = resultadosService;
+            _corridasService = corridasService;
         }
 
         public void CalcularEquipesTemporada(int temporada)
@@ -28,7 +30,7 @@ namespace Formula1.Domain.Services
             {
                 var pontos = resultados.Where(o => o.EquipeId == equipeId).Sum(o => o.Pontos);
 
-                equipesTemporada.Add(new EquipeTemporadaInclusao(equipeId, temporada, pontos, 0));
+                equipesTemporada.Add(new EquipeTemporadaInclusao(equipeId, temporada, pontos, 0, 0));
             }
 
             equipesTemporada.Sort((o, i) =>
@@ -37,6 +39,9 @@ namespace Formula1.Domain.Services
                         : CompararEquipes(i.EquipeId, o.EquipeId, resultados));
 
             equipesTemporada.ForEach(o => o.Posicao = equipesTemporada.IndexOf(o) + 1);
+
+            // calcula a posição máxima de cada equipe
+            MarcarEquipesPosicaoMaxima(equipesTemporada, temporada);
 
             foreach (var equipeTemporada in equipesTemporada)
             {
@@ -65,6 +70,15 @@ namespace Formula1.Domain.Services
             return resultados.Where(o => o.EquipeId == equipeId && o.PosicaoChegada == posicao).Count();
         }
 
+        private void MarcarEquipesPosicaoMaxima(List<EquipeTemporadaInclusao> equipes, int temporada)
+        {
+            double pontosRestantes = _corridasService.GetPontosEmDisputaEquipes(temporada);
+
+            equipes.ForEach(f =>
+                    f.PosicaoMaxima = equipes.IndexOf(equipes.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
+                );
+        }
+
         private void AddOrUpdate(EquipeTemporadaInclusao equipeTemporadaInclusao)
         {
             var equipeTemporada = Db.EquipesTemporada.Where(o => o.Temporada == equipeTemporadaInclusao.Temporada && o.Equipe.Id == equipeTemporadaInclusao.EquipeId).FirstOrDefault();
@@ -83,6 +97,7 @@ namespace Formula1.Domain.Services
 
             equipeTemporada.Pontos = equipeTemporadaInclusao.Pontos;
             equipeTemporada.Posicao = equipeTemporadaInclusao.Posicao;
+            equipeTemporada.PosicaoMaxima = equipeTemporadaInclusao.PosicaoMaxima;
 
             if (equipeTemporada.Id == 0)
                 Db.EquipesTemporada.Add(equipeTemporada);
