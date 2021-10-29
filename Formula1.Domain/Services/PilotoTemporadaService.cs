@@ -67,7 +67,7 @@ namespace Formula1.Domain.Services
 
         private int ObterQuantidadePosicoes(int pilotoId, int posicao, List<ResultadoTemporada> resultados)
         {
-            return resultados.Where(o => o.PilotoId == pilotoId && o.PosicaoChegada == posicao).Count();
+            return resultados.Where(o => o.PilotoId == pilotoId && o.PosicaoChegada == posicao && !o.DNF && !o.DSQ).Count();
         }
 
         private void MarcarPilotosPosicaoMaxima(List<PilotoTemporadaInclusao> pilotos, int temporada)
