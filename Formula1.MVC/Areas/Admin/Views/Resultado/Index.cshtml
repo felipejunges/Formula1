@@ -29,10 +29,13 @@
                 @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].Pontos)
+                @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resultados[0].PontosCorrida)
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.Resultados[0].PontoExtra)
+                @Html.DisplayNameFor(model => model.Resultados[0].VoltaMaisRapida)
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.Resultados[0].DNF)
@@ -60,10 +63,13 @@
                     @Html.DisplayFor(modelItem => item.PosicaoChegada)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Pontos)
+                    @Html.DisplayFor(modelItem => item.PontosClassificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PontosCorrida)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.PontoExtra)
+                    @Html.DisplayFor(modelItem => item.VoltaMaisRapida)
                 </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.DNF)

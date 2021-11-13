@@ -20,10 +20,12 @@ namespace Formula1.Data.Models.Admin.Resultados
         [Display(Name = "Pos. chegada")]
         public int PosicaoChegada { get; set; }
 
-        public double Pontos { get; set; }
+        public double PontosClassificacao { get; set; }
 
-        [Display(Name = "Ponto extra")]
-        public bool PontoExtra { get; set; }
+        public double PontosCorrida { get; set; }
+
+        [Display(Name = "Volta mais rápida")]
+        public bool VoltaMaisRapida { get; set; }
 
         public bool DNF { get; set; }
 
@@ -31,7 +33,7 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool Grifar { get; set; }
 
-        public double PontosCalculados
+        public double PontosCorridaCalculados
         {
             get
             {
@@ -50,16 +52,9 @@ namespace Formula1.Data.Models.Admin.Resultados
 
                 if (CorridaMetadePontos) pontosPosicao /= 2;
 
-                int pontoExtra = PontoExtra && PosicaoChegada <= 10 ? 1 : 0;
+                int pontoExtra = VoltaMaisRapida && PosicaoChegada <= 10 ? 1 : 0;
 
-                int pontosClassificacao =
-                    !TeveCorridaClassificacao ? 0
-                    : PosicaoLargada == 1 ? 3
-                    : PosicaoLargada == 2 ? 2
-                    : PosicaoLargada == 3 ? 1
-                    : 0;
-
-                return pontosPosicao + pontoExtra + pontosClassificacao;
+                return pontosPosicao + pontoExtra;
             }
         }
 
@@ -67,7 +62,7 @@ namespace Formula1.Data.Models.Admin.Resultados
         {
         }
 
-        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontos, bool pontoExtra, bool dnf, bool dsq, bool grifar)
+        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq, bool grifar)
         {
             Id = id;
             Piloto = piloto;
@@ -76,8 +71,9 @@ namespace Formula1.Data.Models.Admin.Resultados
             CorridaMetadePontos = corridaMetadePontos;
             PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;
-            Pontos = pontos;
-            PontoExtra = pontoExtra;
+            PontosClassificacao = pontosClassificacao;
+            PontosCorrida = pontosCorrida;
+            VoltaMaisRapida = voltaMaisRapida;
             DNF = dnf;
             DSQ = dsq;
             Grifar = grifar;

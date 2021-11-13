@@ -29,9 +29,9 @@ namespace Formula1.Domain.Services
                 equipes.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
             else
                 equipes.Sort((o, i) =>
-                        i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
+                        i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : i.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).PontosTotais
                     .CompareTo(
-                        o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).Pontos
+                        o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value) == null ? 0 : o.Resultados.FirstOrDefault(c => c.CorridaId == corridaOrder.Value).PontosTotais
                     ));
 
             return new TabelaCampeonatoEquipes(corridas, equipes);

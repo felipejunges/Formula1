@@ -47,17 +47,25 @@
             </div>
 
             <div class="form-group row">
-                <label asp-for="Pontos" class="col-md-3 text-md-right control-label"></label>
+                <label asp-for="PontosClassificacao" class="col-md-3 text-md-right control-label"></label>
                 <div class="col-md-9">
-                    <input asp-for="Pontos" class="form-control" />
-                    <span asp-validation-for="Pontos" class="text-danger"></span>
+                    <input asp-for="PontosClassificacao" class="form-control" />
+                    <span asp-validation-for="PontosClassificacao" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="PontosCorrida" class="col-md-3 text-md-right control-label"></label>
+                <div class="col-md-9">
+                    <input asp-for="PontosCorrida" class="form-control" />
+                    <span asp-validation-for="PontosCorrida" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group row form-check">
                 <div class="col-md-6 offset-md-3">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="PontoExtra" /> @Html.DisplayNameFor(model => model.PontoExtra)
+                        <input class="form-check-input" asp-for="VoltaMaisRapida" /> @Html.DisplayNameFor(model => model.VoltaMaisRapida)
                     </label>
                 </div>
             </div>

@@ -31,7 +31,7 @@ namespace Formula1.Domain.Services
 
                     var resultado = piloto.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
                     if (resultado != null)
-                        soma += resultado.Pontos;
+                        soma += resultado.PontosTotais;
 
                     pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
                 }

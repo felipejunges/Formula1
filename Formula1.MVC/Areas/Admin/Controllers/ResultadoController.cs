@@ -25,7 +25,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index(int corridaId)
         {
-            var dados = new ResultadoDados() { Id = 0, CorridaId = corridaId };
+            var dados = ResultadoDados.NovoResultado(corridaId);
             var resultados = this.ResultadosService.ObterListaResultados(corridaId);
 
             var edicao = new ResultadoListaDados(dados, resultados);
