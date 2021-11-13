@@ -22,7 +22,7 @@
                 <th scope="col" class="text-center align-middle th-titulo-corrida">
                     <small class="titulo-corrida">
 
-                        @if (corrida.TemResultados)
+                        @if (corrida.TemResultadosDeCorrida)
                         {
                             <a href="@Url.Content("~/Home/EquipesPontos?o=" + corrida.Id)">
                                 @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")

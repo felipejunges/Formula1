@@ -8,10 +8,9 @@ namespace Formula1.Data.Models
         public int Id { get; set; }
         public DateTime DataHoraBrasil { get; set; }
         public string NomeGrandePremio { get; set; }
+        public bool TemResultadosDeCorrida { get; set; }
 
         public List<ResultadoTemporada> Resultados { get; set; }
-
-        public bool TemResultados => Resultados.Count > 0; // TODO: flag "finalizada"
 
         public CorridaTemporada()
         {

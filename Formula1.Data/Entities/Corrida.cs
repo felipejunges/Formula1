@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Formula1.Data.Entities
 {
@@ -28,5 +29,7 @@ namespace Formula1.Data.Entities
         public virtual ICollection<Punicao> Punicoes { get; set; }
 
         public virtual ICollection<Resultado> Resultados { get; set; }
+
+        public bool TemResultadoDeCorrida => Resultados.Any(c => c.PosicaoChegada > 0);
     }
 }
