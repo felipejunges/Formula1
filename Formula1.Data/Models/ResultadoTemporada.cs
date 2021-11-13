@@ -8,9 +8,9 @@
 
         public int CorridaId { get; set; }
 
-        public double Pontos { get; set; }
+        public double PontosTotais { get; set; }
 
-        public bool PontoExtra { get; set; }
+        public bool VoltaMaisRapida { get; set; }
 
         public int PosicaoChegada { get; set; }
 

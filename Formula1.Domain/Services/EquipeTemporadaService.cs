@@ -28,7 +28,7 @@ namespace Formula1.Domain.Services
 
             foreach (var equipeId in equipesIds)
             {
-                var pontos = resultados.Where(o => o.EquipeId == equipeId).Sum(o => o.Pontos);
+                var pontos = resultados.Where(o => o.EquipeId == equipeId).Sum(o => o.PontosTotais);
 
                 equipesTemporada.Add(new EquipeTemporadaInclusao(equipeId, temporada, pontos, 0, 0));
             }

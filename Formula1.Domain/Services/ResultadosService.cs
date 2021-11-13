@@ -34,8 +34,8 @@ namespace Formula1.Domain.Services
                                   PilotoId = r.PilotoId,
                                   EquipeId = 0,
                                   CorridaId = r.CorridaId,
-                                  Pontos = r.Pontos,
-                                  PontoExtra = r.PontoExtra,
+                                  PontosTotais = r.PontosClassificacao + r.PontosCorrida,
+                                  VoltaMaisRapida = r.VoltaMaisRapida,
                                   PosicaoChegada = r.PosicaoChegada,
                                   DNF = r.DNF,
                                   DSQ = r.DSQ
@@ -43,7 +43,7 @@ namespace Formula1.Domain.Services
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
 
-            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.PilotoId == r.PilotoId).Sum(s => s.Pontos));
+            resultados.ForEach(r => r.PontosTotais -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.PilotoId == r.PilotoId).Sum(s => s.Pontos));
 
             return resultados;
         }
@@ -64,8 +64,8 @@ namespace Formula1.Domain.Services
                                   PilotoId = 0,
                                   EquipeId = g.Key.EquipeId,
                                   CorridaId = g.Key.CorridaId,
-                                  Pontos = g.Sum(s => s.Pontos),
-                                  PontoExtra = g.Max(m => m.PontoExtra ? 1 : 0) > 0,
+                                  PontosTotais = g.Sum(s => s.PontosClassificacao + s.PontosCorrida),
+                                  VoltaMaisRapida = g.Max(m => m.VoltaMaisRapida ? 1 : 0) > 0,
                                   PosicaoChegada = g.Min(m => m.PosicaoChegada),
                                   DNF = false,
                                   DSQ = false
@@ -73,7 +73,7 @@ namespace Formula1.Domain.Services
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
 
-            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
+            resultados.ForEach(r => r.PontosTotais -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
 
             return resultados;
         }
@@ -88,12 +88,12 @@ namespace Formula1.Domain.Services
                     o.Id,
                     o.Piloto.Nome,
                     o.Equipe.Nome,
-                    o.Corrida.CorridaClassificacao,
                     o.Corrida.MetadePontos,
                     o.PosicaoLargada,
                     o.PosicaoChegada,
-                    o.Pontos,
-                    o.PontoExtra,
+                    o.PontosClassificacao,
+                    o.PontosCorrida,
+                    o.VoltaMaisRapida,
                     o.DNF,
                     o.DSQ,
                     false
@@ -107,27 +107,34 @@ namespace Formula1.Domain.Services
 
         private void GrifarItensListaInvalidos(List<ResultadoLista> resultados)
         {
-            //
-            resultados.Where(o => o.Pontos != o.PontosCalculados).ToList().ForEach(o => o.Grifar = true);
+            // conferir os pontos da corrida
+            resultados.Where(o => o.PontosCorrida != o.PontosCorridaCalculados).ToList().ForEach(o => o.Grifar = true);
 
-            //
+            // posição largada ou posição chegada zerado
             resultados.Where(r => r.PosicaoLargada == 0 || r.PosicaoChegada == 0).ToList().ForEach(r => r.Grifar = true);
 
-            //
+            // posições largada repetidas
             var posicoesLargadaRepetidos = resultados.GroupBy(o => o.PosicaoLargada).Where(o => o.Count() > 1).Select(o => o.Key).ToList();
 
             var itensPosicaoLargada = resultados.Where(o => posicoesLargadaRepetidos.Contains(o.PosicaoLargada)).ToList();
 
             itensPosicaoLargada.ForEach(o => o.Grifar = true);
 
-            //
+            // posições chegada repetidas
             var posicoesChegadaRepetidos = resultados.GroupBy(o => o.PosicaoChegada).Where(o => o.Count() > 1).Select(o => o.Key).ToList();
 
             var itensPosicaoChegada = resultados.Where(o => posicoesChegadaRepetidos.Contains(o.PosicaoChegada)).ToList();
 
             itensPosicaoChegada.ForEach(o => o.Grifar = true);
 
-            //
+            // pontos classificação repetidos
+            var pontosClassificacaoRepetidos = resultados.Where(o => o.PontosClassificacao > 0).GroupBy(o => o.PontosClassificacao).Where(o => o.Count() > 1).Select(o => o.Key).ToList();
+
+            var itensPontoClassificacao = resultados.Where(o => pontosClassificacaoRepetidos.Contains(o.PontosClassificacao)).ToList();
+
+            itensPontoClassificacao.ForEach(o => o.Grifar = true);
+
+            // equipes com mais de dois resultados
             var equipesMais2Resultados = resultados.GroupBy(o => o.Equipe).Where(o => o.Count() > 2).Select(o => o.Key).ToList();
 
             var equipesGrifar = resultados.Where(o => equipesMais2Resultados.Contains(o.Equipe)).ToList();
@@ -145,8 +152,9 @@ namespace Formula1.Domain.Services
                 EquipeId = resultadoDados.EquipeId,
                 PosicaoLargada = resultadoDados.PosicaoLargada,
                 PosicaoChegada = resultadoDados.PosicaoChegada,
-                Pontos = resultadoDados.Pontos.Value,
-                PontoExtra = resultadoDados.PontoExtra,
+                PontosClassificacao = resultadoDados.PontosClassificacao.Value,
+                PontosCorrida = resultadoDados.PontosCorrida.Value,
+                VoltaMaisRapida = resultadoDados.VoltaMaisRapida,
                 DNF = resultadoDados.DNF,
                 DSQ = resultadoDados.DSQ
             };
@@ -164,8 +172,9 @@ namespace Formula1.Domain.Services
             resultado.EquipeId = resultadoDados.EquipeId;
             resultado.PosicaoLargada = resultadoDados.PosicaoLargada;
             resultado.PosicaoChegada = resultadoDados.PosicaoChegada;
-            resultado.Pontos = resultadoDados.Pontos.Value;
-            resultado.PontoExtra = resultadoDados.PontoExtra;
+            resultado.PontosClassificacao = resultadoDados.PontosClassificacao.Value;
+            resultado.PontosCorrida = resultadoDados.PontosCorrida.Value;
+            resultado.VoltaMaisRapida = resultadoDados.VoltaMaisRapida;
             resultado.DNF = resultadoDados.DNF;
             resultado.DSQ = resultadoDados.DSQ;
 

@@ -11,7 +11,7 @@
 <h4>@ViewData["SubTitle"]</h4>
 <hr />
 
-@await Html.PartialAsync("Add", Model.Dados)
+@await Html.PartialAsync("Add", Model.Dados, ViewData)
 
 <table class="table">
     <thead>
@@ -28,11 +28,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
             </th>
+
+            @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
+                </th>
+            }
+
             <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].Pontos)
+                @Html.DisplayNameFor(model => model.Resultados[0].PontosCorrida)
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.Resultados[0].PontoExtra)
+                @Html.DisplayNameFor(model => model.Resultados[0].VoltaMaisRapida)
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.Resultados[0].DNF)
@@ -59,11 +67,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PosicaoChegada)
                 </td>
+
+                @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PontosClassificacao)
+                    </td>
+                }
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.Pontos)
+                    @Html.DisplayFor(modelItem => item.PontosCorrida)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.PontoExtra)
+                    @Html.DisplayFor(modelItem => item.VoltaMaisRapida)
                 </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.DNF)

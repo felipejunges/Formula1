@@ -40,7 +40,7 @@ namespace Formula1.MVC.Controllers
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
 
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder, false);
 
             ViewData["Temporada"] = _settings.TemporadaAtiva;
 
@@ -52,7 +52,7 @@ namespace Formula1.MVC.Controllers
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
 
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder, true);
 
             ViewData["Temporada"] = _settings.TemporadaAtiva;
 

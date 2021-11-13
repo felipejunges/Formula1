@@ -10,8 +10,6 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public string Equipe { get; set; }
 
-        public bool TeveCorridaClassificacao { get; set; }
-
         public bool CorridaMetadePontos { get; set; }
 
         [Display(Name = "Pos. largada")]
@@ -20,10 +18,14 @@ namespace Formula1.Data.Models.Admin.Resultados
         [Display(Name = "Pos. chegada")]
         public int PosicaoChegada { get; set; }
 
-        public double Pontos { get; set; }
+        [Display(Name = "Pts. class.")]
+        public double PontosClassificacao { get; set; }
 
-        [Display(Name = "Ponto extra")]
-        public bool PontoExtra { get; set; }
+        [Display(Name = "Pts. corrida")]
+        public double PontosCorrida { get; set; }
+
+        [Display(Name = "Volta mais rápida")]
+        public bool VoltaMaisRapida { get; set; }
 
         public bool DNF { get; set; }
 
@@ -31,7 +33,7 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool Grifar { get; set; }
 
-        public double PontosCalculados
+        public double PontosCorridaCalculados
         {
             get
             {
@@ -50,16 +52,9 @@ namespace Formula1.Data.Models.Admin.Resultados
 
                 if (CorridaMetadePontos) pontosPosicao /= 2;
 
-                int pontoExtra = PontoExtra && PosicaoChegada <= 10 ? 1 : 0;
+                int pontoExtra = VoltaMaisRapida && PosicaoChegada <= 10 ? 1 : 0;
 
-                int pontosClassificacao =
-                    !TeveCorridaClassificacao ? 0
-                    : PosicaoLargada == 1 ? 3
-                    : PosicaoLargada == 2 ? 2
-                    : PosicaoLargada == 3 ? 1
-                    : 0;
-
-                return pontosPosicao + pontoExtra + pontosClassificacao;
+                return pontosPosicao + pontoExtra;
             }
         }
 
@@ -67,17 +62,17 @@ namespace Formula1.Data.Models.Admin.Resultados
         {
         }
 
-        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontos, bool pontoExtra, bool dnf, bool dsq, bool grifar)
+        public ResultadoLista(int id, string piloto, string equipe, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq, bool grifar)
         {
             Id = id;
             Piloto = piloto;
             Equipe = equipe;
-            TeveCorridaClassificacao = teveCorridaClassificacao;
             CorridaMetadePontos = corridaMetadePontos;
             PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;
-            Pontos = pontos;
-            PontoExtra = pontoExtra;
+            PontosClassificacao = pontosClassificacao;
+            PontosCorrida = pontosCorrida;
+            VoltaMaisRapida = voltaMaisRapida;
             DNF = dnf;
             DSQ = dsq;
             Grifar = grifar;

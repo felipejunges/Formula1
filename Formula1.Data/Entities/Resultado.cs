@@ -22,9 +22,11 @@
 
         public int PosicaoChegada { get; set; }
 
-        public double Pontos { get; set; }
+        public double PontosClassificacao { get; set; }
 
-        public bool PontoExtra { get; set; }
+        public double PontosCorrida { get; set; }
+
+        public bool VoltaMaisRapida { get; set; }
 
         public bool DNF { get; set; }
 

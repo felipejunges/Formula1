@@ -8,7 +8,7 @@ namespace Formula1.Data.Models.Admin.Resultados
         public int Id { get; set; }
 
         public int CorridaId { get; set; }
-        
+
         [Display(Name = "Piloto")]
         public int PilotoId { get; set; }
 
@@ -22,14 +22,24 @@ namespace Formula1.Data.Models.Admin.Resultados
         public int PosicaoChegada { get; set; }
 
         [Required]
-        public double? Pontos { get; set; }
+        [Display(Name = "Pontos classificação")]
+        public double? PontosClassificacao { get; set; }
 
-        [Display(Name = "Ponto extra")]
-        public bool PontoExtra { get; set; }
+        [Required]
+        [Display(Name = "Pontos corrida")]
+        public double? PontosCorrida { get; set; }
+
+        [Display(Name = "Volta mais rápida")]
+        public bool VoltaMaisRapida { get; set; }
 
         public bool DNF { get; set; }
 
         public bool DSQ { get; set; }
+
+        public static ResultadoDados NovoResultado(int corridaId)
+        {
+            return new ResultadoDados() { Id = 0, CorridaId = corridaId };
+        }
 
         public ResultadoDados()
         {
@@ -43,8 +53,9 @@ namespace Formula1.Data.Models.Admin.Resultados
             EquipeId = resultado.EquipeId;
             PosicaoLargada = resultado.PosicaoLargada;
             PosicaoChegada = resultado.PosicaoChegada;
-            Pontos = resultado.Pontos;
-            PontoExtra = resultado.PontoExtra;
+            PontosClassificacao = resultado.PontosClassificacao;
+            PontosCorrida = resultado.PontosCorrida;
+            VoltaMaisRapida = resultado.VoltaMaisRapida;
             DNF = resultado.DNF;
             DSQ = resultado.DSQ;
         }

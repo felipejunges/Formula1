@@ -29,27 +29,34 @@ namespace Formula1.Domain.Services
 
         public List<CorridaTemporada> GetCorridasTabela(int temporada)
         {
-            var corridas = Db.Corridas.Include(c => c.Resultados).Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaTemporada()
-            {
-                Id = o.Id,
-                DataHoraBrasil = o.DataHoraBrasil,
-                NomeGrandePremio = o.NomeGrandePremio,
-                TemResultadosDeCorrida = o.TemResultadoDeCorrida
-            }).ToList();
+            var corridas = Db.Corridas
+                .Include(c => c.Resultados)
+                .Where(o => o.Temporada == temporada)
+                .OrderBy(o => o.DataHoraBrasil)
+                .Select(o => new CorridaTemporada()
+                {
+                    Id = o.Id,
+                    DataHoraBrasil = o.DataHoraBrasil,
+                    NomeGrandePremio = o.NomeGrandePremio,
+                    TemResultadosDeCorrida = o.TemResultadoDeCorrida
+                }).ToList();
 
             return corridas;
         }
 
         public List<CorridaLista> GetCorridasLista(int temporada)
         {
-            var corridas = Db.Corridas.Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaLista()
-            {
-                Id = o.Id,
-                NumeroCorrida = o.NumeroCorrida,
-                DataHoraBrasil = o.DataHoraBrasil,
-                NomeGrandePremio = o.NomeGrandePremio,
-                Circuito = o.Circuito
-            }).ToList();
+            var corridas = Db.Corridas
+                .Where(o => o.Temporada == temporada)
+                .OrderBy(o => o.DataHoraBrasil)
+                .Select(o => new CorridaLista()
+                {
+                    Id = o.Id,
+                    NumeroCorrida = o.NumeroCorrida,
+                    DataHoraBrasil = o.DataHoraBrasil,
+                    NomeGrandePremio = o.NomeGrandePremio,
+                    Circuito = o.Circuito
+                }).ToList();
 
             return corridas;
         }

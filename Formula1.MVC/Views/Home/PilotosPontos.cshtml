@@ -67,7 +67,7 @@
 
                             if (resultado != null)
                             {
-                                <small class="@(resultado.DNF || resultado.DSQ ? "result-dnf" : "") @(resultado.PontoExtra ? "result-ponto-extra" : "")">@resultado.Pontos.ToString()</small>
+                                <small class="@(resultado.DNF || resultado.DSQ ? "result-dnf" : "") @(resultado.VoltaMaisRapida ? "result-ponto-extra" : "")">@resultado.PontosTotais.ToString()</small>
                             }
                         }
                     </td>
