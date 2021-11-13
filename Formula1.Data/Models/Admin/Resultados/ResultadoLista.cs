@@ -10,8 +10,6 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public string Equipe { get; set; }
 
-        public bool TeveCorridaClassificacao { get; set; }
-
         public bool CorridaMetadePontos { get; set; }
 
         [Display(Name = "Pos. largada")]
@@ -20,8 +18,10 @@ namespace Formula1.Data.Models.Admin.Resultados
         [Display(Name = "Pos. chegada")]
         public int PosicaoChegada { get; set; }
 
+        [Display(Name = "Pts. class.")]
         public double PontosClassificacao { get; set; }
 
+        [Display(Name = "Pts. corrida")]
         public double PontosCorrida { get; set; }
 
         [Display(Name = "Volta mais rápida")]
@@ -62,12 +62,11 @@ namespace Formula1.Data.Models.Admin.Resultados
         {
         }
 
-        public ResultadoLista(int id, string piloto, string equipe, bool teveCorridaClassificacao, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq, bool grifar)
+        public ResultadoLista(int id, string piloto, string equipe, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq, bool grifar)
         {
             Id = id;
             Piloto = piloto;
             Equipe = equipe;
-            TeveCorridaClassificacao = teveCorridaClassificacao;
             CorridaMetadePontos = corridaMetadePontos;
             PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;

@@ -5,40 +5,43 @@ namespace Formula1.Data.Models.Admin.Resultados
 {
     public class ResultadoDados
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public int CorridaId { get; private set; }
+        public int CorridaId { get; set; }
 
         [Display(Name = "Piloto")]
-        public int PilotoId { get; private set; }
+        public int PilotoId { get; set; }
 
         [Display(Name = "Equipe")]
-        public int EquipeId { get; private set; }
+        public int EquipeId { get; set; }
 
         [Display(Name = "Pos. largada")]
-        public int PosicaoLargada { get; private set; }
+        public int PosicaoLargada { get; set; }
 
         [Display(Name = "Pos. chegada")]
-        public int PosicaoChegada { get; private set; }
-
-        public double? PontosClassificacao { get; private set; }
+        public int PosicaoChegada { get; set; }
 
         [Required]
-        public double? PontosCorrida { get; private set; }
+        [Display(Name = "Pontos classificação")]
+        public double? PontosClassificacao { get; set; }
+
+        [Required]
+        [Display(Name = "Pontos corrida")]
+        public double? PontosCorrida { get; set; }
 
         [Display(Name = "Volta mais rápida")]
-        public bool VoltaMaisRapida { get; private set; }
+        public bool VoltaMaisRapida { get; set; }
 
-        public bool DNF { get; private set; }
+        public bool DNF { get; set; }
 
-        public bool DSQ { get; private set; }
+        public bool DSQ { get; set; }
 
         public static ResultadoDados NovoResultado(int corridaId)
         {
             return new ResultadoDados() { Id = 0, CorridaId = corridaId };
         }
 
-        private ResultadoDados()
+        public ResultadoDados()
         {
         }
 

@@ -95,6 +95,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             ViewData["PilotosLista"] = new SelectList(this.PilotosService.ObterPilotosContrato(corrida.Temporada), "Id", "NomeGuerra", null);
             ViewData["EquipesLista"] = new SelectList(this.EquipesService.ObterEquipesContrato(corrida.Temporada), "Id", "Nome", null);
             ViewData["NomeGP"] = $"{corrida.NomeGrandePremio} - {corrida.Temporada}";
+            ViewData["CorridaClassificacao"] = corrida.CorridaClassificacao;
         }
     }
 }

@@ -11,7 +11,7 @@
 <h4>@ViewData["SubTitle"]</h4>
 <hr />
 
-@await Html.PartialAsync("Add", Model.Dados)
+@await Html.PartialAsync("Add", Model.Dados, ViewData)
 
 <table class="table">
     <thead>
@@ -28,9 +28,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
-            </th>
+
+            @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
+                </th>
+            }
+
             <th>
                 @Html.DisplayNameFor(model => model.Resultados[0].PontosCorrida)
             </th>
@@ -62,9 +67,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PosicaoChegada)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PontosClassificacao)
-                </td>
+
+                @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PontosClassificacao)
+                    </td>
+                }
+
                 <td>
                     @Html.DisplayFor(modelItem => item.PontosCorrida)
                 </td>

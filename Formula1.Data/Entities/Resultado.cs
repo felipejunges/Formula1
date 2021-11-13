@@ -31,7 +31,5 @@
         public bool DNF { get; set; }
 
         public bool DSQ { get; set; }
-
-        public double PontosTotais => PontosClassificacao + PontosCorrida;
     }
 }
