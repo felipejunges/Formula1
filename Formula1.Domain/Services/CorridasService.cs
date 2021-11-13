@@ -56,14 +56,14 @@ namespace Formula1.Domain.Services
 
         public int GetPontosEmDisputaPilotos(int temporada)
         {
-            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && !o.TemResultadoDeCorrida);
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada).AsEnumerable().Where(o => !o.TemResultadoDeCorrida);
 
             return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO : MAXIMO_PONTOS_PILOTO_PADRAO);
         }
 
         public int GetPontosEmDisputaEquipes(int temporada)
         {
-            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && !o.TemResultadoDeCorrida);
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada).AsEnumerable().Where(o => !o.TemResultadoDeCorrida);
 
             return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO : MAXIMO_PONTOS_EQUIPE_PADRAO);
         }
