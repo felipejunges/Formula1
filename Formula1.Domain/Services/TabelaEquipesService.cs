@@ -28,18 +28,19 @@ namespace Formula1.Domain.Services
             if (corridaOrder == null)
                 equipes.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
             else
-                equipes.Sort((o, i) => ObterPontosTotais(i.Resultados, corridaOrder.Value).CompareTo(ObterPontosTotais(o.Resultados, corridaOrder.Value)));
+                equipes.Sort((o, i) => OrdenarPorPontos(o.Resultados, i.Resultados, corridaOrder.Value));
 
             return new TabelaCampeonatoEquipes(corridas, equipes);
         }
 
-        private double ObterPontosTotais(List<ResultadoTemporada> resultados, int corridaId)
+        private int OrdenarPorPontos(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
         {
-            var resultadoCorrida = resultados.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida == null) return 999;
+            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
 
-            return resultadoCorrida.PontosTotais;
+            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }
 
         private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)

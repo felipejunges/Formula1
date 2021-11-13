@@ -28,29 +28,34 @@ namespace Formula1.Domain.Services
             if (corridaOrder == null)
                 pilotos.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
             else if (ordenarPelosPontos)
-                pilotos.Sort((o, i) => ObterPontosTotais(i.Resultados, corridaOrder.Value).CompareTo(ObterPontosTotais(o.Resultados, corridaOrder.Value)));
+                pilotos.Sort((o, i) => OrdenarPorPontos(o.Resultados, i.Resultados, corridaOrder.Value));
             else
-                pilotos.Sort((o, i) => ObterPosicaoChegada(o.Resultados, corridaOrder.Value).CompareTo(ObterPosicaoChegada(i.Resultados, corridaOrder.Value)));
+                pilotos.Sort((o, i) => OrdenarPorPosicaoChegada(o.Resultados, i.Resultados, corridaOrder.Value));
 
             return new TabelaCampeonatoPilotos(corridas, pilotos);
         }
 
-        private int ObterPosicaoChegada(List<ResultadoTemporada> resultados, int corridaId)
+        private int OrdenarPorPontos(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
         {
-            var resultadoCorrida = resultados.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida == null) return 999;
+            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
 
-            return resultadoCorrida.PosicaoChegada;
+            if (resultadoCorrida1.PontosTotais == resultadoCorrida2.PontosTotais)
+                return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
+
+            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }
 
-        private double ObterPontosTotais(List<ResultadoTemporada> resultados, int corridaId)
+        private int OrdenarPorPosicaoChegada(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
         {
-            var resultadoCorrida = resultados.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida == null) return 0;
+            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
 
-            return resultadoCorrida.PontosTotais;
+            return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
         }
 
         private void PreencherResultadosPilotosCorridas(List<CorridaTemporada> corridas, List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)
