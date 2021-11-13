@@ -29,11 +29,12 @@ namespace Formula1.Domain.Services
 
         public List<CorridaTemporada> GetCorridasTabela(int temporada)
         {
-            var corridas = Db.Corridas.Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaTemporada()
+            var corridas = Db.Corridas.Include(c => c.Resultados).Where(o => o.Temporada == temporada).OrderBy(o => o.DataHoraBrasil).Select(o => new CorridaTemporada()
             {
                 Id = o.Id,
                 DataHoraBrasil = o.DataHoraBrasil,
-                NomeGrandePremio = o.NomeGrandePremio
+                NomeGrandePremio = o.NomeGrandePremio,
+                TemResultadosDeCorrida = o.TemResultadoDeCorrida
             }).ToList();
 
             return corridas;
@@ -55,14 +56,14 @@ namespace Formula1.Domain.Services
 
         public int GetPontosEmDisputaPilotos(int temporada)
         {
-            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && o.Resultados.Count() == 0); // TODO: flag "finalizada"
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && !o.TemResultadoDeCorrida);
 
             return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO : MAXIMO_PONTOS_PILOTO_PADRAO);
         }
 
         public int GetPontosEmDisputaEquipes(int temporada)
         {
-            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && o.Resultados.Count() == 0); // TODO: flag "finalizada"
+            var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada && !o.TemResultadoDeCorrida);
 
             return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO : MAXIMO_PONTOS_EQUIPE_PADRAO);
         }
