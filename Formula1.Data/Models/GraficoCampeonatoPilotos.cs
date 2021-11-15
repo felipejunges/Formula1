@@ -10,7 +10,9 @@ namespace Formula1.Data.Models
 
         public List<PilotoPontosGrafico> Pilotos { get; private set; }
 
-        public int Step { get => 10; }
+        public int Step { get => 20; }
+
+        public int Height => (int)Math.Ceiling(MaxValue * 2D);
 
         public double MaxValue
         {
