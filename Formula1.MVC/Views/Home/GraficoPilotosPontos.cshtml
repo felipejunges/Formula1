@@ -10,7 +10,7 @@
     <h3 class="display-6">@ViewData["Title"]</h3>
     <p>@ViewData["SubTitle"]</p>
 
-    <canvas id="grafico"></canvas>
+    <canvas id="grafico" style="height: @(Model.Height)px; width: 100%;"></canvas>
 </div>
 
 @section scripts {
@@ -39,7 +39,7 @@
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 plugins: {
                     legend: {
                         display: false
@@ -55,10 +55,9 @@
                 },
                 scales: {
                     y: {
+                        max: @Model.MaxValue,
                         ticks: {
-                            max: @Model.MaxValue,
-                            stepSize: @Model.Step,
-                            beginAtZero: true
+                            stepSize: @Model.Step
                         },
                         display: true,
 						scaleLabel: {
