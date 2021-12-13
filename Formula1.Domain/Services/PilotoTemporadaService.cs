@@ -75,7 +75,9 @@ namespace Formula1.Domain.Services
             double pontosRestantes = _corridasService.GetPontosEmDisputaPilotos(temporada);
 
             pilotos.ForEach(f =>
-                    f.PosicaoMaxima = pilotos.IndexOf(pilotos.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
+                    f.PosicaoMaxima = pontosRestantes == 0 
+                                        ? f.Posicao
+                                        : pilotos.IndexOf(pilotos.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
                 );
         }
 
