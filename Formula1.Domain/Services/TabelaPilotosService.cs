@@ -40,7 +40,9 @@ namespace Formula1.Domain.Services
             var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
+            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
             if (resultadoCorrida1.PontosTotais == resultadoCorrida2.PontosTotais)
                 return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
@@ -53,7 +55,9 @@ namespace Formula1.Domain.Services
             var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
+            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
             return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
         }

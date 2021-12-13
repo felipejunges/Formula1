@@ -38,7 +38,9 @@ namespace Formula1.Domain.Services
             var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
-            if (resultadoCorrida1 == null || resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
+            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
+            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
             return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }

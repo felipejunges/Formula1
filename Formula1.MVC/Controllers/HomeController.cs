@@ -1,6 +1,7 @@
 ﻿using Formula1.Domain.Services;
 using Formula1.Domain.Settings;
 using Formula1.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
@@ -97,6 +98,7 @@ namespace Formula1.MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Authorize]
         public IActionResult Calcular()
         {
             this.PilotoTemporadaService.CalcularPilotosTemporada(_settings.TemporadaAtiva);
