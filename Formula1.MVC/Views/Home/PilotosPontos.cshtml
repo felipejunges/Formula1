@@ -17,24 +17,26 @@
             <th scope="col"></th>
             <th scope="col"></th>
 
-            @foreach (var corrida in Model.Corridas)
-            {
-                <th scope="col" class="text-center align-middle th-titulo-corrida">
-                    <small class="titulo-corrida">
+            @if (Model != null)  {
+                foreach (var corrida in Model.Corridas)
+                {
+                    <th scope="col" class="text-center align-middle th-titulo-corrida">
+                        <small class="titulo-corrida">
 
-                        @if (corrida.TemResultadosDeCorrida)
-                        {
-                            <a href="@Url.Content("~/Home/PilotosPontos?o=" + corrida.Id)">
+                            @if (corrida.TemResultadosDeCorrida)
+                            {
+                                <a href="@Url.Content("~/Home/PilotosPontos?o=" + corrida.Id)">
+                                    @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
+                                </a>
+                            }
+                            else
+                            {
                                 @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
-                            </a>
-                        }
-                        else
-                        {
-                            @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
-                        }
+                            }
 
-                    </small>
-                </th>
+                        </small>
+                    </th>
+                }
             }
 
             <th scope="col" class="text-center align-middle th-titulo-corrida">
