@@ -60,6 +60,8 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         private ResultadoLista()
         {
+            Piloto = string.Empty;
+            Equipe = string.Empty;
         }
 
         public ResultadoLista(int id, string piloto, string equipe, bool corridaMetadePontos, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq, bool grifar)

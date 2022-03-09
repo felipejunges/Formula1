@@ -18,5 +18,14 @@ namespace Formula1.Data.Models.Admin.Corridas
         [Display(Name = "Data/hora Brasil")]
         [DisplayFormat(DataFormatString = "{0:dd/MMM/yyyy HH:mm}")]
         public DateTime DataHoraBrasil { get; set; }
+
+        public CorridaLista(int id, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil)
+        {
+            Id = id;
+            NumeroCorrida = numeroCorrida;
+            NomeGrandePremio = nomeGrandePremio;
+            Circuito = circuito;
+            DataHoraBrasil = dataHoraBrasil;
+        }
     }
 }

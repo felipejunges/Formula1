@@ -12,8 +12,13 @@ namespace Formula1.Data.Models
 
         public List<ResultadoTemporada> Resultados { get; set; }
 
-        public CorridaTemporada()
+        public CorridaTemporada(int id, DateTime dataHoraBrasil, string nomeGrandePremio, bool temResultadosDeCorrida)
         {
+            Id = id;
+            DataHoraBrasil = dataHoraBrasil;
+            NomeGrandePremio = nomeGrandePremio;
+            TemResultadosDeCorrida = temResultadosDeCorrida;
+
             Resultados = new List<ResultadoTemporada>();
         }
     }

@@ -17,7 +17,7 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public Corrida ObterPeloId(int id)
+        public Corrida? ObterPeloId(int id)
         {
             return Db.Corridas.Find(id);
         }
@@ -28,13 +28,14 @@ namespace Formula1.Domain.Services
                 .Include(c => c.Resultados)
                 .Where(o => o.Temporada == temporada)
                 .OrderBy(o => o.DataHoraBrasil)
-                .Select(o => new CorridaTemporada()
-                {
-                    Id = o.Id,
-                    DataHoraBrasil = o.DataHoraBrasil,
-                    NomeGrandePremio = o.NomeGrandePremio,
-                    TemResultadosDeCorrida = o.TemResultadoDeCorrida
-                }).ToList();
+                .AsEnumerable() // para poder usar o construtor abaixo
+                .Select(o => new CorridaTemporada(
+                    id: o.Id,
+                    dataHoraBrasil: o.DataHoraBrasil,
+                    nomeGrandePremio: o.NomeGrandePremio,
+                    temResultadosDeCorrida: o.TemResultadoDeCorrida
+                ))
+                .ToList();
 
             return corridas;
         }
@@ -44,14 +45,15 @@ namespace Formula1.Domain.Services
             var corridas = Db.Corridas
                 .Where(o => o.Temporada == temporada)
                 .OrderBy(o => o.DataHoraBrasil)
-                .Select(o => new CorridaLista()
-                {
-                    Id = o.Id,
-                    NumeroCorrida = o.NumeroCorrida,
-                    DataHoraBrasil = o.DataHoraBrasil,
-                    NomeGrandePremio = o.NomeGrandePremio,
-                    Circuito = o.Circuito
-                }).ToList();
+                .AsEnumerable()
+                .Select(o => new CorridaLista(
+                    id: o.Id,
+                    numeroCorrida: o.NumeroCorrida,
+                    dataHoraBrasil: o.DataHoraBrasil,
+                    nomeGrandePremio: o.NomeGrandePremio,
+                    circuito: o.Circuito
+                ))
+                .ToList();
 
             return corridas;
         }
@@ -81,11 +83,11 @@ namespace Formula1.Domain.Services
             var corrida = new Corrida()
             {
                 Id = 0,
-                NumeroCorrida = corridaDados.NumeroCorrida.Value,
+                NumeroCorrida = corridaDados.NumeroCorrida!.Value,
                 Temporada = corridaDados.Temporada,
                 NomeGrandePremio = corridaDados.NomeGrandePremio,
                 Circuito = corridaDados.Circuito,
-                DataHoraBrasil = corridaDados.DataHoraBrasil.Value,
+                DataHoraBrasil = corridaDados.DataHoraBrasil!.Value,
                 CorridaClassificacao = corridaDados.CorridaClassificacao,
                 MetadePontos = corridaDados.MetadePontos
             };
@@ -98,11 +100,14 @@ namespace Formula1.Domain.Services
         {
             var corrida = ObterPeloId(corridaDados.Id);
 
-            corrida.NumeroCorrida = corridaDados.NumeroCorrida.Value;
+            if (corrida is null)
+                return;
+
+            corrida.NumeroCorrida = corridaDados.NumeroCorrida!.Value;
             corrida.Temporada = corridaDados.Temporada;
             corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;
             corrida.Circuito = corridaDados.Circuito;
-            corrida.DataHoraBrasil = corridaDados.DataHoraBrasil.Value;
+            corrida.DataHoraBrasil = corridaDados.DataHoraBrasil!.Value;
             corrida.CorridaClassificacao = corridaDados.CorridaClassificacao;
             corrida.MetadePontos = corridaDados.MetadePontos;
 

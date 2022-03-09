@@ -20,7 +20,7 @@ namespace Formula1.Domain.Services
             return Db.Usuarios.Any();
         }
 
-        public Usuario ObterUsuarioLogin(string email, string senha)
+        public Usuario? ObterUsuarioLogin(string email, string senha)
         {
             var usuario = Db.Usuarios.Where(o => o.Email == email).SingleOrDefault();
 

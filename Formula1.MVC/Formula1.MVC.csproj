@@ -24,4 +24,10 @@
     <Folder Include="Db\" />
   </ItemGroup>
 
+  <ItemGroup> 
+    <Content Include="Db\**"> 
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
+    </Content> 
+  </ItemGroup>
+
 </Project>

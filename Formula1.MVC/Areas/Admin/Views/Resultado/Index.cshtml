@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ViewData["Title"] = "Resultados";
-    ViewData["SubTitle"] = ViewData["NomeGP"];
+    ViewData["SubTitle"] = Model.NomeGP;
 }
 
 <h3>@ViewData["Title"]</h3>
@@ -29,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
             </th>
 
-            @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+            @if (Model.CorridaClassificacao)
             {
                 <th>
                     @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
@@ -68,7 +68,7 @@
                     @Html.DisplayFor(modelItem => item.PosicaoChegada)
                 </td>
 
-                @if (Convert.ToBoolean(ViewData["CorridaClassificacao"]))
+                @if (Model.CorridaClassificacao)
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.PontosClassificacao)
@@ -88,7 +88,7 @@
                     @Html.DisplayFor(modelItem => item.DSQ)
                 </td>
                 <td class="text-right">
-                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados.CorridaId">Editar</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados!.CorridaId">Editar</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
                 </td>
             </tr>

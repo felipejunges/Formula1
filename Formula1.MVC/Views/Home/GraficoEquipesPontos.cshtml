@@ -10,7 +10,7 @@
     <h3 class="display-6">@ViewData["Title"]</h3>
     <p>@ViewData["SubTitle"]</p>
 
-    <canvas id="grafico" style="height: @(Model.Height)px; width: 100%;"></canvas>
+    <canvas id="grafico" style="height: @(Model!.Height)px; width: 100%;"></canvas>
 </div>
 
 @section scripts {
@@ -29,7 +29,7 @@
                         <text>
                         {
                             label: '@equipe.Equipe',
-                            data: [@(string.Join(",", equipe.Pontos.Select(o => o != null ? o.ToString().Replace(',', '.') : "null")))],
+                            data: [@(string.Join(",", equipe.Pontos.Select(o => o.HasValue ? o.Value.ToString().Replace(',', '.') : "null")))],
                             borderColor: ['@equipe.CorRgb'],
                             fill: false,
                             borderWidth: 2
