@@ -26,7 +26,7 @@ namespace Formula1.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(LoginViewModel model, string returnUrl)
+        public async Task<IActionResult> Index(LoginViewModel model, string? returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace Formula1.MVC.Controllers
                         ExpiresUtc = DateTime.Now.AddHours(1)
                     });
 
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1)
+                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     else
                         return RedirectToAction("Index", "Home");
