@@ -108,6 +108,10 @@ namespace Formula1.MVC
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
+                    name: "default-with-temporada",
+                    pattern: "{temporada}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
