@@ -1,6 +1,5 @@
 ﻿using Formula1.Data.Models.Admin.Corridas;
 using Formula1.Domain.Services;
-using Formula1.Domain.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,29 +9,26 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class CorridaController : Controller
     {
-        private readonly ParametrosSettings _settings;
-
         private readonly CorridasService _corridasService;
 
-        public CorridaController(ParametrosSettings settings, CorridasService corridasService)
+        public CorridaController(CorridasService corridasService)
         {
-            _settings = settings;
             _corridasService = corridasService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int temporada)
         {
-            var dados = new CorridaDados() { Id = 0, Temporada = _settings.TemporadaAtiva };
-            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
+            var dados = new CorridaDados() { Id = 0, Temporada = temporada };
+            var corridasLista = _corridasService.GetCorridasLista(temporada);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(edicao);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, int temporada)
         {
             var corrida = _corridasService.ObterPeloId(id);
 
@@ -40,18 +36,18 @@ namespace Formula1.MVC.Areas.Admin.Controllers
                 return NotFound();
 
             var dados = new CorridaDados(corrida);
-            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
+            var corridasLista = _corridasService.GetCorridasLista(temporada);
 
             var edicao = new CorridaListaDados(dados, corridasLista);
 
             //
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(nameof(Index), edicao);
         }
 
         [HttpPost]
-        public IActionResult Save(CorridaDados corridaDados)
+        public IActionResult Save(CorridaDados corridaDados, int temporada)
         {
             if (ModelState.IsValid)
             {
@@ -64,11 +60,11 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             }
 
             //
-            var corridasLista = _corridasService.GetCorridasLista(_settings.TemporadaAtiva);
+            var corridasLista = _corridasService.GetCorridasLista(temporada); // TODO: analisar se nao é melhor receber no método mesmo o "temporada"
 
             var edicao = new CorridaListaDados(corridaDados, corridasLista);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada; // TODO: analisar se nao é melhor receber no método mesmo o "temporada"
 
             return View(nameof(Index), edicao);
         }

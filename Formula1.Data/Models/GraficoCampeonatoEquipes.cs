@@ -18,7 +18,7 @@ namespace Formula1.Data.Models
         {
             get
             {
-                double maxPontos = Equipes.Max(p => p.Pontos.Max() ?? 0);
+                double maxPontos = Equipes.Any() ? Equipes.Max(p => p.Pontos.Max() ?? 0) : 0;
 
                 if (maxPontos == 0)
                     return maxPontos;

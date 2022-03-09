@@ -1,5 +1,4 @@
 ﻿using Formula1.Domain.Services;
-using Formula1.Domain.Settings;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +9,6 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ParametrosSettings _settings;
-
         private readonly TabelaPilotosService TabelaPilotosService;
         private readonly TabelaEquipesService TabelaEquipesService;
         private readonly PilotoTemporadaService PilotoTemporadaService;
@@ -21,7 +18,6 @@ namespace Formula1.MVC.Controllers
 
         public HomeController(TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
-            //_settings = settings;
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;
             PilotoTemporadaService = pilotoTemporadaService;
