@@ -1,5 +1,4 @@
 ﻿using Formula1.Domain.Services;
-using Formula1.Domain.Settings;
 using Formula1.Infra.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -42,11 +41,6 @@ namespace Formula1.MVC
                     .AddScoped<GraficoCampeonatoPilotosService>()
                     .AddScoped<GraficoCampeonatoEquipesService>()
                     .AddScoped<UsuarioService>();
-
-            var parametrosSettings = Configuration.GetSection("Parametros").Get<ParametrosSettings>();
-
-            services
-                .AddSingleton(parametrosSettings);
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -100,16 +94,16 @@ namespace Formula1.MVC
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Resultado",
-                    pattern: "Admin/{controller}/{corridaId}/{action=Index}/{id?}");
+                    pattern: "{temporada=2022}/Admin/{controller}/{corridaId:int}/{action=Index}/{id?}");
 
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Admin",
-                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada=2022}/Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada=2022}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

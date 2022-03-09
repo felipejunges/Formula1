@@ -24,7 +24,7 @@
 
                         @if (corrida.TemResultadosDeCorrida)
                         {
-                            <a href="@Url.Content("~/Home/PilotosPosicoes?o=" + corrida.Id.ToString())">
+                            <a asp-area="" asp-controller="Home" asp-action="PilotosPosicoes" asp-route-o="@(corrida.Id.ToString())">
                                 @corrida.NomeGrandePremio<br />@corrida.DataHoraBrasil.ToString("dd/MMM/yyyy HH:mm")
                             </a>
                         }
@@ -39,7 +39,7 @@
 
             <th scope="col" class="text-center align-middle th-titulo-corrida">
                 <small class="titulo-corrida">
-                    <a href="@Url.Content("~/Home/PilotosPosicoes")">Pontos</a>
+                    <a asp-area="" asp-controller="Home" asp-action="PilotosPosicoes">Pontos</a>
                 </small>
             </th>
 

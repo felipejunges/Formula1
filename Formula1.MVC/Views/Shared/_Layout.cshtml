@@ -62,6 +62,18 @@
                                 }
                             </div>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Temporada
+                            </a>
+                            <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown">
+                                @for (int temporada = 2022; temporada >= 2019; temporada--)
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="PilotosPosicoes" asp-route-temporada="@temporada">@temporada</a>
+                                }
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

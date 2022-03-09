@@ -1,5 +1,4 @@
 ﻿using Formula1.Domain.Services;
-using Formula1.Domain.Settings;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +9,6 @@ namespace Formula1.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ParametrosSettings _settings;
-
         private readonly TabelaPilotosService TabelaPilotosService;
         private readonly TabelaEquipesService TabelaEquipesService;
         private readonly PilotoTemporadaService PilotoTemporadaService;
@@ -19,9 +16,8 @@ namespace Formula1.MVC.Controllers
         private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
         private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
 
-        public HomeController(ParametrosSettings settings, TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
+        public HomeController(TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
-            _settings = settings;
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;
             PilotoTemporadaService = pilotoTemporadaService;
@@ -37,57 +33,57 @@ namespace Formula1.MVC.Controllers
         }
 
         [ResponseCache(Duration = 60)]
-        public IActionResult PilotosPosicoes()
+        public IActionResult PilotosPosicoes(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
 
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder, false);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(temporada, corridaOrder, false);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(campeonato);
         }
 
         [ResponseCache(Duration = 60)]
-        public IActionResult PilotosPontos()
+        public IActionResult PilotosPontos(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
 
-            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(_settings.TemporadaAtiva, corridaOrder, true);
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(temporada, corridaOrder, true);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(campeonato);
         }
 
         [ResponseCache(Duration = 60)]
-        public IActionResult EquipesPontos()
+        public IActionResult EquipesPontos(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
 
-            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(_settings.TemporadaAtiva, corridaOrder);
+            var campeonato = TabelaEquipesService.GetTabelaCampeonatoEquipes(temporada, corridaOrder);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(campeonato);
         }
 
         [ResponseCache(Duration = 60)]
-        public IActionResult GraficoPilotosPontos()
+        public IActionResult GraficoPilotosPontos(int temporada)
         {
-            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(_settings.TemporadaAtiva);
+            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(temporada);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(pilotosGrafico);
         }
 
         [ResponseCache(Duration = 60)]
-        public IActionResult GraficoEquipesPontos()
+        public IActionResult GraficoEquipesPontos(int temporada)
         {
-            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(_settings.TemporadaAtiva);
+            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(temporada);
 
-            ViewData["Temporada"] = _settings.TemporadaAtiva;
+            ViewData["Temporada"] = temporada;
 
             return View(equipesGrafico);
         }
@@ -99,12 +95,12 @@ namespace Formula1.MVC.Controllers
         }
 
         [Authorize]
-        public IActionResult Calcular()
+        public IActionResult Calcular(int temporada)
         {
-            this.PilotoTemporadaService.CalcularPilotosTemporada(_settings.TemporadaAtiva);
-            this.EquipeTemporadaService.CalcularEquipesTemporada(_settings.TemporadaAtiva);
+            this.PilotoTemporadaService.CalcularPilotosTemporada(temporada);
+            this.EquipeTemporadaService.CalcularEquipesTemporada(temporada);
 
-            return Ok($"Gerado cálculo da temporada {_settings.TemporadaAtiva}.");
+            return Ok($"Gerado cálculo da temporada {temporada}.");
         }
     }
 }
