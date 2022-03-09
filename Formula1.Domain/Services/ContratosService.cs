@@ -15,7 +15,7 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public Contrato ObterPeloId(int id)
+        public Contrato? ObterPeloId(int id)
         {
             return Db.Contratos.Find(id);
         }
@@ -49,6 +49,9 @@ namespace Formula1.Domain.Services
         public void Alterar(ContratoDados contratoDados)
         {
             var contrato = ObterPeloId(contratoDados.Id);
+
+            if (contrato is null)
+                return;
 
             contrato.Temporada = contratoDados.Temporada;
             contrato.PilotoId = contratoDados.PilotoId;

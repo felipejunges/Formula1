@@ -18,7 +18,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var dados = new PilotoDados() { Id = 0, Ativo = true };
+            var dados = PilotoDados.Novo();
             var pilotos = _pilotosService.ObterPilotosLista();
 
             var edicao = new PilotoListaDados(dados, pilotos);

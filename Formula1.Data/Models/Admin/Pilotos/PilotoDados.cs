@@ -18,18 +18,37 @@ namespace Formula1.Data.Models.Admin.Pilotos
         public string Sigla { get; set; }
 
         [Required]
-        [Display(Name = "Número")]
+        [Display(Name = "NÃºmero")]
         public int? NumeroCarro { get; set; }
 
         [Required]
-        [Display(Name = "País origem")]
+        [Display(Name = "PaÃ­s origem")]
         public string PaisOrigem { get; set; }
 
         public bool Ativo { get; set; }
 
-        public PilotoDados()
+        public static PilotoDados Novo()
         {
+            return new PilotoDados(
+                id: 0,
+                nome: string.Empty,
+                nomeGuerra: string.Empty,
+                sigla: string.Empty,
+                numeroCarro: default,
+                paisOrigem: string.Empty,
+                ativo: true
+            );
+        }
 
+        public PilotoDados(int id, string nome, string nomeGuerra, string sigla, int? numeroCarro, string paisOrigem, bool ativo)
+        {
+            Id = id;
+            Nome = nome;
+            NomeGuerra = nomeGuerra;
+            Sigla = sigla;
+            NumeroCarro = numeroCarro;
+            PaisOrigem = paisOrigem;
+            Ativo = ativo;
         }
 
         public PilotoDados(Piloto piloto)

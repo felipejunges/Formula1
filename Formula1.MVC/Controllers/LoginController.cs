@@ -33,7 +33,7 @@ namespace Formula1.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = _usuarioService.ObterUsuarioLogin(model.Email, model.Senha);
+                var usuario = _usuarioService.ObterUsuarioLogin(model.Email!, model.Senha!);
 
                 if (usuario == null)
                     ModelState.AddModelError("", "E-mail e/ou senha inválidos.");

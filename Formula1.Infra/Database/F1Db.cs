@@ -7,23 +7,23 @@ namespace Formula1.Infra.Database
     {
         public F1Db(DbContextOptions<F1Db> options) : base(options) { }
 
-        public DbSet<Contrato> Contratos { get; set; }
+        public DbSet<Contrato> Contratos => Set<Contrato>();
 
-        public DbSet<Corrida> Corridas { get; set; }
+        public DbSet<Corrida> Corridas => Set<Corrida>();
 
-        public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<Equipe> Equipes => Set<Equipe>();
 
-        public DbSet<EquipeTemporada> EquipesTemporada { get; set; }
+        public DbSet<EquipeTemporada> EquipesTemporada => Set<EquipeTemporada>();
 
-        public DbSet<Piloto> Pilotos { get; set; }
+        public DbSet<Piloto> Pilotos => Set<Piloto>();
 
-        public DbSet<PilotoTemporada> PilotosTemporada { get; set; }
+        public DbSet<PilotoTemporada> PilotosTemporada => Set<PilotoTemporada>();
 
-        public DbSet<Punicao> Punicoes { get; set; }
+        public DbSet<Punicao> Punicoes => Set<Punicao>();
 
-        public DbSet<Resultado> Resultados { get; set; }
+        public DbSet<Resultado> Resultados => Set<Resultado>();
 
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Usuario> Usuarios => Set<Usuario>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

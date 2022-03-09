@@ -16,11 +16,9 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public Resultado ObterPeloId(int id)
+        public Resultado? ObterPeloId(int id)
         {
-            var resultado = Db.Resultados.Find(id);
-
-            return resultado;
+            return Db.Resultados.Find(id);
         }
 
         public List<ResultadoTemporada> GetResultadosPilotosTemporada(int temporada)
@@ -148,12 +146,12 @@ namespace Formula1.Domain.Services
             {
                 Id = 0,
                 CorridaId = resultadoDados.CorridaId,
-                PilotoId = resultadoDados.PilotoId,
-                EquipeId = resultadoDados.EquipeId,
+                PilotoId = resultadoDados.PilotoId!.Value,
+                EquipeId = resultadoDados.EquipeId!.Value,
                 PosicaoLargada = resultadoDados.PosicaoLargada,
                 PosicaoChegada = resultadoDados.PosicaoChegada,
-                PontosClassificacao = resultadoDados.PontosClassificacao.Value,
-                PontosCorrida = resultadoDados.PontosCorrida.Value,
+                PontosClassificacao = resultadoDados.PontosClassificacao!.Value,
+                PontosCorrida = resultadoDados.PontosCorrida!.Value,
                 VoltaMaisRapida = resultadoDados.VoltaMaisRapida,
                 DNF = resultadoDados.DNF,
                 DSQ = resultadoDados.DSQ
@@ -167,13 +165,16 @@ namespace Formula1.Domain.Services
         {
             var resultado = ObterPeloId(resultadoDados.Id);
 
+            if (resultado is null)
+                return;
+
             resultado.CorridaId = resultadoDados.CorridaId;
-            resultado.PilotoId = resultadoDados.PilotoId;
-            resultado.EquipeId = resultadoDados.EquipeId;
+            resultado.PilotoId = resultadoDados.PilotoId!.Value;
+            resultado.EquipeId = resultadoDados.EquipeId!.Value;
             resultado.PosicaoLargada = resultadoDados.PosicaoLargada;
             resultado.PosicaoChegada = resultadoDados.PosicaoChegada;
-            resultado.PontosClassificacao = resultadoDados.PontosClassificacao.Value;
-            resultado.PontosCorrida = resultadoDados.PontosCorrida.Value;
+            resultado.PontosClassificacao = resultadoDados.PontosClassificacao!.Value;
+            resultado.PontosCorrida = resultadoDados.PontosCorrida!.Value;
             resultado.VoltaMaisRapida = resultadoDados.VoltaMaisRapida;
             resultado.DNF = resultadoDados.DNF;
             resultado.DSQ = resultadoDados.DSQ;

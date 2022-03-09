@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Formula1.Data.Entities;
+﻿using Formula1.Data.Entities;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Formula1.Data.Models.Admin.Resultados
 {
@@ -9,11 +11,13 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public int CorridaId { get; set; }
 
+        [Required]
         [Display(Name = "Piloto")]
-        public int PilotoId { get; set; }
+        public int? PilotoId { get; set; }
 
+        [Required]
         [Display(Name = "Equipe")]
-        public int EquipeId { get; set; }
+        public int? EquipeId { get; set; }
 
         [Display(Name = "Pos. largada")]
         public int PosicaoLargada { get; set; }
@@ -36,16 +40,36 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool DSQ { get; set; }
 
-        public static ResultadoDados NovoResultado(int corridaId)
-        {
-            return new ResultadoDados() { Id = 0, CorridaId = corridaId };
-        }
+        public bool CorridaClassificacao { get; set; }
+
+        public IEnumerable<Piloto> PilotosLista { get; set; }
+        public IEnumerable<Equipe> EquipesLista { get; set; }
 
         public ResultadoDados()
         {
+            PilotosLista = Enumerable.Empty<Piloto>();
+            EquipesLista = Enumerable.Empty<Equipe>();
         }
 
-        public ResultadoDados(Resultado resultado)
+        public ResultadoDados(int corridaId, bool corridaClassificacao, List<Piloto> pilotosLista, List<Equipe> equipesLista)
+        {
+            Id = 0;
+            CorridaId = corridaId;
+            PilotoId = null;
+            EquipeId = null;
+            PosicaoLargada = 0;
+            PosicaoChegada = 0;
+            PontosClassificacao = 0;
+            PontosCorrida = 0;
+            VoltaMaisRapida = false;
+            DNF = false;
+            DSQ = false;
+            CorridaClassificacao = corridaClassificacao;;
+            PilotosLista = pilotosLista;
+            EquipesLista = equipesLista;
+        }
+
+        public ResultadoDados(Resultado resultado, List<Piloto> pilotosLista, List<Equipe> equipesLista)
         {
             Id = resultado.Id;
             CorridaId = resultado.CorridaId;
@@ -58,6 +82,15 @@ namespace Formula1.Data.Models.Admin.Resultados
             VoltaMaisRapida = resultado.VoltaMaisRapida;
             DNF = resultado.DNF;
             DSQ = resultado.DSQ;
+            CorridaClassificacao = resultado.Corrida.CorridaClassificacao;
+            PilotosLista = pilotosLista;
+            EquipesLista = equipesLista;
+        }
+
+        public void AtualizarListas(List<Piloto> pilotos, List<Equipe> equipes)
+        {
+            PilotosLista = pilotos;
+            EquipesLista = equipes;
         }
     }
 }

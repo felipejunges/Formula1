@@ -16,11 +16,9 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public Piloto ObterPeloId(int id)
+        public Piloto? ObterPeloId(int id)
         {
-            var piloto = Db.Pilotos.Find(id);
-
-            return piloto;
+            return Db.Pilotos.Find(id);
         }
 
         public List<PilotoLista> ObterPilotosLista()
@@ -70,7 +68,7 @@ namespace Formula1.Domain.Services
                 Nome = pilotoDados.Nome,
                 NomeGuerra = pilotoDados.NomeGuerra,
                 Sigla = pilotoDados.Sigla,
-                NumeroCarro = pilotoDados.NumeroCarro.Value,
+                NumeroCarro = pilotoDados.NumeroCarro!.Value,
                 PaisOrigem = pilotoDados.PaisOrigem,
                 Ativo = pilotoDados.Ativo
             };
@@ -83,10 +81,13 @@ namespace Formula1.Domain.Services
         {
             var piloto = ObterPeloId(pilotoDados.Id);
 
+            if (piloto is null)
+                return;
+
             piloto.Nome = pilotoDados.Nome;
             piloto.NomeGuerra = pilotoDados.NomeGuerra;
             piloto.Sigla = pilotoDados.Sigla;
-            piloto.NumeroCarro = pilotoDados.NumeroCarro.Value;
+            piloto.NumeroCarro = pilotoDados.NumeroCarro!.Value;
             piloto.PaisOrigem = pilotoDados.PaisOrigem;
             piloto.Ativo = pilotoDados.Ativo;
 

@@ -8,11 +8,11 @@
 
         public int? PilotoId { get; set; }
 
-        public Piloto Piloto { get; set; }
+        public Piloto? Piloto { get; set; }
 
         public int? EquipeId { get; set; }
 
-        public Equipe Equipe { get; set; }
+        public Equipe? Equipe { get; set; }
 
         public string Descricao { get; set; }
 

@@ -16,11 +16,9 @@ namespace Formula1.Domain.Services
             Db = db;
         }
 
-        public Equipe ObterPeloId(int id)
+        public Equipe? ObterPeloId(int id)
         {
-            var equipe = Db.Equipes.Find(id);
-
-            return equipe;
+            return Db.Equipes.Find(id);
         }
 
         public List<EquipeLista> ObterEquipesLista()
@@ -79,6 +77,9 @@ namespace Formula1.Domain.Services
         public void Alterar(EquipeDados equipeDados)
         {
             var equipe = ObterPeloId(equipeDados.Id);
+
+            if (equipe is null)
+                return;
 
             equipe.Nome = equipeDados.Nome;
             equipe.CorRgb = equipeDados.CorRgb;
