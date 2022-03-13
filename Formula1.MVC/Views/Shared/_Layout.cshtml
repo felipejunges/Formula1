@@ -70,7 +70,7 @@
                             <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown">
                                 @for (int temporada = 2022; temporada >= 2019; temporada--)
                                 {
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="PilotosPosicoes" asp-route-temporada="@temporada">@temporada</a>
+                                    <a class="dropdown-item" asp-route-temporada="@temporada">@temporada</a>
                                 }
                             </div>
                         </li>
