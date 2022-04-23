@@ -10,11 +10,6 @@ namespace Formula1.Domain.Services
 {
     public class CorridasService
     {
-        private const int MAXIMO_PONTOS_PILOTO_PADRAO = 26;
-        private const int MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO = 29;
-        private const int MAXIMO_PONTOS_EQUIPE_PADRAO = 44;
-        private const int MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO = 49;
-
         private readonly F1Db Db;
 
         public CorridasService(F1Db db)
@@ -65,14 +60,20 @@ namespace Formula1.Domain.Services
         {
             var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada).AsEnumerable().Where(o => !o.TemResultadoDeCorrida);
 
-            return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_PILOTO_COM_CLASSIFICACAO : MAXIMO_PONTOS_PILOTO_PADRAO);
+            return corridasRestantes.Sum(s =>
+                s.CorridaClassificacao
+                    ? temporada < 2022 ? 29 : 34
+                    : 26);
         }
 
         public int GetPontosEmDisputaEquipes(int temporada)
         {
             var corridasRestantes = Db.Corridas.Include(o => o.Resultados).Where(o => o.Temporada == temporada).AsEnumerable().Where(o => !o.TemResultadoDeCorrida);
 
-            return corridasRestantes.Sum(s => s.CorridaClassificacao ? MAXIMO_PONTOS_EQUIPE_COM_CLASSIFICACAO : MAXIMO_PONTOS_EQUIPE_PADRAO);
+            return corridasRestantes.Sum(s =>
+                s.CorridaClassificacao
+                    ? temporada < 2022 ? 49 : 59
+                    : 44);
         }
 
         public void Incluir(CorridaDados corridaDados)
