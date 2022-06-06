@@ -1,16 +1,22 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal as build
+WORKDIR /source
+COPY . .
+RUN dotnet restore "Formula1.MVC/Formula1.MVC.csproj"
+RUN dotnet publish "Formula1.MVC/Formula1.MVC.csproj" -c release -o /app --no-restore
+
+# Serve stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
+WORKDIR /app
+COPY --from=build /app ./
 
 EXPOSE 5000
 
-RUN mkdir /srv/Felipe
-
-WORKDIR /srv/Felipe
-
-RUN git clone https://github.com/felipejunges/Formula1.git
-
-WORKDIR /srv/Felipe/Formula1/Formula1.MVC
-
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "Formula1.MVC.dll"]
 
 # $ docker build . -t teste_felipe
 # $ docker run -it -p 5000:5000 teste_felipe
+# $ docker run -it -p 5000:5000 -p 5001:5001 -e ASPNETCORE_HTTP_PORT=https://+:5001 -e ASPNETCORE_URLS=http://+:5000 teste_felipe
+
+# ASPNETCORE_ENVIRONMENT=Development
+
