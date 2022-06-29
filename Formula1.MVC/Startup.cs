@@ -52,7 +52,7 @@ namespace Formula1.MVC
 
             services.AddDataProtection()
                 .SetApplicationName("Formula 1")
-                .PersistKeysToFileSystem(new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"\Etc\Keys"))
+                .PersistKeysToFileSystem(new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"/Etc/Keys"))
                 .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
 
             services.AddMvc();
