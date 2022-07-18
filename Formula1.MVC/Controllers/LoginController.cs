@@ -21,6 +21,9 @@ namespace Formula1.MVC.Controllers
 
         public IActionResult Index()
         {
+            if (!_usuarioService.ValidarPossuiUsuario())
+                return RedirectToAction(nameof(Cadastro));
+
             return View();
         }
 
@@ -30,7 +33,7 @@ namespace Formula1.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = _usuarioService.CheckLogin(model.Email, model.Senha);
+                var usuario = _usuarioService.ObterUsuarioLogin(model.Email, model.Senha);
 
                 if (usuario == null)
                     ModelState.AddModelError("", "E-mail e/ou senha inválidos.");
@@ -64,7 +67,29 @@ namespace Formula1.MVC.Controllers
         {
             await HttpContext.SignOutAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cadastro(CadastroViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = model.MapUsuario();
+
+                await _usuarioService.IncluirUsuario(usuario);
+
+                // TODO: poderia receber o redirecturl
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
         }
     }
 }

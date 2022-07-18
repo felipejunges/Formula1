@@ -1,0 +1,41 @@
+﻿@model Formula1.MVC.Models.CadastroViewModel
+
+@{ 
+    ViewData["Title"] = "Cadastro";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-4 pt-5">
+            <h1 class="text-center login-title">Cadastro do administrador da aplicação Formula 1</h1>
+
+            @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="div-erro">
+                    <strong>Erro no cadastro</strong>
+
+                    @foreach (var modelError in Html.ViewData.ModelState.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+                    {
+                        <br />@modelError.ErrorMessage
+                    }
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+            <div class="account-wall">
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                <form class="form-signin" method="post">
+                    <input type="text" class="form-control" placeholder="Nome" asp-for="Nome" autofocus>
+                    <input type="text" class="form-control" placeholder="E-mail" asp-for="Email">
+                    <input type="text" class="form-control" placeholder="Confirme o e-mail" asp-for="ConfirmacaoEmail">
+                    <input type="password" class="form-control" placeholder="Senha" asp-for="Senha">
+                    <input type="password" class="form-control" placeholder="Confirme a senha" asp-for="ConfirmacaoSenha">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

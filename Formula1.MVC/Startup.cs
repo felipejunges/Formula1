@@ -1,5 +1,9 @@
-﻿using Formula1.Domain.Services;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Formula1.Domain.Services;
 using Formula1.Infra.Database;
+using Formula1.MVC.Models;
+using Formula1.MVC.Models.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -42,6 +46,8 @@ namespace Formula1.MVC
                     .AddScoped<GraficoCampeonatoEquipesService>()
                     .AddScoped<UsuarioService>();
 
+            services.AddTransient<IValidator<CadastroViewModel>, CadastroViewModelValidator>();
+
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -55,7 +61,8 @@ namespace Formula1.MVC
                 .PersistKeysToFileSystem(new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + @"/Etc/Keys"))
                 .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddFluentValidation();
 
             services.AddControllersWithViews();
         }
