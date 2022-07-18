@@ -105,6 +105,12 @@ namespace Formula1.MVC
                     name: "default",
                     pattern: "{temporada=2022}/{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<F1Db>();
+                db.Database.EnsureCreated();
+            }
         }
     }
 }
