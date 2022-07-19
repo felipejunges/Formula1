@@ -2,18 +2,18 @@
 {
     public class Contrato : Entity
     {
-        public Contrato()
-        {
-        }
-
         public int PilotoId { get; set; }
 
-        public Piloto Piloto { get; set; }
+        public virtual Piloto Piloto { get; set; }
 
         public int EquipeId { get; set; }
 
-        public Equipe Equipe { get; set; }
+        public virtual Equipe Equipe { get; set; }
 
         public int Temporada { get; set; }
+
+        public Contrato()
+        {
+        }
     }
 }

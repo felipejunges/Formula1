@@ -4,14 +4,6 @@ namespace Formula1.Data.Entities
 {
     public class Equipe : Entity
     {
-        public Equipe()
-        {
-            Contratos = new HashSet<Contrato>();
-            Punicoes = new HashSet<Punicao>();
-            Resultados = new HashSet<Resultado>();
-            Temporadas = new HashSet<EquipeTemporada>();
-        }
-
         public string Nome { get; set; }
 
         public string CorRgb { get; set; }
@@ -22,5 +14,16 @@ namespace Formula1.Data.Entities
         public virtual ICollection<Punicao> Punicoes { get; set; }
         public virtual ICollection<Resultado> Resultados { get; set; }
         public virtual ICollection<EquipeTemporada> Temporadas { get; set; }
+
+        public Equipe()
+        {
+            Nome = string.Empty;
+            CorRgb = string.Empty;
+
+            Contratos = new HashSet<Contrato>();
+            Punicoes = new HashSet<Punicao>();
+            Resultados = new HashSet<Resultado>();
+            Temporadas = new HashSet<EquipeTemporada>();
+        }
     }
 }

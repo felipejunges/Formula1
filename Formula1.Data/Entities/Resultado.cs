@@ -2,10 +2,6 @@
 {
     public class Resultado : Entity
     {
-        public Resultado()
-        {
-        }
-
         public int CorridaId { get; set; }
 
         public Corrida Corrida { get; set; }
@@ -31,5 +27,9 @@
         public bool DNF { get; set; }
 
         public bool DSQ { get; set; }
+
+        public Resultado()
+        {
+        }
     }
 }

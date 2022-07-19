@@ -37,6 +37,7 @@ namespace Formula1.MVC
                     .AddScoped<CorridasService>()
                     .AddScoped<EquipesService>()
                     .AddScoped<EquipeTemporadaService>()
+                    .AddScoped<ExportacaoService>()
                     .AddScoped<PilotosService>()
                     .AddScoped<PilotoTemporadaService>()
                     .AddScoped<ResultadosService>()
@@ -63,7 +64,7 @@ namespace Formula1.MVC
 
             services.AddMvc()
                 .AddFluentValidation();
-
+                
             services.AddControllersWithViews();
         }
 
