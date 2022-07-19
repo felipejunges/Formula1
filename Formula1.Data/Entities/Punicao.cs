@@ -17,5 +17,9 @@
         public string Descricao { get; set; }
 
         public int Pontos { get; set; }
+
+        public Punicao()
+        {
+        }
     }
 }
