@@ -16,9 +16,17 @@ namespace Formula1.Data.Models.Admin.Equipes
 
         public bool Ativo { get; set; }
 
+        public static EquipeDados Novo()
+        {
+            return new EquipeDados();
+        }
+
         public EquipeDados()
         {
-
+            Id = 0;
+            Nome = string.Empty;
+            CorRgb = string.Empty;
+            Ativo = true;
         }
 
         public EquipeDados(Equipe equipe)

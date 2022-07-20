@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ViewData["Title"] = "Contratos";
-    ViewData["SubTitle"] = "Temporada " + ViewData["Temporada"];
+    ViewData["SubTitle"] = "Temporada " + Model.Dados.Temporada;
 }
 
 <h3>@ViewData["Title"]</h3>

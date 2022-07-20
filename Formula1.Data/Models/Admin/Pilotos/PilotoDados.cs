@@ -40,6 +40,14 @@ namespace Formula1.Data.Models.Admin.Pilotos
             );
         }
 
+        public PilotoDados()
+        {
+            Nome = string.Empty;
+            NomeGuerra = string.Empty;
+            Sigla = string.Empty;
+            PaisOrigem = string.Empty;
+        }
+
         public PilotoDados(int id, string nome, string nomeGuerra, string sigla, int? numeroCarro, string paisOrigem, bool ativo)
         {
             Id = id;

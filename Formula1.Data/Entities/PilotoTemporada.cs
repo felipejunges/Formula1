@@ -11,5 +11,10 @@
         public int Posicao { get; set; }
 
         public int PosicaoMaxima { get; set; }
+
+        public PilotoTemporada()
+        {
+            Piloto = null!;
+        }
     }
 }

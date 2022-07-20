@@ -33,8 +33,17 @@ namespace Formula1.Data.Models.Admin.Corridas
         [Display(Name = "Metade de pontos")]
         public bool MetadePontos { get; set; }
 
-        public CorridaDados()
+        public static CorridaDados Novo(int temporada)
         {
+            return new CorridaDados(temporada);
+        }
+
+        public CorridaDados(int temporada)
+        {
+            Id = 0;
+            Temporada = temporada;
+            NomeGrandePremio = string.Empty;
+            Circuito = string.Empty;
         }
 
         public CorridaDados(Corrida corrida)

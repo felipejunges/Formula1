@@ -9,22 +9,22 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class ResultadoController : Controller
     {
-        private readonly CorridasService CorridasService;
-        private readonly PilotosService PilotosService;
-        private readonly EquipesService EquipesService;
-        private readonly ResultadosService ResultadosService;
+        private readonly CorridasService _corridasService;
+        private readonly PilotosService _pilotosService;
+        private readonly EquipesService _equipesService;
+        private readonly ResultadosService _resultadosService;
 
         public ResultadoController(CorridasService corridasService, PilotosService pilotosService, EquipesService equipesService, ResultadosService resultadosService)
         {
-            CorridasService = corridasService;
-            PilotosService = pilotosService;
-            EquipesService = equipesService;
-            ResultadosService = resultadosService;
+            _corridasService = corridasService;
+            _pilotosService = pilotosService;
+            _equipesService = equipesService;
+            _resultadosService = resultadosService;
         }
 
         public IActionResult Index(int corridaId)
         {
-            var corrida = CorridasService.ObterPeloId(corridaId);
+            var corrida = _corridasService.ObterPeloId(corridaId);
 
             if (corrida is null)
                 return NotFound();
@@ -32,10 +32,10 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             var dados = new ResultadoDados(
                 corridaId,
                 corrida.CorridaClassificacao,
-                PilotosService.ObterPilotosContrato(corrida.Temporada),
-                EquipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosService.ObterPilotosContrato(corrida.Temporada),
+                _equipesService.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = ResultadosService.ObterListaResultados(corridaId);
+            var resultados = _resultadosService.ObterListaResultados(corridaId);
 
             var edicao = new ResultadoListaDados(
                 dados,
@@ -48,22 +48,22 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Edit(int corridaId, int id)
         {
-            var resultado = this.ResultadosService.ObterPeloId(id);
+            var resultado = _resultadosService.ObterPeloId(id);
 
             if (resultado is null)
                 return BadRequest();
 
-            var corrida = CorridasService.ObterPeloId(corridaId);
+            var corrida = _corridasService.ObterPeloId(corridaId);
 
             if (corrida == null)
                 return BadRequest();
 
             var dados = new ResultadoDados(
                 resultado,
-                PilotosService.ObterPilotosContrato(corrida.Temporada),
-                EquipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosService.ObterPilotosContrato(corrida.Temporada),
+                _equipesService.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = this.ResultadosService.ObterListaResultados(corridaId);
+            var resultados = _resultadosService.ObterListaResultados(corridaId);
 
             var edicao = new ResultadoListaDados(
                 dados,
@@ -80,24 +80,24 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (resultadoDados.Id == 0)
-                    this.ResultadosService.Incluir(resultadoDados);
+                    _resultadosService.Incluir(resultadoDados);
                 else
-                    this.ResultadosService.Alterar(resultadoDados);
+                    _resultadosService.Alterar(resultadoDados);
 
                 return RedirectToAction("Index", new { corridaId = resultadoDados.CorridaId });
             }
 
             //
-            var corrida = CorridasService.ObterPeloId(resultadoDados.CorridaId);
+            var corrida = _corridasService.ObterPeloId(resultadoDados.CorridaId);
 
             if (corrida == null)
                 return BadRequest();
 
             resultadoDados.AtualizarListas(
-                PilotosService.ObterPilotosContrato(corrida.Temporada),
-                EquipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosService.ObterPilotosContrato(corrida.Temporada),
+                _equipesService.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = this.ResultadosService.ObterListaResultados(resultadoDados.CorridaId);
+            var resultados = _resultadosService.ObterListaResultados(resultadoDados.CorridaId);
 
             var edicao = new ResultadoListaDados(
                 resultadoDados,
@@ -109,12 +109,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Delete(int corridaId, int id)
         {
-            var resultado = this.ResultadosService.ObterPeloId(id);
+            var resultado = _resultadosService.ObterPeloId(id);
 
             if (resultado == null)
                 return NotFound();
 
-            this.ResultadosService.Excluir(resultado);
+            _resultadosService.Excluir(resultado);
 
             return RedirectToAction("Index", new { corridaId });
         }

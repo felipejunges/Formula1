@@ -2,10 +2,10 @@
 {
     public class EquipePontosGrafico
     {
-        public string Equipe { get; set; }
+        public string Equipe { get; set; } = string.Empty;
 
-        public string CorRgb { get; set; }
+        public string CorRgb { get; set; } = string.Empty;
 
-        public double?[] Pontos { get; set; }
+        public double?[] Pontos { get; set; } = new double?[0];
     }
 }

@@ -19,6 +19,7 @@ namespace Formula1.Data.Models.Admin.Corridas
         [DisplayFormat(DataFormatString = "{0:dd/MMM/yyyy HH:mm}")]
         public DateTime DataHoraBrasil { get; set; }
 
+        // TODO: construtor pode gerar porblema no Ef, nao era melhor setar as props como "init" e setar como string.empty, igual ContratoLista ?
         public CorridaLista(int id, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil)
         {
             Id = id;

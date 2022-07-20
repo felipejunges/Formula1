@@ -20,6 +20,9 @@ namespace Formula1.Data.Models
 
         public PilotoTemporadaResultado()
         {
+            NomeGuerra = string.Empty;
+            CorRgb = string.Empty;
+            
             Resultados = new List<ResultadoTemporada>();
         }
     }
