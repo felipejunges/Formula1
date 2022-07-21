@@ -2,6 +2,7 @@
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Pilotos;
 using Formula1.Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,18 +45,22 @@ namespace Formula1.Domain.Services
 
         public List<PilotoTemporadaResultado> ObterPilotosTabela(int temporada)
         {
-            var pilotos = (from pt in Db.PilotosTemporada
-                           join p in Db.Pilotos on pt.Piloto equals p
-                           where pt.Temporada == temporada
-                           select new PilotoTemporadaResultado()
-                           {
-                               Id = p.Id,
-                               NomeGuerra = p.NomeGuerra,
-                               CorRgb = p.Contratos.Where(o => o.Temporada == temporada).OrderByDescending(o => o.Id).FirstOrDefault().Equipe.CorRgb,
-                               Pontos = pt.Pontos,
-                               Posicao = pt.Posicao,
-                               PosicaoMaxima = pt.PosicaoMaxima
-                           }).ToList();
+            var pilotos = Db.PilotosTemporada
+                            .Include(pt => pt.Piloto)
+                                .ThenInclude(p => p.Contratos)
+                                .ThenInclude(c => c.Equipe)
+                            .Where(pt => pt.Temporada == temporada)
+                            .AsEnumerable()
+                            .Select(pt => new PilotoTemporadaResultado()
+                            {
+                                Id = pt.Piloto.Id,
+                                NomeGuerra = pt.Piloto.NomeGuerra,
+                                CorRgb = pt.Piloto.Contratos.Where(o => o.Temporada == temporada).OrderByDescending(o => o.Id).FirstOrDefault()?.Equipe.CorRgb ?? "#000000",
+                                Pontos = pt.Pontos,
+                                Posicao = pt.Posicao,
+                                PosicaoMaxima = pt.PosicaoMaxima
+                            })
+                            .ToList();
 
             return pilotos;
         }

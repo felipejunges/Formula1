@@ -75,10 +75,20 @@ namespace Formula1.Domain.Services
             double pontosRestantes = _corridasService.GetPontosEmDisputaPilotos(temporada);
 
             pilotos.ForEach(f =>
-                    f.PosicaoMaxima = pontosRestantes == 0 
+                    f.PosicaoMaxima = pontosRestantes == 0
                                         ? f.Posicao
-                                        : pilotos.IndexOf(pilotos.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
+                                        : ObterPosicaoMaximaPilotoPelosPontos(pilotos, f, pontosRestantes)
                 );
+        }
+
+        private static int ObterPosicaoMaximaPilotoPelosPontos(List<PilotoTemporadaInclusao> pilotos, PilotoTemporadaInclusao pilotoIterado, double pontosRestantes)
+        {
+            var pilotoComMaisPontos = pilotos.Where(w => w.Pontos <= pilotoIterado.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault();
+
+            if (pilotoComMaisPontos is null)
+                return pilotoIterado.Posicao;
+
+            return pilotos.IndexOf(pilotoComMaisPontos) + 1;
         }
 
         private void AddOrUpdate(PilotoTemporadaInclusao pilotoTemporadaInclusao)
@@ -88,6 +98,9 @@ namespace Formula1.Domain.Services
             if (pilotoTemporada == null)
             {
                 var piloto = Db.Pilotos.Find(pilotoTemporadaInclusao.PilotoId);
+
+                if (piloto is null)
+                    return;
 
                 pilotoTemporada = new PilotoTemporada()
                 {

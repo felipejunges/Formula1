@@ -77,8 +77,18 @@ namespace Formula1.Domain.Services
             equipes.ForEach(f =>
                     f.PosicaoMaxima = pontosRestantes == 0
                         ? f.Posicao
-                        : equipes.IndexOf(equipes.Where(w => w.Pontos <= f.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault()) + 1
+                        : ObterPosicaoMaximaEquipePelosPontos(equipes, f, pontosRestantes)
                 );
+        }
+
+        private static int ObterPosicaoMaximaEquipePelosPontos(List<EquipeTemporadaInclusao> equipes, EquipeTemporadaInclusao equipeIterada, double pontosRestantes)
+        {
+            var equipeComMaisPontos = equipes.Where(w => w.Pontos <= equipeIterada.Pontos + pontosRestantes).OrderByDescending(o => o.Pontos).FirstOrDefault();
+
+            if (equipeComMaisPontos is null)
+                return equipeIterada.Posicao;
+
+            return equipes.IndexOf(equipeComMaisPontos) + 1;
         }
 
         private void AddOrUpdate(EquipeTemporadaInclusao equipeTemporadaInclusao)
@@ -88,6 +98,9 @@ namespace Formula1.Domain.Services
             if (equipeTemporada == null)
             {
                 var equipe = Db.Equipes.Find(equipeTemporadaInclusao.EquipeId);
+
+                if (equipe is null)
+                    return;
 
                 equipeTemporada = new EquipeTemporada()
                 {

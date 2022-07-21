@@ -9,20 +9,24 @@
         <div class="col-sm-6 col-md-4 offset-md-4 pt-5">
             <h1 class="text-center login-title">Cadastro do administrador da aplicação Formula 1</h1>
 
-            @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
-            {
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="div-erro">
-                    <strong>Erro no cadastro</strong>
+            @{
+                var errors = ViewData.ModelState.SelectMany(s => s!.Value!.Errors);
 
-                    @foreach (var modelError in Html.ViewData.ModelState.SelectMany(keyValuePair => keyValuePair.Value.Errors))
-                    {
-                        <br />@modelError.ErrorMessage
-                    }
+                if (errors.Any())
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="div-erro">
+                        <strong>Erro no cadastro</strong>
 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                        @foreach (var error in errors)
+                        {
+                            <br />@error.ErrorMessage
+                        }
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                }
             }
 
             <div class="account-wall">
