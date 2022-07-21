@@ -44,10 +44,10 @@ namespace Formula1.Domain.Services
             if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
             if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
-            if (resultadoCorrida1.PontosTotais == resultadoCorrida2.PontosTotais)
-                return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
+            if (resultadoCorrida1?.PontosTotais == resultadoCorrida2?.PontosTotais)
+                return (resultadoCorrida1?.PosicaoChegada ?? 0).CompareTo((resultadoCorrida2?.PosicaoChegada ?? 0));
 
-            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
+            return (resultadoCorrida2?.PontosTotais ?? 0).CompareTo((resultadoCorrida1?.PontosTotais ?? 0));
         }
 
         private int OrdenarPorPosicaoChegada(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
@@ -59,7 +59,7 @@ namespace Formula1.Domain.Services
             if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
             if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
-            return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
+            return (resultadoCorrida1?.PosicaoChegada ?? 0).CompareTo((resultadoCorrida2?.PosicaoChegada ?? 0));
         }
 
         private void PreencherResultadosPilotosCorridas(List<CorridaTemporada> corridas, List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)

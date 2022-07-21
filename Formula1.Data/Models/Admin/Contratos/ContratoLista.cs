@@ -2,10 +2,10 @@
 {
     public class ContratoLista
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        public string Piloto { get; set; }
+        public string Piloto { get; init; } = string.Empty;
 
-        public string Equipe { get; set; }
+        public string Equipe { get; init; } = string.Empty;
     }
 }

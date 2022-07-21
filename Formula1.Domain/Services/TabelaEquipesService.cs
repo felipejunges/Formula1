@@ -42,7 +42,7 @@ namespace Formula1.Domain.Services
             if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
             if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
 
-            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
+            return (resultadoCorrida2?.PontosTotais ?? 0).CompareTo((resultadoCorrida1?.PontosTotais ?? 0));
         }
 
         private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)

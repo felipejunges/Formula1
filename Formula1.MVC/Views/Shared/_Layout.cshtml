@@ -43,7 +43,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @(User.Identity.IsAuthenticated ? "Admin" : "Login")
+                                @(User!.Identity!.IsAuthenticated ? "Admin" : "Login")
                             </a>
                             <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown">
                                 @if (User.Identity.IsAuthenticated)

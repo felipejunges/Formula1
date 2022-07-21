@@ -23,14 +23,16 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index(int temporada)
         {
-            var dados = new ContratoDados() { Id = 0, Temporada = temporada };
+            var dados = new ContratoDados(
+                temporada,
+                _pilotosService.ObterPilotosContrato(temporada),
+                _equipesService.ObterEquipesContrato(temporada));
+
             var contratosLista = _contratosService.ObterContratosLista(temporada);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
             //
-            SetarDadosViewData(temporada);
-
             return View(edicao);
         }
 
@@ -41,14 +43,16 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (contrato == null)
                 return NotFound();
 
-            var dados = new ContratoDados(contrato);
+            var dados = new ContratoDados(
+                contrato,
+                _pilotosService.ObterPilotosContrato(contrato.Temporada),
+                _equipesService.ObterEquipesContrato(contrato.Temporada));
+
             var contratosLista = _contratosService.ObterContratosLista(temporada);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
             //
-            SetarDadosViewData(temporada);
-
             return View(nameof(Index), edicao);
         }
 
@@ -66,9 +70,11 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             }
 
             //
-            SetarDadosViewData(contratoDados.Temporada); // TODO: analisar se nao é melhor receber no método mesmo o "temporada"
+            contratoDados.AtualizarListas(
+                _pilotosService.ObterPilotosContrato(contratoDados.Temporada),
+                _equipesService.ObterEquipesContrato(contratoDados.Temporada));
 
-            var contratosLista = _contratosService.ObterContratosLista(contratoDados.Temporada); // TODO: analisar se nao é melhor receber no método mesmo o "temporada"
+            var contratosLista = _contratosService.ObterContratosLista(contratoDados.Temporada);
 
             var edicao = new ContratoListaDados(contratoDados, contratosLista);
 
@@ -85,14 +91,6 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             _contratosService.Excluir(contrato);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        private void SetarDadosViewData(int temporada)
-        {
-            ViewData["Temporada"] = temporada;
-
-            ViewData["PilotosLista"] = new SelectList(_pilotosService.ObterPilotosAtivos(), "Id", "NomeGuerra", null);
-            ViewData["EquipesLista"] = new SelectList(_equipesService.ObterEquipesAtivas(), "Id", "Nome", null);
         }
     }
 }

@@ -2,10 +2,10 @@
 {
     public class PilotoPontosGrafico
     {
-        public string Piloto { get; set; }
+        public string Piloto { get; init; } = string.Empty;
 
-        public string CorRgb { get; set; }
+        public string CorRgb { get; init; } = string.Empty;
 
-        public double?[] Pontos { get; set; }
+        public double?[] Pontos { get; init; } = new double?[0];
     }
 }

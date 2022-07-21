@@ -6,12 +6,6 @@ namespace Formula1.Data.Entities
 {
     public class Corrida : Entity
     {
-        public Corrida()
-        {
-            this.Punicoes = new HashSet<Punicao>();
-            this.Resultados = new HashSet<Resultado>();
-        }
-
         public int Temporada { get; set; }
 
         public int NumeroCorrida { get; set; }
@@ -31,5 +25,14 @@ namespace Formula1.Data.Entities
         public virtual ICollection<Resultado> Resultados { get; set; }
 
         public bool TemResultadoDeCorrida => Resultados.Any(c => c.PosicaoChegada > 0);
+
+        public Corrida()
+        {
+            NomeGrandePremio = string.Empty;
+            Circuito = string.Empty;
+
+            Punicoes = new HashSet<Punicao>();
+            Resultados = new HashSet<Resultado>();
+        }
     }
 }

@@ -5,19 +5,14 @@ namespace Formula1.Data.Models.Admin.Equipes
 {
     public class EquipeLista
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        public string Nome { get; set; }
+        public string Nome { get; init; } = string.Empty;
 
         [Display(Name = "Cor RGB")]
-        public string CorRgb { get; set; }
+        public string CorRgb { get; init; } = string.Empty;
 
-        public bool Ativo { get; set; }
-
-        public EquipeLista()
-        {
-
-        }
+        public bool Ativo { get; init; }
 
         public EquipeLista(Equipe equipe)
         {

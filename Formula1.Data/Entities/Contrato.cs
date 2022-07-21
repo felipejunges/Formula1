@@ -14,6 +14,8 @@
 
         public Contrato()
         {
+            Piloto = null!;
+            Equipe = null!;
         }
     }
 }

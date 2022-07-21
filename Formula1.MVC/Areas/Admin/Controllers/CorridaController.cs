@@ -18,7 +18,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index(int temporada)
         {
-            var dados = new CorridaDados() { Id = 0, Temporada = temporada };
+            var dados = CorridaDados.Novo(temporada);
             var corridasLista = _corridasService.GetCorridasLista(temporada);
 
             var edicao = new CorridaListaDados(dados, corridasLista);

@@ -19,6 +19,3 @@ EXPOSE 5000
 
 ENTRYPOINT ["dotnet", "Formula1.MVC.dll"]
 
-# $ docker build . -t formula1:1.0
-# $ docker run -d -p 5000:5000 formula1:1.0
-

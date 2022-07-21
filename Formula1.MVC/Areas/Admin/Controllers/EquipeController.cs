@@ -18,7 +18,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var dados = new EquipeDados() { Id = 0, Ativo = true };
+            var dados = EquipeDados.Novo();
             var equipes = _equipesService.ObterEquipesLista();
 
             var edicao = new EquipeListaDados(dados, equipes);

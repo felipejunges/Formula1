@@ -14,9 +14,7 @@
 
         public EquipeTemporada()
         {
-            // TODO: pensar sobre: Equipe = new();
-            // Pq o Ef nao vai usar esse construtor
-            // Se um dia for feito um "New" desta entidade, deverão ser passados os parâmetros
+            Equipe = null!;
         }
     }
 }
