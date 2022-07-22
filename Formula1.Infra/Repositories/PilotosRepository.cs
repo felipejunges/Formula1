@@ -68,16 +68,14 @@ namespace Formula1.Infra.Repositories
 
         public void Incluir(PilotoDados pilotoDados)
         {
-            var piloto = new Piloto()
-            {
-                Id = 0,
-                Nome = pilotoDados.Nome,
-                NomeGuerra = pilotoDados.NomeGuerra,
-                Sigla = pilotoDados.Sigla,
-                NumeroCarro = pilotoDados.NumeroCarro!.Value,
-                PaisOrigem = pilotoDados.PaisOrigem,
-                Ativo = pilotoDados.Ativo
-            };
+            var piloto = new Piloto(
+                id: 0,
+                nome: pilotoDados.Nome,
+                nomeGuerra: pilotoDados.NomeGuerra,
+                sigla: pilotoDados.Sigla,
+                numeroCarro: pilotoDados.NumeroCarro!.Value,
+                paisOrigem: pilotoDados.PaisOrigem,
+                ativo: pilotoDados.Ativo);
 
             Db.Pilotos.Add(piloto);
             Db.SaveChanges();
@@ -90,12 +88,13 @@ namespace Formula1.Infra.Repositories
             if (piloto is null)
                 return;
 
-            piloto.Nome = pilotoDados.Nome;
-            piloto.NomeGuerra = pilotoDados.NomeGuerra;
-            piloto.Sigla = pilotoDados.Sigla;
-            piloto.NumeroCarro = pilotoDados.NumeroCarro!.Value;
-            piloto.PaisOrigem = pilotoDados.PaisOrigem;
-            piloto.Ativo = pilotoDados.Ativo;
+            piloto.Atualizar(
+                nome: pilotoDados.Nome,
+                nomeGuerra: pilotoDados.NomeGuerra,
+                sigla: pilotoDados.Sigla,
+                numeroCarro: pilotoDados.NumeroCarro!.Value,
+                paisOrigem: pilotoDados.PaisOrigem,
+                ativo: pilotoDados.Ativo);
 
             Db.Pilotos.Update(piloto);
             Db.SaveChanges();

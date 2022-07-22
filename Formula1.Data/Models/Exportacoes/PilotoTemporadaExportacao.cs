@@ -16,6 +16,10 @@ namespace Formula1.Data.Models.Exportacoes
 
         public int PosicaoMaxima { get; private set; }
 
+        public PilotoTemporadaExportacao()
+        {
+        }
+
         public PilotoTemporadaExportacao(PilotoTemporada pilotoTemporada)
         {
             Id = pilotoTemporada.Id;
@@ -24,6 +28,17 @@ namespace Formula1.Data.Models.Exportacoes
             Pontos = pilotoTemporada.Pontos;
             Posicao = pilotoTemporada.Posicao;
             PosicaoMaxima = pilotoTemporada.PosicaoMaxima;
+        }
+
+        public PilotoTemporada MapPilotoTemporada()
+        {
+            return new PilotoTemporada(
+                Id,
+                PilotoId,
+                Temporada,
+                Pontos,
+                Posicao,
+                PosicaoMaxima);
         }
     }
 }

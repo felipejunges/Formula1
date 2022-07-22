@@ -102,20 +102,18 @@ namespace Formula1.Infra.Repositories
 
         public void Incluir(ResultadoDados resultadoDados)
         {
-            var resultado = new Resultado()
-            {
-                Id = 0,
-                CorridaId = resultadoDados.CorridaId,
-                PilotoId = resultadoDados.PilotoId!.Value,
-                EquipeId = resultadoDados.EquipeId!.Value,
-                PosicaoLargada = resultadoDados.PosicaoLargada,
-                PosicaoChegada = resultadoDados.PosicaoChegada,
-                PontosClassificacao = resultadoDados.PontosClassificacao!.Value,
-                PontosCorrida = resultadoDados.PontosCorrida!.Value,
-                VoltaMaisRapida = resultadoDados.VoltaMaisRapida,
-                DNF = resultadoDados.DNF,
-                DSQ = resultadoDados.DSQ
-            };
+            var resultado = new Resultado(
+                id: 0,
+                corridaId: resultadoDados.CorridaId,
+                pilotoId: resultadoDados.PilotoId!.Value,
+                equipeId: resultadoDados.EquipeId!.Value,
+                posicaoLargada: resultadoDados.PosicaoLargada,
+                posicaoChegada: resultadoDados.PosicaoChegada,
+                pontosClassificacao: resultadoDados.PontosClassificacao!.Value,
+                pontosCorrida: resultadoDados.PontosCorrida!.Value,
+                voltaMaisRapida: resultadoDados.VoltaMaisRapida,
+                dnf: resultadoDados.DNF,
+                dsq: resultadoDados.DSQ);
 
             Db.Resultados.Add(resultado);
             Db.SaveChanges();
@@ -128,16 +126,17 @@ namespace Formula1.Infra.Repositories
             if (resultado is null)
                 return;
 
-            resultado.CorridaId = resultadoDados.CorridaId;
-            resultado.PilotoId = resultadoDados.PilotoId!.Value;
-            resultado.EquipeId = resultadoDados.EquipeId!.Value;
-            resultado.PosicaoLargada = resultadoDados.PosicaoLargada;
-            resultado.PosicaoChegada = resultadoDados.PosicaoChegada;
-            resultado.PontosClassificacao = resultadoDados.PontosClassificacao!.Value;
-            resultado.PontosCorrida = resultadoDados.PontosCorrida!.Value;
-            resultado.VoltaMaisRapida = resultadoDados.VoltaMaisRapida;
-            resultado.DNF = resultadoDados.DNF;
-            resultado.DSQ = resultadoDados.DSQ;
+            resultado.Atualizar(
+                corridaId: resultadoDados.CorridaId,
+                pilotoId: resultadoDados.PilotoId!.Value,
+                equipeId: resultadoDados.EquipeId!.Value,
+                posicaoLargada: resultadoDados.PosicaoLargada,
+                posicaoChegada: resultadoDados.PosicaoChegada,
+                pontosClassificacao: resultadoDados.PontosClassificacao!.Value,
+                pontosCorrida: resultadoDados.PontosCorrida!.Value,
+                voltaMaisRapida: resultadoDados.VoltaMaisRapida,
+                dnf: resultadoDados.DNF,
+                dsq: resultadoDados.DSQ);
 
             Db.Resultados.Update(resultado);
             Db.SaveChanges();

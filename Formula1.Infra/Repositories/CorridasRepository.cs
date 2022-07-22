@@ -71,17 +71,15 @@ namespace Formula1.Infra.Repositories
 
         public void Incluir(CorridaDados corridaDados)
         {
-            var corrida = new Corrida()
-            {
-                Id = 0,
-                NumeroCorrida = corridaDados.NumeroCorrida!.Value,
-                Temporada = corridaDados.Temporada,
-                NomeGrandePremio = corridaDados.NomeGrandePremio,
-                Circuito = corridaDados.Circuito,
-                DataHoraBrasil = corridaDados.DataHoraBrasil!.Value,
-                CorridaClassificacao = corridaDados.CorridaClassificacao,
-                MetadePontos = corridaDados.MetadePontos
-            };
+            var corrida = new Corrida(
+                id: 0,
+                numeroCorrida: corridaDados.NumeroCorrida!.Value,
+                temporada: corridaDados.Temporada,
+                nomeGrandePremio: corridaDados.NomeGrandePremio,
+                circuito: corridaDados.Circuito,
+                dataHoraBrasil: corridaDados.DataHoraBrasil!.Value,
+                corridaClassificacao: corridaDados.CorridaClassificacao,
+                metadePontos: corridaDados.MetadePontos);
 
             Db.Corridas.Add(corrida);
             Db.SaveChanges();
@@ -94,13 +92,14 @@ namespace Formula1.Infra.Repositories
             if (corrida is null)
                 return;
 
-            corrida.NumeroCorrida = corridaDados.NumeroCorrida!.Value;
-            corrida.Temporada = corridaDados.Temporada;
-            corrida.NomeGrandePremio = corridaDados.NomeGrandePremio;
-            corrida.Circuito = corridaDados.Circuito;
-            corrida.DataHoraBrasil = corridaDados.DataHoraBrasil!.Value;
-            corrida.CorridaClassificacao = corridaDados.CorridaClassificacao;
-            corrida.MetadePontos = corridaDados.MetadePontos;
+            corrida.Atualizar(
+                numeroCorrida: corridaDados.NumeroCorrida!.Value,
+                temporada: corridaDados.Temporada,
+                nomeGrandePremio: corridaDados.NomeGrandePremio,
+                circuito: corridaDados.Circuito,
+                dataHoraBrasil: corridaDados.DataHoraBrasil!.Value,
+                corridaClassificacao: corridaDados.CorridaClassificacao,
+                metadePontos: corridaDados.MetadePontos);
 
             Db.Corridas.Update(corrida);
             Db.SaveChanges();

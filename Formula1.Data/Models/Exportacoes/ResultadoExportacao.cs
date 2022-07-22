@@ -26,6 +26,10 @@ namespace Formula1.Data.Models.Exportacoes
 
         public bool DSQ { get; private set; }
 
+        public ResultadoExportacao()
+        {
+        }
+
         public ResultadoExportacao(Resultado resultado)
         {
             Id = resultado.Id;
@@ -39,6 +43,22 @@ namespace Formula1.Data.Models.Exportacoes
             VoltaMaisRapida = resultado.VoltaMaisRapida;
             DNF = resultado.DNF;
             DSQ = resultado.DSQ;
+        }
+
+        public Resultado MapResultado()
+        {
+            return new Resultado(
+                Id,
+                CorridaId,
+                PilotoId,
+                EquipeId,
+                PosicaoLargada,
+                PosicaoChegada,
+                PontosClassificacao,
+                PontosCorrida,
+                VoltaMaisRapida,
+                DNF,
+                DSQ);
         }
     }
 }

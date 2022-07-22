@@ -12,12 +12,27 @@ namespace Formula1.Data.Models.Exportacoes
 
         public bool Ativo { get; private set; }
 
+        public EquipeExportacao()
+        {
+            Nome = string.Empty;
+            CorRgb = string.Empty;
+        }
+
         public EquipeExportacao(Equipe equipe)
         {
             Id = equipe.Id;
             Nome = equipe.Nome;
             CorRgb = equipe.CorRgb;
             Ativo = equipe.Ativo;
+        }
+
+        public Equipe MapEquipe()
+        {
+            return new Equipe(
+                Id,
+                Nome,
+                CorRgb,
+                Ativo);
         }
     }
 }

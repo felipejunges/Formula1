@@ -20,23 +20,12 @@ namespace Formula1.Infra.Repositories
             var pilotoTemporada = Db.PilotosTemporada.Where(o => o.Temporada == pilotoTemporadaInclusao.Temporada && o.Piloto.Id == pilotoTemporadaInclusao.PilotoId).FirstOrDefault();
 
             if (pilotoTemporada == null)
-            {
-                var piloto = Db.Pilotos.Find(pilotoTemporadaInclusao.PilotoId);
+                pilotoTemporada = new PilotoTemporada(pilotoTemporadaInclusao.PilotoId, pilotoTemporadaInclusao.Temporada);
 
-                if (piloto is null)
-                    return;
-
-                pilotoTemporada = new PilotoTemporada()
-                {
-                    Id = 0,
-                    Piloto = piloto,
-                    Temporada = pilotoTemporadaInclusao.Temporada
-                };
-            }
-
-            pilotoTemporada.Pontos = pilotoTemporadaInclusao.Pontos;
-            pilotoTemporada.Posicao = pilotoTemporadaInclusao.Posicao;
-            pilotoTemporada.PosicaoMaxima = pilotoTemporadaInclusao.PosicaoMaxima;
+            pilotoTemporada.Atualizar(
+                pilotoTemporadaInclusao.Pontos,
+                pilotoTemporadaInclusao.Posicao,
+                pilotoTemporadaInclusao.PosicaoMaxima);
 
             if (pilotoTemporada.Id == 0)
                 Db.PilotosTemporada.Add(pilotoTemporada);
