@@ -16,6 +16,11 @@ namespace Formula1.Data.Models.Exportacoes
 
         public int Pontos { get; private set; }
 
+        public PunicaoExportacao()
+        {
+            Descricao = string.Empty;
+        }
+
         public PunicaoExportacao(Punicao punicao)
         {
             Id = punicao.Id;
@@ -24,6 +29,17 @@ namespace Formula1.Data.Models.Exportacoes
             EquipeId = punicao.EquipeId;
             Descricao = punicao.Descricao;
             Pontos = punicao.Pontos;
+        }
+
+        public Punicao MapPunicao()
+        {
+            return new Punicao(
+                Id,
+                CorridaId,
+                PilotoId,
+                EquipeId,
+                Descricao,
+                Pontos);
         }
     }
 }

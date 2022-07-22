@@ -16,6 +16,10 @@ namespace Formula1.Data.Models.Exportacoes
 
         public int PosicaoMaxima { get; private set; }
 
+        public EquipeTemporadaExportacao()
+        {
+        }
+
         public EquipeTemporadaExportacao(EquipeTemporada equipeTemporada)
         {
             Id = equipeTemporada.Id;
@@ -24,6 +28,17 @@ namespace Formula1.Data.Models.Exportacoes
             Pontos = equipeTemporada.Pontos;
             Posicao = equipeTemporada.Posicao;
             PosicaoMaxima = equipeTemporada.PosicaoMaxima;
+        }
+
+        public EquipeTemporada MapEquipeTemporada()
+        {
+            return new EquipeTemporada(
+                Id,
+                EquipeId,
+                Temporada,
+                Pontos,
+                Posicao,
+                PosicaoMaxima);
         }
     }
 }

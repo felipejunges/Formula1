@@ -35,13 +35,10 @@ namespace Formula1.Infra.Repositories
 
         public void Incluir(ContratoDados contratoDados)
         {
-            var contrato = new Contrato()
-            {
-                Id = 0,
-                Temporada = contratoDados.Temporada,
-                PilotoId = contratoDados.PilotoId,
-                EquipeId = contratoDados.EquipeId
-            };
+            var contrato = new Contrato(
+                temporada: contratoDados.Temporada,
+                pilotoId: contratoDados.PilotoId,
+                equipeId: contratoDados.EquipeId);
 
             Db.Contratos.Add(contrato);
             Db.SaveChanges();
@@ -54,9 +51,7 @@ namespace Formula1.Infra.Repositories
             if (contrato is null)
                 return;
 
-            contrato.Temporada = contratoDados.Temporada;
-            contrato.PilotoId = contratoDados.PilotoId;
-            contrato.EquipeId = contratoDados.EquipeId;
+            contrato.Atualizar(contratoDados.Temporada, contratoDados.PilotoId, contratoDados.EquipeId);
 
             Db.Contratos.Update(contrato);
             Db.SaveChanges();

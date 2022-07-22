@@ -20,23 +20,12 @@ namespace Formula1.Infra.Repositories
             var equipeTemporada = Db.EquipesTemporada.Where(o => o.Temporada == equipeTemporadaInclusao.Temporada && o.Equipe.Id == equipeTemporadaInclusao.EquipeId).FirstOrDefault();
 
             if (equipeTemporada == null)
-            {
-                var equipe = Db.Equipes.Find(equipeTemporadaInclusao.EquipeId);
+                equipeTemporada = new EquipeTemporada(equipeTemporadaInclusao.EquipeId, equipeTemporadaInclusao.Temporada);
 
-                if (equipe is null)
-                    return;
-
-                equipeTemporada = new EquipeTemporada()
-                {
-                    Id = 0,
-                    Equipe = equipe,
-                    Temporada = equipeTemporadaInclusao.Temporada
-                };
-            }
-
-            equipeTemporada.Pontos = equipeTemporadaInclusao.Pontos;
-            equipeTemporada.Posicao = equipeTemporadaInclusao.Posicao;
-            equipeTemporada.PosicaoMaxima = equipeTemporadaInclusao.PosicaoMaxima;
+            equipeTemporada.Atualizar(
+                equipeTemporadaInclusao.Pontos,
+                equipeTemporadaInclusao.Posicao,
+                equipeTemporadaInclusao.PosicaoMaxima);
 
             if (equipeTemporada.Id == 0)
                 Db.EquipesTemporada.Add(equipeTemporada);

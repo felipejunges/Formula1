@@ -20,7 +20,6 @@ namespace Formula1.Data.Models.Exportacoes
 
         public List<EquipeTemporadaExportacao> EquipesTemporadas { get; private set; }
 
-
         public Exportacao(
             List<PilotoExportacao> pilotos,
             List<EquipeExportacao> equipes,

@@ -1,6 +1,7 @@
 using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Formula1.MVC.Controllers
@@ -18,9 +19,12 @@ namespace Formula1.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var exportacao = await _exportacaoRepository.ObterDadosExportacao();
-            var json = JsonConvert.SerializeObject(exportacao);
 
-            return Content(json);
+            var json = JsonConvert.SerializeObject(
+                exportacao,
+                new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() { NamingStrategy = new CamelCaseNamingStrategy() } });
+
+            return Ok(json);
         }
     }
 }

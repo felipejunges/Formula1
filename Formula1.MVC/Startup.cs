@@ -1,7 +1,10 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Formula1.Domain.Interfaces.ApiServices;
 using Formula1.Domain.Interfaces.Repositories;
+using Formula1.Domain.Interfaces.Services;
 using Formula1.Domain.Services;
+using Formula1.Infra.ApiServices;
 using Formula1.Infra.Database;
 using Formula1.Infra.Repositories;
 using Formula1.MVC.Models;
@@ -36,6 +39,7 @@ namespace Formula1.MVC
 
             services.AddScoped<CorridasService>()
                     .AddScoped<EquipeTemporadaService>()
+                    .AddScoped<IImportacaoService, ImportacaoService>()
                     .AddScoped<PilotoTemporadaService>()
                     .AddScoped<ResultadosService>()
                     .AddScoped<TabelaPilotosService>()
@@ -48,10 +52,16 @@ namespace Formula1.MVC
                     .AddScoped<IEquipesRepository, EquipesRepository>()
                     .AddScoped<IEquipesTemporadaRepository, EquipesTemporadaRepository>()
                     .AddScoped<IExportacaoRepository, ExportacaoRepository>()
+                    .AddScoped<IImportacaoRepository, ImportacaoRepository>()
                     .AddScoped<IPilotosRepository, PilotosRepository>()
                     .AddScoped<IPilotosTemporadaRepository, PilotosTemporadaRepository>()
                     .AddScoped<IResultadosRepository, ResultadosRepository>()
                     .AddScoped<IUsuariosRepository, UsuariosRepository>();
+
+            services.AddHttpClient<IF1ApiService, F1ApiService>((client) =>
+            {
+                client.BaseAddress = new Uri("https://f1.somee.com/"); // TODO: parametrizar
+            });
 
             services.AddTransient<IValidator<CadastroViewModel>, CadastroViewModelValidator>();
 
@@ -108,16 +118,16 @@ namespace Formula1.MVC
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Resultado",
-                    pattern: "{temporada=2022}/Admin/{controller}/{corridaId:int}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2022}/Admin/{controller}/{corridaId:int}/{action=Index}/{id?}");
 
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Admin",
-                    pattern: "{temporada=2022}/Admin/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2022}/Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{temporada=2022}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2022}/{controller=Home}/{action=Index}/{id?}");
             });
 
             using (var scope = app.ApplicationServices.CreateScope())

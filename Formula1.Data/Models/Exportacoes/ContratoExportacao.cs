@@ -12,12 +12,24 @@ namespace Formula1.Data.Models.Exportacoes
 
         public int Temporada { get; private set; }
 
+        public ContratoExportacao()
+        {
+        }
+
         public ContratoExportacao(Contrato contrato)
         {
             Id = contrato.Id;
             PilotoId = contrato.PilotoId;
             EquipeId = contrato.EquipeId;
             Temporada = contrato.Temporada;
+        }
+
+        public Contrato MapContrato()
+        {
+            return new Contrato(
+                temporada: Temporada,
+                pilotoId: PilotoId,
+                equipeId: EquipeId);
         }
     }
 }

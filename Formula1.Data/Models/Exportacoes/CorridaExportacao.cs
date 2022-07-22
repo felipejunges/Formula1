@@ -1,5 +1,5 @@
-using System;
 using Formula1.Data.Entities;
+using System;
 
 namespace Formula1.Data.Models.Exportacoes
 {
@@ -21,6 +21,12 @@ namespace Formula1.Data.Models.Exportacoes
 
         public bool MetadePontos { get; private set; }
 
+        public CorridaExportacao()
+        {
+            NomeGrandePremio = string.Empty;
+            Circuito = string.Empty;
+        }
+
         public CorridaExportacao(Corrida corrida)
         {
             Id = corrida.Id;
@@ -31,6 +37,19 @@ namespace Formula1.Data.Models.Exportacoes
             DataHoraBrasil = corrida.DataHoraBrasil;
             CorridaClassificacao = corrida.CorridaClassificacao;
             MetadePontos = corrida.MetadePontos;
+        }
+
+        public Corrida MapCorrida()
+        {
+            return new Corrida(
+                Id,
+                Temporada,
+                NumeroCorrida,
+                NomeGrandePremio,
+                Circuito,
+                DataHoraBrasil,
+                CorridaClassificacao,
+                MetadePontos);
         }
     }
 }

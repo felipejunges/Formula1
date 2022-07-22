@@ -63,13 +63,11 @@ namespace Formula1.Infra.Repositories
 
         public void Incluir(EquipeDados equipeDados)
         {
-            var equipe = new Equipe()
-            {
-                Id = 0,
-                Nome = equipeDados.Nome,
-                CorRgb = equipeDados.CorRgb,
-                Ativo = equipeDados.Ativo
-            };
+            var equipe = new Equipe(
+                id: 0,
+                nome: equipeDados.Nome,
+                corRgb: equipeDados.CorRgb,
+                ativo: equipeDados.Ativo);
 
             Db.Equipes.Add(equipe);
             Db.SaveChanges();
@@ -82,9 +80,7 @@ namespace Formula1.Infra.Repositories
             if (equipe is null)
                 return;
 
-            equipe.Nome = equipeDados.Nome;
-            equipe.CorRgb = equipeDados.CorRgb;
-            equipe.Ativo = equipeDados.Ativo;
+            equipe.Atualizar(equipeDados.Nome, equipeDados.CorRgb, equipeDados.Ativo);
 
             Db.Equipes.Update(equipe);
             Db.SaveChanges();

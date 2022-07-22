@@ -1,4 +1,5 @@
 using Formula1.Data.Entities;
+using System.Text.Json.Serialization;
 
 namespace Formula1.Data.Models.Exportacoes
 {
@@ -18,6 +19,14 @@ namespace Formula1.Data.Models.Exportacoes
 
         public bool Ativo { get; private set; }
 
+        public PilotoExportacao()
+        {
+            Nome = string.Empty;
+            NomeGuerra = string.Empty;
+            Sigla = string.Empty;
+            PaisOrigem = string.Empty;
+        }
+
         public PilotoExportacao(Piloto piloto)
         {
             Id = piloto.Id;
@@ -27,6 +36,18 @@ namespace Formula1.Data.Models.Exportacoes
             NumeroCarro = piloto.NumeroCarro;
             PaisOrigem = piloto.PaisOrigem;
             Ativo = piloto.Ativo;
+        }
+
+        public Piloto MapPiloto()
+        {
+            return new Piloto(
+                Id,
+                Nome,
+                NomeGuerra,
+                Sigla,
+                NumeroCarro,
+                PaisOrigem,
+                Ativo);
         }
     }
 }
