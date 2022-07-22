@@ -1,16 +1,17 @@
-﻿using Formula1.Data.Entities;
+using Formula1.Data.Entities;
 using Formula1.Data.Models.Admin.Contratos;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Formula1.Domain.Services
+namespace Formula1.Infra.Repositories
 {
-    public class ContratosService
+    public class ContratosRepository : IContratosRepository
     {
         private readonly F1Db Db;
 
-        public ContratosService(F1Db db)
+        public ContratosRepository(F1Db db)
         {
             Db = db;
         }

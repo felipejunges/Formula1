@@ -1,16 +1,17 @@
 using Formula1.Data.Models.Exportacoes;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Formula1.Domain.Services
+namespace Formula1.Infra.Repositories
 {
-    public class ExportacaoService
+    public class ExportacaoRepository : IExportacaoRepository
     {
         private readonly F1Db Db;
 
-        public ExportacaoService(F1Db db)
+        public ExportacaoRepository(F1Db db)
         {
             Db = db;
         }

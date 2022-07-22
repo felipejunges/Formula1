@@ -1,4 +1,5 @@
 ﻿using Formula1.Data.Models;
+using Formula1.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,22 +7,22 @@ namespace Formula1.Domain.Services
 {
     public class TabelaPilotosService
     {
-        private readonly CorridasService CorridasService;
-        private readonly PilotosService PilotosService;
-        private readonly ResultadosService ResultadosService;
+        private readonly ICorridasRepository _corridasRepository;
+        private readonly IPilotosRepository _pilotosRepository;
+        private readonly IResultadosRepository _resultadosRepository;
 
-        public TabelaPilotosService(CorridasService corridasService, PilotosService pilotosService, ResultadosService resultadosService)
+        public TabelaPilotosService(ICorridasRepository corridasRepository, IPilotosRepository pilotosRepository, IResultadosRepository resultadosRepository)
         {
-            CorridasService = corridasService;
-            PilotosService = pilotosService;
-            ResultadosService = resultadosService;
+            _corridasRepository = corridasRepository;
+            _pilotosRepository = pilotosRepository;
+            _resultadosRepository = resultadosRepository;
         }
 
         public TabelaCampeonatoPilotos GetTabelaCampeonatoPilotos(int temporada, int? corridaOrder, bool ordenarPelosPontos)
         {
-            var corridas = CorridasService.GetCorridasTabela(temporada);
-            var pilotos = PilotosService.ObterPilotosTabela(temporada);
-            var resultados = ResultadosService.GetResultadosPilotosTemporada(temporada);
+            var corridas = _corridasRepository.GetCorridasTabela(temporada);
+            var pilotos = _pilotosRepository.ObterPilotosTabela(temporada);
+            var resultados = _resultadosRepository.GetResultadosPilotosTemporada(temporada);
 
             PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
 

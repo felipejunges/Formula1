@@ -1,8 +1,7 @@
 using Formula1.Data.Models.Admin.Contratos;
-using Formula1.Domain.Services;
+using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Formula1.MVC.Areas.Admin.Controllers
 {
@@ -10,25 +9,25 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class ContratoController : Controller
     {
-        private readonly ContratosService _contratosService;
-        private readonly PilotosService _pilotosService;
-        private readonly EquipesService _equipesService;
+        private readonly IContratosRepository _contratosRepository;
+        private readonly IPilotosRepository _pilotosRepository;
+        private readonly IEquipesRepository _equipesRepository;
 
-        public ContratoController(ContratosService contratosService, PilotosService pilotosService, EquipesService equipesService)
+        public ContratoController(IContratosRepository contratosRepository, IPilotosRepository pilotosRepository, IEquipesRepository equipesRepository)
         {
-            _contratosService = contratosService;
-            _pilotosService = pilotosService;
-            _equipesService = equipesService;
+            _contratosRepository = contratosRepository;
+            _pilotosRepository = pilotosRepository;
+            _equipesRepository = equipesRepository;
         }
 
         public IActionResult Index(int temporada)
         {
             var dados = new ContratoDados(
                 temporada,
-                _pilotosService.ObterPilotosContrato(temporada),
-                _equipesService.ObterEquipesContrato(temporada));
+                _pilotosRepository.ObterPilotosContrato(temporada),
+                _equipesRepository.ObterEquipesContrato(temporada));
 
-            var contratosLista = _contratosService.ObterContratosLista(temporada);
+            var contratosLista = _contratosRepository.ObterContratosLista(temporada);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
@@ -38,17 +37,17 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Edit(int id, int temporada)
         {
-            var contrato = _contratosService.ObterPeloId(id);
+            var contrato = _contratosRepository.ObterPeloId(id);
 
             if (contrato == null)
                 return NotFound();
 
             var dados = new ContratoDados(
                 contrato,
-                _pilotosService.ObterPilotosContrato(contrato.Temporada),
-                _equipesService.ObterEquipesContrato(contrato.Temporada));
+                _pilotosRepository.ObterPilotosContrato(contrato.Temporada),
+                _equipesRepository.ObterEquipesContrato(contrato.Temporada));
 
-            var contratosLista = _contratosService.ObterContratosLista(temporada);
+            var contratosLista = _contratosRepository.ObterContratosLista(temporada);
 
             var edicao = new ContratoListaDados(dados, contratosLista);
 
@@ -62,19 +61,19 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (contratoDados.Id == 0)
-                    _contratosService.Incluir(contratoDados);
+                    _contratosRepository.Incluir(contratoDados);
                 else
-                    _contratosService.Alterar(contratoDados);
+                    _contratosRepository.Alterar(contratoDados);
 
                 return RedirectToAction(nameof(Index));
             }
 
             //
             contratoDados.AtualizarListas(
-                _pilotosService.ObterPilotosContrato(contratoDados.Temporada),
-                _equipesService.ObterEquipesContrato(contratoDados.Temporada));
+                _pilotosRepository.ObterPilotosContrato(contratoDados.Temporada),
+                _equipesRepository.ObterEquipesContrato(contratoDados.Temporada));
 
-            var contratosLista = _contratosService.ObterContratosLista(contratoDados.Temporada);
+            var contratosLista = _contratosRepository.ObterContratosLista(contratoDados.Temporada);
 
             var edicao = new ContratoListaDados(contratoDados, contratosLista);
 
@@ -83,12 +82,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var contrato = _contratosService.ObterPeloId(id);
+            var contrato = _contratosRepository.ObterPeloId(id);
 
             if (contrato == null)
                 return NotFound();
 
-            _contratosService.Excluir(contrato);
+            _contratosRepository.Excluir(contrato);
 
             return RedirectToAction(nameof(Index));
         }

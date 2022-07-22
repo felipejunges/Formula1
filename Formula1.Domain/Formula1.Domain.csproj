@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Formula1.Data\Formula1.Data.csproj" />
-    <ProjectReference Include="..\Formula1.Infra\Formula1.Infra.csproj" />
   </ItemGroup>
 
 </Project>
