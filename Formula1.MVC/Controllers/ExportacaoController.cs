@@ -1,4 +1,4 @@
-using Formula1.Domain.Services;
+using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
@@ -7,17 +7,17 @@ namespace Formula1.MVC.Controllers
 {
     public class ExportacaoController : Controller
     {
-        private readonly ExportacaoService _exportacaoService;
+        private readonly IExportacaoRepository _exportacaoRepository;
 
-        public ExportacaoController(ExportacaoService exportacaoService)
+        public ExportacaoController(IExportacaoRepository exportacaoRepository)
         {
-            _exportacaoService = exportacaoService;
+            _exportacaoRepository = exportacaoRepository;
         }
 
         [ResponseCache(Duration = 60)]
         public async Task<IActionResult> Index()
         {
-            var exportacao = await _exportacaoService.ObterDadosExportacao();
+            var exportacao = await _exportacaoRepository.ObterDadosExportacao();
             var json = JsonConvert.SerializeObject(exportacao);
 
             return Content(json);

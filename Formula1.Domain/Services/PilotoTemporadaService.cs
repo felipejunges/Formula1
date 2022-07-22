@@ -1,6 +1,5 @@
-﻿using Formula1.Data.Entities;
-using Formula1.Data.Models;
-using Formula1.Infra.Database;
+﻿using Formula1.Data.Models;
+using Formula1.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,20 +7,20 @@ namespace Formula1.Domain.Services
 {
     public class PilotoTemporadaService
     {
-        private readonly F1Db Db;
-        private readonly ResultadosService _resultadosService;
+        private readonly IPilotosTemporadaRepository _pilotosTemporadaRepository;
+        private readonly IResultadosRepository _resultadosRepository;
         private readonly CorridasService _corridasService;
 
-        public PilotoTemporadaService(F1Db db, ResultadosService resultadosService, CorridasService corridasService)
+        public PilotoTemporadaService(IPilotosTemporadaRepository pilotosTemporadaRepository, IResultadosRepository resultadosRepository, CorridasService corridasService)
         {
-            Db = db;
-            _resultadosService = resultadosService;
+            _pilotosTemporadaRepository = pilotosTemporadaRepository;
+            _resultadosRepository = resultadosRepository;
             _corridasService = corridasService;
         }
 
         public void CalcularPilotosTemporada(int temporada)
         {
-            var resultados = _resultadosService.GetResultadosPilotosTemporada(temporada);
+            var resultados = _resultadosRepository.GetResultadosPilotosTemporada(temporada);
 
             var pilotosIds = resultados.GroupBy(o => o.PilotoId).Select(o => o.Key).ToList();
             var pilotosTemporada = new List<PilotoTemporadaInclusao>();
@@ -45,7 +44,7 @@ namespace Formula1.Domain.Services
 
             foreach (var pilotoTemporada in pilotosTemporada)
             {
-                AddOrUpdate(pilotoTemporada);
+                _pilotosTemporadaRepository.AddOrUpdate(pilotoTemporada);
             }
         }
 
@@ -89,37 +88,6 @@ namespace Formula1.Domain.Services
                 return pilotoIterado.Posicao;
 
             return pilotos.IndexOf(pilotoComMaisPontos) + 1;
-        }
-
-        private void AddOrUpdate(PilotoTemporadaInclusao pilotoTemporadaInclusao)
-        {
-            var pilotoTemporada = Db.PilotosTemporada.Where(o => o.Temporada == pilotoTemporadaInclusao.Temporada && o.Piloto.Id == pilotoTemporadaInclusao.PilotoId).FirstOrDefault();
-
-            if (pilotoTemporada == null)
-            {
-                var piloto = Db.Pilotos.Find(pilotoTemporadaInclusao.PilotoId);
-
-                if (piloto is null)
-                    return;
-
-                pilotoTemporada = new PilotoTemporada()
-                {
-                    Id = 0,
-                    Piloto = piloto,
-                    Temporada = pilotoTemporadaInclusao.Temporada
-                };
-            }
-
-            pilotoTemporada.Pontos = pilotoTemporadaInclusao.Pontos;
-            pilotoTemporada.Posicao = pilotoTemporadaInclusao.Posicao;
-            pilotoTemporada.PosicaoMaxima = pilotoTemporadaInclusao.PosicaoMaxima;
-
-            if (pilotoTemporada.Id == 0)
-                Db.PilotosTemporada.Add(pilotoTemporada);
-            else
-                Db.PilotosTemporada.Update(pilotoTemporada);
-
-            Db.SaveChanges();
         }
     }
 }

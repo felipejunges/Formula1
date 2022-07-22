@@ -1,4 +1,4 @@
-﻿using Formula1.Domain.Services;
+﻿using Formula1.Domain.Interfaces.Repositories;
 using Formula1.MVC.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,16 +12,16 @@ namespace Formula1.MVC.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly UsuarioService _usuarioService;
+        private readonly IUsuariosRepository _usuariosRepository;
 
-        public LoginController(UsuarioService usuarioService)
+        public LoginController(IUsuariosRepository usuariosRepository)
         {
-            _usuarioService = usuarioService;
+            _usuariosRepository = usuariosRepository;
         }
 
         public IActionResult Index()
         {
-            if (!_usuarioService.ValidarPossuiUsuario())
+            if (!_usuariosRepository.ValidarPossuiUsuario())
                 return RedirectToAction(nameof(Cadastro));
 
             return View();
@@ -33,12 +33,13 @@ namespace Formula1.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = _usuarioService.ObterUsuarioLogin(model.Email!, model.Senha!);
+                var usuario = _usuariosRepository.ObterUsuarioLogin(model.Email!, model.Senha!);
 
                 if (usuario == null)
                     ModelState.AddModelError("", "E-mail e/ou senha inválidos.");
                 else
                 {
+                    // TODO: mover para um UsuarioService
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
@@ -83,7 +84,7 @@ namespace Formula1.MVC.Controllers
             {
                 var usuario = model.MapUsuario();
 
-                await _usuarioService.IncluirUsuario(usuario);
+                await _usuariosRepository.IncluirUsuario(usuario);
 
                 // TODO: poderia receber o redirecturl
                 return RedirectToAction(nameof(Index));

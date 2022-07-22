@@ -1,16 +1,17 @@
-﻿using Formula1.Data.Entities;
+using Formula1.Data.Entities;
 using Formula1.Domain.Extensions;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Formula1.Domain.Services
+namespace Formula1.Infra.Repositories
 {
-    public class UsuarioService
+    public class UsuariosRepository : IUsuariosRepository
     {
         private readonly F1Db Db;
 
-        public UsuarioService(F1Db db)
+        public UsuariosRepository(F1Db db)
         {
             Db = db;
         }

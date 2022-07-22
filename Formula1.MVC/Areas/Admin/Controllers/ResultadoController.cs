@@ -1,5 +1,5 @@
 ﻿using Formula1.Data.Models.Admin.Resultados;
-using Formula1.Domain.Services;
+using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,22 +9,22 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class ResultadoController : Controller
     {
-        private readonly CorridasService _corridasService;
-        private readonly PilotosService _pilotosService;
-        private readonly EquipesService _equipesService;
-        private readonly ResultadosService _resultadosService;
+        private readonly ICorridasRepository _corridasRepository;
+        private readonly IPilotosRepository _pilotosRepository;
+        private readonly IEquipesRepository _equipesRepository;
+        private readonly IResultadosRepository _resultadosRepository;
 
-        public ResultadoController(CorridasService corridasService, PilotosService pilotosService, EquipesService equipesService, ResultadosService resultadosService)
+        public ResultadoController(ICorridasRepository corridasRepository, IPilotosRepository pilotosRepository, IEquipesRepository equipesRepository, IResultadosRepository resultadosRepository)
         {
-            _corridasService = corridasService;
-            _pilotosService = pilotosService;
-            _equipesService = equipesService;
-            _resultadosService = resultadosService;
+            _corridasRepository = corridasRepository;
+            _pilotosRepository = pilotosRepository;
+            _equipesRepository = equipesRepository;
+            _resultadosRepository = resultadosRepository;
         }
 
         public IActionResult Index(int corridaId)
         {
-            var corrida = _corridasService.ObterPeloId(corridaId);
+            var corrida = _corridasRepository.ObterPeloId(corridaId);
 
             if (corrida is null)
                 return NotFound();
@@ -32,10 +32,10 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             var dados = new ResultadoDados(
                 corridaId,
                 corrida.CorridaClassificacao,
-                _pilotosService.ObterPilotosContrato(corrida.Temporada),
-                _equipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
+                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = _resultadosService.ObterListaResultados(corridaId);
+            var resultados = _resultadosRepository.ObterListaResultados(corridaId);
 
             var edicao = new ResultadoListaDados(
                 dados,
@@ -48,22 +48,22 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Edit(int corridaId, int id)
         {
-            var resultado = _resultadosService.ObterPeloId(id);
+            var resultado = _resultadosRepository.ObterPeloId(id);
 
             if (resultado is null)
                 return BadRequest();
 
-            var corrida = _corridasService.ObterPeloId(corridaId);
+            var corrida = _corridasRepository.ObterPeloId(corridaId);
 
             if (corrida == null)
                 return BadRequest();
 
             var dados = new ResultadoDados(
                 resultado,
-                _pilotosService.ObterPilotosContrato(corrida.Temporada),
-                _equipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
+                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = _resultadosService.ObterListaResultados(corridaId);
+            var resultados = _resultadosRepository.ObterListaResultados(corridaId);
 
             var edicao = new ResultadoListaDados(
                 dados,
@@ -80,24 +80,24 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (resultadoDados.Id == 0)
-                    _resultadosService.Incluir(resultadoDados);
+                    _resultadosRepository.Incluir(resultadoDados);
                 else
-                    _resultadosService.Alterar(resultadoDados);
+                    _resultadosRepository.Alterar(resultadoDados);
 
                 return RedirectToAction("Index", new { corridaId = resultadoDados.CorridaId });
             }
 
             //
-            var corrida = _corridasService.ObterPeloId(resultadoDados.CorridaId);
+            var corrida = _corridasRepository.ObterPeloId(resultadoDados.CorridaId);
 
             if (corrida == null)
                 return BadRequest();
 
             resultadoDados.AtualizarListas(
-                _pilotosService.ObterPilotosContrato(corrida.Temporada),
-                _equipesService.ObterEquipesContrato(corrida.Temporada));
+                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
+                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
 
-            var resultados = _resultadosService.ObterListaResultados(resultadoDados.CorridaId);
+            var resultados = _resultadosRepository.ObterListaResultados(resultadoDados.CorridaId);
 
             var edicao = new ResultadoListaDados(
                 resultadoDados,
@@ -109,12 +109,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Delete(int corridaId, int id)
         {
-            var resultado = _resultadosService.ObterPeloId(id);
+            var resultado = _resultadosRepository.ObterPeloId(id);
 
             if (resultado == null)
                 return NotFound();
 
-            _resultadosService.Excluir(resultado);
+            _resultadosRepository.Excluir(resultado);
 
             return RedirectToAction("Index", new { corridaId });
         }

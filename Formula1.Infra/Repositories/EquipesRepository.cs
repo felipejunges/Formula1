@@ -1,17 +1,18 @@
-﻿using Formula1.Data.Entities;
+using Formula1.Data.Entities;
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Equipes;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Formula1.Domain.Services
+namespace Formula1.Infra.Repositories
 {
-    public class EquipesService
+    public class EquipesRepository : IEquipesRepository
     {
         private readonly F1Db Db;
 
-        public EquipesService(F1Db db)
+        public EquipesRepository(F1Db db)
         {
             Db = db;
         }

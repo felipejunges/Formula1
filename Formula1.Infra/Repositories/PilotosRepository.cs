@@ -1,18 +1,19 @@
-﻿using Formula1.Data.Entities;
+using Formula1.Data.Entities;
 using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Pilotos;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Formula1.Domain.Services
+namespace Formula1.Infra.Repositories
 {
-    public class PilotosService
+    public class PilotosRepository : IPilotosRepository
     {
         private readonly F1Db Db;
 
-        public PilotosService(F1Db db)
+        public PilotosRepository(F1Db db)
         {
             Db = db;
         }

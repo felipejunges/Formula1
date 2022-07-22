@@ -1,11 +1,17 @@
 using Formula1.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Formula1.Infra.Database
 {
     public class F1Db : DbContext
     {
-        public F1Db(DbContextOptions<F1Db> options) : base(options) { }
+        private readonly IConfiguration _configuration;
+
+        public F1Db(DbContextOptions<F1Db> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+        }
 
         public DbSet<Contrato> Contratos => Set<Contrato>();
 
@@ -24,6 +30,13 @@ namespace Formula1.Infra.Database
         public DbSet<Resultado> Resultados => Set<Resultado>();
 
         public DbSet<Usuario> Usuarios => Set<Usuario>();
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlite(_configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra"));
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

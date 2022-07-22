@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Domain.Services;
 using Formula1.Infra.Database;
+using Formula1.Infra.Repositories;
 using Formula1.MVC.Models;
 using Formula1.MVC.Models.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,7 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,21 +32,26 @@ namespace Formula1.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<F1Db>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"), b => b.MigrationsAssembly("Formula1.Infra")));
+            services.AddDbContext<F1Db>();
 
-            services.AddScoped<ContratosService>()
-                    .AddScoped<CorridasService>()
-                    .AddScoped<EquipesService>()
+            services.AddScoped<CorridasService>()
                     .AddScoped<EquipeTemporadaService>()
-                    .AddScoped<ExportacaoService>()
-                    .AddScoped<PilotosService>()
                     .AddScoped<PilotoTemporadaService>()
                     .AddScoped<ResultadosService>()
                     .AddScoped<TabelaPilotosService>()
                     .AddScoped<TabelaEquipesService>()
                     .AddScoped<GraficoCampeonatoPilotosService>()
-                    .AddScoped<GraficoCampeonatoEquipesService>()
-                    .AddScoped<UsuarioService>();
+                    .AddScoped<GraficoCampeonatoEquipesService>();
+
+            services.AddScoped<IContratosRepository, ContratosRepository>()
+                    .AddScoped<ICorridasRepository, CorridasRepository>()
+                    .AddScoped<IEquipesRepository, EquipesRepository>()
+                    .AddScoped<IEquipesTemporadaRepository, EquipesTemporadaRepository>()
+                    .AddScoped<IExportacaoRepository, ExportacaoRepository>()
+                    .AddScoped<IPilotosRepository, PilotosRepository>()
+                    .AddScoped<IPilotosTemporadaRepository, PilotosTemporadaRepository>()
+                    .AddScoped<IResultadosRepository, ResultadosRepository>()
+                    .AddScoped<IUsuariosRepository, UsuariosRepository>();
 
             services.AddTransient<IValidator<CadastroViewModel>, CadastroViewModelValidator>();
 
@@ -64,7 +70,7 @@ namespace Formula1.MVC
 
             services.AddMvc()
                 .AddFluentValidation();
-                
+
             services.AddControllersWithViews();
         }
 

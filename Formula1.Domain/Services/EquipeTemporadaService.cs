@@ -1,6 +1,5 @@
-﻿using Formula1.Data.Entities;
-using Formula1.Data.Models;
-using Formula1.Infra.Database;
+﻿using Formula1.Data.Models;
+using Formula1.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,20 +7,20 @@ namespace Formula1.Domain.Services
 {
     public class EquipeTemporadaService
     {
-        private readonly F1Db Db;
-        private readonly ResultadosService _resultadosService;
+        private readonly IEquipesTemporadaRepository _equipesTemporadaRepository;
+        private readonly IResultadosRepository _resultadosRepository;
         private readonly CorridasService _corridasService;
 
-        public EquipeTemporadaService(F1Db db, ResultadosService resultadosService, CorridasService corridasService)
+        public EquipeTemporadaService(IEquipesTemporadaRepository equipesTemporadaRepository, IResultadosRepository resultadosRepository, CorridasService corridasService)
         {
-            Db = db;
-            _resultadosService = resultadosService;
+            _equipesTemporadaRepository = equipesTemporadaRepository;
+            _resultadosRepository = resultadosRepository;
             _corridasService = corridasService;
         }
 
         public void CalcularEquipesTemporada(int temporada)
         {
-            var resultados = _resultadosService.GetResultadosEquipeTemporada(temporada);
+            var resultados = _resultadosRepository.GetResultadosEquipeTemporada(temporada);
 
             var equipesIds = resultados.GroupBy(o => o.EquipeId).Select(o => o.Key).ToList();
             var equipesTemporada = new List<EquipeTemporadaInclusao>();
@@ -45,7 +44,7 @@ namespace Formula1.Domain.Services
 
             foreach (var equipeTemporada in equipesTemporada)
             {
-                AddOrUpdate(equipeTemporada);
+                _equipesTemporadaRepository.AddOrUpdate(equipeTemporada);
             }
         }
 
@@ -89,37 +88,6 @@ namespace Formula1.Domain.Services
                 return equipeIterada.Posicao;
 
             return equipes.IndexOf(equipeComMaisPontos) + 1;
-        }
-
-        private void AddOrUpdate(EquipeTemporadaInclusao equipeTemporadaInclusao)
-        {
-            var equipeTemporada = Db.EquipesTemporada.Where(o => o.Temporada == equipeTemporadaInclusao.Temporada && o.Equipe.Id == equipeTemporadaInclusao.EquipeId).FirstOrDefault();
-
-            if (equipeTemporada == null)
-            {
-                var equipe = Db.Equipes.Find(equipeTemporadaInclusao.EquipeId);
-
-                if (equipe is null)
-                    return;
-
-                equipeTemporada = new EquipeTemporada()
-                {
-                    Id = 0,
-                    Equipe = equipe,
-                    Temporada = equipeTemporadaInclusao.Temporada
-                };
-            }
-
-            equipeTemporada.Pontos = equipeTemporadaInclusao.Pontos;
-            equipeTemporada.Posicao = equipeTemporadaInclusao.Posicao;
-            equipeTemporada.PosicaoMaxima = equipeTemporadaInclusao.PosicaoMaxima;
-
-            if (equipeTemporada.Id == 0)
-                Db.EquipesTemporada.Add(equipeTemporada);
-            else
-                Db.EquipesTemporada.Update(equipeTemporada);
-
-            Db.SaveChanges();
         }
     }
 }

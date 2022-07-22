@@ -1,5 +1,5 @@
 ﻿using Formula1.Data.Models.Admin.Equipes;
-using Formula1.Domain.Services;
+using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +9,17 @@ namespace Formula1.MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class EquipeController : Controller
     {
-        private readonly EquipesService _equipesService;
+        private readonly IEquipesRepository _equipesRepository;
 
-        public EquipeController(EquipesService equipesService)
+        public EquipeController(IEquipesRepository equipesRepository)
         {
-            _equipesService = equipesService;
+            _equipesRepository = equipesRepository;
         }
 
         public IActionResult Index()
         {
             var dados = EquipeDados.Novo();
-            var equipes = _equipesService.ObterEquipesLista();
+            var equipes = _equipesRepository.ObterEquipesLista();
 
             var edicao = new EquipeListaDados(dados, equipes);
 
@@ -28,13 +28,13 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Edit(int id)
         {
-            var equipe = _equipesService.ObterPeloId(id);
+            var equipe = _equipesRepository.ObterPeloId(id);
 
             if (equipe == null)
                 return NotFound();
 
             var dados = new EquipeDados(equipe);
-            var equipesLista = _equipesService.ObterEquipesLista();
+            var equipesLista = _equipesRepository.ObterEquipesLista();
 
             var edicao = new EquipeListaDados(dados, equipesLista);
 
@@ -48,15 +48,15 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (equipeDados.Id == 0)
-                    _equipesService.Incluir(equipeDados);
+                    _equipesRepository.Incluir(equipeDados);
                 else
-                    _equipesService.Alterar(equipeDados);
+                    _equipesRepository.Alterar(equipeDados);
 
                 return RedirectToAction(nameof(Index));
             }
 
             //
-            var equipesLista = _equipesService.ObterEquipesLista();
+            var equipesLista = _equipesRepository.ObterEquipesLista();
 
             var edicao = new EquipeListaDados(equipeDados, equipesLista);
 
@@ -65,12 +65,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var equipe = _equipesService.ObterPeloId(id);
+            var equipe = _equipesRepository.ObterPeloId(id);
 
             if (equipe == null)
                 return NotFound();
 
-            _equipesService.Excluir(equipe);
+            _equipesRepository.Excluir(equipe);
 
             return RedirectToAction(nameof(Index));
         }
