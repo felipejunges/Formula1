@@ -17,12 +17,10 @@ namespace Formula1.MVC.Models
 
         public Usuario MapUsuario()
         {
-            return new Usuario()
-            {
-                Nome = this.Nome ?? string.Empty,
-                Email = this.Email ?? string.Empty,
-                Senha = this.Senha?.GetBCrypt(12) ?? string.Empty
-            };
+            return new Usuario(
+                nome: this.Nome ?? string.Empty,
+                email: this.Email ?? string.Empty,
+                senha: this.Senha?.GetBCrypt(12) ?? string.Empty);
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Formula1.Data.Entities
         public Equipe(int id, string nome, string corRgb, bool ativo)
         {
             Id = id;
-            Nome = string.Empty;
-            CorRgb = string.Empty;
+            Nome = nome;
+            CorRgb = corRgb;
             Ativo = ativo;
 
             Contratos = new HashSet<Contrato>();
