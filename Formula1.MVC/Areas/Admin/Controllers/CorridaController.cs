@@ -1,4 +1,7 @@
-﻿using Formula1.Data.Models.Admin.Corridas;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Formula1.Data.Models.Admin.Corridas;
 using Formula1.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +24,23 @@ namespace Formula1.MVC.Areas.Admin.Controllers
             var dados = CorridaDados.Novo(temporada);
             var corridasLista = _corridasRepository.GetCorridasLista(temporada);
 
+            SetarCorridaProxima(corridasLista);
+
             var edicao = new CorridaListaDados(dados, corridasLista);
 
             ViewData["Temporada"] = temporada;
 
             return View(edicao);
+        }
+
+        private void SetarCorridaProxima(List<CorridaLista> corridas)
+        {
+            var proximaCorrida = corridas.Where(c => c.DataHoraBrasil.Date >= DateTime.Now.Date).OrderBy(c => c.DataHoraBrasil).FirstOrDefault();
+
+            if (proximaCorrida is null)
+                return;
+
+            proximaCorrida.Proxima = true;
         }
 
         public IActionResult Edit(int id, int temporada)

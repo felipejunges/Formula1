@@ -34,25 +34,25 @@
     <tbody>
         @foreach (var item in Model.Corridas)
         {
-        <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroCorrida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataHoraBrasil)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeGrandePremio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Circuito)
-            </td>
-            <td class="text-right">
-                <a asp-area="Admin" asp-controller="Resultado" asp-action="Index" asp-route-corridaId="@item.Id">Resultados</a> |
-                <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
-            </td>
-        </tr>
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "") @(item.Proxima ? "font-weight-bold" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroCorrida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataHoraBrasil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeGrandePremio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Circuito)
+                </td>
+                <td class="text-right">
+                    <a asp-area="Admin" asp-controller="Resultado" asp-action="Index" asp-route-corridaId="@item.Id">Resultados</a> |
+                    <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
