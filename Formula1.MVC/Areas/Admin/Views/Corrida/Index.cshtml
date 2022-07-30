@@ -34,11 +34,11 @@
     <tbody>
         @foreach (var item in Model.Corridas)
         {
-            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "") @(item.Proxima ? "font-weight-bold" : "")">
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
                 <td>
                     @Html.DisplayFor(modelItem => item.NumeroCorrida)
                 </td>
-                <td>
+                <td style="@(item.Proxima ? "font-weight: 650" : "")">
                     @Html.DisplayFor(modelItem => item.DataHoraBrasil)
                 </td>
                 <td>
