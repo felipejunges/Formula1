@@ -35,7 +35,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         private void SetarCorridaProxima(List<CorridaLista> corridas)
         {
-            var proximaCorrida = corridas.Where(c => c.DataHoraBrasil.Date >= DateTime.Now.Date).OrderBy(c => c.DataHoraBrasil).FirstOrDefault();
+            var proximaCorrida = corridas.OrderBy(c => Math.Abs((c.DataHoraBrasil.Date - DateTime.Now).TotalDays)).FirstOrDefault();
 
             if (proximaCorrida is null)
                 return;
