@@ -38,6 +38,8 @@ namespace Formula1.Data.Models.Admin.Corridas
             return new CorridaDados(temporada);
         }
 
+        public CorridaDados() : this(default(int)) { }
+
         public CorridaDados(int temporada)
         {
             Id = 0;
