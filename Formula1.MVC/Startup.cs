@@ -9,6 +9,7 @@ using Formula1.Infra.Database;
 using Formula1.Infra.Repositories;
 using Formula1.MVC.Models;
 using Formula1.MVC.Models.Validators;
+using Formula1.MVC.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -36,6 +37,10 @@ namespace Formula1.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<F1Db>();
+
+            services.AddHttpContextAccessor();
+
+            services.AddScoped<ILoginService, LoginService>();
 
             services.AddScoped<CorridasService>()
                     .AddScoped<EquipeTemporadaService>()
