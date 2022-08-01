@@ -1,21 +1,19 @@
 ﻿using Formula1.Domain.Interfaces.Repositories;
+using Formula1.Domain.Interfaces.Services;
 using Formula1.MVC.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Formula1.MVC.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly ILoginService _loginService;
         private readonly IUsuariosRepository _usuariosRepository;
 
-        public LoginController(IUsuariosRepository usuariosRepository)
+        public LoginController(ILoginService loginService, IUsuariosRepository usuariosRepository)
         {
+            _loginService = loginService;
             _usuariosRepository = usuariosRepository;
         }
 
@@ -39,20 +37,7 @@ namespace Formula1.MVC.Controllers
                     ModelState.AddModelError("", "E-mail e/ou senha inválidos.");
                 else
                 {
-                    // TODO: mover para um UsuarioService
-                    var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-                        new Claim(ClaimTypes.Name, usuario.Nome)
-                    };
-
-                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties()
-                    {
-                        IsPersistent = false,
-                        ExpiresUtc = DateTime.Now.AddHours(1)
-                    });
+                    await _loginService.LogarUsuario(usuario);
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
@@ -66,7 +51,7 @@ namespace Formula1.MVC.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            await _loginService.DeslogarUsuario();
 
             return RedirectToAction(nameof(Index));
         }
@@ -86,8 +71,9 @@ namespace Formula1.MVC.Controllers
 
                 await _usuariosRepository.IncluirUsuario(usuario);
 
-                // TODO: poderia receber o redirecturl
-                return RedirectToAction(nameof(Index));
+                await _loginService.LogarUsuario(usuario);
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
