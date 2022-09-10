@@ -24,8 +24,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         {
             var dados = new ContratoDados(
                 temporada,
-                _pilotosRepository.ObterPilotosContrato(temporada),
-                _equipesRepository.ObterEquipesContrato(temporada));
+                _pilotosRepository.ObterPilotosAtivos(),
+                _equipesRepository.ObterEquipesAtivas());
 
             var contratosLista = _contratosRepository.ObterContratosLista(temporada);
 
@@ -44,8 +44,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             var dados = new ContratoDados(
                 contrato,
-                _pilotosRepository.ObterPilotosContrato(contrato.Temporada),
-                _equipesRepository.ObterEquipesContrato(contrato.Temporada));
+                _pilotosRepository.ObterPilotosAtivos(),
+                _equipesRepository.ObterEquipesAtivas());
 
             var contratosLista = _contratosRepository.ObterContratosLista(temporada);
 
@@ -70,8 +70,8 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             //
             contratoDados.AtualizarListas(
-                _pilotosRepository.ObterPilotosContrato(contratoDados.Temporada),
-                _equipesRepository.ObterEquipesContrato(contratoDados.Temporada));
+                _pilotosRepository.ObterPilotosAtivos(),
+                _equipesRepository.ObterEquipesAtivas());
 
             var contratosLista = _contratosRepository.ObterContratosLista(contratoDados.Temporada);
 
