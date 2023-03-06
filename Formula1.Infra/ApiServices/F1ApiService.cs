@@ -18,7 +18,7 @@ namespace Formula1.Infra.ApiServices
 
         public async Task<Exportacao> ObterDadosExportacao()
         {
-            var response = await _httpClient.GetAsync("2022/Exportacao"); // TODO: melhorar essa questão do ano (ser em apenas algumas rotas?)
+            var response = await _httpClient.GetAsync("2023/Exportacao"); // TODO: melhorar essa questão do ano (ser em apenas algumas rotas?)
 
             if (!response.IsSuccessStatusCode)
                 throw new HttpRequestException(await response.Content.ReadAsStringAsync(), null, response.StatusCode);
