@@ -1,7 +1,9 @@
 using Formula1.Data.Entities;
 using Formula1.Data.Models.Admin.Contratos;
+using Formula1.Data.Models.Admin.Resultados;
 using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,6 +33,24 @@ namespace Formula1.Infra.Repositories
             }).ToList();
 
             return contratos;
+        }
+
+        public List<ResultadoEquipePilotos> ObterResultadoEquipesPilotos(int temporada)
+        {
+            var equipesPilotosList = Db.Contratos
+                .Where(o => o.Temporada == temporada)
+                .Select(o => new { o.EquipeId, o.PilotoId })
+                .ToList();
+
+            return equipesPilotosList
+                .GroupBy(o => o.EquipeId)
+                .Select(o =>
+                    new ResultadoEquipePilotos(
+                        o.Key,
+                        o.Select(o => o.PilotoId).ToArray()
+                    )
+                )
+                .ToList();
         }
 
         public void Incluir(ContratoDados contratoDados)

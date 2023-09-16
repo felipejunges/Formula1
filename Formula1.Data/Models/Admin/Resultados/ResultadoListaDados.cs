@@ -5,15 +5,17 @@ namespace Formula1.Data.Models.Admin.Resultados
 {
     public class ResultadoListaDados
     {
-        public ResultadoDados Dados { get; set; }
-        public List<ResultadoLista> Resultados { get; set; }
-        public string NomeGP { get; set; }
+        public ResultadoDados Dados { get; private set; }
+        public List<ResultadoLista> Resultados { get; private set; }
+        public List<ResultadoEquipePilotos> EquipesPilotos { get; private set; }
+        public string NomeGP { get; private set; }
         public bool CorridaClassificacao => Dados.CorridaClassificacao;
-        
-        public ResultadoListaDados(ResultadoDados dados, List<ResultadoLista> resultados, Corrida corrida)
+
+        public ResultadoListaDados(ResultadoDados dados, List<ResultadoLista> resultados, List<ResultadoEquipePilotos> equipesPilotos, Corrida corrida)
         {
             Dados = dados;
             Resultados = resultados;
+            EquipesPilotos = equipesPilotos;
             NomeGP = $"{corrida.NomeGrandePremio} - {corrida.Temporada}";
         }
     }

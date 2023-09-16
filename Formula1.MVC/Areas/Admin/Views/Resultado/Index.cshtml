@@ -95,3 +95,34 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script type="text/javascript">
+        var equipesPilotos = [
+        @foreach (var equipePilotos in Model.EquipesPilotos)
+        {
+            <text>{
+                    'equipe':'@equipePilotos.EquipeId',
+                    'pilotos': [@string.Join(',', equipePilotos.PilotosId)]
+                },
+            </text>
+        }];
+
+        function selecionaEquipePeloPiloto() {
+            var pilotoId = parseInt($('#PilotoId').val());
+            
+            equipesPilotos.forEach((v) => {
+                if (v.pilotos.includes(pilotoId)) { 
+                    $('#EquipeId').val(v.equipe);
+                    return;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#PilotoId').on("change", function () {
+                selecionaEquipePeloPiloto();
+            });
+        });
+    </script>
+}
