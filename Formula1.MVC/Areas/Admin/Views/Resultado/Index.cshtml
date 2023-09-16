@@ -54,28 +54,28 @@
     <tbody>
         @foreach (var item in Model.Resultados)
         {
-            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")" style="@(item.Grifar ? "color: red;" : string.Empty)">
+            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
                 <td>
                     @Html.DisplayFor(modelItem => item.Piloto)
                 </td>
-                <td>
+                <td style="@(item.GrifarEquipe ? "color: red;" : string.Empty)">
                     @Html.DisplayFor(modelItem => item.Equipe)
                 </td>
-                <td>
+                <td style="@(item.GrifarLargada ? "color: red;" : string.Empty)">
                     @Html.DisplayFor(modelItem => item.PosicaoLargada)
                 </td>
-                <td>
+                <td style="@(item.GrifarChegada ? "color: red;" : string.Empty)">
                     @Html.DisplayFor(modelItem => item.PosicaoChegada)
                 </td>
 
                 @if (Model.CorridaClassificacao)
                 {
-                    <td>
+                    <td style="@(item.GrifarPontosClassificacao ? "color: red;" : string.Empty)">
                         @Html.DisplayFor(modelItem => item.PontosClassificacao)
                     </td>
                 }
 
-                <td>
+                <td style="@(item.GrifarPontosCorrida ? "color: red;" : string.Empty)">
                     @Html.DisplayFor(modelItem => item.PontosCorrida)
                 </td>
                 <td class="text-center">

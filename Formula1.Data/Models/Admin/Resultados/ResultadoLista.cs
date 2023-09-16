@@ -31,7 +31,15 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool DSQ { get; set; }
 
-        public bool Grifar { get; set; }
+        public bool GrifarPontosCorrida { get; set; }
+
+        public bool GrifarPontosClassificacao { get; set; }
+
+        public bool GrifarChegada { get; set; }
+
+        public bool GrifarLargada { get; set; }
+
+        public bool GrifarEquipe { get; set; }
 
         public double PontosCorridaCalculados
         {
@@ -77,7 +85,11 @@ namespace Formula1.Data.Models.Admin.Resultados
             VoltaMaisRapida = voltaMaisRapida;
             DNF = dnf;
             DSQ = dsq;
-            Grifar = grifar;
+            GrifarPontosCorrida = false;
+            GrifarPontosClassificacao = false;
+            GrifarChegada = false;
+            GrifarLargada = false;
+            GrifarEquipe = false;
         }
     }
 }
