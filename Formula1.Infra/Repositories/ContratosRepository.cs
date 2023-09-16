@@ -3,7 +3,6 @@ using Formula1.Data.Models.Admin.Contratos;
 using Formula1.Data.Models.Admin.Resultados;
 using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
