@@ -1,4 +1,6 @@
-﻿namespace Formula1.Data.Models
+﻿using System;
+
+namespace Formula1.Data.Models
 {
     public class EquipePontosGrafico
     {
@@ -6,6 +8,6 @@
 
         public string CorRgb { get; set; } = string.Empty;
 
-        public double?[] Pontos { get; set; } = new double?[0];
+        public double?[] Pontos { get; set; } = Array.Empty<double?>();
     }
 }

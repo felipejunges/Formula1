@@ -40,10 +40,10 @@ namespace Formula1.Domain.Services
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
-            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
-            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
+            if (resultadoCorrida1 == null) return 1;
+            if (resultadoCorrida2 == null) return -1;
 
-            return (resultadoCorrida2?.PontosTotais ?? 0).CompareTo((resultadoCorrida1?.PontosTotais ?? 0));
+            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }
 
         private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)
