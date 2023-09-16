@@ -25,6 +25,8 @@ namespace Formula1.Domain.Services
 
         private void GrifarItensListaInvalidos(List<ResultadoLista> resultados)
         {
+            // TODO: separar cada validação em um método
+
             // posição de largada zerado
             resultados.Where(r => r.PosicaoLargada == 0).ToList().ForEach(r => r.GrifarLargada = true);
 
@@ -54,6 +56,13 @@ namespace Formula1.Domain.Services
             var itensPontoClassificacao = resultados.Where(o => pontosClassificacaoRepetidos.Contains(o.PontosClassificacao)).ToList();
 
             itensPontoClassificacao.ForEach(o => o.GrifarPontosClassificacao = true);
+
+            // pilotos com mais de dois resultados
+            var pilotosRepetidos = resultados.GroupBy(o => o.Piloto).Where(o => o.Count() > 1).Select(o => o.Key).ToList();
+
+            var pilotosGrifar = resultados.Where(o => pilotosRepetidos.Contains(o.Piloto)).ToList();
+
+            pilotosGrifar.ForEach(o => o.GrifarPiloto = true);
 
             // equipes com mais de dois resultados
             var equipesMais2Resultados = resultados.GroupBy(o => o.Equipe).Where(o => o.Count() > 2).Select(o => o.Key).ToList();

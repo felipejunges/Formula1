@@ -39,6 +39,8 @@ namespace Formula1.Data.Models.Admin.Resultados
 
         public bool GrifarLargada { get; set; }
 
+        public bool GrifarPiloto { get; set; }
+
         public bool GrifarEquipe { get; set; }
 
         public double PontosCorridaCalculados
@@ -89,6 +91,7 @@ namespace Formula1.Data.Models.Admin.Resultados
             GrifarPontosClassificacao = false;
             GrifarChegada = false;
             GrifarLargada = false;
+            GrifarPiloto = false;
             GrifarEquipe = false;
         }
     }

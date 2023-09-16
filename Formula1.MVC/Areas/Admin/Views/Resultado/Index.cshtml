@@ -55,7 +55,7 @@
         @foreach (var item in Model.Resultados)
         {
             <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
-                <td>
+                <td style="@(item.GrifarPiloto ? "color: red;" : string.Empty)">
                     @Html.DisplayFor(modelItem => item.Piloto)
                 </td>
                 <td style="@(item.GrifarEquipe ? "color: red;" : string.Empty)">
