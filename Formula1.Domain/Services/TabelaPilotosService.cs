@@ -42,13 +42,13 @@ namespace Formula1.Domain.Services
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
-            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
-            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
+            if (resultadoCorrida1 == null) return 1;
+            if (resultadoCorrida2 == null) return -1;
 
-            if (resultadoCorrida1?.PontosTotais == resultadoCorrida2?.PontosTotais)
-                return (resultadoCorrida1?.PosicaoChegada ?? 0).CompareTo((resultadoCorrida2?.PosicaoChegada ?? 0));
+            if (resultadoCorrida1.PontosTotais == resultadoCorrida2.PontosTotais)
+                return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
 
-            return (resultadoCorrida2?.PontosTotais ?? 0).CompareTo((resultadoCorrida1?.PontosTotais ?? 0));
+            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }
 
         private int OrdenarPorPosicaoChegada(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
@@ -57,10 +57,10 @@ namespace Formula1.Domain.Services
             var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
-            if (resultadoCorrida1 != null && resultadoCorrida2 == null) return -1;
-            if (resultadoCorrida1 == null && resultadoCorrida2 != null) return 1;
+            if (resultadoCorrida1 == null) return 1;
+            if (resultadoCorrida2 == null) return -1;
 
-            return (resultadoCorrida1?.PosicaoChegada ?? 0).CompareTo((resultadoCorrida2?.PosicaoChegada ?? 0));
+            return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
         }
 
         private void PreencherResultadosPilotosCorridas(List<CorridaTemporada> corridas, List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)
