@@ -14,14 +14,16 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         private readonly IPilotosRepository _pilotosRepository;
         private readonly IEquipesRepository _equipesRepository;
         private readonly IResultadosRepository _resultadosRepository;
+        private readonly IContratosRepository _contratosRepository;
         private readonly ResultadosService _resultadosService;
 
-        public ResultadoController(ICorridasRepository corridasRepository, IPilotosRepository pilotosRepository, IEquipesRepository equipesRepository, IResultadosRepository resultadosRepository, ResultadosService resultadosService)
+        public ResultadoController(ICorridasRepository corridasRepository, IPilotosRepository pilotosRepository, IEquipesRepository equipesRepository, IResultadosRepository resultadosRepository, IContratosRepository contratosRepository, ResultadosService resultadosService)
         {
             _corridasRepository = corridasRepository;
             _pilotosRepository = pilotosRepository;
             _equipesRepository = equipesRepository;
             _resultadosRepository = resultadosRepository;
+            _contratosRepository = contratosRepository;
             _resultadosService = resultadosService;
         }
 
@@ -40,9 +42,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             var resultados = _resultadosService.ObterListaResultados(corridaId);
 
+            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
+
             var edicao = new ResultadoListaDados(
                 dados,
                 resultados,
+                equipesPilotos,
                 corrida);
 
             //
@@ -68,9 +73,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             var resultados = _resultadosService.ObterListaResultados(corridaId);
 
+            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
+
             var edicao = new ResultadoListaDados(
                 dados,
                 resultados,
+                equipesPilotos,
                 corrida);
 
             //
@@ -102,9 +110,12 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             var resultados = _resultadosService.ObterListaResultados(resultadoDados.CorridaId);
 
+            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
+
             var edicao = new ResultadoListaDados(
                 resultadoDados,
                 resultados,
+                equipesPilotos,
                 corrida);
 
             return View(nameof(Index), edicao);

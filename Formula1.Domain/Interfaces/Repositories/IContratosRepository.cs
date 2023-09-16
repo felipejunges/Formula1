@@ -1,5 +1,6 @@
 using Formula1.Data.Entities;
 using Formula1.Data.Models.Admin.Contratos;
+using Formula1.Data.Models.Admin.Resultados;
 using System.Collections.Generic;
 
 namespace Formula1.Domain.Interfaces.Repositories
@@ -9,6 +10,8 @@ namespace Formula1.Domain.Interfaces.Repositories
         Contrato? ObterPeloId(int id);
 
         List<ContratoLista> ObterContratosLista(int temporada);
+
+        List<ResultadoEquipePilotos> ObterResultadoEquipesPilotos(int temporada);
 
         void Incluir(ContratoDados contratoDados);
 
