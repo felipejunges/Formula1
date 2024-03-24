@@ -30,11 +30,8 @@ namespace Formula1.Domain.Services
                         break;
 
                     var resultado = equipe.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
-                    
-                    if (resultado == null)
-                        continue;
-
-                    soma += resultado.PontosTotais;
+                    if (resultado != null)
+                        soma += resultado.PontosTotais;
 
                     pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
                 }
