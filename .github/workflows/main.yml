@@ -6,6 +6,21 @@ on:
       ['master']
 
 jobs:
+  stop_service:
+    name: 'Para o serviço do Mangos'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Para o serviço do Mangos
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.SERVER_NAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASS_PHRASE }}
+          port: ${{ vars.SERVER_PORT }}
+          script: systemctl status mangos.app.service # depois trocar para 'stop'
+
   build:
     name: 'Build da aplicação'
     runs-on: ubuntu-latest
@@ -53,3 +68,19 @@ jobs:
           source: ./publish/*
           target: ${{ vars.SERVER_PATH }}
           strip_components: 1 # Remove um nível do folder (publish)
+  
+  start_service:
+    needs: [build, upload]
+    name: 'Reinicia o serviço do Mangos'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Reinicia o serviço do Mangos
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.SERVER_NAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASS_PHRASE }}
+          port: ${{ vars.SERVER_PORT }}
+          script: systemctl status mangos.app.service # depois trocar para 'start'
