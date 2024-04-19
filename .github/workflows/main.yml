@@ -46,7 +46,7 @@ jobs:
           path: ./publish
 
   upload:
-    needs: [build]
+    needs: [stop_service, build]
     name: 'Envio para Servidor Linux'
 
     runs-on: ubuntu-latest
