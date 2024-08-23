@@ -1,0 +1,72 @@
+﻿@model Formula1.Data.Models.GraficoCampeonatoPilotos
+
+@{
+    ViewData["Title"] = "Temporada " + ViewData["Temporada"];
+    ViewData["SubTitle"] = "Gráfico de pontos por piloto por corrida";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Formula 1</h1>
+    <h3 class="display-6">@ViewData["Title"]</h3>
+    <p>@ViewData["SubTitle"]</p>
+
+    <canvas id="grafico" style="height: @(Model!.Height)px; width: 100%;"></canvas>
+</div>
+
+@section scripts {
+
+    <script src="~/lib/chartjs/chart.min.js"></script>
+
+    <script type="text/javascript">
+        var ctx = document.getElementById('grafico').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [@Html.Raw(string.Join(",", Model.Corridas.Select(o => $"'{o.NomeGrandePremio}'")))],
+                datasets: [
+                    @foreach (var piloto in Model.Pilotos)
+                    {
+                        <text>
+                                        {
+                                            label: '@piloto.Piloto',
+                                            data: [@(string.Join(",", piloto.Pontos.Select(o => o.HasValue ? o.Value.ToString().Replace(',', '.') : "null")))],
+                                            borderColor: ['@piloto.CorRgb'],
+                                            fill: false,
+                                            borderWidth: 2
+                                        },
+                        </text>
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0,
+                    },
+                    point: {
+                        radius: 3
+                    }
+                },
+                scales: {
+                    y: {
+                        max: @Model.MaxValue,
+                        ticks: {
+                            stepSize: @Model.Step
+                        },
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Pontos'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

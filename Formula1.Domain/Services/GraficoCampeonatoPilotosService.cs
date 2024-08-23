@@ -44,7 +44,40 @@ namespace Formula1.Domain.Services
                 });
             }
 
-            var graficoCampeonato = new GraficoCampeonatoPilotos(campeonato.Corridas, pilotosGrafico);
+            var graficoCampeonato = new GraficoCampeonatoPilotos(campeonato.Corridas, pilotosGrafico, false);
+
+            return graficoCampeonato;
+        }
+
+        public GraficoCampeonatoPilotos GetGraficoPontosPorCorrida(int temporada)
+        {
+            var campeonato = TabelaPilotosService.GetTabelaCampeonatoPilotos(temporada, null, false);
+
+            var pilotosGrafico = new List<PilotoPontosGrafico>();
+
+            foreach (var piloto in campeonato.Pilotos)
+            {
+                var pontos = new double?[campeonato.Corridas.Count];
+
+                foreach (var corrida in campeonato.Corridas)
+                {
+                    if (!corrida.TemResultadosDeCorrida)
+                        break;
+
+                    var resultado = piloto.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
+
+                    pontos[campeonato.Corridas.IndexOf(corrida)] = resultado?.PontosTotais ?? 0;
+                }
+
+                pilotosGrafico.Add(new PilotoPontosGrafico()
+                {
+                    Piloto = piloto.NomeGuerra,
+                    CorRgb = piloto.CorRgb,
+                    Pontos = pontos
+                });
+            }
+
+            var graficoCampeonato = new GraficoCampeonatoPilotos(campeonato.Corridas, pilotosGrafico, true);
 
             return graficoCampeonato;
         }
