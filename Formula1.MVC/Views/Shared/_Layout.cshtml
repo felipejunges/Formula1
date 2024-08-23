@@ -24,7 +24,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PilotosPosicoes">Pilotos por posições</a>
@@ -35,17 +35,40 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EquipesPontos">Equipes por pontos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GraficoPilotosPontos">Gráfico pilotos por pontos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GraficoEquipesPontos">Gráfico equipes por pontos</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Gráficos
+                            </a>
+                            <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown3">
+                                <a class="dropdown-item" asp-area="" asp-controller="Grafico" asp-action="PilotosPontos">Pilotos por pontos</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Grafico" asp-action="EquipesPontos">Equipes por pontos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-area="" asp-controller="Grafico" asp-action="PontosPilotosPorCorrida">Pontos por piloto por corrida</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Grafico" asp-action="PontosEquipesPorCorrida">Pontos por equipe por corrida</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Temporada
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right ml-md-4" aria-labelledby="navbarDropdown1">
+                                @for (int temporada = 2024; temporada >= 2019; temporada--)
+                                {
+                                    <a class="dropdown-item" asp-route-temporada="@temporada">@temporada</a>
+                                }
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @(User!.Identity!.IsAuthenticated ? "Admin" : "Login")
                             </a>
-                            <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right ml-md-4" aria-labelledby="navbarDropdown2">
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Piloto" asp-action="Index">Pilotos</a>
@@ -59,18 +82,6 @@
                                 else
                                 {
                                     <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                                }
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle ml-md-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Temporada
-                            </a>
-                            <div class="dropdown-menu ml-md-4" aria-labelledby="navbarDropdown">
-                                @for (int temporada = 2024; temporada >= 2019; temporada--)
-                                {
-                                    <a class="dropdown-item" asp-route-temporada="@temporada">@temporada</a>
                                 }
                             </div>
                         </li>

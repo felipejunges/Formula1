@@ -13,17 +13,13 @@ namespace Formula1.MVC.Controllers
         private readonly TabelaEquipesService TabelaEquipesService;
         private readonly PilotoTemporadaService PilotoTemporadaService;
         private readonly EquipeTemporadaService EquipeTemporadaService;
-        private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
-        private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
-
-        public HomeController(TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService, GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
+        
+        public HomeController(TabelaPilotosService tabelaPilotosService, TabelaEquipesService tabelaEquipesService, PilotoTemporadaService pilotoTemporadaService, EquipeTemporadaService equipeTemporadaService)
         {
             TabelaPilotosService = tabelaPilotosService;
             TabelaEquipesService = tabelaEquipesService;
             PilotoTemporadaService = pilotoTemporadaService;
             EquipeTemporadaService = equipeTemporadaService;
-            GraficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
-            GraficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
         }
 
         [ResponseCache(Duration = 60)]
@@ -66,26 +62,6 @@ namespace Formula1.MVC.Controllers
             ViewData["Temporada"] = temporada;
 
             return View(campeonato);
-        }
-
-        [ResponseCache(Duration = 60)]
-        public IActionResult GraficoPilotosPontos(int temporada)
-        {
-            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(temporada);
-
-            ViewData["Temporada"] = temporada;
-
-            return View(pilotosGrafico);
-        }
-
-        [ResponseCache(Duration = 60)]
-        public IActionResult GraficoEquipesPontos(int temporada)
-        {
-            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(temporada);
-
-            ViewData["Temporada"] = temporada;
-
-            return View(equipesGrafico);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

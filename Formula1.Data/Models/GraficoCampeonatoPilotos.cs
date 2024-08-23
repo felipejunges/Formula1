@@ -10,9 +10,11 @@ namespace Formula1.Data.Models
 
         public List<PilotoPontosGrafico> Pilotos { get; private set; }
 
+        public bool HighHeight { get;private set; }
+
         public int Step { get => 20; }
 
-        public int Height => (int)Math.Ceiling(MaxValue * 2D);
+        public int Height => (int)Math.Ceiling(MaxValue * (HighHeight ? 10D : 2D));
 
         public double MaxValue
         {
@@ -29,10 +31,11 @@ namespace Formula1.Data.Models
             }
         }
 
-        public GraficoCampeonatoPilotos(List<CorridaTemporada> corridas, List<PilotoPontosGrafico> pilotos)
+        public GraficoCampeonatoPilotos(List<CorridaTemporada> corridas, List<PilotoPontosGrafico> pilotos, bool highHeight)
         {
             Corridas = corridas;
             Pilotos = pilotos;
+            HighHeight = highHeight;
         }
     }
 }
