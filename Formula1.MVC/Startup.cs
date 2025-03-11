@@ -123,16 +123,16 @@ namespace Formula1.MVC
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Resultado",
-                    pattern: "{temporada:int=2024}/Admin/{controller}/{corridaId:int}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2025}/Admin/{controller}/{corridaId:int}/{action=Index}/{id?}");
 
                 endpoints.MapAreaControllerRoute(
                     areaName: "Admin",
                     name: "Admin",
-                    pattern: "{temporada:int=2024}/Admin/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2025}/Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{temporada:int=2024}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{temporada:int=2025}/{controller=Home}/{action=Index}/{id?}");
             });
 
             using (var scope = app.ApplicationServices.CreateScope())
