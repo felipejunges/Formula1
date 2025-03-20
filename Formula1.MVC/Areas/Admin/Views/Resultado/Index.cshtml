@@ -11,117 +11,113 @@
 <h4>@ViewData["SubTitle"]</h4>
 <hr />
 
-@await Html.PartialAsync("Add", Model.Dados, ViewData)
+<form asp-action="Save">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].Piloto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].Equipe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].PosicaoLargada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
-            </th>
+    <input type="hidden" asp-for="@Model.CorridaId" />
+    <input type="hidden" asp-for="@Model.CorridaSprint" />
 
-            @if (Model.CorridaClassificacao)
-            {
-                <th>
-                    @Html.DisplayNameFor(model => model.Resultados[0].PontosClassificacao)
+    <div class="form-group row">
+        <div class="col-md-6">
+            <input type="submit" value="Salvar" class="btn btn-primary" /> ou <a asp-controller="Corrida" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+
+    <table class="table tableFixHead">
+        <thead>
+            <tr>
+                <th class="td-10">
+                    @Html.DisplayNameFor(model => model.Resultados[0].PosicaoChegada)
                 </th>
-            }
-
-            <th>
-                @Html.DisplayNameFor(model => model.Resultados[0].PontosCorrida)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Resultados[0].VoltaMaisRapida)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Resultados[0].DNF)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Resultados[0].DSQ)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Resultados)
-        {
-            <tr class="@(Model.Dados?.Id == item.Id ? "table-info" : "")">
-                <td style="@(item.GrifarPiloto ? "color: red;" : string.Empty)">
-                    @Html.DisplayFor(modelItem => item.Piloto)
-                </td>
-                <td style="@(item.GrifarEquipe ? "color: red;" : string.Empty)">
-                    @Html.DisplayFor(modelItem => item.Equipe)
-                </td>
-                <td style="@(item.GrifarLargada ? "color: red;" : string.Empty)">
-                    @Html.DisplayFor(modelItem => item.PosicaoLargada)
-                </td>
-                <td style="@(item.GrifarChegada ? "color: red;" : string.Empty)">
-                    @Html.DisplayFor(modelItem => item.PosicaoChegada)
-                </td>
-
-                @if (Model.CorridaClassificacao)
-                {
-                    <td style="@(item.GrifarPontosClassificacao ? "color: red;" : string.Empty)">
-                        @Html.DisplayFor(modelItem => item.PontosClassificacao)
-                    </td>
-                }
-
-                <td style="@(item.GrifarPontosCorrida ? "color: red;" : string.Empty)">
-                    @Html.DisplayFor(modelItem => item.PontosCorrida)
-                </td>
-                <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.VoltaMaisRapida)
-                </td>
-                <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.DNF)
-                </td>
-                <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.DSQ)
-                </td>
-                <td class="text-right">
-                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-corridaId="@Model.Dados!.CorridaId">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
-                </td>
+                <th class="td-10">
+                    @Html.DisplayNameFor(model => model.Resultados[0].PontosCorrida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resultados[0].PilotoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resultados[0].EquipeId)
+                </th>
+                <th class="td-10 text-center">
+                    @Html.DisplayNameFor(model => model.Resultados[0].VoltaMaisRapida)
+                </th>
+                <th class="td-10 text-center">
+                    @Html.DisplayNameFor(model => model.Resultados[0].DNF)
+                </th>
+                <th class="td-10 text-center">
+                    @Html.DisplayNameFor(model => model.Resultados[0].DSQ)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Resultados.Count; i++)
+            {
+                var item = Model.Resultados[i];
+
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="@Model.Resultados[i].IdAtual" />
+                        <input asp-for="@Model.Resultados[i].PosicaoChegada" class="form-control @(item.GrifarChegada ? "input-validation-error" : string.Empty)" readonly />
+                        <span asp-validation-for="@Model.Resultados[i].PosicaoChegada" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Resultados[i].PontosCorrida" class="form-control @(item.GrifarPontosCorrida ? "input-validation-error" : string.Empty)" />
+                        <span asp-validation-for="@Model.Resultados[i].PontosCorrida" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <select asp-for="@Model.Resultados[i].PilotoId" asp-items="@(new SelectList(Model.Pilotos, "Id", "NomeGuerra"))" class="form-control pilotoSelect @(item.GrifarPiloto ? "input-validation-error" : string.Empty)">
+                            <option value="">Selecione</option>
+                        </select>
+                        <span asp-validation-for="@Model.Resultados[i].PilotoId" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <select asp-for="@Model.Resultados[i].EquipeId" asp-items="@(new SelectList(Model.Equipes, "Id", "Nome"))" class="form-control equipeSelect @(item.GrifarEquipe ? "input-validation-error" : string.Empty)">
+                            <option value="">Selecione</option>
+                        </select>
+                        <span asp-validation-for="@Model.Resultados[i].EquipeId" class="text-danger"></span>
+                    </td>
+                    <td class="text-center">
+                        <input class="check-box" asp-for="@Model.Resultados[i].VoltaMaisRapida" />
+                    </td>
+                    <td class="text-center">
+                        <input class="check-box" asp-for="@Model.Resultados[i].DNF" />
+                    </td>
+                    <td class="text-center">
+                        <input class="check-box" asp-for="@Model.Resultados[i].DSQ" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</form>
 
 @section Scripts {
     <script type="text/javascript">
         var equipesPilotos = [
         @foreach (var equipePilotos in Model.EquipesPilotos)
         {
-            <text>{
-                    'equipe':'@equipePilotos.EquipeId',
-                    'pilotos': [@string.Join(',', equipePilotos.PilotosId)]
-                },
+            <text>
+            {
+                'equipe':'@equipePilotos.EquipeId',
+                'pilotos': [@string.Join(',', equipePilotos.PilotosId)]
+            },
             </text>
         }];
 
-        function selecionaEquipePeloPiloto() {
-            var pilotoId = parseInt($('#PilotoId').val());
-            
+        function selecionaEquipePeloPiloto(t, pilotoId) {
             equipesPilotos.forEach((v) => {
-                if (v.pilotos.includes(pilotoId)) { 
-                    $('#EquipeId').val(v.equipe);
+                if (v.pilotos.includes(pilotoId)) {
+                    var equipeSel = $(t).first().parent().parent().find('.equipeSelect');
+                    equipeSel.val(v.equipe);
                     return;
                 }
             });
         }
 
         $(document).ready(function () {
-            $('#PilotoId').on("change", function () {
-                selecionaEquipePeloPiloto();
+            $(".pilotoSelect").on("change", function () {
+                var pilotoId = parseInt($(this).val());
+                selecionaEquipePeloPiloto(this, pilotoId);
             });
         });
     </script>

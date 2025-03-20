@@ -27,7 +27,7 @@ namespace Formula1.Domain.Services
 
             foreach (var pilotoId in pilotosIds)
             {
-                var pontos = resultados.Where(o => o.PilotoId == pilotoId).Sum(o => o.PontosTotais);
+                var pontos = resultados.Where(o => o.PilotoId == pilotoId).Sum(o => o.Pontos);
 
                 pilotosTemporada.Add(new PilotoTemporadaInclusao(pilotoId, temporada, pontos, 0, 0));
             }
@@ -35,7 +35,10 @@ namespace Formula1.Domain.Services
             pilotosTemporada.Sort((o, i) =>
                     i.Pontos != o.Pontos
                         ? i.Pontos.CompareTo(o.Pontos)
-                        : CompararPilotos(i.PilotoId, o.PilotoId, resultados));
+                        : CompararPilotos(
+                            i.PilotoId,
+                            o.PilotoId,
+                            resultados.Where(r => !r.Sprint).ToList()));
 
             pilotosTemporada.ForEach(o => o.Posicao = pilotosTemporada.IndexOf(o) + 1);
 

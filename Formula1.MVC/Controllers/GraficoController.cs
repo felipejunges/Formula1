@@ -5,19 +5,19 @@ namespace Formula1.MVC.Controllers
 {
     public class GraficoController : Controller
     {
-        private readonly GraficoCampeonatoPilotosService GraficoCampeonatoPilotosService;
-        private readonly GraficoCampeonatoEquipesService GraficoCampeonatoEquipesService;
+        private readonly GraficoCampeonatoPilotosService _graficoCampeonatoPilotosService;
+        private readonly GraficoCampeonatoEquipesService _graficoCampeonatoEquipesService;
 
         public GraficoController(GraficoCampeonatoPilotosService graficoCampeonatoPilotosService, GraficoCampeonatoEquipesService graficoCampeonatoEquipesService)
         {
-            GraficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
-            GraficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
+            _graficoCampeonatoPilotosService = graficoCampeonatoPilotosService;
+            _graficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
         }
 
         [ResponseCache(Duration = 60)]
         public IActionResult PilotosPontos(int temporada)
         {
-            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(temporada);
+            var pilotosGrafico = _graficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(temporada);
 
             ViewData["Temporada"] = temporada;
 
@@ -27,7 +27,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult EquipesPontos(int temporada)
         {
-            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(temporada);
+            var equipesGrafico = _graficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(temporada);
 
             ViewData["Temporada"] = temporada;
 
@@ -37,7 +37,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PontosPilotosPorCorrida(int temporada)
         {
-            var pilotosGrafico = GraficoCampeonatoPilotosService.GetGraficoPontosPorCorrida(temporada);
+            var pilotosGrafico = _graficoCampeonatoPilotosService.GetGraficoPontosPorCorrida(temporada);
 
             ViewData["Temporada"] = temporada;
 
@@ -47,7 +47,7 @@ namespace Formula1.MVC.Controllers
         [ResponseCache(Duration = 60)]
         public IActionResult PontosEquipesPorCorrida(int temporada)
         {
-            var equipesGrafico = GraficoCampeonatoEquipesService.GetGraficoPontosPorCorrida(temporada);
+            var equipesGrafico = _graficoCampeonatoEquipesService.GetGraficoPontosPorCorrida(temporada);
 
             ViewData["Temporada"] = temporada;
 

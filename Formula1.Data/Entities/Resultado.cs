@@ -1,8 +1,14 @@
-﻿namespace Formula1.Data.Entities
+﻿using System;
+using Formula1.Data.ValueObjects.CalculosPontos;
+using Formula1.Data.ValueObjects.CalculosPontos.Base;
+
+namespace Formula1.Data.Entities
 {
     public class Resultado : Entity
     {
         public int CorridaId { get; private set; }
+        
+        public bool Sprint { get; private set; }
 
         public virtual Corrida Corrida { get; private set; }
 
@@ -14,11 +20,7 @@
 
         public virtual Equipe Equipe { get; private set; }
 
-        public int PosicaoLargada { get; private set; }
-
         public int PosicaoChegada { get; private set; }
-
-        public double PontosClassificacao { get; private set; }
 
         public double PontosCorrida { get; private set; }
 
@@ -28,19 +30,18 @@
 
         public bool DSQ { get; private set; }
 
-        public Resultado() : this(0, 0, 0, 0, 0, 0, 0, 0, false, false, false)
+        public Resultado() : this(0, 0, false, 0, 0, 0, 0, false, false, false)
         {
         }
 
-        public Resultado(int id, int corridaId, int pilotoId, int equipeId, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq)
+        public Resultado(int id, int corridaId, bool sprint, int pilotoId, int equipeId, int posicaoChegada, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq)
         {
             Id = id;
             CorridaId = corridaId;
+            Sprint = sprint;
             PilotoId = pilotoId;
             EquipeId = equipeId;
-            PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;
-            PontosClassificacao = pontosClassificacao;
             PontosCorrida = pontosCorrida;
             VoltaMaisRapida = voltaMaisRapida;
             DNF = dnf;
@@ -51,14 +52,13 @@
             Equipe = null!;
         }
 
-        public void Atualizar(int corridaId, int pilotoId, int equipeId, int posicaoLargada, int posicaoChegada, double pontosClassificacao, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq)
+        public void Atualizar(int corridaId, bool sprint, int pilotoId, int equipeId, int posicaoChegada, double pontosCorrida, bool voltaMaisRapida, bool dnf, bool dsq)
         {
             CorridaId = corridaId;
+            Sprint = sprint;
             PilotoId = pilotoId;
             EquipeId = equipeId;
-            PosicaoLargada = posicaoLargada;
             PosicaoChegada = posicaoChegada;
-            PontosClassificacao = pontosClassificacao;
             PontosCorrida = pontosCorrida;
             VoltaMaisRapida = voltaMaisRapida;
             DNF = dnf;

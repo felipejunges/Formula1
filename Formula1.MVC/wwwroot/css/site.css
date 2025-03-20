@@ -84,6 +84,24 @@ html {
 }
 
 
+.input-validation-error {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+sub,
+sup {
+    font-size: 60%;
+}
+
+.tableFixHead          { overflow: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+table  { border-collapse: collapse; width: 100%; }
+th     { background:#fff; }
+
+.td-10 { width: 10%; }
+
 /* BEGIN LOGIN */
 
 .form-signin {

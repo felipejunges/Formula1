@@ -16,7 +16,7 @@ namespace Formula1.Data.Entities
 
         public DateTime DataHoraBrasil { get; private set; }
 
-        public bool CorridaClassificacao { get; private set; }
+        public bool CorridaSprint { get; private set; }
 
         public bool MetadePontos { get; private set; }
 
@@ -26,11 +26,27 @@ namespace Formula1.Data.Entities
 
         public bool TemResultadoDeCorrida => Resultados.Any(c => c.PosicaoChegada > 0);
 
-        public Corrida() : this(0, 0, 0, string.Empty, string.Empty, DateTime.Now, false, false)
+        public Corrida() : this(
+            0,
+            0,
+            0,
+            string.Empty,
+            string.Empty,
+            DateTime.Now,
+            false, 
+            false)
         {
         }
 
-        public Corrida(int id, int temporada, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil, bool corridaClassificacao, bool metadePontos)
+        public Corrida(
+            int id,
+            int temporada,
+            int numeroCorrida,
+            string nomeGrandePremio,
+            string circuito,
+            DateTime dataHoraBrasil,
+            bool corridaSprint,
+            bool metadePontos)
         {
             Id = id;
             Temporada = temporada;
@@ -38,21 +54,28 @@ namespace Formula1.Data.Entities
             NomeGrandePremio = nomeGrandePremio;
             Circuito = circuito;
             DataHoraBrasil = dataHoraBrasil;
-            CorridaClassificacao = corridaClassificacao;
+            CorridaSprint = corridaSprint;
             MetadePontos = metadePontos;
 
             Punicoes = new HashSet<Punicao>();
             Resultados = new HashSet<Resultado>();
         }
 
-        public void Atualizar(int temporada, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil, bool corridaClassificacao, bool metadePontos)
+        public void Atualizar(
+            int temporada,
+            int numeroCorrida,
+            string nomeGrandePremio,
+            string circuito,
+            DateTime dataHoraBrasil,
+            bool corridaSprint,
+            bool metadePontos)
         {
             Temporada = temporada;
             NumeroCorrida = numeroCorrida;
             NomeGrandePremio = nomeGrandePremio;
             Circuito = circuito;
             DataHoraBrasil = dataHoraBrasil;
-            CorridaClassificacao = corridaClassificacao;
+            CorridaSprint = corridaSprint;
             MetadePontos = metadePontos;
         }
     }

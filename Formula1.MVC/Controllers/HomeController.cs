@@ -73,8 +73,8 @@ namespace Formula1.MVC.Controllers
         [Authorize]
         public IActionResult Calcular(int temporada)
         {
-            this.PilotoTemporadaService.CalcularPilotosTemporada(temporada);
-            this.EquipeTemporadaService.CalcularEquipesTemporada(temporada);
+            PilotoTemporadaService.CalcularPilotosTemporada(temporada);
+            EquipeTemporadaService.CalcularEquipesTemporada(temporada);
 
             return Ok($"Gerado cálculo da temporada {temporada}.");
         }

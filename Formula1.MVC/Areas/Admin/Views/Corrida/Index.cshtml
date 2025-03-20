@@ -48,6 +48,11 @@
                     @Html.DisplayFor(modelItem => item.Circuito)
                 </td>
                 <td class="text-right">
+                    @if (item.CorridaSprint)
+                    {
+                        <a asp-area="Admin" asp-controller="Resultado" asp-action="Sprint" asp-route-corridaId="@item.Id">Sprint</a> <span>&#124;</span>
+                    }
+                    
                     <a asp-area="Admin" asp-controller="Resultado" asp-action="Index" asp-route-corridaId="@item.Id">Resultados</a> |
                     <a asp-area="Admin" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                     <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.Id" onclick="if (!confirm('Confirma a exclusão do registro?')) return false;">Excluir</a>
