@@ -13,11 +13,11 @@ namespace Formula1.Domain.Interfaces.Repositories
 
         List<ResultadoTemporada> GetResultadosEquipeTemporada(int temporada);
 
-        List<ResultadoLista> ObterListaResultados(int corridaId);
+        List<ResultadoItemDados> ObterListaResultados(int corridaId, bool sprint);
 
-        void Incluir(ResultadoDados resultadoDados);
+        void Incluir(Resultado resultado);
 
-        void Alterar(ResultadoDados resultadoDados);
+        void Alterar(Resultado resultado);
 
         void Excluir(Resultado resultado);
     }

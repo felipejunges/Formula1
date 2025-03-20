@@ -29,55 +29,34 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
         public IActionResult Index(int corridaId)
         {
+            return MontarViewCorrida(corridaId, false);
+        }
+
+        public IActionResult Sprint(int corridaId)
+        {
+            return MontarViewCorrida(corridaId, true);
+        }
+
+        public IActionResult MontarViewCorrida(int corridaId, bool corridaSprint)
+        {
             var corrida = _corridasRepository.ObterPeloId(corridaId);
 
             if (corrida is null)
                 return NotFound();
 
-            var dados = new ResultadoDados(
+            var pilotos = _pilotosRepository.ObterPilotosContrato(corrida.Temporada);
+            var equipes = _equipesRepository.ObterEquipesContrato(corrida.Temporada);
+
+            var resultados = _resultadosService.ObterListaResultados(corrida, corridaSprint);
+
+            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
+
+            var edicao = new ResultadoListaDados(
                 corridaId,
-                corrida.CorridaClassificacao,
-                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
-                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
-
-            var resultados = _resultadosService.ObterListaResultados(corridaId);
-
-            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
-
-            var edicao = new ResultadoListaDados(
-                dados,
+                corridaSprint,
                 resultados,
-                equipesPilotos,
-                corrida);
-
-            //
-            return View(edicao);
-        }
-
-        public IActionResult Edit(int corridaId, int id)
-        {
-            var resultado = _resultadosRepository.ObterPeloId(id);
-
-            if (resultado is null)
-                return BadRequest();
-
-            var corrida = _corridasRepository.ObterPeloId(corridaId);
-
-            if (corrida == null)
-                return BadRequest();
-
-            var dados = new ResultadoDados(
-                resultado,
-                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
-                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
-
-            var resultados = _resultadosService.ObterListaResultados(corridaId);
-
-            var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
-
-            var edicao = new ResultadoListaDados(
-                dados,
-                resultados,
+                pilotos,
+                equipes,
                 equipesPilotos,
                 corrida);
 
@@ -86,39 +65,33 @@ namespace Formula1.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(ResultadoDados resultadoDados)
+        public IActionResult Save(ResultadoListaDados resultadoListaDados)
         {
             if (ModelState.IsValid)
             {
-                if (resultadoDados.Id == 0)
-                    _resultadosRepository.Incluir(resultadoDados);
-                else
-                    _resultadosRepository.Alterar(resultadoDados);
+                _resultadosService.PersistirResultadosCorrida(resultadoListaDados);
 
-                return RedirectToAction("Index", new { corridaId = resultadoDados.CorridaId });
+                var viewToRedirect = resultadoListaDados.CorridaSprint ? nameof(Sprint) : nameof(Index);
+                
+                return RedirectToAction(viewToRedirect, new { corridaId = resultadoListaDados.CorridaId });
             }
 
             //
-            var corrida = _corridasRepository.ObterPeloId(resultadoDados.CorridaId);
+            var corrida = _corridasRepository.ObterPeloId(resultadoListaDados.CorridaId);
 
             if (corrida == null)
                 return BadRequest();
 
-            resultadoDados.AtualizarListas(
-                _pilotosRepository.ObterPilotosContrato(corrida.Temporada),
-                _equipesRepository.ObterEquipesContrato(corrida.Temporada));
-
-            var resultados = _resultadosService.ObterListaResultados(resultadoDados.CorridaId);
-
+            var pilotos = _pilotosRepository.ObterPilotosContrato(corrida.Temporada);
+            var equipes = _equipesRepository.ObterEquipesContrato(corrida.Temporada);
             var equipesPilotos = _contratosRepository.ObterResultadoEquipesPilotos(corrida.Temporada);
+            
+            resultadoListaDados.AtualizarListas(
+                pilotos,
+                equipes,
+                equipesPilotos);
 
-            var edicao = new ResultadoListaDados(
-                resultadoDados,
-                resultados,
-                equipesPilotos,
-                corrida);
-
-            return View(nameof(Index), edicao);
+            return View(nameof(Index), resultadoListaDados);
         }
 
         public IActionResult Delete(int corridaId, int id)

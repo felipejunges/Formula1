@@ -1,5 +1,7 @@
 ﻿using Formula1.Domain.Interfaces.Repositories;
 using System.Linq;
+using Formula1.Data.ValueObjects.CalculosPontos.Base;
+using Formula1.Data.ValueObjects.CalculosPontos.Factories;
 
 namespace Formula1.Domain.Services
 {
@@ -12,24 +14,28 @@ namespace Formula1.Domain.Services
             _corridasRepository = corridasRepository;
         }
 
-        public int GetPontosEmDisputaPilotos(int temporada)
+        public double GetPontosEmDisputaPilotos(int temporada)
         {
+            var calculoGPS = CalculoPontosFactory.CriarCalculoPontos(temporada, false);
+            var calculoSprints = CalculoPontosFactory.CriarCalculoPontos(temporada, true);
+            
             var corridasRestantes = _corridasRepository.ObterCorridasRestantes(temporada);
 
             return corridasRestantes.Sum(s =>
-                s.CorridaClassificacao
-                    ? temporada < 2022 ? 29 : 34
-                    : 26);
+                calculoGPS.MaximoPontosPiloto
+                + (s.CorridaSprint ? calculoSprints.MaximoPontosPiloto : 0));
         }
 
-        public int GetPontosEmDisputaEquipes(int temporada)
+        public double GetPontosEmDisputaEquipes(int temporada)
         {
+            var calculoGPS = CalculoPontosFactory.CriarCalculoPontos(temporada, false);
+            var calculoSprints = CalculoPontosFactory.CriarCalculoPontos(temporada, true);
+            
             var corridasRestantes = _corridasRepository.ObterCorridasRestantes(temporada);
-
+            
             return corridasRestantes.Sum(s =>
-                s.CorridaClassificacao
-                    ? temporada < 2022 ? 49 : 59
-                    : 44);
+                calculoGPS.MaximoPontosEquipe
+                + (s.CorridaSprint ? calculoSprints.MaximoPontosEquipe : 0));
         }
     }
 }

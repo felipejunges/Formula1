@@ -20,15 +20,18 @@ namespace Formula1.Data.Models.Admin.Corridas
         public DateTime DataHoraBrasil { get; set; }
 
         public bool Proxima { get; set; }
+        
+        public bool CorridaSprint { get; set; }
 
         // TODO: construtor pode gerar porblema no Ef, nao era melhor setar as props como "init" e setar como string.empty, igual ContratoLista ?
-        public CorridaLista(int id, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil)
+        public CorridaLista(int id, int numeroCorrida, string nomeGrandePremio, string circuito, DateTime dataHoraBrasil, bool corridaSprint)
         {
             Id = id;
             NumeroCorrida = numeroCorrida;
             NomeGrandePremio = nomeGrandePremio;
             Circuito = circuito;
             DataHoraBrasil = dataHoraBrasil;
+            CorridaSprint = corridaSprint;
             Proxima = false;
         }
     }

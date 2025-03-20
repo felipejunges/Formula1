@@ -7,8 +7,10 @@
         public int EquipeId { get; set; }
 
         public int CorridaId { get; set; }
+        
+        public bool Sprint { get; set; }
 
-        public double PontosTotais { get; set; }
+        public double Pontos { get; set; }
 
         public bool VoltaMaisRapida { get; set; }
 

@@ -24,7 +24,7 @@ namespace Formula1.Domain.Services
             var equipes = _equipesRepository.ObterEquipesTabela(temporada);
             var resultados = _resultadosRepository.GetResultadosEquipeTemporada(temporada);
 
-            PreencherResultadosEquipesCorridas(corridas, equipes, resultados);
+            PreencherResultadosEquipes(equipes, resultados);
 
             if (corridaOrder == null)
                 equipes.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
@@ -43,13 +43,12 @@ namespace Formula1.Domain.Services
             if (resultadoCorrida1 == null) return 1;
             if (resultadoCorrida2 == null) return -1;
 
-            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
+            return resultadoCorrida2.Pontos.CompareTo(resultadoCorrida1.Pontos);
         }
 
-        private void PreencherResultadosEquipesCorridas(List<CorridaTemporada> corridas, List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)
+        private void PreencherResultadosEquipes(List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)
         {
             equipes.ForEach(f => f.Resultados = resultados.Where(o => o.EquipeId == f.Id).ToList());
-            corridas.ForEach(f => f.Resultados = resultados.Where(o => o.CorridaId == f.Id).ToList());
         }
     }
 }

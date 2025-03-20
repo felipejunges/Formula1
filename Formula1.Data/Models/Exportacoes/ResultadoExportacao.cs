@@ -8,15 +8,13 @@ namespace Formula1.Data.Models.Exportacoes
 
         public int CorridaId { get; private set; }
 
+        public bool Sprint { get; private set; }
+
         public int PilotoId { get; private set; }
 
         public int EquipeId { get; private set; }
 
-        public int PosicaoLargada { get; private set; }
-
         public int PosicaoChegada { get; private set; }
-
-        public double PontosClassificacao { get; private set; }
 
         public double PontosCorrida { get; private set; }
 
@@ -34,11 +32,10 @@ namespace Formula1.Data.Models.Exportacoes
         {
             Id = resultado.Id;
             CorridaId = resultado.CorridaId;
+            Sprint = resultado.Sprint;
             PilotoId = resultado.PilotoId;
             EquipeId = resultado.EquipeId;
-            PosicaoLargada = resultado.PosicaoLargada;
             PosicaoChegada = resultado.PosicaoChegada;
-            PontosClassificacao = resultado.PontosClassificacao;
             PontosCorrida = resultado.PontosCorrida;
             VoltaMaisRapida = resultado.VoltaMaisRapida;
             DNF = resultado.DNF;
@@ -50,11 +47,10 @@ namespace Formula1.Data.Models.Exportacoes
             return new Resultado(
                 Id,
                 CorridaId,
+                Sprint,
                 PilotoId,
                 EquipeId,
-                PosicaoLargada,
                 PosicaoChegada,
-                PontosClassificacao,
                 PontosCorrida,
                 VoltaMaisRapida,
                 DNF,

@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Formula1.Data.Models.Admin.Resultados;
+using Formula1.Data.Models.Admin.Validators;
 using Formula1.Domain.Interfaces.ApiServices;
 using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Domain.Interfaces.Services;
@@ -68,7 +70,10 @@ namespace Formula1.MVC
                 client.BaseAddress = new Uri("https://f1.somee.com/"); // TODO: parametrizar
             });
 
-            services.AddTransient<IValidator<CadastroViewModel>, CadastroViewModelValidator>();
+            services
+                .AddTransient<IValidator<CadastroViewModel>, CadastroViewModelValidator>()
+                .AddTransient<IValidator<ResultadoListaDados>, ResultadoListaDadosValidator>()
+                .AddTransient<IValidator<ResultadoItemDados>, ResultadoItemDadosValidator>();
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

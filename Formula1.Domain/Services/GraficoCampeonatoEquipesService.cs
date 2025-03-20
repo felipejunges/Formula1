@@ -29,9 +29,9 @@ namespace Formula1.Domain.Services
                     if (!corrida.TemResultadosDeCorrida)
                         break;
 
-                    var resultado = equipe.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
-                    if (resultado != null)
-                        soma += resultado.PontosTotais;
+                    var resultado = equipe.Resultados.Where(o => o.CorridaId == corrida.Id).ToList();
+                    if (resultado.Any())
+                        soma += resultado.Sum(s => s.Pontos);
 
                     pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
                 }
@@ -64,9 +64,9 @@ namespace Formula1.Domain.Services
                     if (!corrida.TemResultadosDeCorrida)
                         break;
 
-                    var resultado = equipe.Resultados.FirstOrDefault(o => o.CorridaId == corrida.Id);
+                    var resultado = equipe.Resultados.Where(o => o.CorridaId == corrida.Id).ToList();
 
-                    pontos[campeonato.Corridas.IndexOf(corrida)] = resultado?.PontosTotais ?? 0;
+                    pontos[campeonato.Corridas.IndexOf(corrida)] = resultado.Sum(s => s.Pontos);
                 }
 
                 equipesGrafico.Add(new EquipePontosGrafico()
@@ -77,9 +77,7 @@ namespace Formula1.Domain.Services
                 });
             }
 
-            var graficoCampeonatoEquipes = new GraficoCampeonatoEquipes(campeonato.Corridas, equipesGrafico, true);
-
-            return graficoCampeonatoEquipes;
+            return new GraficoCampeonatoEquipes(campeonato.Corridas, equipesGrafico, true);
         }
     }
 }

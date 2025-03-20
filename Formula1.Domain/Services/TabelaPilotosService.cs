@@ -24,7 +24,7 @@ namespace Formula1.Domain.Services
             var pilotos = _pilotosRepository.ObterPilotosTabela(temporada);
             var resultados = _resultadosRepository.GetResultadosPilotosTemporada(temporada);
 
-            PreencherResultadosPilotosCorridas(corridas, pilotos, resultados);
+            PreencherResultadosPilotos(pilotos, resultados);
 
             if (corridaOrder == null)
                 pilotos.Sort((o, i) => o.Posicao.CompareTo(i.Posicao));
@@ -45,10 +45,10 @@ namespace Formula1.Domain.Services
             if (resultadoCorrida1 == null) return 1;
             if (resultadoCorrida2 == null) return -1;
 
-            if (resultadoCorrida1.PontosTotais == resultadoCorrida2.PontosTotais)
+            if (resultadoCorrida1.Pontos == resultadoCorrida2.Pontos)
                 return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
 
-            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
+            return resultadoCorrida2.Pontos.CompareTo(resultadoCorrida1.Pontos);
         }
 
         private int OrdenarPorPosicaoChegada(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
@@ -63,10 +63,9 @@ namespace Formula1.Domain.Services
             return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
         }
 
-        private void PreencherResultadosPilotosCorridas(List<CorridaTemporada> corridas, List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)
+        private void PreencherResultadosPilotos(List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)
         {
             pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
-            corridas.ForEach(f => f.Resultados = resultados.Where(o => o.CorridaId == f.Id).ToList());
         }
     }
 }

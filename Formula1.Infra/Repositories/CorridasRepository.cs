@@ -29,9 +29,10 @@ namespace Formula1.Infra.Repositories
                 .Include(c => c.Resultados)
                 .Where(o => o.Temporada == temporada)
                 .OrderBy(o => o.DataHoraBrasil)
-                .AsEnumerable() // para poder usar o construtor abaixo
+                .AsEnumerable()
                 .Select(o => new CorridaTemporada(
                     id: o.Id,
+                    corridaSprint: o.CorridaSprint,
                     dataHoraBrasil: o.DataHoraBrasil,
                     nomeGrandePremio: o.NomeGrandePremio,
                     temResultadosDeCorrida: o.TemResultadoDeCorrida
@@ -52,7 +53,8 @@ namespace Formula1.Infra.Repositories
                     numeroCorrida: o.NumeroCorrida,
                     dataHoraBrasil: o.DataHoraBrasil,
                     nomeGrandePremio: o.NomeGrandePremio,
-                    circuito: o.Circuito
+                    circuito: o.Circuito,
+                    corridaSprint: o.CorridaSprint
                 ))
                 .ToList();
 
@@ -78,7 +80,7 @@ namespace Formula1.Infra.Repositories
                 nomeGrandePremio: corridaDados.NomeGrandePremio,
                 circuito: corridaDados.Circuito,
                 dataHoraBrasil: corridaDados.DataHoraBrasil!.Value,
-                corridaClassificacao: corridaDados.CorridaClassificacao,
+                corridaSprint: corridaDados.CorridaSprint,
                 metadePontos: corridaDados.MetadePontos);
 
             Db.Corridas.Add(corrida);
@@ -98,7 +100,7 @@ namespace Formula1.Infra.Repositories
                 nomeGrandePremio: corridaDados.NomeGrandePremio,
                 circuito: corridaDados.Circuito,
                 dataHoraBrasil: corridaDados.DataHoraBrasil!.Value,
-                corridaClassificacao: corridaDados.CorridaClassificacao,
+                corridaSprint: corridaDados.CorridaSprint,
                 metadePontos: corridaDados.MetadePontos);
 
             Db.Corridas.Update(corrida);

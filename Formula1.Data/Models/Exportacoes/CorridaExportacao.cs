@@ -17,7 +17,7 @@ namespace Formula1.Data.Models.Exportacoes
 
         public DateTime DataHoraBrasil { get; private set; }
 
-        public bool CorridaClassificacao { get; private set; }
+        public bool CorridaSprint { get; private set; }
 
         public bool MetadePontos { get; private set; }
 
@@ -35,7 +35,6 @@ namespace Formula1.Data.Models.Exportacoes
             NomeGrandePremio = corrida.NomeGrandePremio;
             Circuito = corrida.Circuito;
             DataHoraBrasil = corrida.DataHoraBrasil;
-            CorridaClassificacao = corrida.CorridaClassificacao;
             MetadePontos = corrida.MetadePontos;
         }
 
@@ -48,7 +47,7 @@ namespace Formula1.Data.Models.Exportacoes
                 NomeGrandePremio,
                 Circuito,
                 DataHoraBrasil,
-                CorridaClassificacao,
+                CorridaSprint,
                 MetadePontos);
         }
     }

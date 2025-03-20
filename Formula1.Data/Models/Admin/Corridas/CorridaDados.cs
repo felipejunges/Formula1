@@ -27,8 +27,8 @@ namespace Formula1.Data.Models.Admin.Corridas
         [DataType(DataType.Text)]
         public DateTime? DataHoraBrasil { get; set; }
 
-        [Display(Name = "Com corrida classificação")]
-        public bool CorridaClassificacao { get; set; }
+        [Display(Name = "Com corrida sprint")]
+        public bool CorridaSprint { get; set; }
 
         [Display(Name = "Metade de pontos")]
         public bool MetadePontos { get; set; }
@@ -56,7 +56,7 @@ namespace Formula1.Data.Models.Admin.Corridas
             NomeGrandePremio = corrida.NomeGrandePremio;
             Circuito = corrida.Circuito;
             DataHoraBrasil = corrida.DataHoraBrasil;
-            CorridaClassificacao = corrida.CorridaClassificacao;
+            CorridaSprint = corrida.CorridaSprint;
             MetadePontos = corrida.MetadePontos;
         }
     }

@@ -63,11 +63,18 @@
                 {
                     <td class="text-center">
                         @{
-                            var resultado = piloto.Resultados.Where(o => o.CorridaId == corrida.Id).FirstOrDefault();
+                            var resultado = piloto.Resultados.Where(o => o.CorridaId == corrida.Id && !o.Sprint).FirstOrDefault();
 
                             if (resultado != null)
                             {
                                 <small class="@(resultado.DNF || resultado.DSQ ? "result-dnf" : "") @(resultado.VoltaMaisRapida ? "result-ponto-extra" : "")">@resultado.PosicaoChegada.ToString()</small>
+                            }
+
+                            var resultadoSprint = piloto.Resultados.Where(o => o.CorridaId == corrida.Id && o.Sprint).FirstOrDefault();
+                            
+                            if (resultadoSprint != null)
+                            {
+                                <sup class="@(resultadoSprint.DNF || resultadoSprint.DSQ ? "result-dnf" : "") @(resultadoSprint.VoltaMaisRapida ? "result-ponto-extra" : "")">@resultadoSprint.PosicaoChegada.ToString()</sup>
                             }
                         }
                     </td>

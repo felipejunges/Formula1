@@ -3,6 +3,7 @@ using Formula1.Data.Models;
 using Formula1.Data.Models.Admin.Resultados;
 using Formula1.Domain.Interfaces.Repositories;
 using Formula1.Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +34,8 @@ namespace Formula1.Infra.Repositories
                                   PilotoId = r.PilotoId,
                                   EquipeId = 0,
                                   CorridaId = r.CorridaId,
-                                  PontosTotais = r.PontosClassificacao + r.PontosCorrida,
+                                  Sprint = r.Sprint,
+                                  Pontos = r.PontosCorrida,
                                   VoltaMaisRapida = r.VoltaMaisRapida,
                                   PosicaoChegada = r.PosicaoChegada,
                                   DNF = r.DNF,
@@ -42,7 +44,7 @@ namespace Formula1.Infra.Repositories
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
 
-            resultados.ForEach(r => r.PontosTotais -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.PilotoId == r.PilotoId).Sum(s => s.Pontos));
+            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.PilotoId == r.PilotoId).Sum(s => s.Pontos));
 
             return resultados;
         }
@@ -56,14 +58,16 @@ namespace Formula1.Infra.Repositories
                               group r by new
                               {
                                   r.EquipeId,
-                                  r.CorridaId
+                                  r.CorridaId,
+                                  r.Sprint
                               } into g
                               select new ResultadoTemporada()
                               {
                                   PilotoId = 0,
                                   EquipeId = g.Key.EquipeId,
                                   CorridaId = g.Key.CorridaId,
-                                  PontosTotais = g.Sum(s => s.PontosClassificacao + s.PontosCorrida),
+                                  Sprint = g.Key.Sprint,
+                                  Pontos = g.Sum(s => s.PontosCorrida),
                                   VoltaMaisRapida = g.Max(m => m.VoltaMaisRapida ? 1 : 0) > 0,
                                   PosicaoChegada = g.Min(m => m.PosicaoChegada),
                                   DNF = false,
@@ -72,72 +76,40 @@ namespace Formula1.Infra.Repositories
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
 
-            resultados.ForEach(r => r.PontosTotais -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
+            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
 
             return resultados;
         }
 
-        public List<ResultadoLista> ObterListaResultados(int corridaId)
+        public List<ResultadoItemDados> ObterListaResultados(int corridaId, bool sprint)
         {
             return Db.Resultados
-                .Where(o => o.Corrida.Id == corridaId)
+                .Include(r => r.Corrida)
+                .Where(o => 
+                    o.Corrida.Id == corridaId 
+                    && o.Sprint == sprint)
                 .OrderBy(o => o.PosicaoChegada)
-                .ThenBy(o => o.PosicaoLargada)
-                .Select(o => new ResultadoLista(
+                .Select(o => new ResultadoItemDados(
                     o.Id,
-                    o.Piloto.Nome,
-                    o.Equipe.Nome,
-                    o.Corrida.MetadePontos,
-                    o.PosicaoLargada,
                     o.PosicaoChegada,
-                    o.PontosClassificacao,
+                    o.PilotoId,
+                    o.EquipeId,
                     o.PontosCorrida,
                     o.VoltaMaisRapida,
                     o.DNF,
-                    o.DSQ,
-                    false
+                    o.DSQ
                  ))
                 .ToList();
         }
 
-        public void Incluir(ResultadoDados resultadoDados)
+        public void Incluir(Resultado resultado)
         {
-            var resultado = new Resultado(
-                id: 0,
-                corridaId: resultadoDados.CorridaId,
-                pilotoId: resultadoDados.PilotoId!.Value,
-                equipeId: resultadoDados.EquipeId!.Value,
-                posicaoLargada: resultadoDados.PosicaoLargada,
-                posicaoChegada: resultadoDados.PosicaoChegada,
-                pontosClassificacao: resultadoDados.PontosClassificacao!.Value,
-                pontosCorrida: resultadoDados.PontosCorrida!.Value,
-                voltaMaisRapida: resultadoDados.VoltaMaisRapida,
-                dnf: resultadoDados.DNF,
-                dsq: resultadoDados.DSQ);
-
             Db.Resultados.Add(resultado);
             Db.SaveChanges();
         }
 
-        public void Alterar(ResultadoDados resultadoDados)
+        public void Alterar(Resultado resultado)
         {
-            var resultado = ObterPeloId(resultadoDados.Id);
-
-            if (resultado is null)
-                return;
-
-            resultado.Atualizar(
-                corridaId: resultadoDados.CorridaId,
-                pilotoId: resultadoDados.PilotoId!.Value,
-                equipeId: resultadoDados.EquipeId!.Value,
-                posicaoLargada: resultadoDados.PosicaoLargada,
-                posicaoChegada: resultadoDados.PosicaoChegada,
-                pontosClassificacao: resultadoDados.PontosClassificacao!.Value,
-                pontosCorrida: resultadoDados.PontosCorrida!.Value,
-                voltaMaisRapida: resultadoDados.VoltaMaisRapida,
-                dnf: resultadoDados.DNF,
-                dsq: resultadoDados.DSQ);
-
             Db.Resultados.Update(resultado);
             Db.SaveChanges();
         }
