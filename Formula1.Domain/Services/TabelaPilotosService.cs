@@ -36,10 +36,10 @@ namespace Formula1.Domain.Services
             return new TabelaCampeonatoPilotos(corridas, pilotos);
         }
 
-        private int OrdenarPorPontos(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
+        private int OrdenarPorPontos(List<ResultadoTemporadaPiloto> resultados1, List<ResultadoTemporadaPiloto> resultados2, int corridaId)
         {
-            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
-            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
             if (resultadoCorrida1 == null) return 1;
@@ -51,10 +51,10 @@ namespace Formula1.Domain.Services
             return resultadoCorrida2.Pontos.CompareTo(resultadoCorrida1.Pontos);
         }
 
-        private int OrdenarPorPosicaoChegada(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
+        private int OrdenarPorPosicaoChegada(List<ResultadoTemporadaPiloto> resultados1, List<ResultadoTemporadaPiloto> resultados2, int corridaId)
         {
-            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
-            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
             if (resultadoCorrida1 == null) return 1;
@@ -63,7 +63,7 @@ namespace Formula1.Domain.Services
             return resultadoCorrida1.PosicaoChegada.CompareTo(resultadoCorrida2.PosicaoChegada);
         }
 
-        private void PreencherResultadosPilotos(List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporada> resultados)
+        private void PreencherResultadosPilotos(List<PilotoTemporadaResultado> pilotos, List<ResultadoTemporadaPiloto> resultados)
         {
             pilotos.ForEach(f => f.Resultados = resultados.Where(o => o.PilotoId == f.Id).ToList());
         }

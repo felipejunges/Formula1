@@ -51,7 +51,7 @@ namespace Formula1.Domain.Services
             }
         }
 
-        private int CompararPilotos(int pilotoId1, int pilotoId2, List<ResultadoTemporada> resultados)
+        private int CompararPilotos(int pilotoId1, int pilotoId2, List<ResultadoTemporadaPiloto> resultados)
         {
             var maxPosicaoChegada = resultados.Max(o => o.PosicaoChegada);
 
@@ -67,7 +67,7 @@ namespace Formula1.Domain.Services
             return 0;
         }
 
-        private int ObterQuantidadePosicoes(int pilotoId, int posicao, List<ResultadoTemporada> resultados)
+        private int ObterQuantidadePosicoes(int pilotoId, int posicao, List<ResultadoTemporadaPiloto> resultados)
         {
             return resultados.Where(o => o.PilotoId == pilotoId && o.PosicaoChegada == posicao && !o.DNF && !o.DSQ).Count();
         }

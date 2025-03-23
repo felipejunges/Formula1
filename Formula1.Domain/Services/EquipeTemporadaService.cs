@@ -27,7 +27,7 @@ namespace Formula1.Domain.Services
 
             foreach (var equipeId in equipesIds)
             {
-                var pontos = resultados.Where(o => o.EquipeId == equipeId).Sum(o => o.Pontos);
+                var pontos = resultados.Where(o => o.EquipeId == equipeId).Sum(o => o.PontosTotais);
 
                 equipesTemporada.Add(new EquipeTemporadaInclusao(equipeId, temporada, pontos, 0, 0));
             }
@@ -51,9 +51,9 @@ namespace Formula1.Domain.Services
             }
         }
 
-        private int CompararEquipes(int equipeId1, int equipeId2, List<ResultadoTemporada> resultados)
+        private int CompararEquipes(int equipeId1, int equipeId2, List<ResultadoTemporadaEquipe> resultados)
         {
-            var maxPosicaoChegada = resultados.Max(o => o.PosicaoChegada);
+            var maxPosicaoChegada = resultados.Max(o => o.MelhorPosicaoChegada);
 
             for (int i = 1; i <= maxPosicaoChegada; i++)
             {
@@ -67,9 +67,9 @@ namespace Formula1.Domain.Services
             return 0;
         }
 
-        private int ObterQuantidadePosicoes(int equipeId, int posicao, List<ResultadoTemporada> resultados)
+        private int ObterQuantidadePosicoes(int equipeId, int posicao, List<ResultadoTemporadaEquipe> resultados)
         {
-            return resultados.Where(o => o.EquipeId == equipeId && o.PosicaoChegada == posicao).Count();
+            return resultados.Where(o => o.EquipeId == equipeId && o.MelhorPosicaoChegada == posicao).Count();
         }
 
         private void MarcarEquipesPosicaoMaxima(List<EquipeTemporadaInclusao> equipes, int temporada)

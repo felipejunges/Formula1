@@ -34,19 +34,19 @@ namespace Formula1.Domain.Services
             return new TabelaCampeonatoEquipes(corridas, equipes);
         }
 
-        private int OrdenarPorPontos(List<ResultadoTemporada> resultados1, List<ResultadoTemporada> resultados2, int corridaId)
+        private int OrdenarPorPontos(List<ResultadoTemporadaEquipe> resultados1, List<ResultadoTemporadaEquipe> resultados2, int corridaId)
         {
-            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId);
-            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId);
+            var resultadoCorrida1 = resultados1.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
+            var resultadoCorrida2 = resultados2.FirstOrDefault(c => c.CorridaId == corridaId && !c.Sprint);
 
             if (resultadoCorrida1 == null && resultadoCorrida2 == null) return 0;
             if (resultadoCorrida1 == null) return 1;
             if (resultadoCorrida2 == null) return -1;
 
-            return resultadoCorrida2.Pontos.CompareTo(resultadoCorrida1.Pontos);
+            return resultadoCorrida2.PontosTotais.CompareTo(resultadoCorrida1.PontosTotais);
         }
 
-        private void PreencherResultadosEquipes(List<EquipeTemporadaResultado> equipes, List<ResultadoTemporada> resultados)
+        private void PreencherResultadosEquipes(List<EquipeTemporadaResultado> equipes, List<ResultadoTemporadaEquipe> resultados)
         {
             equipes.ForEach(f => f.Resultados = resultados.Where(o => o.EquipeId == f.Id).ToList());
         }

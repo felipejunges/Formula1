@@ -23,16 +23,15 @@ namespace Formula1.Infra.Repositories
             return Db.Resultados.Find(id);
         }
 
-        public List<ResultadoTemporada> GetResultadosPilotosTemporada(int temporada)
+        public List<ResultadoTemporadaPiloto> GetResultadosPilotosTemporada(int temporada)
         {
             var resultados = (from r in Db.Resultados
                               join c in Db.Corridas on r.CorridaId equals c.Id
                               where
                                   c.Temporada == temporada
-                              select new ResultadoTemporada()
+                              select new ResultadoTemporadaPiloto()
                               {
                                   PilotoId = r.PilotoId,
-                                  EquipeId = 0,
                                   CorridaId = r.CorridaId,
                                   Sprint = r.Sprint,
                                   Pontos = r.PontosCorrida,
@@ -49,7 +48,7 @@ namespace Formula1.Infra.Repositories
             return resultados;
         }
 
-        public List<ResultadoTemporada> GetResultadosEquipeTemporada(int temporada)
+        public List<ResultadoTemporadaEquipe> GetResultadosEquipeTemporada(int temporada)
         {
             var resultados = (from r in Db.Resultados
                               join c in Db.Corridas on r.CorridaId equals c.Id
@@ -61,22 +60,19 @@ namespace Formula1.Infra.Repositories
                                   r.CorridaId,
                                   r.Sprint
                               } into g
-                              select new ResultadoTemporada()
+                              select new ResultadoTemporadaEquipe()
                               {
-                                  PilotoId = 0,
                                   EquipeId = g.Key.EquipeId,
                                   CorridaId = g.Key.CorridaId,
                                   Sprint = g.Key.Sprint,
-                                  Pontos = g.Sum(s => s.PontosCorrida),
+                                  PontosTotais = g.Sum(s => s.PontosCorrida),
                                   VoltaMaisRapida = g.Max(m => m.VoltaMaisRapida ? 1 : 0) > 0,
-                                  PosicaoChegada = g.Min(m => m.PosicaoChegada),
-                                  DNF = false,
-                                  DSQ = false
+                                  MelhorPosicaoChegada = g.Min(m => m.PosicaoChegada)
                               }).ToList();
 
             var punicoes = Db.Punicoes.Where(o => o.Corrida.Temporada == temporada).ToList();
 
-            resultados.ForEach(r => r.Pontos -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
+            resultados.ForEach(r => r.PontosTotais -= punicoes.Where(w => w.CorridaId == r.CorridaId && w.EquipeId == r.EquipeId).Sum(s => s.Pontos));
 
             return resultados;
         }

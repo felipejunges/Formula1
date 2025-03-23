@@ -14,7 +14,7 @@ namespace Formula1.Data.Models
 
         public int Posicao { get; set; }
 
-        public List<ResultadoTemporada> Resultados { get; set; }
+        public List<ResultadoTemporadaPiloto> Resultados { get; set; }
 
         public int PosicaoMaxima { get; set; }
 
@@ -23,7 +23,7 @@ namespace Formula1.Data.Models
             NomeGuerra = string.Empty;
             CorRgb = string.Empty;
             
-            Resultados = new List<ResultadoTemporada>();
+            Resultados = new List<ResultadoTemporadaPiloto>();
         }
     }
 }
