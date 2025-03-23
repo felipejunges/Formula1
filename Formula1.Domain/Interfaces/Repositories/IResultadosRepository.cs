@@ -9,9 +9,9 @@ namespace Formula1.Domain.Interfaces.Repositories
     {
         Resultado? ObterPeloId(int id);
 
-        List<ResultadoTemporada> GetResultadosPilotosTemporada(int temporada);
+        List<ResultadoTemporadaPiloto> GetResultadosPilotosTemporada(int temporada);
 
-        List<ResultadoTemporada> GetResultadosEquipeTemporada(int temporada);
+        List<ResultadoTemporadaEquipe> GetResultadosEquipeTemporada(int temporada);
 
         List<ResultadoItemDados> ObterListaResultados(int corridaId, bool sprint);
 

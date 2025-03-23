@@ -31,7 +31,7 @@ namespace Formula1.Domain.Services
 
                     var resultado = equipe.Resultados.Where(o => o.CorridaId == corrida.Id).ToList();
                     if (resultado.Any())
-                        soma += resultado.Sum(s => s.Pontos);
+                        soma += resultado.Sum(s => s.PontosTotais);
 
                     pontos[campeonato.Corridas.IndexOf(corrida)] = soma;
                 }
@@ -66,7 +66,7 @@ namespace Formula1.Domain.Services
 
                     var resultado = equipe.Resultados.Where(o => o.CorridaId == corrida.Id).ToList();
 
-                    pontos[campeonato.Corridas.IndexOf(corrida)] = resultado.Sum(s => s.Pontos);
+                    pontos[campeonato.Corridas.IndexOf(corrida)] = resultado.Sum(s => s.PontosTotais);
                 }
 
                 equipesGrafico.Add(new EquipePontosGrafico()

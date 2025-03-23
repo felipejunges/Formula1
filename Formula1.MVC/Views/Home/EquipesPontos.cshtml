@@ -67,14 +67,14 @@
 
                             if (resultadoGP != null)
                             {
-                                <small style="font-weight: @(resultadoGP.VoltaMaisRapida ? "bold" : "normal")">@resultadoGP.Pontos.ToString()</small>
+                                <small style="font-weight: @(resultadoGP.VoltaMaisRapida ? "bold" : "normal")">@resultadoGP.PontosTotais.ToString()</small>
                             }
                             
                             var resultadoSprint = equipe.Resultados.Where(o => o.CorridaId == corrida.Id && o.Sprint).FirstOrDefault();
 
                             if (resultadoSprint != null)
                             {
-                                <sup style="font-weight: @(resultadoSprint.VoltaMaisRapida ? "bold" : "normal")">@resultadoSprint.Pontos.ToString()</sup>
+                                <sup style="font-weight: @(resultadoSprint.VoltaMaisRapida ? "bold" : "normal")">@resultadoSprint.PontosTotais.ToString()</sup>
                             }
                         }
                     </td>
