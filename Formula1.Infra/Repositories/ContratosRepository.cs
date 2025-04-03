@@ -70,7 +70,7 @@ namespace Formula1.Infra.Repositories
             if (contrato is null)
                 return;
 
-            contrato.Atualizar(contratoDados.Temporada, contratoDados.PilotoId, contratoDados.EquipeId);
+            contrato.Atualizar(contratoDados.PilotoId, contratoDados.EquipeId);
 
             Db.Contratos.Update(contrato);
             Db.SaveChanges();

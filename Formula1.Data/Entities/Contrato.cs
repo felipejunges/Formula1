@@ -26,11 +26,10 @@
             Equipe = null!;
         }
 
-        public void Atualizar(int pilotoId, int equipeId, int temporada)
+        public void Atualizar(int pilotoId, int equipeId)
         {
             PilotoId = pilotoId;
             EquipeId = equipeId;
-            Temporada = temporada;
         }
     }
 }
