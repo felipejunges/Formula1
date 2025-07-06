@@ -14,10 +14,18 @@ namespace Formula1.Domain.Services
         private const int POSICOES_POR_CORRIDA = 20;
 
         private readonly IResultadosRepository _resultadosRepository;
+        
+        private readonly PilotoTemporadaService _pilotoTemporadaService;
+        private readonly EquipeTemporadaService _equipeTemporadaService;
 
-        public ResultadosService(IResultadosRepository resultadosRepository)
+        public ResultadosService(
+            IResultadosRepository resultadosRepository,
+            PilotoTemporadaService pilotoTemporadaService,
+            EquipeTemporadaService equipeTemporadaService)
         {
             _resultadosRepository = resultadosRepository;
+            _pilotoTemporadaService = pilotoTemporadaService;
+            _equipeTemporadaService = equipeTemporadaService;
         }
 
         public List<ResultadoItemDados> ObterListaResultados(Corrida corrida, bool sprint)
@@ -88,6 +96,9 @@ namespace Formula1.Domain.Services
                         _resultadosRepository.Alterar(resultado);
                 }
             }
+            
+            _pilotoTemporadaService.CalcularPilotosTemporada(resultadoListaDados.Temporada);
+            _equipeTemporadaService.CalcularEquipesTemporada(resultadoListaDados.Temporada);
         }
 
         private void GrifarItensListaInvalidos(List<ResultadoItemDados> resultados, CalculoPontos calculoPontos)

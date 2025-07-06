@@ -6,6 +6,7 @@ namespace Formula1.Data.Models.Admin.Resultados
     public class ResultadoListaDados
     {
         public int CorridaId { get; set; }
+        public int Temporada { get; set; }
         public bool CorridaSprint { get; set; }
         public List<ResultadoItemDados> Resultados { get; set; }
         public List<Piloto> Pilotos { get; set; }
@@ -22,9 +23,10 @@ namespace Formula1.Data.Models.Admin.Resultados
             NomeGP = string.Empty;
         }
 
-        public ResultadoListaDados(int corridaId, bool corridaSprint, List<ResultadoItemDados> resultados, List<Piloto> pilotos, List<Equipe> equipes, List<ResultadoEquipePilotos> equipesPilotos, Corrida corrida)
+        public ResultadoListaDados(int corridaId, int temporada, bool corridaSprint, List<ResultadoItemDados> resultados, List<Piloto> pilotos, List<Equipe> equipes, List<ResultadoEquipePilotos> equipesPilotos, Corrida corrida)
         {
             CorridaId = corridaId;
+            Temporada = temporada;
             CorridaSprint = corridaSprint;
             Resultados = resultados;
             Pilotos = pilotos;
