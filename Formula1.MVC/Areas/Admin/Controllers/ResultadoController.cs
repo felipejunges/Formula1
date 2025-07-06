@@ -53,6 +53,7 @@ namespace Formula1.MVC.Areas.Admin.Controllers
 
             var edicao = new ResultadoListaDados(
                 corridaId,
+                corrida.Temporada,
                 corridaSprint,
                 resultados,
                 pilotos,
