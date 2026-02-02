@@ -1,0 +1,41 @@
+name: Build and Deploy .NET Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore Formula1.sln
+    
+    - name: Build solution
+      run: dotnet build Formula1.sln --configuration Release --no-restore
+    
+    - name: Run tests
+      run: dotnet test Formula1.Test/Formula1.Test.csproj --configuration Release --no-build --verbosity normal
+    
+    - name: Publish application
+      run: dotnet publish Formula1.MVC/Formula1.MVC.csproj --configuration Release --no-build --output ./publish
+    
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./publish/
+        server-dir: ${{ secrets.FTP_SERVER_DIR }}
+        dangerous-clean-slate: false
