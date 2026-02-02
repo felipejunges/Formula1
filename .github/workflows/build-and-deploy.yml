@@ -82,7 +82,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./publish/
         server-dir: ${{ vars.FTP_SERVER_DIR }}
-        exclude: ${{ vars.FTP_EXCLUDE }}
+        #exclude: ${{ vars.FTP_EXCLUDE }}
         dangerous-clean-slate: false
     
     - name: Remove app_offline.htm to bring site back online
