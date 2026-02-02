@@ -58,7 +58,23 @@ jobs:
         name: published-app
         path: ./publish/
     
-    - name: Deploy via FTP
+    - name: Create app_offline.htm
+      run: echo "<h1>Application is being updated. Please refresh in a moment.</h1>" > ./app_offline.htm
+    
+    - name: Upload app_offline.htm to take site offline
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ vars.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./
+        server-dir: ${{ vars.FTP_SERVER_DIR }}
+        include: app_offline.htm
+    
+    - name: Wait for IIS to process app_offline.htm
+      run: sleep 5
+    
+    - name: Deploy application files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ vars.FTP_SERVER }}
@@ -68,3 +84,22 @@ jobs:
         server-dir: ${{ vars.FTP_SERVER_DIR }}
         exclude: ${{ vars.FTP_EXCLUDE }}
         dangerous-clean-slate: false
+    
+    - name: Remove app_offline.htm to bring site back online
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ vars.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: ${{ vars.FTP_SERVER_DIR }}
+        local-dir: ./
+        include: .github/workflows/cleanup_app_offline.txt
+        
+    - name: Delete app_offline.htm via FTP command
+      run: |
+        sudo apt-get update && sudo apt-get install -y lftp
+        lftp -u "${{ secrets.FTP_USERNAME }}","${{ secrets.FTP_PASSWORD }}" "${{ vars.FTP_SERVER }}" <<EOF
+        cd ${{ vars.FTP_SERVER_DIR }}
+        rm -f app_offline.htm
+        bye
+        EOF
