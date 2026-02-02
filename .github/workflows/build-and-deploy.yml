@@ -58,18 +58,16 @@ jobs:
         name: published-app
         path: ./publish/
     
-    - name: Create app_offline.htm
-      run: echo "<h1>Application is being updated. Please refresh in a moment.</h1>" > ./app_offline.htm
+    - name: Setup FTP tools
+      run: sudo apt-get update && sudo apt-get install -y lftp
     
-    - name: Upload app_offline.htm to take site offline
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{ vars.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./
-        server-dir: ${{ vars.FTP_SERVER_DIR }}
-        include: app_offline.htm
+    - name: Rename app_offline.backup to app_offline.htm (take site offline)
+      run: |
+        lftp -u "${{ secrets.FTP_USERNAME }}","${{ secrets.FTP_PASSWORD }}" "${{ vars.FTP_SERVER }}" <<EOF
+        cd ${{ vars.FTP_SERVER_DIR }}
+        mv app_offline.backup app_offline.htm
+        bye
+        EOF
     
     - name: Wait for IIS to process app_offline.htm
       run: sleep 5
@@ -82,24 +80,13 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./publish/
         server-dir: ${{ vars.FTP_SERVER_DIR }}
-        #exclude: ${{ vars.FTP_EXCLUDE }}
+        exclude: ${{ vars.FTP_EXCLUDE }}
         dangerous-clean-slate: false
     
-    - name: Remove app_offline.htm to bring site back online
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{ vars.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: ${{ vars.FTP_SERVER_DIR }}
-        local-dir: ./
-        include: .github/workflows/cleanup_app_offline.txt
-        
-    - name: Delete app_offline.htm via FTP command
+    - name: Rename app_offline.htm back to app_offline.backup (bring site online)
       run: |
-        sudo apt-get update && sudo apt-get install -y lftp
         lftp -u "${{ secrets.FTP_USERNAME }}","${{ secrets.FTP_PASSWORD }}" "${{ vars.FTP_SERVER }}" <<EOF
         cd ${{ vars.FTP_SERVER_DIR }}
-        rm -f app_offline.htm
+        mv app_offline.htm app_offline.backup
         bye
         EOF
