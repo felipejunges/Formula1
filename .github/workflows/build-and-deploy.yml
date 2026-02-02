@@ -66,4 +66,5 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./publish/
         server-dir: ${{ vars.FTP_SERVER_DIR }}
+        exclude: ${{ vars.FTP_EXCLUDE }}
         dangerous-clean-slate: false
