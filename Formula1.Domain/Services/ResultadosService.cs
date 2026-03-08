@@ -11,8 +11,6 @@ namespace Formula1.Domain.Services
 {
     public class ResultadosService
     {
-        private const int POSICOES_POR_CORRIDA = 20;
-
         private readonly IResultadosRepository _resultadosRepository;
         
         private readonly PilotoTemporadaService _pilotoTemporadaService;
@@ -36,15 +34,15 @@ namespace Formula1.Domain.Services
             
             GrifarItensListaInvalidos(resultados, calculo);
 
-            PreencherPosicoesFaltantes(resultados, calculo);
+            PreencherPosicoesFaltantes(resultados, calculo, corrida.Temporada);
 
             return resultados;
         }
 
-        private void PreencherPosicoesFaltantes(List<ResultadoItemDados> resultados, CalculoPontos calculoPontos)
+        private void PreencherPosicoesFaltantes(List<ResultadoItemDados> resultados, CalculoPontos calculoPontos, int temporada)
         {
             var posicoesAtuais = resultados.Select(o => o.PosicaoChegada).ToList();
-            var posicoesFaltantes = Enumerable.Range(1, POSICOES_POR_CORRIDA).Except(posicoesAtuais).ToList();
+            var posicoesFaltantes = Enumerable.Range(1, ObterPosicoesPorCorrida(temporada)).Except(posicoesAtuais).ToList();
 
             foreach (var posicao in posicoesFaltantes)
             {
@@ -135,5 +133,7 @@ namespace Formula1.Domain.Services
 
             equipesGrifar.ForEach(o => o.GrifarEquipe = true);
         }
+
+        private int ObterPosicoesPorCorrida(int temporada) => temporada < 2026 ? 20 : 22;
     }
 }
