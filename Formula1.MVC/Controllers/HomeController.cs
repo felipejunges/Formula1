@@ -22,13 +22,13 @@ namespace Formula1.MVC.Controllers
             EquipeTemporadaService = equipeTemporadaService;
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult Index()
         {
             return RedirectToAction(nameof(PilotosPosicoes));
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult PilotosPosicoes(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
@@ -40,7 +40,7 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult PilotosPontos(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;
@@ -52,7 +52,7 @@ namespace Formula1.MVC.Controllers
             return View(campeonato);
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult EquipesPontos(int temporada)
         {
             int? corridaOrder = !string.IsNullOrEmpty(Request.Query["o"]) ? Convert.ToInt32(Request.Query["o"]) : (int?)null;

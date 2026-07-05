@@ -14,7 +14,7 @@ namespace Formula1.MVC.Controllers
             _graficoCampeonatoEquipesService = graficoCampeonatoEquipesService;
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult PilotosPontos(int temporada)
         {
             var pilotosGrafico = _graficoCampeonatoPilotosService.GetGraficoCampeonatoPilotos(temporada);
@@ -24,7 +24,7 @@ namespace Formula1.MVC.Controllers
             return View(pilotosGrafico);
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult EquipesPontos(int temporada)
         {
             var equipesGrafico = _graficoCampeonatoEquipesService.GetGraficoCampeonatoEquipes(temporada);
@@ -34,7 +34,7 @@ namespace Formula1.MVC.Controllers
             return View(equipesGrafico);
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult PontosPilotosPorCorrida(int temporada)
         {
             var pilotosGrafico = _graficoCampeonatoPilotosService.GetGraficoPontosPorCorrida(temporada);
@@ -44,7 +44,7 @@ namespace Formula1.MVC.Controllers
             return View(pilotosGrafico);
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByHeader = "Cookie")]
         public IActionResult PontosEquipesPorCorrida(int temporada)
         {
             var equipesGrafico = _graficoCampeonatoEquipesService.GetGraficoPontosPorCorrida(temporada);
